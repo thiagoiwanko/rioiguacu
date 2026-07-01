@@ -29,6 +29,13 @@ function formatDateTime(value) {
   });
 }
 
+function formatTime(value) {
+  return parseDate(value).toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+}
+
 const NIVEL_MAX_ESCALA = 5.5;
 
 function colorForLevel(level) {
@@ -309,7 +316,19 @@ function renderChart(data) {
       ${dryPoints.length > 1 ? `<path d="${makePath(dryPoints, x, y)}" fill="none" stroke="#f2f7fa" stroke-width="2.4" stroke-dasharray="8 7" opacity=".92"/>` : ""}
       ${wetPoints.length > 1 ? `<path d="${makePath(wetPoints, x, y)}" fill="none" stroke="#ff3d42" stroke-width="2.4" stroke-dasharray="8 7" opacity=".95"/>` : ""}
       <path d="${makePath(histPoints, x, y)}" fill="none" stroke="url(#waterLine)" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
-      ${histPoints.map((p, idx) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="${idx === histPoints.length - 1 ? 5 : 3}" fill="${colorForLevel(p.value)}" stroke="#071019" stroke-width="1.5"/>`).join("")}
+      ${histPoints.slice(0, -1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="3" fill="${colorForLevel(p.value)}" stroke="#071019" stroke-width="1.5"/>`).join("")}
+      ${histPoints.length ? (() => {
+        const last = histPoints[histPoints.length - 1];
+        const cx = x(parseDate(last.data_hora));
+        const cy = y(last.value);
+        const color = colorForLevel(last.value);
+        const labelY = Math.min(cy + 22, height - pad.bottom - 6);
+        return `
+          <circle class="current-point-ring" cx="${cx}" cy="${cy}" r="5" fill="none" stroke="${color}" stroke-width="2"/>
+          <circle class="current-point-dot" cx="${cx}" cy="${cy}" r="5" fill="${color}" stroke="#071019" stroke-width="1.5"/>
+          <text class="current-point-label" x="${cx}" y="${labelY}" text-anchor="middle" fill="#eef7fb" font-size="11" font-weight="800">Cota atual</text>
+        `;
+      })() : ""}
       ${dryPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#f2f7fa"/>`).join("")}
       ${wetPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#ff3d42"/>`).join("")}
       <text x="${pad.left}" y="18" fill="#9fb4c1" font-size="12">Leitura da régua (m)</text>
@@ -348,10 +367,12 @@ async function refresh(force = false) {
       $("diagnosticBox").hidden = false;
       $("diagnosticBox").textContent = payload.erro;
     } else if (payload.dados && !payload.dados.previsao_disponivel) {
-      $("syncStatus").textContent = `Atualizado em ${formatDateTime(payload.dados.atualizado_em)} · previsão indisponível`;
+      const proxima = new Date(parseDate(payload.dados.atualizado_em).getTime() + 5 * 60 * 1000);
+      $("syncStatus").textContent = `Atualizado em ${formatDateTime(payload.dados.atualizado_em)} · previsão indisponível · próxima atualização às ${formatTime(proxima)}`;
       $("syncStatus").classList.add("warning");
     } else {
-      $("syncStatus").textContent = `Atualizado em ${formatDateTime(payload.dados.atualizado_em)}`;
+      const proxima = new Date(parseDate(payload.dados.atualizado_em).getTime() + 5 * 60 * 1000);
+      $("syncStatus").textContent = `Atualizado em ${formatDateTime(payload.dados.atualizado_em)} · próxima atualização às ${formatTime(proxima)}`;
     }
     state.data = payload.dados;
     renderAll(payload.dados);
