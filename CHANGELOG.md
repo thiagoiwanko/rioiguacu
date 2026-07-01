@@ -2,6 +2,10 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.1 — 2026-07-01
+
+- Gráfico: toda cota de referência agora mostra seu valor em texto pequeno junto à linha, mesmo as que não têm a caixa de legenda completa (que continua reservada às duas cotas mais próximas do nível atual).
+
 ## v1.0 — 2026-07-01
 
 Primeira versão estável rodando 100% no GitHub (sem servidor local).
