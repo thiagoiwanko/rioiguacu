@@ -29,16 +29,18 @@ function formatDateTime(value) {
   });
 }
 
+const NIVEL_MAX_ESCALA = 5.5;
+
 function colorForLevel(level) {
   const stops = [
     [0, [21, 108, 255]],
-    [2.6, [32, 231, 224]],
-    [4.4, [40, 244, 94]],
-    [7, [255, 236, 63]],
-    [8.8, [255, 156, 40]],
-    [10.42, [255, 48, 48]],
+    [NIVEL_MAX_ESCALA * 0.25, [32, 231, 224]],
+    [NIVEL_MAX_ESCALA * 0.42, [40, 244, 94]],
+    [NIVEL_MAX_ESCALA * 0.67, [255, 236, 63]],
+    [NIVEL_MAX_ESCALA * 0.84, [255, 156, 40]],
+    [NIVEL_MAX_ESCALA, [255, 48, 48]],
   ];
-  const value = Math.max(0, Math.min(10.42, level));
+  const value = Math.max(0, Math.min(NIVEL_MAX_ESCALA, level));
   for (let i = 0; i < stops.length - 1; i++) {
     const [a, ca] = stops[i];
     const [b, cb] = stops[i + 1];
@@ -117,12 +119,28 @@ function chartBounds(data) {
   return { minY, maxY };
 }
 
+function severityClass(situacao) {
+  const texto = situacao || "";
+  if (texto.startsWith("ALERTA CRÍTICO")) return "badge-critico";
+  if (texto.startsWith("ATENÇÃO MUITO ALTA")) return "badge-muito-alta";
+  if (texto.startsWith("ATENÇÃO ALTA")) return "badge-alta";
+  if (texto.startsWith("ATENÇÃO MODERADA")) return "badge-moderada";
+  return "badge-normal";
+}
+
 function renderCards(data) {
   const last = data.ultima;
   const level = Number(last.regua_m);
   $("lastTime").textContent = formatDateTime(last.data_hora);
   $("levelValue").textContent = `${fmt.format(level)} m`;
-  $("levelBadge").textContent = data.situacao;
+
+  const badgeClass = severityClass(data.situacao);
+  const levelBadge = $("levelBadge");
+  levelBadge.className = `level-badge ${badgeClass}`;
+  levelBadge.innerHTML = badgeClass === "badge-critico"
+    ? `<i class="siren-dot"></i>${data.situacao}`
+    : data.situacao;
+
   $("situationText").textContent = `Situação do rio: ${data.situacao}`;
   $("flowValue").textContent = `${last.vazao_m3s} m³/s`;
   $("rainValue").textContent = `${fmt1.format(last.chuva_mm)} mm`;
@@ -132,22 +150,37 @@ function renderCards(data) {
   $("forecastAlert").className = data.previsao_disponivel ? "" : "warning";
   $("sourceLink").href = data.url_historico;
 
-  const marker = Math.max(0, Math.min(100, (level / 10.42) * 100));
+  const marker = Math.max(0, Math.min(100, (level / NIVEL_MAX_ESCALA) * 100));
   $("gaugeMarker").style.left = `calc(${marker}% - 2px)`;
   $("levelValue").style.color = colorForLevel(level);
 }
 
 function renderReferences(data) {
-  $("referenceList").innerHTML = data.cotas_bairros
-    .slice()
-    .sort((a, b) => b.nivel - a.nivel)
-    .map((item) => `
-      <div class="ref-row">
-        <i class="swatch" style="color:${colorForLevel(item.nivel)}; background:${colorForLevel(item.nivel)}"></i>
-        <strong>${item.nivel.toFixed(2)} m</strong>
-        <span>${item.descricao}</span>
-      </div>
-    `).join("");
+  const currentLevel = data.ultima.regua_m;
+  const referencias = data.cotas_bairros
+    .map((item) => ({ ...item, isCurrent: false }))
+    .concat([{ nivel: currentLevel, descricao: "", isCurrent: true }])
+    .sort((a, b) => b.nivel - a.nivel);
+
+  $("referenceList").innerHTML = referencias
+    .map((item) => {
+      if (item.isCurrent) {
+        return `
+          <div class="ref-row ref-row-current">
+            <i class="swatch current-dot" style="color:${colorForLevel(item.nivel)}; background:${colorForLevel(item.nivel)}"></i>
+            <strong>${item.nivel.toFixed(2)} m</strong>
+            <span>🡒 O rio está aqui agora!</span>
+          </div>
+        `;
+      }
+      return `
+        <div class="ref-row">
+          <i class="swatch" style="color:${colorForLevel(item.nivel)}; background:${colorForLevel(item.nivel)}"></i>
+          <strong>${item.nivel.toFixed(2)} m</strong>
+          <span>${item.descricao}</span>
+        </div>
+      `;
+    }).join("");
 
   $("alertList").innerHTML = data.cotas_alerta
     .slice()
@@ -200,6 +233,21 @@ function renderChart(data) {
   const refs = allReferences(data).filter((item) => item.nivel >= minY && item.nivel <= maxY);
   const labels = nearestReferenceLabels(data, data.ultima.regua_m);
 
+  // Evita sobreposição de caixas de legenda quando duas cotas de referência
+  // estão muito próximas em altura (ex.: 4.30 m e 4.50 m).
+  const labelBoxHeight = 20;
+  const labelPositions = new Map();
+  const sortedLabels = [...labels.values()].sort((a, b) => y(a.nivel) - y(b.nivel));
+  let previousLabelY = null;
+  sortedLabels.forEach((item) => {
+    let labelY = y(item.nivel);
+    if (previousLabelY !== null && labelY - previousLabelY < labelBoxHeight) {
+      labelY = previousLabelY + labelBoxHeight;
+    }
+    labelPositions.set(item.nivel, labelY);
+    previousLabelY = labelY;
+  });
+
   const histPoints = data.historico
     .map((item) => ({ ...item, value: item.regua_m }))
     .filter((item) => parseDate(item.data_hora) >= start && parseDate(item.data_hora) <= end);
@@ -245,12 +293,13 @@ function renderChart(data) {
       ${refs.map((item) => {
         const isAlert = data.cotas_alerta.some((alert) => Number(alert.nivel) === item.nivel);
         const label = labels.get(item.nivel);
+        const labelY = labelPositions.get(item.nivel);
         return `
           <line x1="${pad.left}" x2="${width - pad.right}" y1="${y(item.nivel)}" y2="${y(item.nivel)}" stroke="${colorForLevel(item.nivel)}" stroke-width="${isAlert ? 2 : 1.2}" stroke-dasharray="${isAlert ? "3 5" : "8 5"}" opacity=".95"/>
           ${label ? `
             <g>
-              <rect x="${pad.left + 8}" y="${y(item.nivel) - 19}" width="320" height="18" rx="5" fill="rgba(8,16,22,.78)" stroke="rgba(255,255,255,.10)"/>
-              <text x="${pad.left + 16}" y="${y(item.nivel) - 6}" fill="${isAlert ? "#eef7fb" : colorForLevel(item.nivel)}" font-size="12" font-weight="800">${item.nivel.toFixed(2)} m - ${label.descricao}</text>
+              <rect x="${pad.left + 8}" y="${labelY - 19}" width="320" height="18" rx="5" fill="rgba(8,16,22,.78)" stroke="rgba(255,255,255,.10)"/>
+              <text x="${pad.left + 16}" y="${labelY - 6}" fill="${isAlert ? "#eef7fb" : colorForLevel(item.nivel)}" font-size="12" font-weight="800">${item.nivel.toFixed(2)} m - ${label.descricao}</text>
             </g>
           ` : ""}
         `;
@@ -308,7 +357,7 @@ async function refresh(force = false) {
     $("syncStatus").textContent = error.message;
     $("syncStatus").classList.add("error");
     $("diagnosticBox").hidden = false;
-    $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada hora; tente novamente em instantes.";
+    $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada poucos minutos; tente novamente em instantes.";
   } finally {
     $("refreshBtn").disabled = false;
     state.loading = false;
