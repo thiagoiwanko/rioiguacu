@@ -265,7 +265,10 @@ async function refresh(force = false) {
   $("diagnosticBox").hidden = true;
 
   try {
-    const response = await fetch(`/api/monitor${force ? "?force=1" : ""}`);
+    const response = await fetch(`data.json?t=${Date.now()}`);
+    if (!response.ok) {
+      throw new Error("Não foi possível carregar data.json");
+    }
     const payload = await response.json();
     if (!payload.ok && !payload.dados) {
       throw new Error(payload.erro || "Falha ao coletar os dados.");
@@ -287,7 +290,7 @@ async function refresh(force = false) {
     $("syncStatus").textContent = error.message;
     $("syncStatus").classList.add("error");
     $("diagnosticBox").hidden = false;
-    $("diagnosticBox").textContent = "Não foi possível falar com o servidor local. Abra pelo arquivo abrir_monitor_web.bat e mantenha a janela do servidor aberta.";
+    $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada hora; tente novamente em instantes.";
   } finally {
     $("refreshBtn").disabled = false;
     state.loading = false;
