@@ -106,7 +106,7 @@ def extrair_medicoes(texto):
     dados = []
     padrao = re.compile(
         r"(\d{2}/\d{2}/\d{2})\s+(\d{2})h\s+"
-        r"([\d,]+)\s+([\d,]+)\s+(\d+)\s+([\d,]+)\s+([\d,]+)"
+        r"([\d,]+)\s+([\d,]+)\s+([\d.]+)\s+([\d,]+)\s+([\d,]+)"
     )
 
     for linha in texto.splitlines():
@@ -120,7 +120,7 @@ def extrair_medicoes(texto):
                 "data_hora": iso(data_hora),
                 "regua_m": parse_numero(regua),
                 "nivel_agua_m": parse_numero(nivel_agua),
-                "vazao_m3s": int(vazao),
+                "vazao_m3s": int(vazao.replace(".", "")),
                 "chuva_mm": parse_numero(chuva),
                 "chuva_acumulada_mm": parse_numero(chuva_acum),
             })
