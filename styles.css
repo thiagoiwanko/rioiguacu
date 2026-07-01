@@ -514,6 +514,23 @@ td {
   white-space: pre-wrap;
 }
 
+.version-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.version-footer a {
+  color: var(--cyan);
+  text-decoration: none;
+  font-weight: 800;
+}
+
 @media (max-width: 1120px) {
   .hero-grid,
   .main-grid {
