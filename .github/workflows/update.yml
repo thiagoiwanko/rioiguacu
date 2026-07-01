@@ -1,0 +1,46 @@
+name: Atualizar dados do Rio Iguaçu
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: atualizar-dados
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependências
+        run: pip install -r requirements.txt
+
+      - name: Rodar coleta
+        run: python scrape.py
+
+      - name: Commit e push do data.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data.json monitor_web.log
+          if ! git diff --staged --quiet; then
+            git commit -m "Atualiza dados do Rio Iguaçu"
+            git push
+          else
+            echo "Nenhuma mudança nos dados."
+          fi
