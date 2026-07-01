@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitor Rio Iguaçu - União da Vitória</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Defesa Civil · Monitoramento Hidrológico</p>
+        <h1>Rio Iguaçu</h1>
+        <p class="subtitle">União da Vitória · dados Copel com alertas e referências históricas</p>
+      </div>
+      <div class="actions">
+        <span id="syncStatus" class="sync">Iniciando...</span>
+        <button id="refreshBtn" class="primary-button" type="button">Atualizar</button>
+      </div>
+    </header>
+
+    <section class="hero-grid">
+      <article class="level-card depth">
+        <div class="card-head">
+          <span>Cota atual</span>
+          <strong id="lastTime">--/-- --:--</strong>
+        </div>
+        <div class="level-wrap">
+          <div id="levelValue" class="level-value">--,-- m</div>
+          <div id="levelBadge" class="level-badge">Aguardando dados</div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-fill"></div>
+          <div id="gaugeMarker" class="gauge-marker"></div>
+        </div>
+        <p id="situationText" class="situation">Coletando informações da Copel.</p>
+      </article>
+
+      <article class="metric-card">
+        <span>Vazão</span>
+        <strong id="flowValue">-- m³/s</strong>
+        <small>última medição visível</small>
+      </article>
+
+      <article class="metric-card">
+        <span>Chuva</span>
+        <strong id="rainValue">-- mm</strong>
+        <small id="rainAccum">acumulada -- mm</small>
+      </article>
+
+      <article class="metric-card">
+        <span>Tendência</span>
+        <strong id="trendValue">--</strong>
+        <small id="forecastAlert">previsão em análise</small>
+      </article>
+    </section>
+
+    <section class="main-grid">
+      <article class="chart-panel depth">
+        <div class="panel-title">
+          <div>
+            <h2>Cota do Rio Iguaçu</h2>
+          </div>
+          <div class="legend-mini">
+            <span><i class="dot history"></i>Histórico</span>
+            <span><i class="line dry"></i>Previsão sem chuva</span>
+            <span><i class="line wet"></i>Previsão com chuva</span>
+          </div>
+        </div>
+      <div id="chart" class="chart"></div>
+      <pre id="diagnosticBox" class="diagnostic" hidden></pre>
+    </article>
+
+      <aside class="side-panel">
+        <article class="references depth">
+          <h2>Cotas de referência</h2>
+          <div id="referenceList" class="reference-list"></div>
+        </article>
+        <article class="alerts depth">
+          <h2>Alertas Defesa Civil</h2>
+          <div id="alertList" class="alert-list"></div>
+        </article>
+      </aside>
+    </section>
+
+    <section class="table-panel depth">
+      <div class="panel-title compact">
+        <h2>Dados visíveis da Copel</h2>
+        <a id="sourceLink" href="#" target="_blank" rel="noreferrer">Abrir fonte</a>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Data/hora</th>
+              <th>Régua</th>
+              <th>Vazão</th>
+              <th>Chuva</th>
+              <th>Acum.</th>
+            </tr>
+          </thead>
+          <tbody id="dataRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
