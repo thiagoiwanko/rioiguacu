@@ -301,7 +301,9 @@ function renderChart(data) {
               <rect x="${pad.left + 8}" y="${labelY - 19}" width="320" height="18" rx="5" fill="rgba(8,16,22,.78)" stroke="rgba(255,255,255,.10)"/>
               <text x="${pad.left + 16}" y="${labelY - 6}" fill="${isAlert ? "#eef7fb" : colorForLevel(item.nivel)}" font-size="12" font-weight="800">${item.nivel.toFixed(2)} m - ${label.descricao}</text>
             </g>
-          ` : ""}
+          ` : `
+            <text x="${width - pad.right - 5}" y="${y(item.nivel) - 3}" text-anchor="end" fill="${colorForLevel(item.nivel)}" font-size="9" opacity=".8">${item.nivel.toFixed(2)}</text>
+          `}
         `;
       }).join("")}
       ${dryPoints.length > 1 ? `<path d="${makePath(dryPoints, x, y)}" fill="none" stroke="#f2f7fa" stroke-width="2.4" stroke-dasharray="8 7" opacity=".92"/>` : ""}
