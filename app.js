@@ -76,26 +76,44 @@ function nearestReferenceLabels(data, currentLevel) {
 }
 
 function chartBounds(data) {
+  const currentLevel = data.ultima.regua_m;
   const hist = data.historico.map((d) => d.regua_m);
   const forecast = data.previsao.flatMap((d) => [
     d.regua_sem_chuva_m,
     d.regua_com_chuva_m,
   ]).filter((v) => typeof v === "number");
-  const values = [...hist, ...forecast];
+  const values = [...hist, ...forecast, currentLevel];
   const minValue = Math.min(...values);
   const maxValue = Math.max(...values);
+
+  // Distância mínima necessária para a linha inteira caber no gráfico.
+  const distAcimaDados = Math.max(maxValue - currentLevel, 0);
+  const distAbaixoDados = Math.max(currentLevel - minValue, 0);
+
+  // Reserva espaço para pelo menos as duas próximas cotas de referência
+  // acima e abaixo do nível atual, para dar contexto de alerta.
   const refs = allReferences(data).map((item) => item.nivel);
-  const below = refs.filter((v) => v <= minValue).at(-1);
-  const above = refs.find((v) => v >= maxValue);
-  let minY = below ?? Math.max(0, minValue - 0.5);
-  let maxY = above ?? maxValue + 0.8;
-  minY = Math.max(0, Math.min(minY, minValue) - 0.18);
-  maxY = Math.max(maxY, maxValue) + 0.18;
-  if (maxY - minY < 1) {
-    const center = (maxY + minY) / 2;
-    minY = Math.max(0, center - 0.5);
-    maxY = center + 0.5;
+  const refsAcima = refs.filter((v) => v > currentLevel).sort((a, b) => a - b);
+  const refsAbaixo = refs.filter((v) => v < currentLevel).sort((a, b) => b - a);
+  const folgaRefAcima = refsAcima.length
+    ? refsAcima[Math.min(1, refsAcima.length - 1)] - currentLevel
+    : 1;
+  const folgaRefAbaixo = refsAbaixo.length
+    ? currentLevel - refsAbaixo[Math.min(1, refsAbaixo.length - 1)]
+    : 1;
+
+  let halfSpan = Math.max(distAcimaDados, distAbaixoDados, folgaRefAcima, folgaRefAbaixo, 0.6) + 0.3;
+
+  let minY = currentLevel - halfSpan;
+  let maxY = currentLevel + halfSpan;
+
+  if (minY < 0) {
+    // Régua não é negativa: em vez de cortar embaixo, empurra a folga para cima
+    // (o nível atual deixa de ficar exatamente no centro só quando está bem perto de zero).
+    maxY += -minY;
+    minY = 0;
   }
+
   return { minY, maxY };
 }
 
