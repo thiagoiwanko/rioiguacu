@@ -1,0 +1,594 @@
+{
+  "ok": true,
+  "erro": null,
+  "dados": {
+    "versao": "GitHub Actions 1.0",
+    "fonte": "Copel - Monitoramento Hidrológico",
+    "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
+    "atualizado_em": "2026-07-01T12:42",
+    "historico": [
+      {
+        "data_hora": "2026-06-28T09:00",
+        "regua_m": 2.981,
+        "nivel_agua_m": 742.591,
+        "vazao_m3s": 575,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T10:00",
+        "regua_m": 2.979,
+        "nivel_agua_m": 742.589,
+        "vazao_m3s": 575,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T11:00",
+        "regua_m": 2.975,
+        "nivel_agua_m": 742.585,
+        "vazao_m3s": 577,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T12:00",
+        "regua_m": 2.972,
+        "nivel_agua_m": 742.582,
+        "vazao_m3s": 573,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T13:00",
+        "regua_m": 2.967,
+        "nivel_agua_m": 742.577,
+        "vazao_m3s": 573,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T14:00",
+        "regua_m": 2.964,
+        "nivel_agua_m": 742.574,
+        "vazao_m3s": 568,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T15:00",
+        "regua_m": 2.961,
+        "nivel_agua_m": 742.571,
+        "vazao_m3s": 568,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T16:00",
+        "regua_m": 2.957,
+        "nivel_agua_m": 742.567,
+        "vazao_m3s": 570,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T17:00",
+        "regua_m": 2.954,
+        "nivel_agua_m": 742.564,
+        "vazao_m3s": 566,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 3.6
+      },
+      {
+        "data_hora": "2026-06-28T18:00",
+        "regua_m": 2.954,
+        "nivel_agua_m": 742.564,
+        "vazao_m3s": 561,
+        "chuva_mm": 25.0,
+        "chuva_acumulada_mm": 28.6
+      },
+      {
+        "data_hora": "2026-06-28T19:00",
+        "regua_m": 2.987,
+        "nivel_agua_m": 742.597,
+        "vazao_m3s": 580,
+        "chuva_mm": 3.2,
+        "chuva_acumulada_mm": 31.8
+      },
+      {
+        "data_hora": "2026-06-28T20:00",
+        "regua_m": 2.996,
+        "nivel_agua_m": 742.606,
+        "vazao_m3s": 582,
+        "chuva_mm": 1.2,
+        "chuva_acumulada_mm": 33.0
+      },
+      {
+        "data_hora": "2026-06-28T21:00",
+        "regua_m": 3.004,
+        "nivel_agua_m": 742.614,
+        "vazao_m3s": 582,
+        "chuva_mm": 1.8,
+        "chuva_acumulada_mm": 34.8
+      },
+      {
+        "data_hora": "2026-06-28T22:00",
+        "regua_m": 3.013,
+        "nivel_agua_m": 742.623,
+        "vazao_m3s": 584,
+        "chuva_mm": 1.8,
+        "chuva_acumulada_mm": 36.6
+      },
+      {
+        "data_hora": "2026-06-28T23:00",
+        "regua_m": 3.024,
+        "nivel_agua_m": 742.634,
+        "vazao_m3s": 587,
+        "chuva_mm": 3.6,
+        "chuva_acumulada_mm": 40.2
+      },
+      {
+        "data_hora": "2026-06-29T00:00",
+        "regua_m": 3.037,
+        "nivel_agua_m": 742.647,
+        "vazao_m3s": 596,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 40.2
+      },
+      {
+        "data_hora": "2026-06-29T01:00",
+        "regua_m": 3.046,
+        "nivel_agua_m": 742.656,
+        "vazao_m3s": 598,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-06-29T02:00",
+        "regua_m": 3.056,
+        "nivel_agua_m": 742.666,
+        "vazao_m3s": 600,
+        "chuva_mm": 1.0,
+        "chuva_acumulada_mm": 1.0
+      },
+      {
+        "data_hora": "2026-06-29T03:00",
+        "regua_m": 3.067,
+        "nivel_agua_m": 742.677,
+        "vazao_m3s": 603,
+        "chuva_mm": 8.0,
+        "chuva_acumulada_mm": 9.0
+      },
+      {
+        "data_hora": "2026-06-29T04:00",
+        "regua_m": 3.089,
+        "nivel_agua_m": 742.699,
+        "vazao_m3s": 611,
+        "chuva_mm": 3.2,
+        "chuva_acumulada_mm": 12.2
+      },
+      {
+        "data_hora": "2026-06-29T05:00",
+        "regua_m": 3.102,
+        "nivel_agua_m": 742.712,
+        "vazao_m3s": 617,
+        "chuva_mm": 1.4,
+        "chuva_acumulada_mm": 13.6
+      },
+      {
+        "data_hora": "2026-06-29T06:00",
+        "regua_m": 3.116,
+        "nivel_agua_m": 742.726,
+        "vazao_m3s": 625,
+        "chuva_mm": 0.8,
+        "chuva_acumulada_mm": 14.4
+      },
+      {
+        "data_hora": "2026-06-29T07:00",
+        "regua_m": 3.133,
+        "nivel_agua_m": 742.743,
+        "vazao_m3s": 628,
+        "chuva_mm": 0.2,
+        "chuva_acumulada_mm": 14.6
+      },
+      {
+        "data_hora": "2026-06-29T08:00",
+        "regua_m": 3.149,
+        "nivel_agua_m": 742.759,
+        "vazao_m3s": 636,
+        "chuva_mm": 1.0,
+        "chuva_acumulada_mm": 15.6
+      },
+      {
+        "data_hora": "2026-06-29T09:00",
+        "regua_m": 3.165,
+        "nivel_agua_m": 742.775,
+        "vazao_m3s": 646,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 15.6
+      },
+      {
+        "data_hora": "2026-06-29T10:00",
+        "regua_m": 3.182,
+        "nivel_agua_m": 742.792,
+        "vazao_m3s": 649,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 15.6
+      },
+      {
+        "data_hora": "2026-06-29T11:00",
+        "regua_m": 3.2,
+        "nivel_agua_m": 742.81,
+        "vazao_m3s": 657,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 15.6
+      },
+      {
+        "data_hora": "2026-06-29T12:00",
+        "regua_m": 3.217,
+        "nivel_agua_m": 742.827,
+        "vazao_m3s": 665,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 15.6
+      },
+      {
+        "data_hora": "2026-06-29T13:00",
+        "regua_m": 3.236,
+        "nivel_agua_m": 742.846,
+        "vazao_m3s": 674,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 15.6
+      },
+      {
+        "data_hora": "2026-06-29T14:00",
+        "regua_m": 3.257,
+        "nivel_agua_m": 742.867,
+        "vazao_m3s": 682,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 15.6
+      },
+      {
+        "data_hora": "2026-06-29T15:00",
+        "regua_m": 3.276,
+        "nivel_agua_m": 742.886,
+        "vazao_m3s": 690,
+        "chuva_mm": 0.6,
+        "chuva_acumulada_mm": 16.2
+      },
+      {
+        "data_hora": "2026-06-29T16:00",
+        "regua_m": 3.297,
+        "nivel_agua_m": 742.907,
+        "vazao_m3s": 697,
+        "chuva_mm": 0.4,
+        "chuva_acumulada_mm": 16.6
+      },
+      {
+        "data_hora": "2026-06-29T17:00",
+        "regua_m": 3.317,
+        "nivel_agua_m": 742.927,
+        "vazao_m3s": 705,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 16.6
+      },
+      {
+        "data_hora": "2026-06-29T18:00",
+        "regua_m": 3.337,
+        "nivel_agua_m": 742.947,
+        "vazao_m3s": 714,
+        "chuva_mm": 0.4,
+        "chuva_acumulada_mm": 17.0
+      },
+      {
+        "data_hora": "2026-06-29T19:00",
+        "regua_m": 3.364,
+        "nivel_agua_m": 742.974,
+        "vazao_m3s": 722,
+        "chuva_mm": 13.0,
+        "chuva_acumulada_mm": 30.0
+      },
+      {
+        "data_hora": "2026-06-29T20:00",
+        "regua_m": 3.396,
+        "nivel_agua_m": 743.006,
+        "vazao_m3s": 740,
+        "chuva_mm": 1.0,
+        "chuva_acumulada_mm": 31.0
+      },
+      {
+        "data_hora": "2026-06-29T21:00",
+        "regua_m": 3.421,
+        "nivel_agua_m": 743.031,
+        "vazao_m3s": 745,
+        "chuva_mm": 1.8,
+        "chuva_acumulada_mm": 32.8
+      },
+      {
+        "data_hora": "2026-06-29T22:00",
+        "regua_m": 3.446,
+        "nivel_agua_m": 743.056,
+        "vazao_m3s": 758,
+        "chuva_mm": 0.4,
+        "chuva_acumulada_mm": 33.2
+      },
+      {
+        "data_hora": "2026-06-29T23:00",
+        "regua_m": 3.474,
+        "nivel_agua_m": 743.084,
+        "vazao_m3s": 765,
+        "chuva_mm": 2.6,
+        "chuva_acumulada_mm": 35.8
+      },
+      {
+        "data_hora": "2026-06-30T00:00",
+        "regua_m": 3.506,
+        "nivel_agua_m": 743.116,
+        "vazao_m3s": 780,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 35.8
+      },
+      {
+        "data_hora": "2026-06-30T01:00",
+        "regua_m": 3.53,
+        "nivel_agua_m": 743.14,
+        "vazao_m3s": 788,
+        "chuva_mm": 0.2,
+        "chuva_acumulada_mm": 0.2
+      },
+      {
+        "data_hora": "2026-06-30T02:00",
+        "regua_m": 3.561,
+        "nivel_agua_m": 743.171,
+        "vazao_m3s": 797,
+        "chuva_mm": 0.6,
+        "chuva_acumulada_mm": 0.8
+      },
+      {
+        "data_hora": "2026-06-30T03:00",
+        "regua_m": 3.588,
+        "nivel_agua_m": 743.198,
+        "vazao_m3s": 810,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.8
+      },
+      {
+        "data_hora": "2026-06-30T04:00",
+        "regua_m": 3.616,
+        "nivel_agua_m": 743.226,
+        "vazao_m3s": 821,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.8
+      },
+      {
+        "data_hora": "2026-06-30T05:00",
+        "regua_m": 3.643,
+        "nivel_agua_m": 743.253,
+        "vazao_m3s": 831,
+        "chuva_mm": 0.2,
+        "chuva_acumulada_mm": 1.0
+      },
+      {
+        "data_hora": "2026-06-30T06:00",
+        "regua_m": 3.67,
+        "nivel_agua_m": 743.28,
+        "vazao_m3s": 846,
+        "chuva_mm": 0.4,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T07:00",
+        "regua_m": 3.696,
+        "nivel_agua_m": 743.306,
+        "vazao_m3s": 857,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T08:00",
+        "regua_m": 3.722,
+        "nivel_agua_m": 743.332,
+        "vazao_m3s": 866,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T09:00",
+        "regua_m": 3.746,
+        "nivel_agua_m": 743.356,
+        "vazao_m3s": 879,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T10:00",
+        "regua_m": 3.771,
+        "nivel_agua_m": 743.381,
+        "vazao_m3s": 887,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T11:00",
+        "regua_m": 3.796,
+        "nivel_agua_m": 743.406,
+        "vazao_m3s": 898,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T12:00",
+        "regua_m": 3.822,
+        "nivel_agua_m": 743.432,
+        "vazao_m3s": 906,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T13:00",
+        "regua_m": 3.846,
+        "nivel_agua_m": 743.456,
+        "vazao_m3s": 919,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T14:00",
+        "regua_m": 3.87,
+        "nivel_agua_m": 743.48,
+        "vazao_m3s": 927,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T15:00",
+        "regua_m": 3.893,
+        "nivel_agua_m": 743.503,
+        "vazao_m3s": 935,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 1.4
+      },
+      {
+        "data_hora": "2026-06-30T16:00",
+        "regua_m": 3.913,
+        "nivel_agua_m": 743.523,
+        "vazao_m3s": 943,
+        "chuva_mm": 3.0,
+        "chuva_acumulada_mm": 4.4
+      },
+      {
+        "data_hora": "2026-06-30T17:00",
+        "regua_m": 3.944,
+        "nivel_agua_m": 743.554,
+        "vazao_m3s": 957,
+        "chuva_mm": 8.2,
+        "chuva_acumulada_mm": 12.6
+      },
+      {
+        "data_hora": "2026-06-30T18:00",
+        "regua_m": 3.979,
+        "nivel_agua_m": 743.589,
+        "vazao_m3s": 977,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 12.6
+      },
+      {
+        "data_hora": "2026-06-30T19:00",
+        "regua_m": 4.002,
+        "nivel_agua_m": 743.612,
+        "vazao_m3s": 986,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 12.6
+      },
+      {
+        "data_hora": "2026-06-30T20:00",
+        "regua_m": 4.023,
+        "nivel_agua_m": 743.633,
+        "vazao_m3s": 994,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 12.6
+      }
+    ],
+    "previsao": [
+      {
+        "data_hora": "2026-07-01T15:00",
+        "regua_sem_chuva_m": 4.27,
+        "regua_com_chuva_m": 4.25
+      },
+      {
+        "data_hora": "2026-07-01T21:00",
+        "regua_sem_chuva_m": 4.3,
+        "regua_com_chuva_m": 4.28
+      },
+      {
+        "data_hora": "2026-07-02T03:00",
+        "regua_sem_chuva_m": 4.32,
+        "regua_com_chuva_m": 4.29
+      },
+      {
+        "data_hora": "2026-07-02T09:00",
+        "regua_sem_chuva_m": 4.34,
+        "regua_com_chuva_m": 4.3
+      },
+      {
+        "data_hora": "2026-07-02T15:00",
+        "regua_sem_chuva_m": 4.35,
+        "regua_com_chuva_m": 4.31
+      },
+      {
+        "data_hora": "2026-07-02T21:00",
+        "regua_sem_chuva_m": 4.35,
+        "regua_com_chuva_m": 4.32
+      }
+    ],
+    "ultima": {
+      "data_hora": "2026-06-30T20:00",
+      "regua_m": 4.023,
+      "nivel_agua_m": 743.633,
+      "vazao_m3s": 994,
+      "chuva_mm": 0.0,
+      "chuva_acumulada_mm": 12.6
+    },
+    "situacao": "NÍVEL NORMAL - monitoramento diário",
+    "tendencia": {
+      "texto": "SUBINDO +0.021 m/h",
+      "delta": 0.020999999999999908,
+      "direcao": "subindo"
+    },
+    "alerta_previsao": "Previsão em 48 h: pode atingir 4.35 m (ATENÇÃO MODERADA).",
+    "previsao_disponivel": true,
+    "cotas_bairros": [
+      {
+        "nivel": 1.29,
+        "descricao": "Menor nível histórico - estiagem de 2020"
+      },
+      {
+        "nivel": 6.0,
+        "descricao": "Limeira / Rio d'Areia / Rocio"
+      },
+      {
+        "nivel": 6.5,
+        "descricao": "São Basílio / Navegantes / Ponte Nova"
+      },
+      {
+        "nivel": 7.0,
+        "descricao": "Cidade Jardim / Cristo Rei / Sagrada Família"
+      },
+      {
+        "nivel": 8.15,
+        "descricao": "Referência da enchente de 2014"
+      },
+      {
+        "nivel": 8.38,
+        "descricao": "Referência da enchente de 2023"
+      },
+      {
+        "nivel": 9.8,
+        "descricao": "Grande enchente de 1992"
+      },
+      {
+        "nivel": 10.42,
+        "descricao": "Cheia histórica de 1983"
+      }
+    ],
+    "cotas_alerta": [
+      {
+        "nivel": 4.3,
+        "descricao": "ATENÇÃO MODERADA"
+      },
+      {
+        "nivel": 4.5,
+        "descricao": "ATENÇÃO ALTA"
+      },
+      {
+        "nivel": 4.9,
+        "descricao": "ATENÇÃO MUITO ALTA"
+      },
+      {
+        "nivel": 5.5,
+        "descricao": "ALERTA CRÍTICO - PLANO DE CONTINGÊNCIA ACIONADO"
+      }
+    ],
+    "janela_historico_horas": 48,
+    "janela_previsao_horas": 48
+  }
+}
