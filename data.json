@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-02T18:07",
+    "atualizado_em": "2026-07-02T18:11",
     "historico": [
       {
         "data_hora": "2026-06-29T18:00",
@@ -582,6 +582,14 @@
         "vazao_m3s": 1290,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.6
+      },
+      {
+        "data_hora": "2026-07-02T18:00",
+        "regua_m": 4.679,
+        "nivel_agua_m": 744.289,
+        "vazao_m3s": 1290,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.6
       }
     ],
     "previsao": [
@@ -617,9 +625,9 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-02T17:00",
-      "regua_m": 4.675,
-      "nivel_agua_m": 744.285,
+      "data_hora": "2026-07-02T18:00",
+      "regua_m": 4.679,
+      "nivel_agua_m": 744.289,
       "vazao_m3s": 1290,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.6
@@ -627,7 +635,7 @@
     "situacao": "ATENÇÃO ALTA",
     "tendencia": {
       "texto": "SUBINDO +0.004 m/h",
-      "delta": 0.0039999999999995595,
+      "delta": 0.004000000000000448,
       "direcao": "subindo"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.73 m (ATENÇÃO ALTA).",
@@ -650,7 +658,7 @@
         "descricao": "Cidade Jardim / Cristo Rei / Sagrada Família"
       },
       {
-        "nivel": 8.13,
+        "nivel": 8.12,
         "descricao": "Referência da enchente de 2014"
       },
       {
