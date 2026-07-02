@@ -340,6 +340,9 @@ function renderChart(data) {
       ${dryPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#f2f7fa"/>`).join("")}
       ${wetPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#ff3d42"/>`).join("")}
       <text x="${pad.left}" y="${isNarrow ? 14 : 18}" fill="#9fb4c1" font-size="${fs.axisTitle}">Leitura da régua (m)</text>
+      ${histPoints.map((p, idx) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="${idx === histPoints.length - 1 ? "Cota atual" : "Histórico"}"/>`).join("")}
+      ${dryPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão sem chuva"/>`).join("")}
+      ${wetPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão com chuva"/>`).join("")}
     </svg>
   `;
 }
@@ -395,7 +398,49 @@ async function refresh(force = false) {
   }
 }
 
+function setupChartTooltip() {
+  const chartEl = $("chart");
+  const tooltipEl = $("chartTooltip");
+
+  function showTooltip(clientX, clientY, target) {
+    const rect = chartEl.getBoundingClientRect();
+    const offsetX = clientX - rect.left;
+    const offsetY = clientY - rect.top;
+    const cota = target.getAttribute("data-cota");
+    const time = target.getAttribute("data-time");
+    const kind = target.getAttribute("data-kind");
+    tooltipEl.innerHTML = `<strong>${cota} m</strong><br><span>${time} · ${kind}</span>`;
+    tooltipEl.style.left = `${offsetX}px`;
+    tooltipEl.style.top = `${Math.max(offsetY - 12, 0)}px`;
+    tooltipEl.hidden = false;
+  }
+
+  function hideTooltip() {
+    tooltipEl.hidden = true;
+  }
+
+  chartEl.addEventListener("mousemove", (evt) => {
+    const target = evt.target.closest(".chart-hit");
+    if (target) {
+      showTooltip(evt.clientX, evt.clientY, target);
+    } else {
+      hideTooltip();
+    }
+  });
+  chartEl.addEventListener("mouseleave", hideTooltip);
+
+  chartEl.addEventListener("touchstart", (evt) => {
+    const touch = evt.touches[0];
+    if (!touch) return;
+    const el2 = document.elementFromPoint(touch.clientX, touch.clientY);
+    const target = el2 && el2.closest(".chart-hit");
+    if (target) showTooltip(touch.clientX, touch.clientY, target);
+    else hideTooltip();
+  }, { passive: true });
+}
+
 $("refreshBtn").addEventListener("click", () => refresh(true));
 window.addEventListener("resize", () => state.data && renderChart(state.data));
+setupChartTooltip();
 refresh(false);
 setInterval(() => refresh(false), 5 * 60 * 1000);
