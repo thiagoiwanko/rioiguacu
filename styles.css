@@ -576,4 +576,50 @@ td {
   .legend-mini {
     justify-content: start;
   }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .shell {
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .level-value {
+    font-size: 42px;
+  }
+
+  .level-badge {
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .chart-panel {
+    min-height: auto;
+  }
+
+  .chart {
+    height: 320px;
+  }
+
+  .legend-mini {
+    font-size: 11px;
+    gap: 6px 10px;
+  }
+
+  .metric-card strong {
+    font-size: 22px;
+  }
+
+  .ref-row,
+  .alert-row {
+    grid-template-columns: 12px 54px 1fr;
+    font-size: 11px;
+  }
 }
