@@ -357,7 +357,6 @@ function renderAll(data) {
 async function refresh(force = false) {
   if (state.loading) return;
   state.loading = true;
-  $("refreshBtn").disabled = true;
   $("syncStatus").textContent = "Coletando dados da Copel...";
   $("syncStatus").classList.remove("error");
   $("syncStatus").classList.remove("warning");
@@ -393,7 +392,6 @@ async function refresh(force = false) {
     $("diagnosticBox").hidden = false;
     $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada hora; tente novamente em instantes.";
   } finally {
-    $("refreshBtn").disabled = false;
     state.loading = false;
   }
 }
@@ -439,7 +437,6 @@ function setupChartTooltip() {
   }, { passive: true });
 }
 
-$("refreshBtn").addEventListener("click", () => refresh(true));
 window.addEventListener("resize", () => state.data && renderChart(state.data));
 setupChartTooltip();
 refresh(false);
