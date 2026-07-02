@@ -593,6 +593,11 @@ td {
   font-weight: 800;
 }
 
+.visit-counter {
+  color: var(--muted);
+  opacity: .85;
+}
+
 @media (max-width: 1120px) {
   .hero-grid,
   .main-grid {
