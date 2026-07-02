@@ -2,6 +2,10 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.6 — 2026-07-02
+
+- Corrigido o motivo real do site "parar de atualizar": os deploys do GitHub Pages estavam levando 8–10 min para publicar, mas a coleta fazia commit a cada 5 min — os deploys se atropelavam e nenhum terminava de publicar, deixando o site visível travado em uma versão antiga mesmo com o repositório sempre atualizado por trás. Frequência de coleta reduzida de 5 em 5 min para 15 em 15 min para dar tempo do Pages publicar cada versão.
+
 ## v1.5 — 2026-07-02
 
 - Gráfico: ao passar o mouse (ou tocar, no celular) sobre qualquer ponto da linha — histórico, previsão sem chuva ou previsão com chuva — aparece um balão mostrando a cota exata e o horário daquele ponto.
