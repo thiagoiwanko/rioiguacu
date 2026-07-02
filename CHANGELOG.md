@@ -2,6 +2,12 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.7 — 2026-07-02
+
+- Removido o botão "Atualizar" do topo do site. Como a coleta agora é automática (a cada 5 min no scraper, publicada pelo Pages a cada 15 min) e a página já se atualiza sozinha em segundo plano, o botão de atualização manual havia perdido a função.
+- Corrigido bug de fuso horário: o `scrape.py` gravava "atualizado_em" com `datetime.now()` rodando em UTC (horário do servidor do GitHub Actions), sem converter para o horário de Brasília. Isso fazia o rótulo "Atualizado em / próxima atualização" aparecer cerca de 3h adiantado em relação ao horário real. A cota, o gráfico e a tabela não eram afetados (usam o horário que vem direto da Copel). Corrigido usando `zoneinfo` para gravar sempre em horário de Brasília (America/Sao_Paulo).
+- Investigado por que a coleta não roda de forma confiável a cada 15 min: o `schedule` (cron) do GitHub Actions roda numa fila compartilhada de baixa prioridade com todo o GitHub, sem garantia de horário — medimos atrasos reais de 1h a 4h entre execuções, mesmo com o cron configurado corretamente. Isso é uma limitação da plataforma do GitHub, não um erro de configuração. Site migrado para hospedagem no Cloudflare Pages (domínio rioiguacu.com) e um Cloudflare Worker com Cron Trigger está sendo configurado para disparar a coleta via API do GitHub de forma confiável, contornando essa fila.
+
 ## v1.6 — 2026-07-02
 
 - Corrigido o motivo real do site "parar de atualizar": os deploys do GitHub Pages estavam levando 8–10 min para publicar, mas a coleta fazia commit a cada 5 min — os deploys se atropelavam e nenhum terminava de publicar, deixando o site visível travado em uma versão antiga mesmo com o repositório sempre atualizado por trás. Frequência de coleta reduzida de 5 em 5 min para 15 em 15 min para dar tempo do Pages publicar cada versão.
