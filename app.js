@@ -437,7 +437,53 @@ function setupChartTooltip() {
   }, { passive: true });
 }
 
+function saoPauloDateStr(date) {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(date);
+}
+
+function isoWeekKey(date) {
+  const [y, m, d] = saoPauloDateStr(date).split("-").map(Number);
+  const cursor = new Date(Date.UTC(y, m - 1, d));
+  const dayNum = (cursor.getUTCDay() + 6) % 7; // segunda=0 ... domingo=6
+  cursor.setUTCDate(cursor.getUTCDate() - dayNum + 3); // quinta-feira da semana ISO
+  const firstThursday = new Date(Date.UTC(cursor.getUTCFullYear(), 0, 4));
+  const firstDayNum = (firstThursday.getUTCDay() + 6) % 7;
+  firstThursday.setUTCDate(firstThursday.getUTCDate() - firstDayNum + 3);
+  const week = 1 + Math.round((cursor - firstThursday) / (7 * 24 * 3600 * 1000));
+  return `${cursor.getUTCFullYear()}-w${String(week).padStart(2, "0")}`;
+}
+
+// Contador de visitas via CountAPI (serviço público gratuito, sem login/conta).
+// Falha silenciosamente se o serviço estiver fora do ar: é só um número informativo
+// no rodapé, não deve afetar o resto do site. Conta acessos (hits), não visitantes únicos.
+async function trackVisit() {
+  const counterEl = $("visitCounter");
+  if (!counterEl) return;
+  const namespace = "rioiguacu.com";
+  const base = "https://api.countapi.xyz/hit";
+  const now = new Date();
+  const dayKey = `dia-${saoPauloDateStr(now)}`;
+  const weekKey = `semana-${isoWeekKey(now)}`;
+  const nf = new Intl.NumberFormat("pt-BR");
+  try {
+    const [total, week, day] = await Promise.all([
+      fetch(`${base}/${namespace}/total`).then((r) => r.json()),
+      fetch(`${base}/${namespace}/${weekKey}`).then((r) => r.json()),
+      fetch(`${base}/${namespace}/${dayKey}`).then((r) => r.json()),
+    ]);
+    counterEl.textContent = `· ${nf.format(total.value)} visitas · ${nf.format(week.value)} na semana · ${nf.format(day.value)} hoje`;
+  } catch (error) {
+    // silencioso
+  }
+}
+
 window.addEventListener("resize", () => state.data && renderChart(state.data));
 setupChartTooltip();
 refresh(false);
+trackVisit();
 setInterval(() => refresh(false), 5 * 60 * 1000);
