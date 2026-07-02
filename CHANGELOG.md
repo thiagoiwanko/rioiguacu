@@ -2,6 +2,10 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.8 — 2026-07-02
+
+- Corrigida a cota de referência da enchente de 2014, de 8,13 m para 8,12 m. O usuário enviou o documento oficial "Reordenamento Territorial" (Prefeitura de União da Vitória, março/2022) para conferência, que confirma na íntegra: "O nível do rio chegou a 8,12 metros de profundidade" na enchente de 2014. Ajustado em `scrape.py` e `app.py` (COTAS_BAIRROS e limiar em `definir_situacao`). As cotas de 1992 (9,80 m) e 1983 (10,42 m) não constam nesse documento (que só cita o número de mortes por enchente), então não foram alteradas.
+
 ## v1.7 — 2026-07-02
 
 - Removido o botão "Atualizar" do topo do site. Como a coleta agora é automática (a cada 5 min no scraper, publicada pelo Pages a cada 15 min) e a página já se atualiza sozinha em segundo plano, o botão de atualização manual havia perdido a função.
