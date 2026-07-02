@@ -5,24 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-01T23:43",
+    "atualizado_em": "2026-07-02T01:51",
     "historico": [
-      {
-        "data_hora": "2026-06-28T20:00",
-        "regua_m": 2.996,
-        "nivel_agua_m": 742.606,
-        "vazao_m3s": 582,
-        "chuva_mm": 1.2,
-        "chuva_acumulada_mm": 33.0
-      },
-      {
-        "data_hora": "2026-06-28T21:00",
-        "regua_m": 3.004,
-        "nivel_agua_m": 742.614,
-        "vazao_m3s": 582,
-        "chuva_mm": 1.8,
-        "chuva_acumulada_mm": 34.8
-      },
       {
         "data_hora": "2026-06-28T22:00",
         "regua_m": 3.013,
@@ -590,6 +574,22 @@
         "vazao_m3s": 1210,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 8.8
+      },
+      {
+        "data_hora": "2026-07-01T21:00",
+        "regua_m": 4.51,
+        "nivel_agua_m": 744.12,
+        "vazao_m3s": 1210,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 8.8
+      },
+      {
+        "data_hora": "2026-07-01T22:00",
+        "regua_m": 4.525,
+        "nivel_agua_m": 744.135,
+        "vazao_m3s": 1230,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 8.8
       }
     ],
     "previsao": [
@@ -625,17 +625,17 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-01T20:00",
-      "regua_m": 4.495,
-      "nivel_agua_m": 744.105,
-      "vazao_m3s": 1210,
+      "data_hora": "2026-07-01T22:00",
+      "regua_m": 4.525,
+      "nivel_agua_m": 744.135,
+      "vazao_m3s": 1230,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 8.8
     },
-    "situacao": "ATENÇÃO MODERADA",
+    "situacao": "ATENÇÃO ALTA",
     "tendencia": {
-      "texto": "SUBINDO +0.016 m/h",
-      "delta": 0.016000000000000014,
+      "texto": "SUBINDO +0.015 m/h",
+      "delta": 0.015000000000000568,
       "direcao": "subindo"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.59 m (ATENÇÃO ALTA).",
