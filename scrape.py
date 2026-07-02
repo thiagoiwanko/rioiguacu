@@ -3,6 +3,7 @@ import re
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -20,6 +21,13 @@ URL_PREVISAO = "https://www.copel.com/mhbweb/paginas/previsao.jsf"
 JANELA_HISTORICO_HORAS = 48
 JANELA_PREVISAO_HORAS = 48
 TIMEOUT_COLETA_SEGUNDOS = 90
+FUSO_BR = ZoneInfo("America/Sao_Paulo")
+
+
+def agora_br():
+    return datetime.now(FUSO_BR).replace(tzinfo=None)
+
+
 ESPERA_NOVA_TENTATIVA_SEGUNDOS = 30
 
 COTAS_BAIRROS = [
@@ -42,7 +50,7 @@ COTAS_ALERTA_DEFESA_CIVIL = [
 
 
 def log(mensagem):
-    linha = f"[{datetime.now().strftime('%d/%m/%Y %H:%M:%S')}] {mensagem}\n"
+    linha = f"[{agora_br().strftime('%d/%m/%Y %H:%M:%S')}] {mensagem}\n"
     try:
         LOG_PATH.write_text(
             (LOG_PATH.read_text(encoding="utf-8") if LOG_PATH.exists() else "") + linha,
@@ -244,7 +252,7 @@ def montar_payload(historico, previsao):
         "versao": APP_VERSION,
         "fonte": "Copel - Monitoramento Hidrológico",
         "url_historico": URL_HISTORICO,
-        "atualizado_em": iso(datetime.now()),
+        "atualizado_em": iso(agora_br()),
         "historico": historico,
         "previsao": previsao,
         "ultima": ultima,
