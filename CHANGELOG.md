@@ -2,9 +2,14 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.9 — 2026-07-02
+
+- Adicionado contador de visitas no rodapé, ao lado do número da versão: total de visitas, visitas na semana e visitas no dia. Implementado com a CountAPI (serviço público gratuito e anônimo, sem login/conta) chamado direto pelo navegador do visitante — tentei primeiro montar isso com Worker + KV do próprio Cloudflare (mais privado, sem terceiros), mas o painel do Cloudflare não carregou nesta automação (travava indefinidamente mesmo depois de fechar o Kaspersky). Importante: é contagem de acessos (hits) por carregamento de página, não de visitantes únicos.
+
 ## v1.8 — 2026-07-02
 
 - Corrigida a cota de referência da enchente de 2014, de 8,13 m para 8,12 m. O usuário enviou o documento oficial "Reordenamento Territorial" (Prefeitura de União da Vitória, março/2022) para conferência, que confirma na íntegra: "O nível do rio chegou a 8,12 metros de profundidade" na enchente de 2014. Ajustado em `scrape.py` e `app.py` (COTAS_BAIRROS e limiar em `definir_situacao`). As cotas de 1992 (9,80 m) e 1983 (10,42 m) não constam nesse documento (que só cita o número de mortes por enchente), então não foram alteradas.
+- Removido o link "Histórico de versões" do rodapé, mantendo apenas o texto "Versão 1.8".
 
 ## v1.7 — 2026-07-02
 
