@@ -261,7 +261,7 @@ def montar_payload(historico, previsao):
 
 def coletar_uma_vez():
     texto_historico = coletar_texto(URL_HISTORICO)
-    historico,� extrair_medicoes(texto_historico)
+    historico = extrair_medicoes(texto_historico)
     log(f"Medições extraídas: {len(historico)}")
 
     previsao = []
