@@ -222,11 +222,19 @@ function makePath(points, x, y) {
 
 function renderChart(data) {
   const el = $("chart");
-  const width = Math.max(760, el.clientWidth || 900);
-  const height = 485;
-  const pad = { left: 58, right: 28, top: 28, bottom: 50 };
+  const containerWidth = el.clientWidth || 900;
+  const isNarrow = containerWidth < 640;
+  const width = isNarrow ? Math.max(280, containerWidth) : Math.max(760, containerWidth);
+  const height = isNarrow ? Math.round(Math.min(360, Math.max(300, width * 0.92))) : 485;
+  el.style.height = `${height}px`;
+  const pad = isNarrow
+    ? { left: 40, right: 10, top: 18, bottom: 36 }
+    : { left: 58, right: 28, top: 28, bottom: 50 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
+  const fs = isNarrow ? { tick: 10, tickSmall: 9, label: 10, refLabel: 10, refNum: 8, current: 10, axisTitle: 10 }
+    : { tick: 12, tickSmall: 11, label: 12, refLabel: 12, refNum: 9, current: 11, axisTitle: 12 };
+  const labelBoxWidth = isNarrow ? Math.max(150, width - pad.left - pad.right - 20) : 320;
   const lastTime = parseDate(data.ultima.data_hora);
   const start = new Date(lastTime.getTime() - data.janela_historico_horas * 3600 * 1000);
   const forecastEnd = data.previsao.length
@@ -290,12 +298,12 @@ function renderChart(data) {
       <rect x="${pad.left}" y="${pad.top}" width="${plotW}" height="${plotH}" rx="8" fill="rgba(217,255,238,.045)" stroke="rgba(180,215,230,.18)"/>
       ${yTicks.map((tick) => `
         <line x1="${pad.left}" x2="${width - pad.right}" y1="${y(tick)}" y2="${y(tick)}" stroke="rgba(180,215,230,.12)" stroke-dasharray="2 5"/>
-        <text x="${pad.left - 12}" y="${y(tick) + 4}" text-anchor="end" fill="#8aa3b0" font-size="12">${tick.toFixed(2)}</text>
+        <text x="${pad.left - (isNarrow ? 8 : 12)}" y="${y(tick) + 4}" text-anchor="end" fill="#8aa3b0" font-size="${fs.tick}">${tick.toFixed(2)}</text>
       `).join("")}
       ${xTicks.map((tick) => `
         <line x1="${x(tick)}" x2="${x(tick)}" y1="${pad.top}" y2="${height - pad.bottom}" stroke="rgba(180,215,230,.10)" stroke-dasharray="2 5"/>
-        <text x="${x(tick)}" y="${height - 22}" text-anchor="middle" fill="#8aa3b0" font-size="12">${tick.toLocaleDateString("pt-BR", {day: "2-digit", month: "2-digit"})}</text>
-        <text x="${x(tick)}" y="${height - 8}" text-anchor="middle" fill="#6f8795" font-size="11">${tick.toLocaleTimeString("pt-BR", {hour: "2-digit", minute: "2-digit"})}</text>
+        <text x="${x(tick)}" y="${height - (isNarrow ? 18 : 22)}" text-anchor="middle" fill="#8aa3b0" font-size="${fs.tick}">${tick.toLocaleDateString("pt-BR", {day: "2-digit", month: "2-digit"})}</text>
+        <text x="${x(tick)}" y="${height - (isNarrow ? 5 : 8)}" text-anchor="middle" fill="#6f8795" font-size="${fs.tickSmall}">${tick.toLocaleTimeString("pt-BR", {hour: "2-digit", minute: "2-digit"})}</text>
       `).join("")}
       ${refs.map((item) => {
         const isAlert = data.cotas_alerta.some((alert) => Number(alert.nivel) === item.nivel);
@@ -305,11 +313,11 @@ function renderChart(data) {
           <line x1="${pad.left}" x2="${width - pad.right}" y1="${y(item.nivel)}" y2="${y(item.nivel)}" stroke="${colorForLevel(item.nivel)}" stroke-width="${isAlert ? 2 : 1.2}" stroke-dasharray="${isAlert ? "3 5" : "8 5"}" opacity=".95"/>
           ${label ? `
             <g>
-              <rect x="${pad.left + 8}" y="${labelY - 19}" width="320" height="18" rx="5" fill="rgba(8,16,22,.78)" stroke="rgba(255,255,255,.10)"/>
-              <text x="${pad.left + 16}" y="${labelY - 6}" fill="${isAlert ? "#eef7fb" : colorForLevel(item.nivel)}" font-size="12" font-weight="800">${item.nivel.toFixed(2)} m - ${label.descricao}</text>
+              <rect x="${pad.left + 8}" y="${labelY - 19}" width="${labelBoxWidth}" height="18" rx="5" fill="rgba(8,16,22,.78)" stroke="rgba(255,255,255,.10)"/>
+              <text x="${pad.left + 16}" y="${labelY - 6}" fill="${isAlert ? "#eef7fb" : colorForLevel(item.nivel)}" font-size="${fs.refLabel}" font-weight="800">${item.nivel.toFixed(2)} m - ${label.descricao}</text>
             </g>
           ` : `
-            <text x="${width - pad.right - 5}" y="${y(item.nivel) - 3}" text-anchor="end" fill="${colorForLevel(item.nivel)}" font-size="9" opacity=".8">${item.nivel.toFixed(2)}</text>
+            <text x="${width - pad.right - 5}" y="${y(item.nivel) - 3}" text-anchor="end" fill="${colorForLevel(item.nivel)}" font-size="${fs.refNum}" opacity=".8">${item.nivel.toFixed(2)}</text>
           `}
         `;
       }).join("")}
@@ -322,16 +330,16 @@ function renderChart(data) {
         const cx = x(parseDate(last.data_hora));
         const cy = y(last.value);
         const color = colorForLevel(last.value);
-        const labelY = Math.min(cy + 22, height - pad.bottom - 6);
+        const labelY = Math.min(cy + (isNarrow ? 18 : 22), height - pad.bottom - 6);
         return `
           <circle class="current-point-ring" cx="${cx}" cy="${cy}" r="5" fill="none" stroke="${color}" stroke-width="2"/>
           <circle class="current-point-dot" cx="${cx}" cy="${cy}" r="5" fill="${color}" stroke="#071019" stroke-width="1.5"/>
-          <text class="current-point-label" x="${cx}" y="${labelY}" text-anchor="middle" fill="#eef7fb" font-size="11" font-weight="800">Cota atual</text>
+          <text class="current-point-label" x="${cx}" y="${labelY}" text-anchor="middle" fill="#eef7fb" font-size="${fs.current}" font-weight="800">Cota atual</text>
         `;
       })() : ""}
       ${dryPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#f2f7fa"/>`).join("")}
       ${wetPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#ff3d42"/>`).join("")}
-      <text x="${pad.left}" y="18" fill="#9fb4c1" font-size="12">Leitura da régua (m)</text>
+      <text x="${pad.left}" y="${isNarrow ? 14 : 18}" fill="#9fb4c1" font-size="${fs.axisTitle}">Leitura da régua (m)</text>
     </svg>
   `;
 }
@@ -380,7 +388,7 @@ async function refresh(force = false) {
     $("syncStatus").textContent = error.message;
     $("syncStatus").classList.add("error");
     $("diagnosticBox").hidden = false;
-    $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada poucos minutos; tente novamente em instantes.";
+    $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada hora; tente novamente em instantes.";
   } finally {
     $("refreshBtn").disabled = false;
     state.loading = false;
