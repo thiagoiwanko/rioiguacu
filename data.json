@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-03T19:02",
+    "atualizado_em": "2026-07-03T19:05",
     "historico": [
       {
         "data_hora": "2026-06-30T19:00",
@@ -654,7 +654,7 @@
         "descricao": "Referência da enchente de 2014"
       },
       {
-        "nivel": 8.38,
+        "nivel": 8.37,
         "descricao": "Referência da enchente de 2023"
       },
       {
