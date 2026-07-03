@@ -34,7 +34,7 @@ COTAS_BAIRROS = [
     (7.00, "Cidade Jardim / Cristo Rei / Sagrada Família"),
     (8.12, "Referência da enchente de 2014"),
     (8.38, "Referência da enchente de 2023"),
-    (9.80, "Grande enchente de 1992"),
+    (8.90, "Grande enchente de 1992"),
     (10.42, "Cheia histórica de 1983"),
 ]
 
@@ -203,7 +203,7 @@ def definir_situacao(regua):
         return f"{texto}; afetando Limeira / Rio d'Areia / Rocio / São Basílio / Navegantes / Ponte Nova / Cidade Jardim / Cristo Rei / Sagrada Família"
     if regua < 8.38:
         return f"{texto}; próximo da enchente de 2014"
-    if regua < 9.80:
+    if regua < 8.90:
         return f"{texto}; próximo da enchente de 2023"
     if regua < 10.42:
         return f"{texto}; próximo da enchente de 1992"
