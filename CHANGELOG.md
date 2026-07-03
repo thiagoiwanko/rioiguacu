@@ -2,6 +2,10 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.11 — 2026-07-03
+
+- Migrado o contador de visitas da CountAPI (terceiro que saiu do ar) para um Worker + KV do próprio Cloudflare (`rioiguacu-counter`, namespace `RIOIGUACU_VISITS`). O Worker calcula a data/semana em horário de Brasília e incrementa os contadores de total, semana e dia direto no KV, retornando os três valores numa única chamada. O `app.js` agora chama só esse endpoint, sem depender de nenhum serviço externo. Configurado manualmente pelo usuário no painel do Cloudflare (Workers e Pages → Associações), já que o painel/API do Cloudflare ficaram instáveis nesta automação durante boa parte do processo.
+
 ## v1.10 — 2026-07-03
 
 - Corrigida falha intermitente na coleta automática: cerca de 3% das execuções do GitHub Actions falhavam ao tentar publicar `data.json` ("! [rejected] main -> main (fetch first)"), porque duas execuções do workflow às vezes tentam gravar no repositório quase ao mesmo tempo, e a que termina depois é rejeitada por já não ter a versão mais recente do repositório. O `.github/workflows/update.yml` agora tenta novamente automaticamente (até 5 vezes): ao ser rejeitado, sincroniza com o repositório remoto e reenvia os dados coletados, em vez de simplesmente falhar e gerar o aviso por e-mail.
@@ -13,10 +17,4 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 ## v1.8 — 2026-07-02
 
-- Corrigida a cota de referência da enchente de 2014, de 8,13 m para 8,12 m. O usuário enviou o documento oficial "Reordenamento Territorial" (Prefeitura de União da Vitória, março/2022) para conferência, que confirma na íntegra: "O nível do rio chegou a 8,12 metros de profundidade" na enchente de 2014. Ajustado em `scrape.py` e `app.py` (COTAS_BAIRROS e limiar em `definir_situacao`). As cotas de 1992 (9,80 m) e 1983 (10,42 m) não constam nesse documento (que só cita o número de mortes por enchente), então não foram alteradas.
-- Removido o link "Histórico de versões" do rodapé, mantendo apenas o texto "Versão 1.8".
-
-## v1.7 — 2026-07-02
-
-- Removido o botão "Atualizar" do topo do site. Como a coleta agora é automática (a cada 5 min no scraper, publicada pelo Pages a cada 15 min) e a página já se atualiza sozinha em segundo plano, o botão de atualização manual havia perdido a função.
-- Corrigi
+- Corrigida a cota de referência da enchente de 2014, de 8,13 m para 8,12 m. O usuário enviou o documento oficial "Reordenamento Territorial" (Prefeitura de União da Vitória, março/2022) para conferência, que confirma na íntegra: "O nível do rio chegou a 8,12 metros de profundid
