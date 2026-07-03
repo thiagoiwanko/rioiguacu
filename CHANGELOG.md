@@ -2,6 +2,10 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.12 — 2026-07-03
+
+- Corrigido cache do navegador que impedia o contador novo (v1.11) de aparecer para quem já tinha visitado o site: como `app.js` era referenciado sem versão (`<script src="app.js">`), navegadores guardavam a versão antiga em cache por tempo indefinido e continuavam usando o código velho (com a CountAPI morta) mesmo depois do arquivo ser atualizado no servidor — confirmado testando em aba nova, que ainda executava a função antiga. Corrigido de duas formas: (1) o `index.html` agora referencia `app.js?v=1.12`, forçando o navegador a buscar a versão nova a cada atualização de versão; (2) adicionado arquivo `_headers` instruindo o Cloudflare Pages a nunca cachear `app.js` sem revalidar, prevenindo que o mesmo problema se repita em futuras atualizações mesmo se o número de versão for esquecido.
+
 ## v1.11 — 2026-07-03
 
 - Migrado o contador de visitas da CountAPI (terceiro que saiu do ar) para um Worker + KV do próprio Cloudflare (`rioiguacu-counter`, namespace `RIOIGUACU_VISITS`). O Worker calcula a data/semana em horário de Brasília e incrementa os contadores de total, semana e dia direto no KV, retornando os três valores numa única chamada. O `app.js` agora chama só esse endpoint, sem depender de nenhum serviço externo. Configurado manualmente pelo usuário no painel do Cloudflare (Workers e Pages → Associações), já que o painel/API do Cloudflare ficaram instáveis nesta automação durante boa parte do processo.
@@ -13,8 +17,4 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 ## v1.9 — 2026-07-02
 
-- Adicionado contador de visitas no rodapé, ao lado do número da versão: total de visitas, visitas na semana e visitas no dia. Implementado com a CountAPI (serviço público gratuito e anônimo, sem login/conta) chamado direto pelo navegador do visitante — tentei primeiro montar isso com Worker + KV do próprio Cloudflare (mais privado, sem terceiros), mas o painel do Cloudflare não carregou nesta automação (travava indefinidamente mesmo depois de fechar o Kaspersky). Importante: é contagem de acessos (hits) por carregamento de página, não de visitantes únicos.
-
-## v1.8 — 2026-07-02
-
-- Corrigida a cota de referência da enchente de 2014, de 8,13 m para 8,12 m. O usuário enviou o documento oficial "Reordenamento Territorial" (Prefeitura de União da Vitória, março/2022) para conferência, que confirma na íntegra: "O nível do rio chegou a 8,12 metros de profundid
+- Adicionado contador de visitas no rodapé, ao l
