@@ -2,6 +2,10 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
+## v1.15 — 2026-07-03
+
+- Corrigida a cota de referência da enchente de 2023, de 8,38 m para 8,37 m (COTAS_BAIRROS e limiar de definir_situacao, em scrape.py e app.py). O valor de 8,38 m vinha de fonte secundária (Governo do Paraná/AEN); a série oficial consistida da ANA/HidroWeb (65310000_Cotas.csv, estação 65310000) confirma pico de 837 cm (8,37 m) em 20/10/2023. Mesma validação usada para corrigir a cota de 1992 na v1.14 — a série consistida da ANA é adotada como referência definitiva para todas as cotas históricas do site.
+
 ## v1.14 — 2026-07-03
 
 - Corrigida a cota de referência da enchente de 1992, de 9,80 m para 8,90 m (usada em COTAS_BAIRROS e no limiar da função definir_situacao, em scrape.py e app.py). O valor de 9,80 m veio de uma citação secundária (CENACID/UFPR) que o próprio material técnico local já registrava como suspeita de erro de digitação. Confirmando isso, foi feita uma validação direta na série bruta oficial da ANA/HidroWeb (arquivo 65310000_Cotas.csv, estação 65310000): separando as leituras "consistidas" (validadas pela ANA) das "brutas", o pico de junho/1992 consistido é 890 cm (8,90 m) em 08/06/1992 — o mesmo valor que o Webnode/material técnico local já indicava (cota altimétrica 748,50 m). A mesma validação confirmou de passagem os demais picos históricos já usados no site (1983 = 10,42 m, 2014 = 8,12 m, 2023 = 8,37 m) e resolveu uma dúvida em aberto: o pico de 2023 na série oficial consistida é 8,37 m em 20/10/2023, não 8,38 m como divulgado por fontes secundárias.
