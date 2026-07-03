@@ -38,9 +38,28 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json monitor_web.log
-          if ! git diff --staged --quiet; then
-            git commit -m "Atualiza dados do Rio Iguaçu"
-            git push
-          else
+          if git diff --staged --quiet; then
             echo "Nenhuma mudança nos dados."
+            exit 0
           fi
+          # Guarda os arquivos recém-coletados fora do repo, pois em caso de
+          # conflito de push vamos resetar a árvore local para o remoto.
+          mkdir -p /tmp/coleta_atual
+          cp data.json /tmp/coleta_atual/ 2>/dev/null || true
+          cp monitor_web.log /tmp/coleta_atual/ 2>/dev/null || true
+          for i in 1 2 3 4 5; do
+            git commit -m "Atualiza dados do Rio Iguaçu" -q || true
+            if git push; then
+              echo "Push concluído na tentativa $i."
+              exit 0
+            fi
+            echo "Push rejeitado (tentativa $i/5): outra execução chegou primeiro. Sincronizando..."
+            git fetch origin main
+            git reset --hard origin/main
+            cp /tmp/coleta_atual/data.json . 2>/dev/null || true
+            cp /tmp/coleta_atual/monitor_web.log . 2>/dev/null || true
+            git add data.json monitor_web.log
+            sleep $((RANDOM % 6 + 2))
+          done
+          echo "Falha ao empurrar as mudanças após 5 tentativas."
+          exit 1
