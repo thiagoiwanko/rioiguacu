@@ -1,11 +1,11 @@
 {
-  "ok": false,
-  "erro": "nenhuma medição foi encontrada na tela da Copel",
+  "ok": true,
+  "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-03T20:47",
+    "atualizado_em": "2026-07-03T20:52",
     "historico": [
       {
         "data_hora": "2026-06-30T20:00",
