@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-03T23:57",
+    "atualizado_em": "2026-07-04T00:02",
     "historico": [
-      {
-        "data_hora": "2026-06-30T23:00",
-        "regua_m": 4.076,
-        "nivel_agua_m": 743.686,
-        "vazao_m3s": 1020,
-        "chuva_mm": 14.8,
-        "chuva_acumulada_mm": 27.4
-      },
       {
         "data_hora": "2026-07-01T00:00",
         "regua_m": 4.124,
