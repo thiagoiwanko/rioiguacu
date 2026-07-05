@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-05T19:07",
+    "atualizado_em": "2026-07-05T19:11",
     "historico": [
       {
         "data_hora": "2026-07-02T19:00",
@@ -582,6 +582,14 @@
         "vazao_m3s": 1320,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-05T19:00",
+        "regua_m": 4.714,
+        "nivel_agua_m": 744.324,
+        "vazao_m3s": 1310,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -617,18 +625,18 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-05T18:00",
-      "regua_m": 4.717,
-      "nivel_agua_m": 744.327,
-      "vazao_m3s": 1320,
+      "data_hora": "2026-07-05T19:00",
+      "regua_m": 4.714,
+      "nivel_agua_m": 744.324,
+      "vazao_m3s": 1310,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "ATENÇÃO ALTA",
     "tendencia": {
-      "texto": "ESTÁVEL",
-      "delta": 0,
-      "direcao": "estavel"
+      "texto": "BAIXANDO -0.003 m/h",
+      "delta": -0.0029999999999992255,
+      "direcao": "baixando"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.72 m (ATENÇÃO ALTA).",
     "previsao_disponivel": true,
