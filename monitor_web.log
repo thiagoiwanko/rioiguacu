@@ -17244,19 +17244,12 @@
 [06/07/2026 13:07:52] Previsões extraídas: 6
 [06/07/2026 13:07:52] Dados atualizados com sucesso.
 [06/07/2026 13:07:52] data.json gravado (17392 bytes).
-[06/07/2026 13:09:06] Execução do scrape.py iniciada (GitHub Actions).
-[06/07/2026 13:09:06] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[06/07/2026 13:09:25] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4452 caracteres)
-[06/07/2026 13:09:25] Medições extraídas: 72
-[06/07/2026 13:09:25] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[06/07/2026 13:09:39] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[06/07/2026 13:09:39] Previsões extraídas: 6
-[06/07/2026 13:09:39] Copel ainda não publicou dado novo (última: 2026-07-06T12:00). Aguardando 30s para nova tentativa.
-[06/07/2026 13:10:09] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[06/07/2026 13:10:55] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4493 caracteres)
-[06/07/2026 13:10:55] Medições extraídas: 73
-[06/07/2026 13:10:55] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[06/07/2026 13:11:08] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[06/07/2026 13:11:08] Previsões extraídas: 6
-[06/07/2026 13:11:08] Dados atualizados com sucesso.
-[06/07/2026 13:11:08] data.json gravado (17595 bytes).
+[06/07/2026 13:11:35] Execução do scrape.py iniciada (GitHub Actions).
+[06/07/2026 13:11:35] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[06/07/2026 13:11:58] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4493 caracteres)
+[06/07/2026 13:11:58] Medições extraídas: 73
+[06/07/2026 13:11:58] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[06/07/2026 13:12:12] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[06/07/2026 13:12:12] Previsões extraídas: 6
+[06/07/2026 13:12:12] Dados atualizados com sucesso.
+[06/07/2026 13:12:12] data.json gravado (17595 bytes).
