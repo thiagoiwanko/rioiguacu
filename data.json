@@ -1,11 +1,11 @@
 {
-  "ok": false,
-  "erro": "Message: timeout: Timed out receiving message from renderer: -0.002\n  (Session info: chrome=149.0.7827.200)\nStacktrace:\n#0 0x55657ca873da <unknown>\n#1 0x55657c469139 <unknown>\n#2 0x55657c450a1b <unknown>\n#3 0x55657c450696 <unknown>\n#4 0x55657c44e27b <unknown>\n#5 0x55657c44ebff <unknown>\n#6 0x55657c45de70 <unknown>\n#7 0x55657c477ea7 <unknown>\n#8 0x55657c47f71b <unknown>\n#9 0x55657c44f359 <unknown>\n#10 0x55657c477c09 <unknown>\n#11 0x55657c505a25 <unknown>\n#12 0x55657c4b0e4f <unknown>\n#13 0x55657c4b1c31 <unknown>\n#14 0x55657ca4d9f7 <unknown>\n#15 0x55657ca4c203 <unknown>\n#16 0x55657ca36f16 <unknown>\n#17 0x55657ca4cd9a <unknown>\n#18 0x55657ca1eeb0 <unknown>\n#19 0x55657ca73d58 <unknown>\n#20 0x55657ca73ef5 <unknown>\n#21 0x55657ca85f5e <unknown>\n#22 0x7f9abc69caa4 <unknown>\n#23 0x7f9abc729c6c <unknown>\n",
+  "ok": true,
+  "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-07T09:47",
+    "atualizado_em": "2026-07-07T09:57",
     "historico": [
       {
         "data_hora": "2026-07-04T09:00",
