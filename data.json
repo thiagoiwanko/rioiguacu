@@ -1,6 +1,6 @@
 {
-  "ok": true,
-  "erro": null,
+  "ok": false,
+  "erro": "Message: timeout: Timed out receiving message from renderer: -0.002\n  (Session info: chrome=149.0.7827.200)\nStacktrace:\n#0 0x560b7676f3da <unknown>\n#1 0x560b76151139 <unknown>\n#2 0x560b76138a1b <unknown>\n#3 0x560b76138696 <unknown>\n#4 0x560b7613627b <unknown>\n#5 0x560b76136bff <unknown>\n#6 0x560b76145e70 <unknown>\n#7 0x560b7615fea7 <unknown>\n#8 0x560b7616771b <unknown>\n#9 0x560b76137359 <unknown>\n#10 0x560b7615fc09 <unknown>\n#11 0x560b761eda25 <unknown>\n#12 0x560b76198e4f <unknown>\n#13 0x560b76199c31 <unknown>\n#14 0x560b767359f7 <unknown>\n#15 0x560b76734203 <unknown>\n#16 0x560b7671ef16 <unknown>\n#17 0x560b76734d9a <unknown>\n#18 0x560b76706eb0 <unknown>\n#19 0x560b7675bd58 <unknown>\n#20 0x560b7675bef5 <unknown>\n#21 0x560b7676df5e <unknown>\n#22 0x7facdf29caa4 <unknown>\n#23 0x7facdf329c6c <unknown>\n",
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
