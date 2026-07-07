@@ -21092,3 +21092,62 @@ Stacktrace:
 [07/07/2026 09:47:47] Previsões extraídas: 6
 [07/07/2026 09:47:47] Dados atualizados com sucesso.
 [07/07/2026 09:47:47] data.json gravado (17594 bytes).
+[07/07/2026 09:51:07] Execução do scrape.py iniciada (GitHub Actions).
+[07/07/2026 09:51:07] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[07/07/2026 09:52:43] Erro na coleta (tentativa 1): Message: timeout: Timed out receiving message from renderer: -0.002
+  (Session info: chrome=149.0.7827.200)
+Stacktrace:
+#0 0x55657ca873da <unknown>
+#1 0x55657c469139 <unknown>
+#2 0x55657c450a1b <unknown>
+#3 0x55657c450696 <unknown>
+#4 0x55657c44e27b <unknown>
+#5 0x55657c44ebff <unknown>
+#6 0x55657c45de70 <unknown>
+#7 0x55657c477ea7 <unknown>
+#8 0x55657c47f71b <unknown>
+#9 0x55657c44f359 <unknown>
+#10 0x55657c477c09 <unknown>
+#11 0x55657c505a25 <unknown>
+#12 0x55657c4b0e4f <unknown>
+#13 0x55657c4b1c31 <unknown>
+#14 0x55657ca4d9f7 <unknown>
+#15 0x55657ca4c203 <unknown>
+#16 0x55657ca36f16 <unknown>
+#17 0x55657ca4cd9a <unknown>
+#18 0x55657ca1eeb0 <unknown>
+#19 0x55657ca73d58 <unknown>
+#20 0x55657ca73ef5 <unknown>
+#21 0x55657ca85f5e <unknown>
+#22 0x7f9abc69caa4 <unknown>
+#23 0x7f9abc729c6c <unknown>
+
+[07/07/2026 09:52:43] Falha na coleta, mantendo dado anterior em cache. Erro: Message: timeout: Timed out receiving message from renderer: -0.002
+  (Session info: chrome=149.0.7827.200)
+Stacktrace:
+#0 0x55657ca873da <unknown>
+#1 0x55657c469139 <unknown>
+#2 0x55657c450a1b <unknown>
+#3 0x55657c450696 <unknown>
+#4 0x55657c44e27b <unknown>
+#5 0x55657c44ebff <unknown>
+#6 0x55657c45de70 <unknown>
+#7 0x55657c477ea7 <unknown>
+#8 0x55657c47f71b <unknown>
+#9 0x55657c44f359 <unknown>
+#10 0x55657c477c09 <unknown>
+#11 0x55657c505a25 <unknown>
+#12 0x55657c4b0e4f <unknown>
+#13 0x55657c4b1c31 <unknown>
+#14 0x55657ca4d9f7 <unknown>
+#15 0x55657ca4c203 <unknown>
+#16 0x55657ca36f16 <unknown>
+#17 0x55657ca4cd9a <unknown>
+#18 0x55657ca1eeb0 <unknown>
+#19 0x55657ca73d58 <unknown>
+#20 0x55657ca73ef5 <unknown>
+#21 0x55657ca85f5e <unknown>
+#22 0x7f9abc69caa4 <unknown>
+#23 0x7f9abc729c6c <unknown>
+
+[07/07/2026 09:52:43] data.json gravado (18426 bytes).
