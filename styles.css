@@ -336,6 +336,10 @@ h2 {
   background: var(--cyan);
 }
 
+.rain {
+  background: var(--blue);
+}
+
 .line {
   width: 18px;
   border-top: 3px dashed currentColor;
@@ -591,11 +595,6 @@ td {
   color: var(--cyan);
   text-decoration: none;
   font-weight: 800;
-}
-
-.visit-counter {
-  color: var(--muted);
-  opacity: .85;
 }
 
 @media (max-width: 1120px) {
