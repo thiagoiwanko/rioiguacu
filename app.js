@@ -226,12 +226,22 @@ function renderChart(data) {
   const isNarrow = containerWidth < 640;
   const width = isNarrow ? Math.max(280, containerWidth) : Math.max(760, containerWidth);
   const height = isNarrow ? Math.round(Math.min(360, Math.max(300, width * 0.92))) : 485;
-  el.style.height = `${height}px`;
+  // Painel pequeno de precipitação, anexado abaixo do gráfico principal (mesmo eixo X).
+  const rain = isNarrow
+    ? { gap: 10, titleH: 14, barsH: 50, marginBottom: 6 }
+    : { gap: 14, titleH: 16, barsH: 70, marginBottom: 8 };
+  const rainExtra = rain.gap + rain.titleH + rain.barsH + rain.marginBottom;
+  const totalHeight = height + rainExtra;
+  el.style.height = `${totalHeight}px`;
   const pad = isNarrow
     ? { left: 40, right: 10, top: 18, bottom: 36 }
     : { left: 58, right: 28, top: 28, bottom: 50 };
   const plotW = width - pad.left - pad.right;
   const plotH = height - pad.top - pad.bottom;
+  const rainSectionTop = height + rain.gap;
+  const rainTitleY = rainSectionTop + (isNarrow ? 10 : 12);
+  const rainPlotTop = rainSectionTop + rain.titleH;
+  const rainPlotBottom = rainPlotTop + rain.barsH;
   const fs = isNarrow ? { tick: 10, tickSmall: 9, label: 10, refLabel: 10, refNum: 8, current: 10, axisTitle: 10 }
     : { tick: 12, tickSmall: 11, label: 12, refLabel: 12, refNum: 9, current: 11, axisTitle: 12 };
   const labelBoxWidth = isNarrow ? Math.max(150, width - pad.left - pad.right - 20) : 320;
@@ -279,8 +289,17 @@ function renderChart(data) {
   const yTicks = Array.from({ length: 6 }, (_, i) => minY + ((maxY - minY) / 5) * i);
   const xTicks = Array.from({ length: 5 }, (_, i) => new Date(start.getTime() + ((end.getTime() - start.getTime()) / 4) * i));
 
+  // Barras de precipitação horária (mm), mesma janela de tempo do histórico.
+  const rainPoints = histPoints.filter((item) => typeof item.chuva_mm === "number");
+  const rainMaxRaw = rainPoints.length ? Math.max(...rainPoints.map((p) => p.chuva_mm)) : 0;
+  const rainMax = Math.max(5, rainMaxRaw * 1.15);
+  const oneHourPx = plotW * (3600 * 1000) / (end.getTime() - start.getTime());
+  const rainBarW = Math.max(2, Math.min(14, oneHourPx * 0.55));
+  const rainBarY = (mm) => rainPlotBottom - (Math.max(0, mm) / rainMax) * rain.barsH;
+  const rainTicks = [0, rainMax];
+
   el.innerHTML = `
-    <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Gráfico da cota do Rio Iguaçu">
+    <svg viewBox="0 0 ${width} ${totalHeight}" role="img" aria-label="Gráfico da cota do Rio Iguaçu e precipitação">
       <defs>
         <linearGradient id="waterLine" x1="0" x2="1">
           <stop offset="0%" stop-color="#18d9d2"/>
@@ -301,7 +320,7 @@ function renderChart(data) {
         <text x="${pad.left - (isNarrow ? 8 : 12)}" y="${y(tick) + 4}" text-anchor="end" fill="#8aa3b0" font-size="${fs.tick}">${tick.toFixed(2)}</text>
       `).join("")}
       ${xTicks.map((tick) => `
-        <line x1="${x(tick)}" x2="${x(tick)}" y1="${pad.top}" y2="${height - pad.bottom}" stroke="rgba(180,215,230,.10)" stroke-dasharray="2 5"/>
+        <line x1="${x(tick)}" x2="${x(tick)}" y1="${pad.top}" y2="${rainPlotBottom}" stroke="rgba(180,215,230,.10)" stroke-dasharray="2 5"/>
         <text x="${x(tick)}" y="${height - (isNarrow ? 18 : 22)}" text-anchor="middle" fill="#8aa3b0" font-size="${fs.tick}">${tick.toLocaleDateString("pt-BR", {day: "2-digit", month: "2-digit"})}</text>
         <text x="${x(tick)}" y="${height - (isNarrow ? 5 : 8)}" text-anchor="middle" fill="#6f8795" font-size="${fs.tickSmall}">${tick.toLocaleTimeString("pt-BR", {hour: "2-digit", minute: "2-digit"})}</text>
       `).join("")}
@@ -343,6 +362,18 @@ function renderChart(data) {
       ${histPoints.map((p, idx) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="${idx === histPoints.length - 1 ? "Cota atual" : "Histórico"}"/>`).join("")}
       ${dryPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão sem chuva"/>`).join("")}
       ${wetPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão com chuva"/>`).join("")}
+      <rect x="${pad.left}" y="${rainPlotTop}" width="${plotW}" height="${rain.barsH}" rx="6" fill="rgba(72,167,255,.05)" stroke="rgba(180,215,230,.14)"/>
+      <text x="${pad.left}" y="${rainTitleY}" fill="#9fb4c1" font-size="${fs.axisTitle}">Chuva (mm)</text>
+      ${rainTicks.map((tick) => `
+        <text x="${pad.left - (isNarrow ? 8 : 12)}" y="${rainBarY(tick) + 3}" text-anchor="end" fill="#8aa3b0" font-size="${fs.tick}">${tick.toFixed(tick === 0 ? 0 : 1)}</text>
+      `).join("")}
+      ${rainPoints.map((p) => {
+        const cx = x(parseDate(p.data_hora));
+        const barTop = rainBarY(p.chuva_mm);
+        const barH = Math.max(0, rainPlotBottom - barTop);
+        return `<rect x="${cx - rainBarW / 2}" y="${barTop}" width="${rainBarW}" height="${barH}" rx="1.5" fill="rgba(72,167,255,.85)" stroke="rgba(255,255,255,.15)"/>`;
+      }).join("")}
+      ${rainPoints.map((p) => `<rect class="chart-hit" x="${x(parseDate(p.data_hora)) - Math.max(rainBarW, 10) / 2}" y="${rainPlotTop}" width="${Math.max(rainBarW, 10)}" height="${rain.barsH}" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt1.format(p.chuva_mm)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Chuva horária" data-unit="mm"/>`).join("")}
     </svg>
   `;
 }
@@ -357,6 +388,7 @@ function renderAll(data) {
 async function refresh(force = false) {
   if (state.loading) return;
   state.loading = true;
+  $("refreshBtn").disabled = true;
   $("syncStatus").textContent = "Coletando dados da Copel...";
   $("syncStatus").classList.remove("error");
   $("syncStatus").classList.remove("warning");
@@ -392,6 +424,7 @@ async function refresh(force = false) {
     $("diagnosticBox").hidden = false;
     $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada hora; tente novamente em instantes.";
   } finally {
+    $("refreshBtn").disabled = false;
     state.loading = false;
   }
 }
@@ -407,7 +440,8 @@ function setupChartTooltip() {
     const cota = target.getAttribute("data-cota");
     const time = target.getAttribute("data-time");
     const kind = target.getAttribute("data-kind");
-    tooltipEl.innerHTML = `<strong>${cota} m</strong><br><span>${time} · ${kind}</span>`;
+    const unit = target.getAttribute("data-unit") || "m";
+    tooltipEl.innerHTML = `<strong>${cota} ${unit}</strong><br><span>${time} · ${kind}</span>`;
     tooltipEl.style.left = `${offsetX}px`;
     tooltipEl.style.top = `${Math.max(offsetY - 12, 0)}px`;
     tooltipEl.hidden = false;
@@ -437,24 +471,8 @@ function setupChartTooltip() {
   }, { passive: true });
 }
 
-// Contador de visitas via Worker + KV do próprio Cloudflare (sem depender de terceiros).
-// Falha silenciosamente se o serviço estiver fora do ar: é só um número informativo
-// no rodapé, não deve afetar o resto do site. Conta acessos (hits), não visitantes únicos.
-async function trackVisit() {
-  const counterEl = $("visitCounter");
-  if (!counterEl) return;
-  const nf = new Intl.NumberFormat("pt-BR");
-  try {
-    const r = await fetch("https://rioiguacu-counter.thiago-dff.workers.dev/track");
-    const { total, week, day } = await r.json();
-    counterEl.textContent = `· ${nf.format(total)} visitas · ${nf.format(week)} na semana · ${nf.format(day)} hoje`;
-  } catch (error) {
-    // silencioso
-  }
-}
-
+$("refreshBtn").addEventListener("click", () => refresh(true));
 window.addEventListener("resize", () => state.data && renderChart(state.data));
 setupChartTooltip();
 refresh(false);
-trackVisit();
 setInterval(() => refresh(false), 5 * 60 * 1000);
