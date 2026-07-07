@@ -2,22 +2,49 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
-## v1.15 — 2026-07-03
+## v1.6 — 2026-07-07
 
-- Corrigida a cota de referência da enchente de 2023, de 8,38 m para 8,37 m (COTAS_BAIRROS e limiar de definir_situacao, em scrape.py e app.py). O valor de 8,38 m vinha de fonte secundária (Governo do Paraná/AEN); a série oficial consistida da ANA/HidroWeb (65310000_Cotas.csv, estação 65310000) confirma pico de 837 cm (8,37 m) em 20/10/2023. Mesma validação usada para corrigir a cota de 1992 na v1.14 — a série consistida da ANA é adotada como referência definitiva para todas as cotas históricas do site.
+- Novo painel pequeno de barras de precipitação (mm), anexado logo abaixo do gráfico principal de cota, compartilhando o mesmo eixo de tempo.
+- Cada barra representa a chuva horária (`chuva_mm`) já coletada da Copel; passar o mouse (ou tocar) mostra o valor exato e o horário, igual ao gráfico de régua.
+- Tooltip do gráfico generalizado para suportar unidades diferentes (m para régua, mm para chuva).
+- Nova legenda "Chuva horária (mm)" no cabeçalho do gráfico.
 
-## v1.14 — 2026-07-03
+## v1.5 — 2026-07-02
 
-- Corrigida a cota de referência da enchente de 1992, de 9,80 m para 8,90 m (usada em COTAS_BAIRROS e no limiar da função definir_situacao, em scrape.py e app.py). O valor de 9,80 m veio de uma citação secundária (CENACID/UFPR) que o próprio material técnico local já registrava como suspeita de erro de digitação. Confirmando isso, foi feita uma validação direta na série bruta oficial da ANA/HidroWeb (arquivo 65310000_Cotas.csv, estação 65310000): separando as leituras "consistidas" (validadas pela ANA) das "brutas", o pico de junho/1992 consistido é 890 cm (8,90 m) em 08/06/1992 — o mesmo valor que o Webnode/material técnico local já indicava (cota altimétrica 748,50 m). A mesma validação confirmou de passagem os demais picos históricos já usados no site (1983 = 10,42 m, 2014 = 8,12 m, 2023 = 8,37 m) e resolveu uma dúvida em aberto: o pico de 2023 na série oficial consistida é 8,37 m em 20/10/2023, não 8,38 m como divulgado por fontes secundárias.
+- Gráfico: ao passar o mouse (ou tocar, no celular) sobre qualquer ponto da linha — histórico, previsão sem chuva ou previsão com chuva — aparece um balão mostrando a cota exata e o horário daquele ponto.
+- Corrigido também um bug de corrupção de bytes introduzido no upload anterior do `scrape.py` (um byte inválido na linha 264 quebrava a coleta no GitHub Actions com `SyntaxError`); reenviado com verificação de integridade byte a byte.
 
-## v1.13 — 2026-07-03
+## v1.4 — 2026-07-02
 
-- Corrigida inconsistência no contador de visitas: o usuário percebeu que "hoje" mostrava mais visitas que "na semana" (113 x 112), o que é logicamente impossível já que a semana inclui o dia de hoje. Causa: o Worker `rioiguacu-counter` incrementava os contadores no Workers KV com um padrão ler → somar 1 → gravar, mas o KV não é atômico nem fortemente consistente — quando várias requisições chegam quase ao mesmo tempo (como aconteceu bastante durante os testes desta migração), gravações concorrentes podem se sobrescrever e "perder" incrementos, de forma independente para cada contador. Corrigido migrando o armazenamento de Workers KV para um Durable Object (`VisitCounterDO`), que processa uma requisição de cada vez para o mesmo objeto — o runtime do Cloudflare garante isso — eliminando a corrida de vez. O código-fonte do Worker agora também é versionado neste repositório, em `cloudflare-worker/rioiguacu-counter.js`, para ter backup (antes só existia dentro do painel do Cloudflare). Números de total/semana/dia foram migrados a partir da última leitura consistente disponível, sem perder o histórico.
+- Corrigida a cota de referência da enchente de 2014, de 8,15 m para 8,13 m. O valor anterior estava incorreto: 8,15 m era, na verdade, o nível atingido em 18/10/2023 (quando o rio ultrapassou a marca de 2014), não o pico real de 2014. Fontes: reportagens da época e documento oficial de reordenamento territorial da Prefeitura de União da Vitória (2022), que registra 8,12 m para a enchente de 2014.
+- Ajustado o limiar correspondente na descrição textual da situação do rio (scrape.py e app.py).
 
-## v1.12 — 2026-07-03
+## v1.3 — 2026-07-02
 
-- Corrigido cache do navegador que impedia o contador novo (v1.11) de aparecer para quem já tinha visitado o site: como `app.js` era referenciado sem versão (`<script src="app.js">`), navegadores guardavam a versão antiga em cache por tempo indefinido e continuavam usando o código velho (com a CountAPI morta) mesmo depois do arquivo ser atualizado no servidor — confirmado testando em aba nova, que ainda executava a função antiga. Corrigido de duas formas: (1) o `index.html` agora referencia `app.js?v=1.12`, forçando o navegador a buscar a versão nova a cada atualização de versão; (2) adicionado arquivo `_headers` instruindo o Cloudflare Pages a nunca cachear `app.js` sem revalidar, prevenindo que o mesmo problema se repita em futuras atualizações mesmo se o número de versão for esquecido.
+- Corrigido bug de dimensionamento do gráfico no celular: a largura interna era travada em no mínimo 760px, fazendo o gráfico "encolher" no meio de uma área com altura fixa de 485px e deixando faixas vazias em cima/embaixo em telas estreitas.
+- Gráfico agora calcula largura, altura e espaçamentos de forma responsiva conforme a largura real da tela (fontes, caixas de legenda e eixos reduzidos no mobile).
+- Ajustes gerais de layout para telas pequenas: títulos, cartões de métricas e listas de referência com tamanhos mais compactos.
+- Confirmado via PageSpeed Insights: nota 100/100/100 (Performance/Acessibilidade/Boas práticas) em mobile e desktop — a lentidão percebida era o bug visual do gráfico, não velocidade de carregamento.
 
-## v1.11 — 2026-07-03
+## v1.2 — 2026-07-01
 
-- Migrado o contador de visitas da CountAPI (terceiro que saiu do ar) para um Worker + KV do próprio Cloudflare (`rioiguacu-counter`, namespace `RIOIGUACU_VISITS`). O Worker calcula a data/semana em horário de Brasília e incrementa os contadores de total, semana e dia direto no KV, retornando os três valores numa única chamada. O `app.js` agora chama só esse endpoint, sem depender de nenhum serviço externo. Configurado manualmente pelo usuário no painel do Cloudflare (Workers e Pages → Associações), já que o painel/API do Clo
+- Status de sincronização agora mostra também "próxima atualização às HH:MM", calculado a partir do horário do último dado coletado.
+- Gráfico: o ponto mais recente (cota atual) agora pulsa com um anel de destaque e o texto "Cota atual" logo abaixo dele.
+
+## v1.1 — 2026-07-01
+
+- Gráfico: toda cota de referência agora mostra seu valor em texto pequeno junto à linha, mesmo as que não têm a caixa de legenda completa (que continua reservada às duas cotas mais próximas do nível atual).
+
+## v1.0 — 2026-07-01
+
+Primeira versão estável rodando 100% no GitHub (sem servidor local).
+
+- Migração do monitor de um servidor Python local (Selenium + HTTP server) para GitHub Actions + GitHub Pages.
+- `scrape.py` roda automaticamente a cada 5 minutos via GitHub Actions, gera `data.json` estático e o site consome esse arquivo direto.
+- Corrigido bug de parsing da vazão: valores acima de 1.000 m³/s usam "." como separador de milhar e estavam sendo descartados, travando a leitura mais recente.
+- Gráfico: nível atual agora fica centralizado verticalmente, com espaço reservado para cotas de alerta acima e abaixo.
+- Gráfico: caixas de legenda de cotas de referência próximas (ex. 4.30 m e 4.50 m) não se sobrepõem mais.
+- Lista "Cotas de referência": adicionado marcador móvel destacado "O rio está aqui agora!" na posição correta entre as cotas.
+- Selo de situação do rio colorido por gravidade: amarelo (atenção moderada), laranja (atenção alta), vermelho (atenção muito alta) e vermelho piscando com giroflex (alerta crítico).
+- Escala de cores e barra de nível recalibradas: vermelho a partir de 5,50 m (nível de alerta crítico), em vez de 10,42 m (cheia histórica de 1983).
+- Rodapé com número de versão e link para este changelog.
