@@ -1,6 +1,6 @@
 {
-  "ok": true,
-  "erro": null,
+  "ok": false,
+  "erro": "nenhuma medição foi encontrada na tela da Copel",
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
