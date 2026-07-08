@@ -2,12 +2,59 @@
 
 Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`, gerado antes de qualquer modificação.
 
-## v1.6 — 2026-07-07
+**Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
-- Novo painel pequeno de barras de precipitação (mm), anexado logo abaixo do gráfico principal de cota, compartilhando o mesmo eixo de tempo.
-- Cada barra representa a chuva horária (`chuva_mm`) já coletada da Copel; passar o mouse (ou tocar) mostra o valor exato e o horário, igual ao gráfico de régua.
-- Tooltip do gráfico generalizado para suportar unidades diferentes (m para régua, mm para chuva).
-- Nova legenda "Chuva horária (mm)" no cabeçalho do gráfico.
+## v1.16 — 2026-07-07
+
+- **Correção de erro grave:** a "v1.6" publicada mais cedo em 07/07 foi feita em cima de um snapshot local desatualizado (equivalente à v1.5) e, ao subir pro GitHub, apagou tudo que tinha sido feito entre v1.6 e v1.15 — inclusive o contador de visitas via Cloudflare Worker (com o histórico real de visitas) e a remoção do botão "Atualizar". Esta versão restaura o estado exato da v1.15 (confirmado via `raw.githubusercontent.com` no commit `d38a8b6`) e aplica por cima, de forma isolada, só a funcionalidade nova (gráfico de chuva).
+- Contador de visitas restaurado, chamando o mesmo Worker de sempre (`rioiguacu-counter.thiago-dff.workers.dev/track`) — a contagem real (total/semana/dia) não foi zerada, só parou de aparecer por 33 minutos enquanto a v1.6 quebrada esteve no ar.
+- Botão "Atualizar" removido de novo (tinha sido removido na v1.7, voltou por engano na v1.6 quebrada) — o site já atualiza sozinho a cada 5 min.
+- Link "Histórico de versões" removido do rodapé de novo (tinha sido removido em 02/07, voltou por engano na v1.6 quebrada).
+- Mantido o novo painel de barras de precipitação (chuva horária, mm) abaixo do gráfico principal de cota, com tooltip generalizado para mostrar "mm" nas barras e "m" no resto do gráfico.
+- Nova regra de processo: antes de qualquer publicação, comparar arquivo por arquivo com o que está ao vivo em `raw.githubusercontent.com/thiagoiwanko/rioiguacu/main/...`, não confiar em snapshot local sem verificar primeiro.
+
+## v1.15 — 2026-07-03
+
+- Bump de versão (commit "Versao 1.15"). Sem detalhe adicional na mensagem do commit.
+
+## v1.14 — 2026-07-03
+
+- Bump de versão (commit "Versao 1.14"). Sem detalhe adicional na mensagem do commit.
+
+## v1.13 — 2026-07-03
+
+- Corrige condição de corrida (race condition) no contador de visitas, migrando o armazenamento de KV para Durable Object do Cloudflare.
+
+## v1.12 — 2026-07-03
+
+- Corrige cache do navegador que travava `app.js` numa versão antiga (parâmetro `?v=` de cache-busting no `<script src="app.js?v=...">`).
+
+## v1.11 — 2026-07-03
+
+- Contador de visitas implementado via Cloudflare Worker + KV (`rioiguacu-counter.thiago-dff.workers.dev`), mostrando total, visitas na semana e visitas no dia no rodapé.
+
+## v1.10 — 2026-07-03
+
+- Bump de versão no rodapé.
+
+## v1.9 — 2026-07-02
+
+- Contador de visitas (total/semana/dia) adicionado no rodapé (primeira versão, antes da migração pra Worker+KV na v1.11).
+
+## v1.8 — 2026-07-02
+
+- Bump de versão para 1.8.
+- Removido o link "Histórico de versões" do rodapé.
+
+## v1.7 — 2026-07-02
+
+- Removido o botão "Atualizar" do cabeçalho (o site já atualiza sozinho a cada 5 min via `setInterval`).
+- Corrigido bug de fuso horário.
+- Investigação do agendamento (cron) do GitHub Actions.
+
+## v1.6 — 2026-07-02
+
+- Reduzida a frequência de coleta para 15 min, corrigindo um engarrafamento no Cloudflare Pages causado por deploys demais em pouco tempo.
 
 ## v1.5 — 2026-07-02
 

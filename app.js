@@ -388,7 +388,6 @@ function renderAll(data) {
 async function refresh(force = false) {
   if (state.loading) return;
   state.loading = true;
-  $("refreshBtn").disabled = true;
   $("syncStatus").textContent = "Coletando dados da Copel...";
   $("syncStatus").classList.remove("error");
   $("syncStatus").classList.remove("warning");
@@ -424,7 +423,6 @@ async function refresh(force = false) {
     $("diagnosticBox").hidden = false;
     $("diagnosticBox").textContent = "Não foi possível carregar data.json. O GitHub Actions atualiza esse arquivo a cada hora; tente novamente em instantes.";
   } finally {
-    $("refreshBtn").disabled = false;
     state.loading = false;
   }
 }
@@ -471,8 +469,24 @@ function setupChartTooltip() {
   }, { passive: true });
 }
 
-$("refreshBtn").addEventListener("click", () => refresh(true));
+// Contador de visitas via Worker + KV do próprio Cloudflare (sem depender de terceiros).
+// Falha silenciosamente se o serviço estiver fora do ar: é só um número informativo
+// no rodapé, não deve afetar o resto do site. Conta acessos (hits), não visitantes únicos.
+async function trackVisit() {
+  const counterEl = $("visitCounter");
+  if (!counterEl) return;
+  const nf = new Intl.NumberFormat("pt-BR");
+  try {
+    const r = await fetch("https://rioiguacu-counter.thiago-dff.workers.dev/track");
+    const { total, week, day } = await r.json();
+    counterEl.textContent = `· ${nf.format(total)} visitas · ${nf.format(week)} na semana · ${nf.format(day)} hoje`;
+  } catch (error) {
+    // silencioso
+  }
+}
+
 window.addEventListener("resize", () => state.data && renderChart(state.data));
 setupChartTooltip();
 refresh(false);
+trackVisit();
 setInterval(() => refresh(false), 5 * 60 * 1000);
