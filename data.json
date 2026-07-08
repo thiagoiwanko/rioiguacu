@@ -5,24 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-08T11:31",
+    "atualizado_em": "2026-07-08T13:22",
     "historico": [
-      {
-        "data_hora": "2026-07-05T11:00",
-        "regua_m": 4.737,
-        "nivel_agua_m": 744.347,
-        "vazao_m3s": 1330,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
-      {
-        "data_hora": "2026-07-05T12:00",
-        "regua_m": 4.735,
-        "nivel_agua_m": 744.345,
-        "vazao_m3s": 1330,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-07-05T13:00",
         "regua_m": 4.732,
@@ -590,6 +574,22 @@
         "vazao_m3s": 1230,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-08T12:00",
+        "regua_m": 4.53,
+        "nivel_agua_m": 744.14,
+        "vazao_m3s": 1230,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-08T13:00",
+        "regua_m": 4.533,
+        "nivel_agua_m": 744.143,
+        "vazao_m3s": 1230,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -625,18 +625,18 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-08T11:00",
-      "regua_m": 4.53,
-      "nivel_agua_m": 744.14,
+      "data_hora": "2026-07-08T13:00",
+      "regua_m": 4.533,
+      "nivel_agua_m": 744.143,
       "vazao_m3s": 1230,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "ATENÇÃO ALTA",
     "tendencia": {
-      "texto": "BAIXANDO -0.008 m/h",
-      "delta": -0.008000000000000007,
-      "direcao": "baixando"
+      "texto": "SUBINDO +0.003 m/h",
+      "delta": 0.0030000000000001137,
+      "direcao": "subindo"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.54 m (ATENÇÃO ALTA).",
     "previsao_disponivel": true,
