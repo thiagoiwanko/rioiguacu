@@ -2,6 +2,18 @@ name: Atualizar dados do Rio Iguaçu
 
 on:
   schedule:
+    # A ANA publica o dado novo pouco depois de cada hora fechar. Esta linha
+    # faz o job rodar todo minuto de HH:01 a HH:05 pra pegar esse dado assim
+    # que aparecer (com folga pro atraso de transmissão da estação); se em
+    # nenhuma dessas tentativas a ANA tiver o dado novo, scrape.py cai pra
+    # Copel como redundância naquela rodada específica. Essas tentativas
+    # extras não geram deploy no Cloudflare Pages quando não há dado novo,
+    # porque o commit abaixo só considera diff em data.json (ver comentário
+    # no step "Commit e push do data.json").
+    - cron: "1-5 * * * *"
+    # Ritmo normal pro resto da hora (mantido em 15 min, igual já estava --
+    # reduzir pra 5 min foi o que causou o engarrafamento de deploys
+    # corrigido na v1.6; não repetir esse erro).
     - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
@@ -31,6 +43,9 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Rodar coleta
+        env:
+          ANA_API_LOGIN: ${{ secrets.ANA_API_LOGIN }}
+          ANA_API_SENHA: ${{ secrets.ANA_API_SENHA }}
         run: python scrape.py
 
       - name: Commit e push do data.json
@@ -38,8 +53,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data.json monitor_web.log
-          if git diff --staged --quiet; then
-            echo "Nenhuma mudança nos dados."
+          # Só publica (e só gera deploy no Cloudflare Pages) quando o
+          # data.json realmente mudou -- monitor_web.log muda em toda
+          # execução (é só texto de log) e não deve, sozinho, disparar um
+          # deploy. É isso que permite rodar de minuto em minuto na janela
+          # HH:01-05 sem reintroduzir o engarrafamento de deploys da v1.6.
+          if git diff --staged --quiet -- data.json; then
+            echo "data.json sem mudança; não publica nesta rodada."
             exit 0
           fi
           # Guarda os arquivos recém-coletados fora do repo, pois em caso de
