@@ -87,10 +87,9 @@ function nearestReferenceLabels(data, currentLevel) {
 function chartBounds(data) {
   const currentLevel = data.ultima.regua_m;
   const hist = data.historico.map((d) => d.regua_m);
-  const forecast = data.previsao.flatMap((d) => [
-    d.regua_sem_chuva_m,
-    d.regua_com_chuva_m,
-  ]).filter((v) => typeof v === "number");
+  const forecast = data.previsao
+    .map((d) => d.regua_com_chuva_m)
+    .filter((v) => typeof v === "number");
   const values = [...hist, ...forecast, currentLevel];
   const minValue = Math.min(...values);
   const maxValue = Math.max(...values);
@@ -99,9 +98,11 @@ function chartBounds(data) {
   const distAcimaDados = Math.max(maxValue - currentLevel, 0);
   const distAbaixoDados = Math.max(currentLevel - minValue, 0);
 
-  // Reserva espaço para pelo menos as duas próximas cotas de referência
-  // acima e abaixo do nível atual, para dar contexto de alerta.
-  const refs = allReferences(data).map((item) => item.nivel);
+  // Reserva espaço para pelo menos as duas próximas cotas de ALERTA (não
+  // cotas históricas distantes, como recordes de estiagem ou enchentes
+  // antigas) acima e abaixo do nível atual, para dar contexto sem esticar
+  // demais a escala vertical e achatar a variação real do gráfico.
+  const refs = data.cotas_alerta.map((item) => Number(item.nivel));
   const refsAcima = refs.filter((v) => v > currentLevel).sort((a, b) => a - b);
   const refsAbaixo = refs.filter((v) => v < currentLevel).sort((a, b) => b - a);
   const folgaRefAcima = refsAcima.length
@@ -279,10 +280,6 @@ function renderChart(data) {
     .map((item) => ({ ...item, value: item.regua_m }))
     .filter((item) => parseDate(item.data_hora) >= start && parseDate(item.data_hora) <= end);
 
-  const dryPoints = [
-    { data_hora: data.ultima.data_hora, value: data.ultima.regua_m },
-    ...data.previsao.map((item) => ({ data_hora: item.data_hora, value: item.regua_sem_chuva_m })),
-  ];
   const wetPoints = [
     { data_hora: data.ultima.data_hora, value: data.ultima.regua_m },
     ...data.previsao.filter((item) => item.regua_com_chuva_m !== null).map((item) => ({ data_hora: item.data_hora, value: item.regua_com_chuva_m })),
@@ -342,10 +339,9 @@ function renderChart(data) {
           `}
         `;
       }).join("")}
-      ${dryPoints.length > 1 ? `<path d="${makePath(dryPoints, x, y)}" fill="none" stroke="#f2f7fa" stroke-width="2.4" stroke-dasharray="8 7" opacity=".92"/>` : ""}
       ${wetPoints.length > 1 ? `<path d="${makePath(wetPoints, x, y)}" fill="none" stroke="#ff3d42" stroke-width="2.4" stroke-dasharray="8 7" opacity=".95"/>` : ""}
       <path d="${makePath(histPoints, x, y)}" fill="none" stroke="url(#waterLine)" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
-      ${histPoints.slice(0, -1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="3" fill="${colorForLevel(p.value)}" stroke="#071019" stroke-width="1.5"/>`).join("")}
+      ${histPoints.slice(0, -1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="3" fill="#18d9d2" stroke="#071019" stroke-width="1.5"/>`).join("")}
       ${histPoints.length ? (() => {
         const last = histPoints[histPoints.length - 1];
         const cx = x(parseDate(last.data_hora));
@@ -358,12 +354,10 @@ function renderChart(data) {
           <text class="current-point-label" x="${cx}" y="${labelY}" text-anchor="middle" fill="#eef7fb" font-size="${fs.current}" font-weight="800">Cota atual</text>
         `;
       })() : ""}
-      ${dryPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#f2f7fa"/>`).join("")}
       ${wetPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#ff3d42"/>`).join("")}
       <text x="${pad.left}" y="${isNarrow ? 14 : 18}" fill="#9fb4c1" font-size="${fs.axisTitle}">Leitura da régua (m)</text>
       ${histPoints.map((p, idx) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="${idx === histPoints.length - 1 ? "Cota atual" : "Histórico"}"/>`).join("")}
-      ${dryPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão sem chuva"/>`).join("")}
-      ${wetPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão com chuva"/>`).join("")}
+      ${wetPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão"/>`).join("")}
       <rect x="${pad.left}" y="${rainPlotTop}" width="${plotW}" height="${rain.barsH}" rx="6" fill="rgba(72,167,255,.05)" stroke="rgba(180,215,230,.14)"/>
       <text x="${pad.left}" y="${rainTitleY}" fill="#9fb4c1" font-size="${fs.axisTitle}">Chuva (mm)</text>
       ${rainTicks.map((tick) => `

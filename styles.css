@@ -345,10 +345,6 @@ h2 {
   border-top: 3px dashed currentColor;
 }
 
-.dry {
-  color: #ffffff;
-}
-
 .wet {
   color: var(--red);
 }
