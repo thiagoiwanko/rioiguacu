@@ -3,18 +3,10 @@
   "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
-    "fonte": "Copel - Monitoramento Hidrológico",
+    "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-09T13:44",
+    "atualizado_em": "2026-07-09T14:44",
     "historico": [
-      {
-        "data_hora": "2026-07-06T13:00",
-        "regua_m": 4.662,
-        "nivel_agua_m": 744.272,
-        "vazao_m3s": 1290,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.2
-      },
       {
         "data_hora": "2026-07-06T14:00",
         "regua_m": 4.659,
@@ -590,6 +582,14 @@
         "vazao_m3s": 1190,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-09T14:00",
+        "regua_m": 4.448,
+        "nivel_agua_m": 744.058,
+        "vazao_m3s": 1190,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -625,17 +625,17 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-09T13:00",
-      "regua_m": 4.451,
-      "nivel_agua_m": 744.061,
+      "data_hora": "2026-07-09T14:00",
+      "regua_m": 4.448,
+      "nivel_agua_m": 744.058,
       "vazao_m3s": 1190,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "ATENÇÃO MODERADA",
     "tendencia": {
-      "texto": "BAIXANDO -0.004 m/h",
-      "delta": -0.004000000000000448,
+      "texto": "BAIXANDO -0.003 m/h",
+      "delta": -0.0029999999999992255,
       "direcao": "baixando"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.44 m (ATENÇÃO MODERADA).",
