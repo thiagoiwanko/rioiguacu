@@ -5,24 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel - Monitoramento Hidrológico",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-09T11:01",
+    "atualizado_em": "2026-07-09T13:44",
     "historico": [
-      {
-        "data_hora": "2026-07-06T11:00",
-        "regua_m": 4.668,
-        "nivel_agua_m": 744.278,
-        "vazao_m3s": 1290,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.2
-      },
-      {
-        "data_hora": "2026-07-06T12:00",
-        "regua_m": 4.665,
-        "nivel_agua_m": 744.275,
-        "vazao_m3s": 1290,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.2
-      },
       {
         "data_hora": "2026-07-06T13:00",
         "regua_m": 4.662,
@@ -582,23 +566,42 @@
         "vazao_m3s": 1200,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-09T11:00",
+        "regua_m": 4.458,
+        "nivel_agua_m": 744.068,
+        "vazao_m3s": 1200,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-09T12:00",
+        "regua_m": 4.455,
+        "nivel_agua_m": 744.065,
+        "vazao_m3s": 1200,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-09T13:00",
+        "regua_m": 4.451,
+        "nivel_agua_m": 744.061,
+        "vazao_m3s": 1190,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
       {
-        "data_hora": "2026-07-09T15:00",
-        "regua_sem_chuva_m": 4.46,
-        "regua_com_chuva_m": 4.46
-      },
-      {
         "data_hora": "2026-07-09T21:00",
-        "regua_sem_chuva_m": 4.45,
-        "regua_com_chuva_m": 4.45
+        "regua_sem_chuva_m": 4.44,
+        "regua_com_chuva_m": 4.44
       },
       {
         "data_hora": "2026-07-10T03:00",
-        "regua_sem_chuva_m": 4.43,
-        "regua_com_chuva_m": 4.43
+        "regua_sem_chuva_m": 4.42,
+        "regua_com_chuva_m": 4.42
       },
       {
         "data_hora": "2026-07-10T09:00",
@@ -607,20 +610,25 @@
       },
       {
         "data_hora": "2026-07-10T15:00",
-        "regua_sem_chuva_m": 4.38,
-        "regua_com_chuva_m": 4.38
+        "regua_sem_chuva_m": 4.39,
+        "regua_com_chuva_m": 4.39
       },
       {
         "data_hora": "2026-07-10T21:00",
-        "regua_sem_chuva_m": 4.36,
-        "regua_com_chuva_m": 4.36
+        "regua_sem_chuva_m": 4.37,
+        "regua_com_chuva_m": 4.37
+      },
+      {
+        "data_hora": "2026-07-11T03:00",
+        "regua_sem_chuva_m": 4.35,
+        "regua_com_chuva_m": 4.34
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-09T10:00",
-      "regua_m": 4.46,
-      "nivel_agua_m": 744.07,
-      "vazao_m3s": 1200,
+      "data_hora": "2026-07-09T13:00",
+      "regua_m": 4.451,
+      "nivel_agua_m": 744.061,
+      "vazao_m3s": 1190,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
@@ -630,7 +638,7 @@
       "delta": -0.004000000000000448,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão em 48 h: pode atingir 4.46 m (ATENÇÃO MODERADA).",
+    "alerta_previsao": "Previsão em 48 h: pode atingir 4.44 m (ATENÇÃO MODERADA).",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
