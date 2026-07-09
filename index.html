@@ -12,7 +12,7 @@
       <div>
         <p class="eyebrow">Defesa Civil · Monitoramento Hidrológico</p>
         <h1>Rio Iguaçu</h1>
-        <p class="subtitle">União da Vitória · dados Copel com alertas e referências históricas</p>
+        <p class="subtitle">União da Vitória · dados da ANA (Agência Nacional de Águas e Saneamento Básico), com a Copel como fonte de apoio</p>
       </div>
       <div class="actions">
         <span id="syncStatus" class="sync">Iniciando...</span>
@@ -33,7 +33,7 @@
           <div class="gauge-fill"></div>
           <div id="gaugeMarker" class="gauge-marker"></div>
         </div>
-        <p id="situationText" class="situation">Coletando informações da Copel.</p>
+        <p id="situationText" class="situation">Coletando dados do rio.</p>
       </article>
 
       <article class="metric-card">
@@ -89,7 +89,7 @@
 
     <section class="table-panel depth">
       <div class="panel-title compact">
-        <h2>Dados visíveis da Copel</h2>
+        <h2>Dados visíveis <span id="sourceLabel"></span></h2>
         <a id="sourceLink" href="#" target="_blank" rel="noreferrer">Abrir fonte</a>
       </div>
       <div class="table-wrap">
@@ -108,11 +108,11 @@
       </div>
     </section>
     <footer class="version-footer">
-      <span>Versão 1.16</span>
+      <span>Versão 1.17</span>
       <span id="visitCounter" class="visit-counter"></span>
     </footer>
   </main>
 
-  <script src="app.js?v=1.16"></script>
+  <script src="app.js?v=1.17"></script>
 </body>
 </html>

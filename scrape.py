@@ -1,10 +1,13 @@
 import json
+import os
 import re
 import time
 from datetime import datetime, timedelta
 from pathlib import Path
+from urllib.parse import quote
 from zoneinfo import ZoneInfo
 
+import requests
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -14,9 +17,24 @@ APP_VERSION = "GitHub Actions 1.0"
 BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "data.json"
 LOG_PATH = BASE_DIR / "monitor_web.log"
+ANA_TOKEN_CACHE_PATH = BASE_DIR / ".ana_token_cache.json"
 
-URL_HISTORICO = "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf"
+URL_HISTORICO_COPEL = "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf"
+URL_HISTORICO_ANA = "https://www.snirh.gov.br/hidrotelemetria/"
 URL_PREVISAO = "https://www.copel.com/mhbweb/paginas/previsao.jsf"
+
+# API oficial da ANA (HidroWebservice). Estação 65310001 = UHE Gov. Bento Munhoz
+# União da Vitória, confirmada em 07/2026 batendo hora a hora com o que a Copel
+# publica (mesmo datum, zero 739,61 m). Não tem previsão -- só dado medido real,
+# por isso a previsão continua vindo da Copel independentemente disso funcionar.
+# Credenciais NUNCA ficam neste arquivo: vêm de variável de ambiente
+# (ANA_API_LOGIN / ANA_API_SENHA), configuradas como GitHub Actions Secret em
+# produção ou exportadas manualmente pra teste local. Se não estiverem
+# configuradas, ou se a chamada falhar por qualquer motivo, cai automaticamente
+# pro scraping da Copel (comportamento original, inalterado).
+ANA_BASE = "https://www.ana.gov.br/hidrowebservice"
+ANA_CODIGO_ESTACAO = 65310001
+ANA_ZERO_REGUA_M = 739.61
 
 JANELA_HISTORICO_HORAS = 48
 JANELA_PREVISAO_HORAS = 48
@@ -66,6 +84,115 @@ def iso(dt):
 
 def parse_numero(valor):
     return float(valor.replace(",", "."))
+
+
+def _ana_query_string(params):
+    # A API da ANA exige espaço codificado como %20 nos NOMES dos parâmetros
+    # ("Código da Estação", "Range Intervalo de busca" etc). requests.get(params=dict)
+    # usa '+' por padrão (estilo application/x-www-form-urlencoded), que a API
+    # rejeita com 400 Bad Request -- por isso a URL é montada manualmente aqui.
+    return "&".join(f"{quote(k, safe='')}={quote(str(v), safe='')}" for k, v in params.items())
+
+
+def _ana_token_valido():
+    try:
+        cache = json.loads(ANA_TOKEN_CACHE_PATH.read_text(encoding="utf-8"))
+        expira_em = datetime.fromisoformat(cache["expira_em"])
+        if datetime.now() < expira_em:
+            return cache["token"]
+    except Exception:
+        pass
+    return None
+
+
+def _ana_autenticar(identificador, senha):
+    token = _ana_token_valido()
+    if token:
+        return token
+
+    resp = requests.get(
+        f"{ANA_BASE}/EstacoesTelemetricas/OAUth/v1",
+        headers={"Identificador": identificador, "Senha": senha},
+        timeout=20,
+    )
+    resp.raise_for_status()
+    token = resp.json()["items"]["tokenautenticacao"]
+
+    # Cacheia por 55 min (validade real é 60 min) pra nunca reautenticar a
+    # cada execução do GitHub Actions -- autenticação em alta frequência é
+    # monitorada pela ANA e pode resultar em bloqueio de IP (417).
+    try:
+        ANA_TOKEN_CACHE_PATH.write_text(
+            json.dumps({
+                "token": token,
+                "expira_em": iso(datetime.now() + timedelta(minutes=55)),
+            }),
+            encoding="utf-8",
+        )
+    except Exception:
+        pass
+
+    return token
+
+
+def _parse_data_hora_ana(valor):
+    valor = valor.split(".")[0]
+    return datetime.strptime(valor, "%Y-%m-%d %H:%M:%S")
+
+
+def coletar_via_ana():
+    """Busca o histórico via API oficial da ANA (estação 65310001). Retorna None
+    (sem lançar exceção) se as credenciais não estiverem configuradas ou se
+    qualquer etapa falhar -- nesses casos coletar_uma_vez() cai pro scraping
+    da Copel automaticamente, sem afetar a previsão (que é Copel-only)."""
+    identificador = os.environ.get("ANA_API_LOGIN")
+    senha = os.environ.get("ANA_API_SENHA")
+    if not identificador or not senha:
+        log("ANA: credenciais não configuradas (ANA_API_LOGIN/ANA_API_SENHA); usando Copel.")
+        return None
+
+    try:
+        token = _ana_autenticar(identificador, senha)
+        query = _ana_query_string({
+            "Código da Estação": ANA_CODIGO_ESTACAO,
+            "Tipo Filtro Data": "DATA_LEITURA",
+            "Range Intervalo de busca": "DIAS_2",
+        })
+        resp = requests.get(
+            f"{ANA_BASE}/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v1?{query}",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=20,
+        )
+        resp.raise_for_status()
+        payload = resp.json()
+        itens = payload.get("items") or []
+        if payload.get("code") != 200 or not itens:
+            log(f"ANA: resposta sem itens utilizáveis ({payload.get('message')}); usando Copel.")
+            return None
+
+        itens = sorted(itens, key=lambda item: item["Data_Hora_Medicao"])
+        historico = []
+        chuva_acumulada = 0.0
+        for item in itens:
+            regua_m = round(float(item["Cota_Adotada"]) / 100, 3)
+            chuva_mm = round(float(item.get("Chuva_Adotada", 0) or 0), 1)
+            chuva_acumulada = round(chuva_acumulada + chuva_mm, 1)
+            historico.append({
+                "data_hora": iso(_parse_data_hora_ana(item["Data_Hora_Medicao"])),
+                "regua_m": regua_m,
+                "nivel_agua_m": round(regua_m + ANA_ZERO_REGUA_M, 3),
+                "vazao_m3s": int(float(item.get("Vazao_Adotada", 0) or 0)),
+                "chuva_mm": chuva_mm,
+                "chuva_acumulada_mm": chuva_acumulada,
+            })
+
+        if not historico:
+            return None
+        log(f"ANA: {len(historico)} medições obtidas com sucesso (estação {ANA_CODIGO_ESTACAO}).")
+        return historico
+    except Exception as exc:
+        log(f"ANA: falha na coleta ({exc}); usando Copel.")
+        return None
 
 
 def abrir_navegador():
@@ -242,16 +369,16 @@ def verificar_alerta_previsao(historico, previsao):
     return "Previsão em 48 h sem atingir cotas críticas."
 
 
-def montar_payload(historico, previsao):
+def montar_payload(historico, previsao, fonte_historico, url_historico):
     if not historico:
-        raise RuntimeError("nenhuma medição foi encontrada na tela da Copel")
+        raise RuntimeError("nenhuma medição foi encontrada (nem ANA, nem Copel)")
 
     ultima = historico[-1]
     regua = float(ultima["regua_m"])
     return {
         "versao": APP_VERSION,
-        "fonte": "Copel - Monitoramento Hidrológico",
-        "url_historico": URL_HISTORICO,
+        "fonte": fonte_historico,
+        "url_historico": url_historico,
         "atualizado_em": iso(agora_br()),
         "historico": historico,
         "previsao": previsao,
@@ -267,11 +394,39 @@ def montar_payload(historico, previsao):
     }
 
 
-def coletar_uma_vez():
-    texto_historico = coletar_texto(URL_HISTORICO)
-    historico = extrair_medicoes(texto_historico)
-    log(f"Medições extraídas: {len(historico)}")
+# Nomes de fonte exibidos no site (campo "fonte" do data.json). O app.js lê
+# esse texto e mostra dinamicamente, então quando a redundância da Copel
+# entra em ação (raro, só nos minutos em que a ANA ainda não fechou a hora)
+# o site mostra a fonte real daquela leitura, nunca uma informação fixa/errada.
+FONTE_ANA = "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)"
+FONTE_COPEL = "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)"
 
+
+def coletar_uma_vez(ultima_anterior=None):
+    historico = coletar_via_ana()
+    fonte_historico = None
+    url_historico = URL_HISTORICO_COPEL
+    if historico:
+        nova_ultima_ana = historico[-1]["data_hora"]
+        if ultima_anterior is None or nova_ultima_ana != ultima_anterior:
+            fonte_historico = FONTE_ANA
+            url_historico = URL_HISTORICO_ANA
+        else:
+            # A ANA respondeu, mas ainda é o mesmo dado de antes (a hora ainda
+            # não fechou lá) -- usa Copel como redundância nesta rodada em vez
+            # de reescrever o mesmo horário e fingir que atualizou.
+            log(f"ANA: ainda sem dado novo (última segue {nova_ultima_ana}); usando Copel como redundância nesta rodada.")
+            historico = None
+
+    if not historico:
+        texto_historico = coletar_texto(URL_HISTORICO_COPEL)
+        historico = extrair_medicoes(texto_historico)
+        fonte_historico = FONTE_COPEL
+        url_historico = URL_HISTORICO_COPEL
+    log(f"Medições obtidas via {fonte_historico.split(' ')[0]}: {len(historico)}")
+
+    # Previsão é exclusiva da Copel -- a ANA não oferece esse dado, então essa
+    # parte roda sempre, independentemente da fonte do histórico acima.
     previsao = []
     try:
         texto_previsao = coletar_texto(URL_PREVISAO)
@@ -280,7 +435,7 @@ def coletar_uma_vez():
     except Exception as exc:
         log(f"Previsão indisponível: {exc}")
 
-    return montar_payload(historico, previsao)
+    return montar_payload(historico, previsao, fonte_historico, url_historico)
 
 
 def carregar_anterior():
@@ -304,7 +459,7 @@ def main():
     tentativas = 2
     for tentativa in range(1, tentativas + 1):
         try:
-            payload = coletar_uma_vez()
+            payload = coletar_uma_vez(ultima_anterior)
         except Exception as exc:
             erro = str(exc)
             log(f"Erro na coleta (tentativa {tentativa}): {exc}")
@@ -315,7 +470,7 @@ def main():
         if ultima_anterior is None or nova_ultima != ultima_anterior or tentativa == tentativas:
             break
         log(
-            f"Copel ainda não publicou dado novo (última: {nova_ultima}). "
+            f"Ainda sem dado novo (última: {nova_ultima}, fonte: {payload['fonte'].split(' ')[0]}). "
             f"Aguardando {ESPERA_NOVA_TENTATIVA_SEGUNDOS}s para nova tentativa."
         )
         time.sleep(ESPERA_NOVA_TENTATIVA_SEGUNDOS)
