@@ -496,6 +496,13 @@ h2 {
   font-weight: 800;
 }
 
+#sourceLabel {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+  opacity: .8;
+}
+
 .table-wrap {
   max-height: 310px;
   overflow: auto;

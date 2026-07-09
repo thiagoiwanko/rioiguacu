@@ -155,7 +155,9 @@ function renderCards(data) {
   $("trendValue").textContent = data.tendencia.texto;
   $("forecastAlert").textContent = data.alerta_previsao;
   $("forecastAlert").className = data.previsao_disponivel ? "" : "warning";
-  $("sourceLink").href = data.url_historico;
+  $("sourceLink").href = data.url_historico || "#";
+  const fonteCurta = (data.fonte || "").split(/[–-]/)[0].trim();
+  $("sourceLabel").textContent = fonteCurta ? `(${fonteCurta})` : "";
 
   const marker = Math.max(0, Math.min(100, (level / NIVEL_MAX_ESCALA) * 100));
   $("gaugeMarker").style.left = `calc(${marker}% - 2px)`;
@@ -388,7 +390,7 @@ function renderAll(data) {
 async function refresh(force = false) {
   if (state.loading) return;
   state.loading = true;
-  $("syncStatus").textContent = "Coletando dados da Copel...";
+  $("syncStatus").textContent = "Coletando dados do rio...";
   $("syncStatus").classList.remove("error");
   $("syncStatus").classList.remove("warning");
   $("diagnosticBox").hidden = true;
