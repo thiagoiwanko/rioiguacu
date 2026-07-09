@@ -4,6 +4,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.18 — 2026-07-09
+
+- **Corrigida cor dos pontos do histórico no gráfico:** os pontos ao longo da linha de histórico usavam a mesma escala de cor por severidade das cotas de referência (azul→ciano→verde→amarelo→laranja→vermelho), o que fazia a maioria aparecer amarela/dourada mesmo com a legenda mostrando um ponto ciano fixo para "Histórico". Agora os pontos usam a mesma cor ciana da linha e da legenda, consistente.
+- **Corrigida escala vertical "achatada" do gráfico:** o cálculo de folga do eixo vertical reservava espaço até a 2ª cota de referência mais próxima do nível atual, incluindo cotas históricas distantes (ex.: menor nível histórico de 1,29 m, estiagem de 2020), o que esticava a escala de ~1 m a quase 8 m e espremia a variação real numa faixa fina. Agora a folga considera só as cotas de ALERTA (as quatro faixas da Defesa Civil), mantendo o gráfico com zoom na faixa relevante.
+- **Removida a linha "Previsão sem chuva" do gráfico:** as duas linhas de previsão (com e sem chuva) ficavam muito próximas e confundiam a leitura. Mantida só a previsão com chuva, renomeada de "Previsão com chuva" para simplesmente "Previsão" na legenda, no tooltip e no código.
+- Limpeza: removida a regra CSS `.dry` (usada só pela legenda da linha removida) e o cálculo de previsão sem chuva na escala vertical do gráfico.
+
 ## v1.17 — 2026-07-09
 
 - **Migração da fonte de dados histórica: Copel → ANA (API oficial), com Copel como redundância.** `scrape.py` agora consulta primeiro a API HidroWebservice da ANA (Agência Nacional de Águas e Saneamento Básico, estação telemétrica 65310001 — UHE Gov. Bento Munhoz, União da Vitória) e só cai para o scraping da Copel quando a ANA ainda não publicou a leitura da hora corrente (situação esperada nos primeiros minutos após cada hora fechar) ou em caso de falha. A previsão continua vindo exclusivamente da Copel, pois a ANA não oferece esse dado.
