@@ -1,11 +1,11 @@
 {
-  "ok": false,
-  "erro": "nenhuma medição foi encontrada (nem ANA, nem Copel)",
+  "ok": true,
+  "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-10T09:04",
+    "atualizado_em": "2026-07-10T12:04",
     "historico": [
       {
         "data_hora": "2026-07-10T00:00",
@@ -78,6 +78,30 @@
         "vazao_m3s": 1160,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-10T09:00",
+        "regua_m": 4.373,
+        "nivel_agua_m": 743.983,
+        "vazao_m3s": 1155,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-10T10:00",
+        "regua_m": 4.368,
+        "nivel_agua_m": 743.978,
+        "vazao_m3s": 1155,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-10T11:00",
+        "regua_m": 4.366,
+        "nivel_agua_m": 743.976,
+        "vazao_m3s": 1155,
+        "chuva_mm": 1.2,
+        "chuva_acumulada_mm": 1.2
       }
     ],
     "previsao": [
@@ -113,17 +137,17 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-10T08:00",
-      "regua_m": 4.377,
-      "nivel_agua_m": 743.987,
-      "vazao_m3s": 1160,
-      "chuva_mm": 0.0,
-      "chuva_acumulada_mm": 0.0
+      "data_hora": "2026-07-10T11:00",
+      "regua_m": 4.366,
+      "nivel_agua_m": 743.976,
+      "vazao_m3s": 1155,
+      "chuva_mm": 1.2,
+      "chuva_acumulada_mm": 1.2
     },
     "situacao": "ATENÇÃO MODERADA",
     "tendencia": {
-      "texto": "BAIXANDO -0.004 m/h",
-      "delta": -0.004000000000000448,
+      "texto": "BAIXANDO -0.002 m/h",
+      "delta": -0.002000000000000668,
       "direcao": "baixando"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.38 m (ATENÇÃO MODERADA).",
