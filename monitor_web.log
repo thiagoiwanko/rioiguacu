@@ -22956,3 +22956,11 @@ Stacktrace:
 [10/07/2026 10:10:44] Erro na coleta (tentativa 1): nenhuma medição foi encontrada (nem ANA, nem Copel)
 [10/07/2026 10:10:44] Falha na coleta, mantendo dado anterior em cache. Erro: nenhuma medição foi encontrada (nem ANA, nem Copel)
 [10/07/2026 10:10:44] data.json gravado (4754 bytes).
+[10/07/2026 12:03:47] Execução do scrape.py iniciada (GitHub Actions).
+[10/07/2026 12:03:55] ANA: 12 medições obtidas com sucesso (estação 65310001).
+[10/07/2026 12:03:55] Medições obtidas via ANA: 12
+[10/07/2026 12:03:55] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[10/07/2026 12:04:20] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[10/07/2026 12:04:20] Previsões extraídas: 6
+[10/07/2026 12:04:20] Dados atualizados com sucesso.
+[10/07/2026 12:04:20] data.json gravado (5311 bytes).
