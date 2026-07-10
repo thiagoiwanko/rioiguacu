@@ -4,6 +4,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.19 — 2026-07-10
+
+- **SEO: o site não aparecia bem no Google para buscas como "nível rio iguaçu união da vitória" ou "porto união".** Adicionados: `<title>` e `<meta name="description">` otimizados com essas palavras-chave; tags Open Graph e Twitter Card (melhora o preview ao compartilhar o link no WhatsApp/redes); dados estruturados JSON-LD (`schema.org/WebSite`); `<link rel="canonical">` apontando pra `https://rioiguacu.com/`; `robots.txt` e `sitemap.xml` (nenhum dos dois existia antes).
+- Subtítulo do cabeçalho passou a mencionar também Porto União (SC), não só União da Vitória (PR), e a frase "nível do rio em tempo real" — mais fiel ao propósito do projeto (que sempre foi as duas cidades) e mais alinhado com o que as pessoas buscam.
+- Nenhuma mudança visual/funcional no painel de dados, gráfico ou lógica de coleta — só metadados e HTML de cabeçalho.
+- Nota: isso melhora a indexação e a relevância percebida pelo Google, mas não garante uma posição específica no ranking — isso também depende de backlinks e do tempo até o Google re-rastrear o site. Recomendado cadastrar `rioiguacu.com` no Google Search Console.
+
 ## v1.18 — 2026-07-09
 
 - **Corrigida cor dos pontos do histórico no gráfico:** os pontos ao longo da linha de histórico usavam a mesma escala de cor por severidade das cotas de referência (azul→ciano→verde→amarelo→laranja→vermelho), o que fazia a maioria aparecer amarela/dourada mesmo com a legenda mostrando um ponto ciano fixo para "Histórico". Agora os pontos usam a mesma cor ciana da linha e da legenda, consistente.
