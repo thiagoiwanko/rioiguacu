@@ -4,6 +4,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.20 — 2026-07-11
+
+- **Novo: histórico diário automático (`historico_diario.csv`).** O `scrape.py` agora grava, a cada coleta bem-sucedida, 1 linha por dia (nível máximo/mínimo/último de régua em metros, vazão do último horário e fonte) num CSV crescente no repositório. Isso dá continuidade ao histórico oficial da ANA/HidroWeb da estação 65310000 (que só cobre até 31/12/2023) com os dados telemétricos da estação 65310001 coletados a partir de agora — sem precisar de nenhuma intervenção manual daqui pra frente.
+- O `update.yml` foi ajustado pra também commitar/publicar o `historico_diario.csv` (além do `data.json`), com a mesma lógica de só gerar deploy quando um desses dois arquivos realmente muda.
+- Motivação: pedido do usuário por uma planilha de estudo do histórico do rio (sazonalidade, mês com mais risco de enchente) — o histórico oficial da ANA (1930–2023) foi extraído manualmente numa planilha à parte; esta mudança evita que o mesmo trabalho manual precise ser refeito no futuro, mantendo o histórico sempre atualizado.
+- Nenhuma mudança visual no site — só um novo arquivo de dados sendo gerado em paralelo ao `data.json`.
+
 ## v1.19 — 2026-07-10
 
 - **SEO: o site não aparecia bem no Google para buscas como "nível rio iguaçu união da vitória" ou "porto união".** Adicionados: `<title>` e `<meta name="description">` otimizados com essas palavras-chave; tags Open Graph e Twitter Card (melhora o preview ao compartilhar o link no WhatsApp/redes); dados estruturados JSON-LD (`schema.org/WebSite`); `<link rel="canonical">` apontando pra `https://rioiguacu.com/`; `robots.txt` e `sitemap.xml` (nenhum dos dois existia antes).

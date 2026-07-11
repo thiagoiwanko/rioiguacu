@@ -18,6 +18,8 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_PATH = BASE_DIR / "data.json"
 LOG_PATH = BASE_DIR / "monitor_web.log"
 ANA_TOKEN_CACHE_PATH = BASE_DIR / ".ana_token_cache.json"
+HISTORICO_DIARIO_PATH = BASE_DIR / "historico_diario.csv"
+HISTORICO_DIARIO_CABECALHO = "Data;NivelMaximo_m;NivelMinimo_m;NivelUltimo_m;VazaoUltimo_m3s;Fonte\n"
 
 URL_HISTORICO_COPEL = "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf"
 URL_HISTORICO_ANA = "https://www.snirh.gov.br/hidrotelemetria/"
@@ -447,6 +449,66 @@ def carregar_anterior():
     return None
 
 
+def _ler_historico_diario():
+    """Lê o CSV atual do histórico diário (se existir) como um dicionário
+    {data: [campos]}, pra permitir upsert por data sem duplicar linhas."""
+    linhas = {}
+    if HISTORICO_DIARIO_PATH.exists():
+        try:
+            texto = HISTORICO_DIARIO_PATH.read_text(encoding="utf-8")
+        except Exception:
+            return linhas
+        for linha in texto.splitlines()[1:]:
+            if not linha.strip():
+                continue
+            partes = linha.split(";")
+            if len(partes) == 6:
+                linhas[partes[0]] = partes
+    return linhas
+
+
+def atualizar_historico_diario(payload):
+    """Mantém um registro de 1 linha por dia (nível máximo/mínimo/último e
+    vazão do último horário do dia) num CSV crescente no repositório, pra
+    dar continuidade ao histórico oficial da ANA (estação 65310000, que só
+    vai até 31/12/2023) com os dados telemétricos coletados a partir daqui.
+
+    Roda a cada execução com coleta bem-sucedida. Como o histórico coletado
+    cobre as últimas JANELA_HISTORICO_HORAS horas (48h), isso também corrige
+    o fechamento do dia anterior caso a última execução daquele dia tenha
+    ficado incompleta -- todo dia presente na janela atual é reescrito com
+    os dados mais completos disponíveis até agora."""
+    try:
+        linhas = _ler_historico_diario()
+        por_dia = {}
+        for item in payload["historico"]:
+            data_str = item["data_hora"][:10]
+            por_dia.setdefault(data_str, []).append(item)
+
+        fonte_curta = (payload.get("fonte") or "").split(" ")[0] or "?"
+        for data_str, itens in por_dia.items():
+            itens_ordenados = sorted(itens, key=lambda i: i["data_hora"])
+            niveis = [i["regua_m"] for i in itens_ordenados if isinstance(i.get("regua_m"), (int, float))]
+            if not niveis:
+                continue
+            ultimo = itens_ordenados[-1]
+            linhas[data_str] = [
+                data_str,
+                f"{max(niveis):.3f}",
+                f"{min(niveis):.3f}",
+                f"{ultimo['regua_m']:.3f}",
+                str(ultimo.get("vazao_m3s", "")),
+                fonte_curta,
+            ]
+
+        texto = HISTORICO_DIARIO_CABECALHO
+        for data_str in sorted(linhas.keys()):
+            texto += ";".join(linhas[data_str]) + "\n"
+        HISTORICO_DIARIO_PATH.write_text(texto, encoding="utf-8")
+    except Exception as exc:
+        log(f"Histórico diário: falha ao atualizar ({exc}).")
+
+
 def main():
     log("Execução do scrape.py iniciada (GitHub Actions).")
     anterior = carregar_anterior()
@@ -478,6 +540,7 @@ def main():
     if payload:
         resultado = {"ok": True, "erro": None, "dados": payload}
         log("Dados atualizados com sucesso.")
+        atualizar_historico_diario(payload)
     else:
         dados_cache = anterior["dados"] if anterior else None
         resultado = {"ok": False, "erro": erro or "falha desconhecida na coleta", "dados": dados_cache}
