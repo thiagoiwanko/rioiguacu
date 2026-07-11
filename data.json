@@ -5,24 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-10T23:25",
+    "atualizado_em": "2026-07-11T01:32",
     "historico": [
-      {
-        "data_hora": "2026-07-07T23:00",
-        "regua_m": 4.577,
-        "nivel_agua_m": 744.187,
-        "vazao_m3s": 1250,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
-      {
-        "data_hora": "2026-07-08T00:00",
-        "regua_m": 4.574,
-        "nivel_agua_m": 744.184,
-        "vazao_m3s": 1250,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-07-08T01:00",
         "regua_m": 4.569,
@@ -590,6 +574,22 @@
         "vazao_m3s": 1170,
         "chuva_mm": 0.6,
         "chuva_acumulada_mm": 41.0
+      },
+      {
+        "data_hora": "2026-07-11T00:00",
+        "regua_m": 4.423,
+        "nivel_agua_m": 744.033,
+        "vazao_m3s": 1180,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 41.0
+      },
+      {
+        "data_hora": "2026-07-11T01:00",
+        "regua_m": 4.432,
+        "nivel_agua_m": 744.042,
+        "vazao_m3s": 1180,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -625,17 +625,17 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-10T23:00",
-      "regua_m": 4.412,
-      "nivel_agua_m": 744.022,
-      "vazao_m3s": 1170,
-      "chuva_mm": 0.6,
-      "chuva_acumulada_mm": 41.0
+      "data_hora": "2026-07-11T01:00",
+      "regua_m": 4.432,
+      "nivel_agua_m": 744.042,
+      "vazao_m3s": 1180,
+      "chuva_mm": 0.0,
+      "chuva_acumulada_mm": 0.0
     },
     "situacao": "ATENÇÃO MODERADA",
     "tendencia": {
-      "texto": "SUBINDO +0.006 m/h",
-      "delta": 0.006000000000000227,
+      "texto": "SUBINDO +0.009 m/h",
+      "delta": 0.009000000000000341,
       "direcao": "subindo"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.43 m (ATENÇÃO MODERADA).",
