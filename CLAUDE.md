@@ -47,6 +47,17 @@ Fluxo atual presumido: `scrape.py` busca dados → atualiza o `index.html` → p
 
 ## Funcionalidades do index.html
 
+### Favicon / ícone e imagem de preview social (desde v1.21, 11/07/2026)
+
+O usuário criou `logo.png` (1254×1254, RGB, quadrado com fundo branco/quase-branco, "U" estilizado em gradiente azul/verde representando o rio) e colocou na raiz do projeto. A partir dele foram gerados (Pillow, `Image.resize`/`Image.save(format="ICO")`) e commitados na raiz do repo:
+
+- `favicon.ico` (16/32/48px), `favicon-16x16.png`, `favicon-32x32.png`
+- `apple-touch-icon.png` (180×180)
+- `android-chrome-192x192.png`, `android-chrome-512x512.png`
+- `og-image.png` (630×630, usado em `og:image`/`twitter:image` pra preview de link no WhatsApp/redes sociais — antes não existia nenhuma imagem de preview)
+
+Todos referenciados no `<head>` do `index.html`. Se o usuário substituir o `logo.png` no futuro, regenerar todos esses arquivos a partir do novo original (mesmo processo) e re-publicar.
+
 ### Contador de visitas (Cloudflare Worker + Durable Object) — versão correta/atual desde a v1.16
 
 O contador **não é** hits.sh nem qualquer serviço de terceiro — é um Worker próprio do Cloudflare, implementado originalmente na v1.11 (02-03/07/2026) e restaurado na v1.16 depois do incidente de sobrescrita descrito na "REGRA OBRIGATÓRIA" acima. **Não trocar por hits.sh ou qualquer outro serviço externo sem o usuário pedir explicitamente** — já aconteceu uma vez (commit `24a9c02`, um remendo temporário) e não é o que deve ficar.

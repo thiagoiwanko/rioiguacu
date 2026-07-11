@@ -4,6 +4,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.21 — 2026-07-11
+
+- **Novo: favicon/ícone do site.** Adicionado `logo.png` (criado pelo usuário) como ícone oficial, gerados `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png` (180×180) e ícones Android/PWA (`android-chrome-192x192.png`, `android-chrome-512x512.png`), todos referenciados no `<head>` do `index.html`.
+- **Preview de link melhorado (WhatsApp/redes sociais):** adicionado `og-image.png` (630×630, a partir do mesmo logo) via `og:image`/`twitter:image` — antes o preview não tinha nenhuma imagem. Título e descrição do `og:title`/`og:description`/`twitter:*` também foram reescritos pra explicar melhor o que é o site ("site gratuito e público pra acompanhar o Rio Iguaçu... atualizados a cada 5 minutos") em vez de só listar métricas, já que o texto anterior não deixava claro do que se tratava ao ser compartilhado.
+- Motivação: usuário compartilhou o link no WhatsApp e reparou que o preview aparecia sem logo e com pouca explicação do que era o site.
+- Sem mudança de funcionalidade — só metadados de `<head>` e novos arquivos de imagem estáticos.
+
 ## v1.20 — 2026-07-11
 
 - **Novo: histórico diário automático (`historico_diario.csv`).** O `scrape.py` agora grava, a cada coleta bem-sucedida, 1 linha por dia (nível máximo/mínimo/último de régua em metros, vazão do último horário e fonte) num CSV crescente no repositório. Isso dá continuidade ao histórico oficial da ANA/HidroWeb da estação 65310000 (que só cobre até 31/12/2023) com os dados telemétricos da estação 65310001 coletados a partir de agora — sem precisar de nenhuma intervenção manual daqui pra frente.
