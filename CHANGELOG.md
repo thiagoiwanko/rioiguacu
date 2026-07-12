@@ -4,6 +4,10 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.24 — 2026-07-12
+
+- **Corrigida seta "→ O rio está aqui agora!" invisível no celular.** O caractere usado (🡒, U+1F852) tem suporte ruim/inexistente em fontes de navegadores mobile, renderizando em branco. Trocado pela seta padrão → (U+2192), com suporte universal. Nenhuma outra mudança.
+
 ## v1.23 — 2026-07-12
 
 - **Removida toda referência a "Defesa Civil" do site**, a pedido do usuário (recebeu recomendação de tirar). Trocado o texto do cabeçalho (`Defesa Civil · Monitoramento Hidrológico` → `Monitoramento Hidrológico`) e o título do painel de alertas (`Alertas Defesa Civil` → `Alertas de Nível`). O conteúdo dos alertas (níveis de atenção/crítico) continua o mesmo, só o rótulo mudou.
