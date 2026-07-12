@@ -179,7 +179,7 @@ function renderReferences(data) {
           <div class="ref-row ref-row-current">
             <i class="swatch current-dot" style="color:${colorForLevel(item.nivel)}; background:${colorForLevel(item.nivel)}"></i>
             <strong>${item.nivel.toFixed(2)} m</strong>
-            <span>🡒 O rio está aqui agora!</span>
+            <span>→ O rio está aqui agora!</span>
           </div>
         `;
       }
