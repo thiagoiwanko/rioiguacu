@@ -19,6 +19,14 @@
 
 **Nota sobre OneDrive:** a pasta agora é sincronizada pelo OneDrive. Isso é transparente pro Read/Write/Edit (que sempre funcionam), mas o bash só enxerga arquivos que já estão baixados em disco — se um comando bash der erro "No such file" num arquivo que existe, é provável que esteja "somente na nuvem" ainda; usar Read nele primeiro (isso baixa o arquivo) antes de tentar de novo via bash.
 
+### Disparo confiável do scrape (Cloudflare Worker `rioiguacu-trigger`, desde v1.22, 12/07/2026)
+
+**Problema descoberto:** o agendador `schedule` nativo do GitHub Actions falha silenciosamente com frequência — não é o `scrape.py` que trava, é o GitHub que simplesmente não dispara o job na hora. Confirmado cruzando o histórico de commits do `data.json` (via API do GitHub) com o histórico de execuções do workflow: em várias janelas de mais de 2h sem nenhuma atualização, só rodaram 2-3 execuções quando deveriam ter rodado ~16 (a cada 15 min). O GitHub avisa oficialmente que o início de cada hora é o pico de carga do agendador `schedule` — e a antiga rajada `1-5 * * * *` (removida na v1.22) rodava exatamente nessa janela mais congestionada.
+
+**Solução:** Worker `rioiguacu-trigger` (`rioiguacu-trigger.thiago-dff.workers.dev`, mesmo account Cloudflare `dffb378e10f41dbfc75aeeb686e0f95c`) com Cron Trigger a cada 5 min (`*/5 * * * *`, muito mais confiável que o `schedule` do GitHub), que chama `POST https://api.github.com/repos/thiagoiwanko/rioiguacu/actions/workflows/update.yml/dispatches` com `{"ref":"main"}`. Requer secret `GITHUB_PAT` (fine-grained, escopo só do repo `rioiguacu`, permissão Actions: Read and write) configurado nas variáveis do Worker — **gerado e configurado pelo próprio usuário**, nunca por mim (não manuseio tokens/credenciais). Endpoint `/run` no Worker permite testar o dispatch manualmente sem esperar o cron. O `schedule: */15 * * * *` do `update.yml` continua ativo como rede de segurança redundante, caso o Worker ou o PAT parem de funcionar.
+
+**Nota técnica sobre automação do editor Cloudflare:** o editor "Quick Edit" do dashboard Cloudflare (`quick-edit-workers.devprod.cloudflare.dev`, carregado num iframe cross-origin) não aceita digitação simulada via automação de navegador (Claude-in-Chrome) — cliques não focam o Monaco editor interno, e `Ctrl+A`/digitação acabam atingindo a página pai em vez do editor. Se precisar editar o código de um Worker no futuro, ou (a) peça pro usuário colar o código manualmente, ou (b) tente outra via (ex: GitHub integration/CI do próprio Worker, se configurada). Cron Triggers e outras configurações em `Configurações` (fora do iframe do editor) funcionam normalmente via automação.
+
 ### Arquitetura do projeto (importante)
 O diretório local contém dois componentes distintos:
 - **Frontend estático** (`index.html`, `styles.css`, `app.js`) — é o que está publicado no Cloudflare Pages em `rioiguacu.com`

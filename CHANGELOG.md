@@ -4,6 +4,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.22 — 2026-07-12
+
+- **Novo: Cloudflare Worker `rioiguacu-trigger`.** Dispara o workflow `update.yml` via API do GitHub (`workflow_dispatch`) a cada 5 minutos, usando um Cron Trigger do Cloudflare (muito mais confiável que o agendador nativo do GitHub Actions). Requer um secret `GITHUB_PAT` (fine-grained, escopo só do repo `rioiguacu`, permissão Actions: Read and write) configurado no Worker — configurado pelo próprio usuário, nunca manuseado por mim.
+- **Removida a rajada de cron `1-5 * * * *`** do `update.yml` (tentativa de todo minuto nos primeiros 5 min de cada hora). Diagnóstico: analisando o histórico de commits do `data.json`, achamos vários atrasos de 2h+ na atualização do site (ex: 07/11 23:25-01:32, 07/12 23:14-01:03) causados pelo próprio agendador `schedule` do GitHub Actions simplesmente não disparando — e não por falha do `scrape.py`. O GitHub avisa oficialmente que o início de cada hora é o pico de carga do agendador; a rajada rodava exatamente nessa janela mais congestionada, piorando o problema que tentava resolver. Mantido `*/15 * * * *` como rede de segurança redundante ao Worker.
+- Motivação: usuário reportou "o site tem demorado pra pegar os dados... ontem o atraso passava de 2h".
+- Nenhuma mudança visual no site — só infraestrutura de coleta de dados.
+
 ## v1.21 — 2026-07-11
 
 - **Novo: favicon/ícone do site.** Adicionado `logo.png` (criado pelo usuário) como ícone oficial, gerados `favicon.ico`, `favicon-16x16.png`, `favicon-32x32.png`, `apple-touch-icon.png` (180×180) e ícones Android/PWA (`android-chrome-192x192.png`, `android-chrome-512x512.png`), todos referenciados no `<head>` do `index.html`.
