@@ -5,24 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-11T21:13",
+    "atualizado_em": "2026-07-11T23:14",
     "historico": [
-      {
-        "data_hora": "2026-07-08T21:00",
-        "regua_m": 4.507,
-        "nivel_agua_m": 744.117,
-        "vazao_m3s": 1220,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
-      {
-        "data_hora": "2026-07-08T22:00",
-        "regua_m": 4.504,
-        "nivel_agua_m": 744.114,
-        "vazao_m3s": 1210,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-07-08T23:00",
         "regua_m": 4.5,
@@ -590,6 +574,22 @@
         "vazao_m3s": 1280,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 29.8
+      },
+      {
+        "data_hora": "2026-07-11T22:00",
+        "regua_m": 4.648,
+        "nivel_agua_m": 744.258,
+        "vazao_m3s": 1280,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 29.8
+      },
+      {
+        "data_hora": "2026-07-11T23:00",
+        "regua_m": 4.657,
+        "nivel_agua_m": 744.267,
+        "vazao_m3s": 1290,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 29.8
       }
     ],
     "previsao": [
@@ -625,17 +625,17 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-11T21:00",
-      "regua_m": 4.637,
-      "nivel_agua_m": 744.247,
-      "vazao_m3s": 1280,
+      "data_hora": "2026-07-11T23:00",
+      "regua_m": 4.657,
+      "nivel_agua_m": 744.267,
+      "vazao_m3s": 1290,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 29.8
     },
     "situacao": "ATENÇÃO ALTA",
     "tendencia": {
-      "texto": "SUBINDO +0.011 m/h",
-      "delta": 0.010999999999999233,
+      "texto": "SUBINDO +0.009 m/h",
+      "delta": 0.009000000000000341,
       "direcao": "subindo"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.69 m (ATENÇÃO ALTA).",
