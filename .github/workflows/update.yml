@@ -2,18 +2,17 @@ name: Atualizar dados do Rio Iguaçu
 
 on:
   schedule:
-    # A ANA publica o dado novo pouco depois de cada hora fechar. Esta linha
-    # faz o job rodar todo minuto de HH:01 a HH:05 pra pegar esse dado assim
-    # que aparecer (com folga pro atraso de transmissão da estação); se em
-    # nenhuma dessas tentativas a ANA tiver o dado novo, scrape.py cai pra
-    # Copel como redundância naquela rodada específica. Essas tentativas
-    # extras não geram deploy no Cloudflare Pages quando não há dado novo,
-    # porque o commit abaixo só considera diff em data.json e historico_diario.csv
-    # (ver comentário no step "Commit e push do data.json").
-    - cron: "1-5 * * * *"
-    # Ritmo normal pro resto da hora (mantido em 15 min, igual já estava --
-    # reduzir pra 5 min foi o que causou o engarrafamento de deploys
-    # corrigido na v1.6; não repetir esse erro).
+    # Baseline redundante (v1.22, 12/07/2026): o disparo PRINCIPAL agora vem
+    # do Cloudflare Worker "rioiguacu-trigger" (Cron Trigger a cada 5 min,
+    # chama workflow_dispatch via API do GitHub) -- o cron nativo do GitHub
+    # Actions é usado só como rede de segurança caso o Worker pare.
+    #
+    # Removida a rajada "todo minuto de HH:01-05" que existia até a v1.21:
+    # medindo o histórico de commits, ela causava atrasos de mais de 2h em
+    # vários dias, porque o próprio GitHub avisa que o início de cada hora é
+    # o pico de carga global do agendador `schedule` -- ou seja, a rajada
+    # rodava justamente na janela mais congestionada e menos confiável,
+    # piorando o atraso que ela tentava evitar. Não reintroduzir essa rajada.
     - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
@@ -56,9 +55,9 @@ jobs:
           # Só publica (e só gera deploy no Cloudflare Pages) quando o
           # data.json ou o historico_diario.csv realmente mudaram --
           # monitor_web.log muda em toda execução (é só texto de log) e não
-          # deve, sozinho, disparar um deploy. É isso que permite rodar de
-          # minuto em minuto na janela HH:01-05 sem reintroduzir o
-          # engarrafamento de deploys da v1.6.
+          # deve, sozinho, disparar um deploy. É isso que permite rodar a
+          # cada 5 min (via Worker) sem reintroduzir o engarrafamento de
+          # deploys da v1.6.
           if git diff --staged --quiet -- data.json historico_diario.csv; then
             echo "Sem mudança em data.json/historico_diario.csv; não publica nesta rodada."
             exit 0
