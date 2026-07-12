@@ -4,6 +4,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.23 — 2026-07-12
+
+- **Removida toda referência a "Defesa Civil" do site**, a pedido do usuário (recebeu recomendação de tirar). Trocado o texto do cabeçalho (`Defesa Civil · Monitoramento Hidrológico` → `Monitoramento Hidrológico`) e o título do painel de alertas (`Alertas Defesa Civil` → `Alertas de Nível`). O conteúdo dos alertas (níveis de atenção/crítico) continua o mesmo, só o rótulo mudou.
+- Nenhuma mudança de dados/funcionalidade — só texto visível.
+
 ## v1.22 — 2026-07-12
 
 - **Novo: Cloudflare Worker `rioiguacu-trigger`.** Dispara o workflow `update.yml` via API do GitHub (`workflow_dispatch`) a cada 5 minutos, usando um Cron Trigger do Cloudflare (muito mais confiável que o agendador nativo do GitHub Actions). Requer um secret `GITHUB_PAT` (fine-grained, escopo só do repo `rioiguacu`, permissão Actions: Read and write) configurado no Worker — configurado pelo próprio usuário, nunca manuseado por mim.
