@@ -24116,3 +24116,21 @@ Stacktrace:
 [12/07/2026 23:53:18] Previsões extraídas: 6
 [12/07/2026 23:53:18] Dados atualizados com sucesso.
 [12/07/2026 23:53:18] data.json gravado (17666 bytes).
+[12/07/2026 23:56:14] Execução do scrape.py iniciada (GitHub Actions).
+[12/07/2026 23:56:16] ANA: falha na coleta (401 Client Error:  for url: https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v1?C%C3%B3digo%20da%20Esta%C3%A7%C3%A3o=65310001&Tipo%20Filtro%20Data=DATA_LEITURA&Range%20Intervalo%20de%20busca=DIAS_2); usando Copel.
+[12/07/2026 23:56:16] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[12/07/2026 23:56:44] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4604 caracteres)
+[12/07/2026 23:56:44] Medições obtidas via Copel: 73
+[12/07/2026 23:56:44] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[12/07/2026 23:56:58] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[12/07/2026 23:56:58] Previsões extraídas: 6
+[12/07/2026 23:56:58] Ainda sem dado novo (última: 2026-07-12T23:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[12/07/2026 23:57:29] ANA: falha na coleta (401 Client Error:  for url: https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/HidroinfoanaSerieTelemetricaAdotada/v1?C%C3%B3digo%20da%20Esta%C3%A7%C3%A3o=65310001&Tipo%20Filtro%20Data=DATA_LEITURA&Range%20Intervalo%20de%20busca=DIAS_2); usando Copel.
+[12/07/2026 23:57:29] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[12/07/2026 23:57:46] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4604 caracteres)
+[12/07/2026 23:57:46] Medições obtidas via Copel: 73
+[12/07/2026 23:57:46] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[12/07/2026 23:58:00] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[12/07/2026 23:58:00] Previsões extraídas: 6
+[12/07/2026 23:58:00] Dados atualizados com sucesso.
+[12/07/2026 23:58:00] data.json gravado (17666 bytes).
