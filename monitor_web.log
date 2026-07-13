@@ -24328,3 +24328,21 @@ Stacktrace:
 [13/07/2026 00:52:58] Previsões extraídas: 6
 [13/07/2026 00:52:58] Dados atualizados com sucesso.
 [13/07/2026 00:52:58] data.json gravado (17696 bytes).
+[13/07/2026 00:56:11] Execução do scrape.py iniciada (GitHub Actions).
+[13/07/2026 00:56:11] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[13/07/2026 00:56:11] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[13/07/2026 00:56:38] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4604 caracteres)
+[13/07/2026 00:56:38] Medições obtidas via Copel: 73
+[13/07/2026 00:56:38] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[13/07/2026 00:56:52] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[13/07/2026 00:56:52] Previsões extraídas: 6
+[13/07/2026 00:56:52] Ainda sem dado novo (última: 2026-07-13T00:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[13/07/2026 00:57:23] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[13/07/2026 00:57:23] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[13/07/2026 00:57:39] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4604 caracteres)
+[13/07/2026 00:57:39] Medições obtidas via Copel: 73
+[13/07/2026 00:57:39] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[13/07/2026 00:57:52] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[13/07/2026 00:57:52] Previsões extraídas: 6
+[13/07/2026 00:57:52] Dados atualizados com sucesso.
+[13/07/2026 00:57:52] data.json gravado (17696 bytes).
