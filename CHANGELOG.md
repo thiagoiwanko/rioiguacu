@@ -4,6 +4,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.26 — 2026-07-13
+
+- **Nova seção "Guia de Emergência e Informações Úteis"** (entre a tabela de dados e o FAQ), com explicação de como funciona o monitoramento, bairros historicamente afetados por cheias (Navegantes, São Bernardo, Rio D'Areia, Limeira — lista baseada no relatório CENACID/UFPR já documentado no projeto, sem cravar cota exata por bairro) e contatos de emergência nacionais (Defesa Civil 199, Bombeiros 193, PM 190).
+- **Nota de processo:** uma ferramenta de IA externa (Antigravity) chegou a editar o `index.html` local diretamente com uma proposta similar, mas com dados fabricados/não verificados — cotas de "alerta" inventadas (3,00/4,50/5,50 m, sem fonte), um bairro que não existe em nenhuma pesquisa do projeto ("Christofis") e telefones fixos locais de Defesa Civil que não bateram com nenhuma fonte oficial checada (Prefeitura de União da Vitória e de Porto União). Nada disso chegou a ser publicado — foi revertido antes do build desta versão. Mantido só o número 199 (Defesa Civil, nacional, confirmado) e a redação com ressalvas já usada no resto do site.
+- Nenhuma mudança de dados/funcionalidade dinâmica.
+
 ## v1.25 — 2026-07-13
 
 - **Melhorias de SEO** pra ranquear melhor no Google para buscas como "nível do rio iguaçu união da vitória": adicionada seção "Perguntas frequentes" com conteúdo estático (nível atual, referências de cheias históricas, como funciona a régua, maior cheia registrada, origem dos dados) + schema.org FAQPage no `<head>`. Headers internos com mais contexto de palavras-chave: "Cotas de referência" → "Cotas de Referência (Cheias Históricas)", "Alertas de Nível" → "Alertas de Nível do Rio". `sitemap.xml` com `lastmod` atualizado. Title/meta description/H1 mantidos como estavam (o site já aparece em 1º lugar em buscas testadas pra essas queries, então essas partes não foram mexidas pra não arriscar a posição já conquistada).
