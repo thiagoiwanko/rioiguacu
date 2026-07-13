@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-13T15:05",
+    "atualizado_em": "2026-07-13T16:52",
     "historico": [
-      {
-        "data_hora": "2026-07-10T15:00",
-        "regua_m": 4.369,
-        "nivel_agua_m": 743.979,
-        "vazao_m3s": 1160,
-        "chuva_mm": 2.6,
-        "chuva_acumulada_mm": 17.2
-      },
       {
         "data_hora": "2026-07-10T16:00",
         "regua_m": 4.371,
@@ -582,6 +574,22 @@
         "vazao_m3s": 1350,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-13T15:00",
+        "regua_m": 4.791,
+        "nivel_agua_m": 744.401,
+        "vazao_m3s": 1350,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-13T16:00",
+        "regua_m": 4.787,
+        "nivel_agua_m": 744.397,
+        "vazao_m3s": 1350,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -617,71 +625,67 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-13T14:00",
-      "regua_m": 4.794,
-      "nivel_agua_m": 744.404,
+      "data_hora": "2026-07-13T16:00",
+      "regua_m": 4.787,
+      "nivel_agua_m": 744.397,
       "vazao_m3s": 1350,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
-    "situacao": "ATENÇÃO ALTA",
+    "situacao": "NÍVEL NORMAL - monitoramento de rotina",
     "tendencia": {
-      "texto": "BAIXANDO -0.003 m/h",
-      "delta": -0.0030000000000001137,
+      "texto": "BAIXANDO -0.004 m/h",
+      "delta": -0.004000000000000448,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão em 48 h: pode atingir 4.77 m (ATENÇÃO ALTA).",
+    "alerta_previsao": "Previsão em 48 h sem atingir cotas críticas.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
-        "nivel": 1.29,
-        "descricao": "Menor nível histórico - estiagem de 2020"
+        "nivel": 5.09,
+        "descricao": "Cheia padrão (nível de atenção inicial)"
       },
       {
-        "nivel": 6.0,
-        "descricao": "Limeira / Rio d'Areia / Rocio"
+        "nivel": 6.89,
+        "descricao": "Área de risco de enchente pelo zoneamento local (cheia de 10 anos)"
       },
       {
-        "nivel": 6.5,
-        "descricao": "São Basílio / Navegantes / Ponte Nova"
-      },
-      {
-        "nivel": 7.0,
-        "descricao": "Cidade Jardim / Cristo Rei / Sagrada Família"
+        "nivel": 7.25,
+        "descricao": "Cheia de 1993"
       },
       {
         "nivel": 8.12,
-        "descricao": "Referência da enchente de 2014"
+        "descricao": "Cheia de 2014"
       },
       {
         "nivel": 8.37,
-        "descricao": "Referência da enchente de 2023"
+        "descricao": "Cheia de 2023"
       },
       {
         "nivel": 8.9,
-        "descricao": "Grande enchente de 1992"
+        "descricao": "Grande cheia de 1992"
       },
       {
         "nivel": 10.42,
-        "descricao": "Cheia histórica de 1983"
+        "descricao": "Maior cheia histórica registrada (1983)"
       }
     ],
     "cotas_alerta": [
       {
-        "nivel": 4.3,
-        "descricao": "ATENÇÃO MODERADA"
+        "nivel": 6.89,
+        "descricao": "Área de risco de enchente (zoneamento local, cheia de 10 anos)"
       },
       {
-        "nivel": 4.5,
-        "descricao": "ATENÇÃO ALTA"
+        "nivel": 7.25,
+        "descricao": "Nível da cheia de 1993"
       },
       {
-        "nivel": 4.9,
-        "descricao": "ATENÇÃO MUITO ALTA"
+        "nivel": 8.9,
+        "descricao": "Nível da grande cheia de 1992"
       },
       {
-        "nivel": 5.5,
-        "descricao": "ALERTA CRÍTICO - PLANO DE CONTINGÊNCIA ACIONADO"
+        "nivel": 10.42,
+        "descricao": "Nível da maior cheia histórica (1983)"
       }
     ],
     "janela_historico_horas": 48,
