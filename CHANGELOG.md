@@ -4,6 +4,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.25 — 2026-07-13
+
+- **Melhorias de SEO** pra ranquear melhor no Google para buscas como "nível do rio iguaçu união da vitória": adicionada seção "Perguntas frequentes" com conteúdo estático (nível atual, referências de cheias históricas, como funciona a régua, maior cheia registrada, origem dos dados) + schema.org FAQPage no `<head>`. Headers internos com mais contexto de palavras-chave: "Cotas de referência" → "Cotas de Referência (Cheias Históricas)", "Alertas de Nível" → "Alertas de Nível do Rio". `sitemap.xml` com `lastmod` atualizado. Title/meta description/H1 mantidos como estavam (o site já aparece em 1º lugar em buscas testadas pra essas queries, então essas partes não foram mexidas pra não arriscar a posição já conquistada).
+- Nenhuma mudança de dados/funcionalidade dinâmica — só conteúdo estático novo e ajuste de texto em headers existentes.
+
 ## v1.24 — 2026-07-12
 
 - **Corrigida seta "→ O rio está aqui agora!" invisível no celular.** O caractere usado (🡒, U+1F852) tem suporte ruim/inexistente em fontes de navegadores mobile, renderizando em branco. Trocado pela seta padrão → (U+2192), com suporte universal. Nenhuma outra mudança.

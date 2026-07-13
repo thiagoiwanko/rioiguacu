@@ -583,6 +583,53 @@ td {
   50% { transform: scale(1.3); }
 }
 
+.faq-panel {
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.faq-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, .03);
+}
+
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--text);
+  font-size: 14px;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::before {
+  content: "+ ";
+  color: var(--cyan);
+  font-weight: 900;
+}
+
+.faq-item[open] summary::before {
+  content: "– ";
+}
+
+.faq-item p {
+  margin: 10px 0 2px;
+  color: var(--soft);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
 .version-footer {
   display: flex;
   align-items: center;
@@ -668,3 +715,66 @@ td {
     font-size: 11px;
   }
 }
+
+.info-panel {
+  margin-bottom: 18px;
+  padding: 18px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-top: 12px;
+}
+
+.info-col h3 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: var(--cyan);
+}
+
+.info-col p {
+  margin-bottom: 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--soft);
+}
+
+.emergency-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--soft);
+}
+
+.emergency-list li {
+  margin-bottom: 8px;
+}
+
+.emergency-list a {
+  color: var(--text);
+  text-decoration: underline;
+  font-weight: 800;
+}
+
+.emergency-list a:hover {
+  color: var(--cyan);
+}
+
+.emergency-note {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
