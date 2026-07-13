@@ -25,6 +25,15 @@ URL_HISTORICO_COPEL = "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf"
 URL_HISTORICO_ANA = "https://www.snirh.gov.br/hidrotelemetria/"
 URL_PREVISAO = "https://www.copel.com/mhbweb/paginas/previsao.jsf"
 
+# API oficial da ANA (HidroWebservice). Estação 65310001 = UHE Gov. Bento Munhoz
+# União da Vitória, confirmada em 07/2026 batendo hora a hora com o que a Copel
+# publica (mesmo datum, zero 739,61 m). Não tem previsão -- só dado medido real,
+# por isso a previsão continua vindo da Copel independentemente disso funcionar.
+# Credenciais NUNCA ficam neste arquivo: vêm de variável de ambiente
+# (ANA_API_LOGIN / ANA_API_SENHA), configuradas como GitHub Actions Secret em
+# produção ou exportadas manualmente pra teste local. Se não estiverem
+# configuradas, ou se a chamada falhar por qualquer motivo, cai automaticamente
+# pro scraping da Copel (comportamento original, inalterado).
 ANA_BASE = "https://www.ana.gov.br/hidrowebservice"
 ANA_CODIGO_ESTACAO = 65310001
 ANA_ZERO_REGUA_M = 739.61
@@ -42,20 +51,21 @@ def agora_br():
 ESPERA_NOVA_TENTATIVA_SEGUNDOS = 30
 
 COTAS_BAIRROS = [
-    (5.09, "Cheia padrão (nível de atenção inicial)"),
-    (6.89, "Área de risco de enchente pelo zoneamento local (cheia de 10 anos)"),
-    (7.25, "Cheia de 1993"),
-    (8.12, "Cheia de 2014"),
-    (8.37, "Cheia de 2023"),
-    (8.90, "Grande cheia de 1992"),
-    (10.42, "Maior cheia histórica registrada (1983)"),
+    (1.29, "Menor nível histórico - estiagem de 2020"),
+    (6.00, "Limeira / Rio d'Areia / Rocio"),
+    (6.50, "São Basílio / Navegantes / Ponte Nova"),
+    (7.00, "Cidade Jardim / Cristo Rei / Sagrada Família"),
+    (8.12, "Referência da enchente de 2014"),
+    (8.37, "Referência da enchente de 2023"),
+    (8.90, "Grande enchente de 1992"),
+    (10.42, "Cheia histórica de 1983"),
 ]
 
 COTAS_ALERTA_DEFESA_CIVIL = [
-    (6.89, "Área de risco de enchente (zoneamento local, cheia de 10 anos)"),
-    (7.25, "Nível da cheia de 1993"),
-    (8.90, "Nível da grande cheia de 1992"),
-    (10.42, "Nível da maior cheia histórica (1983)"),
+    (4.30, "ATENÇÃO MODERADA"),
+    (4.50, "ATENÇÃO ALTA"),
+    (4.90, "ATENÇÃO MUITO ALTA"),
+    (5.50, "ALERTA CRÍTICO - PLANO DE CONTINGÊNCIA ACIONADO"),
 ]
 
 
@@ -79,6 +89,10 @@ def parse_numero(valor):
 
 
 def _ana_query_string(params):
+    # A API da ANA exige espaço codificado como %20 nos NOMES dos parâmetros
+    # ("Código da Estação", "Range Intervalo de busca" etc). requests.get(params=dict)
+    # usa '+' por padrão (estilo application/x-www-form-urlencoded), que a API
+    # rejeita com 400 Bad Request -- por isso a URL é montada manualmente aqui.
     return "&".join(f"{quote(k, safe='')}={quote(str(v), safe='')}" for k, v in params.items())
 
 
@@ -106,6 +120,9 @@ def _ana_autenticar(identificador, senha):
     resp.raise_for_status()
     token = resp.json()["items"]["tokenautenticacao"]
 
+    # Cacheia por 55 min (validade real é 60 min) pra nunca reautenticar a
+    # cada execução do GitHub Actions -- autenticação em alta frequência é
+    # monitorada pela ANA e pode resultar em bloqueio de IP (417).
     try:
         ANA_TOKEN_CACHE_PATH.write_text(
             json.dumps({
@@ -126,6 +143,10 @@ def _parse_data_hora_ana(valor):
 
 
 def coletar_via_ana():
+    """Busca o histórico via API oficial da ANA (estação 65310001). Retorna None
+    (sem lançar exceção) se as credenciais não estiverem configuradas ou se
+    qualquer etapa falhar -- nesses casos coletar_uma_vez() cai pro scraping
+    da Copel automaticamente, sem afetar a previsão (que é Copel-only)."""
     identificador = os.environ.get("ANA_API_LOGIN")
     senha = os.environ.get("ANA_API_SENHA")
     if not identificador or not senha:
@@ -292,17 +313,30 @@ def coletar_texto(url):
 
 
 def definir_situacao(regua):
-    if regua < 5.09:
-        return "NÍVEL NORMAL - monitoramento de rotina"
-    if regua < 6.89:
-        return "ATENÇÃO - nível de cheia padrão atingido"
-    if regua < 7.25:
-        return "ALERTA - área de risco de enchente (zoneamento local, cheia de 10 anos)"
+    if regua < 4.30:
+        return "NÍVEL NORMAL - monitoramento diário"
+    if regua < 4.50:
+        return "ATENÇÃO MODERADA"
+    if regua < 4.90:
+        return "ATENÇÃO ALTA"
+    if regua < 5.50:
+        return "ATENÇÃO MUITO ALTA"
+    texto = "ALERTA CRÍTICO - Plano de Contingência acionado; início do impacto nas primeiras residências"
+    if regua < 6.0:
+        return texto
+    if regua < 6.5:
+        return f"{texto}; afetando Limeira / Rio d'Areia / Rocio"
+    if regua < 7.0:
+        return f"{texto}; afetando Limeira / Rio d'Areia / Rocio / São Basílio / Navegantes / Ponte Nova"
+    if regua < 8.12:
+        return f"{texto}; afetando Limeira / Rio d'Areia / Rocio / São Basílio / Navegantes / Ponte Nova / Cidade Jardim / Cristo Rei / Sagrada Família"
+    if regua < 8.37:
+        return f"{texto}; próximo da enchente de 2014"
     if regua < 8.90:
-        return "ALERTA - nível da cheia de 1993 atingido"
+        return f"{texto}; próximo da enchente de 2023"
     if regua < 10.42:
-        return "ALERTA CRÍTICO - nível da grande cheia de 1992 atingido"
-    return "ALERTA CRÍTICO - nível comparável à maior cheia histórica (1983)"
+        return f"{texto}; próximo da enchente de 1992"
+    return f"{texto}; CHEIA HISTÓRICA - nível comparável a 1983"
 
 
 def calcular_tendencia(historico):
@@ -362,6 +396,10 @@ def montar_payload(historico, previsao, fonte_historico, url_historico):
     }
 
 
+# Nomes de fonte exibidos no site (campo "fonte" do data.json). O app.js lê
+# esse texto e mostra dinamicamente, então quando a redundância da Copel
+# entra em ação (raro, só nos minutos em que a ANA ainda não fechou a hora)
+# o site mostra a fonte real daquela leitura, nunca uma informação fixa/errada.
 FONTE_ANA = "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)"
 FONTE_COPEL = "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)"
 
@@ -376,6 +414,9 @@ def coletar_uma_vez(ultima_anterior=None):
             fonte_historico = FONTE_ANA
             url_historico = URL_HISTORICO_ANA
         else:
+            # A ANA respondeu, mas ainda é o mesmo dado de antes (a hora ainda
+            # não fechou lá) -- usa Copel como redundância nesta rodada em vez
+            # de reescrever o mesmo horário e fingir que atualizou.
             log(f"ANA: ainda sem dado novo (última segue {nova_ultima_ana}); usando Copel como redundância nesta rodada.")
             historico = None
 
@@ -386,6 +427,8 @@ def coletar_uma_vez(ultima_anterior=None):
         url_historico = URL_HISTORICO_COPEL
     log(f"Medições obtidas via {fonte_historico.split(' ')[0]}: {len(historico)}")
 
+    # Previsão é exclusiva da Copel -- a ANA não oferece esse dado, então essa
+    # parte roda sempre, independentemente da fonte do histórico acima.
     previsao = []
     try:
         texto_previsao = coletar_texto(URL_PREVISAO)
@@ -407,6 +450,8 @@ def carregar_anterior():
 
 
 def _ler_historico_diario():
+    """Lê o CSV atual do histórico diário (se existir) como um dicionário
+    {data: [campos]}, pra permitir upsert por data sem duplicar linhas."""
     linhas = {}
     if HISTORICO_DIARIO_PATH.exists():
         try:
@@ -423,6 +468,16 @@ def _ler_historico_diario():
 
 
 def atualizar_historico_diario(payload):
+    """Mantém um registro de 1 linha por dia (nível máximo/mínimo/último e
+    vazão do último horário do dia) num CSV crescente no repositório, pra
+    dar continuidade ao histórico oficial da ANA (estação 65310000, que só
+    vai até 31/12/2023) com os dados telemétricos coletados a partir daqui.
+
+    Roda a cada execução com coleta bem-sucedida. Como o histórico coletado
+    cobre as últimas JANELA_HISTORICO_HORAS horas (48h), isso também corrige
+    o fechamento do dia anterior caso a última execução daquele dia tenha
+    ficado incompleta -- todo dia presente na janela atual é reescrito com
+    os dados mais completos disponíveis até agora."""
     try:
         linhas = _ler_historico_diario()
         por_dia = {}
