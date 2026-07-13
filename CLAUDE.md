@@ -55,6 +55,10 @@ Fluxo atual presumido: `scrape.py` busca dados → atualiza o `index.html` → p
 
 ## Funcionalidades do index.html
 
+### SEO (desde v1.25, 13/07/2026)
+
+O site já aparecia em 1º lugar no Google pra buscas como "nível do rio iguaçu hoje união da vitória" e variações (confirmado por busca antes de mexer em qualquer coisa) — por isso title/meta description/H1 não foram alterados, pra não arriscar a posição já conquistada. O que foi adicionado: seção "Perguntas frequentes" com conteúdo estático (nível atual, cheias históricas, como funciona a régua, maior cheia registrada 1983=10,42m, origem dos dados) + schema.org FAQPage no `<head>` (nota: Google descontinuou o rich result de FAQ em maio/2026, então o schema não gera mais o "snippet" visual na busca, mas o conteúdo em si continua valioso pra relevância/long-tail e pra IAs de busca que leem a página). Headers internos reforçados com mais contexto: "Cotas de referência" → "Cotas de Referência (Cheias Históricas)", "Alertas de Nível" → "Alertas de Nível do Rio". `sitemap.xml` com `lastmod` atualizado.
+
 ### Favicon / ícone e imagem de preview social (desde v1.21, 11/07/2026)
 
 O usuário criou `logo.png` (1254×1254, RGB, quadrado com fundo branco/quase-branco, "U" estilizado em gradiente azul/verde representando o rio) e colocou na raiz do projeto. A partir dele foram gerados (Pillow, `Image.resize`/`Image.save(format="ICO")`) e commitados na raiz do repo:
