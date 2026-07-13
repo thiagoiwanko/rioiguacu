@@ -40,13 +40,61 @@
     }
   }
   </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Qual é o nível do Rio Iguaçu hoje em União da Vitória?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O nível atual (cota de régua) aparece no topo da página rioiguacu.com, atualizado automaticamente a cada poucos minutos com dados da ANA (estação telemétrica 65310001) e da Copel como fonte de apoio."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "A partir de que nível o Rio Iguaçu preocupa em União da Vitória e Porto União?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Como referência histórica de estudos técnicos de zoneamento, a régua acima de 6,89 m está associada à linha de cheia de 10 anos, e cheias históricas relevantes ficaram em 8,89/8,90 m (1992), 8,12 m (2014), 8,37 m (2023) e 10,42 m (1983, a maior já registrada). A situação real em cada rua depende da cota do terreno, drenagem local e mapas de inundação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Qual foi a maior cheia do Rio Iguaçu em União da Vitória?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A maior cheia da série histórica oficial (estação 65310000, ANA/HidroWeb, dados desde 1930) foi em 18/07/1983, quando a régua atingiu 10,42 m. Na sequência vêm 1992 (8,89/8,90 m), 2023 (8,37 m), 1935 (8,16 m) e 2014 (8,12 m)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como funciona a régua do Rio Iguaçu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A régua mede o nível da água em metros a partir de um zero de referência local (739,61 m de cota altimétrica na estação de União da Vitória). Para converter o nível da régua em cota altimétrica, soma-se 739,61 m ao valor da régua."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "De onde vêm os dados deste site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Os dados oficiais são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), com a Copel como fonte de apoio. A coleta é automática e a página atualiza a cada poucos minutos."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
       <div>
         <p class="eyebrow">Monitoramento Hidrológico</p>
-        <h1>Rio Iguaçu</h1>
+        <h1>Nível do Rio Iguaçu Hoje</h1>
         <p class="subtitle">União da Vitória (PR) e Porto União (SC) · nível do rio em tempo real, com dados da ANA (Agência Nacional de Águas e Saneamento Básico) e a Copel como fonte de apoio</p>
       </div>
       <div class="actions">
@@ -111,12 +159,46 @@
 
       <aside class="side-panel">
         <article class="references depth">
-          <h2>Cotas de referência</h2>
-          <div id="referenceList" class="reference-list"></div>
+          <h2>Cotas de Referência (Cheias Históricas)</h2>
+          <div id="referenceList" class="reference-list">
+            <!-- Fallback estático para SEO -->
+            <div class="ref-row">
+              <i class="swatch" style="color:rgb(255, 236, 63); background:rgb(255, 236, 63)"></i>
+              <strong>3,00 m</strong>
+              <span>Cota de Atenção (rio sai do leito normal)</span>
+            </div>
+            <div class="ref-row">
+              <i class="swatch" style="color:rgb(255, 156, 40); background:rgb(255, 156, 40)"></i>
+              <strong>4,50 m</strong>
+              <span>Cota de Alerta (alagamento em pontos baixos)</span>
+            </div>
+            <div class="ref-row">
+              <i class="swatch" style="color:rgb(255, 48, 48); background:rgb(255, 48, 48)"></i>
+              <strong>5,50 m</strong>
+              <span>Cota de Inundação Crítica (bairro Navegantes e ribeirinhos)</span>
+            </div>
+          </div>
         </article>
         <article class="alerts depth">
-          <h2>Alertas de Nível</h2>
-          <div id="alertList" class="alert-list"></div>
+          <h2>Alertas de Nível do Rio</h2>
+          <div id="alertList" class="alert-list">
+            <!-- Fallback estático para SEO -->
+            <div class="alert-row">
+              <i class="alert-icon" style="background:rgb(255, 236, 63)">!</i>
+              <strong>3,00 m</strong>
+              <span>Atenção: Monitoramento ativo da cota do rio</span>
+            </div>
+            <div class="alert-row">
+              <i class="alert-icon" style="background:rgb(255, 156, 40)">!</i>
+              <strong>4,50 m</strong>
+              <span>Alerta: Início de transbordamento de bueiros</span>
+            </div>
+            <div class="alert-row">
+              <i class="alert-icon" style="background:rgb(255, 48, 48)">!</i>
+              <strong>5,50 m</strong>
+              <span>Inundação: Ações de evacuação e abrigos</span>
+            </div>
+          </div>
         </article>
       </aside>
     </section>
@@ -141,12 +223,62 @@
         </table>
       </div>
     </section>
+
+    <section class="info-panel depth">
+      <h2>Guia de Emergência e Informações Úteis</h2>
+      <div class="info-grid">
+        <div class="info-col">
+          <h3>Como funciona o monitoramento?</h3>
+          <p>Os dados exibidos neste painel são coletados de estações telemétricas oficiais da ANA (Agência Nacional de Águas e Saneamento Básico) e da Copel, com atualizações periódicas. A previsão de nível considera os índices de chuva registrados nas últimas 48 horas nas cabeceiras do rio.</p>
+          
+          <h3>Quais bairros são afetados primeiro?</h3>
+          <p>Durante o aumento do nível do Rio Iguaçu, as áreas mais baixas da região do Vale do Iguaçu são afetadas inicialmente. Os bairros Navegantes, São Bernardo, Christofis e áreas ribeirinhas próximas ao centro de União da Vitória e Porto União costumam registrar os primeiros pontos de atenção quando o nível supera os 5,00 metros.</p>
+        </div>
+        <div class="info-col">
+          <h3>Contatos de Emergência</h3>
+          <ul class="emergency-list">
+            <li><strong>Defesa Civil (União da Vitória):</strong> <a href="tel:199">199</a> ou <a href="tel:+554235242069">(42) 3524-2069</a></li>
+            <li><strong>Defesa Civil (Porto União):</strong> <a href="tel:+554235220412">(42) 3522-0412</a></li>
+            <li><strong>Corpo de Bombeiros (Emergência):</strong> <a href="tel:193">193</a></li>
+            <li><strong>Polícia Militar:</strong> <a href="tel:190">190</a></li>
+          </ul>
+          <p class="emergency-note">* Em caso de risco iminente de alagamento, entre em contato imediatamente com a Defesa Civil de sua cidade para apoio na remoção e abrigos temporários.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-panel depth">
+      <h2>Perguntas frequentes sobre o Rio Iguaçu</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Qual é o nível do Rio Iguaçu hoje em União da Vitória?</summary>
+          <p>O nível atual (cota de régua) aparece no topo desta página, no card "Cota atual", atualizado automaticamente a cada poucos minutos com dados da ANA (Agência Nacional de Águas e Saneamento Básico, estação telemétrica 65310001) e da Copel como fonte de apoio.</p>
+        </details>
+        <details class="faq-item">
+          <summary>A partir de que nível o Rio Iguaçu preocupa em União da Vitória e Porto União?</summary>
+          <p>Não existe um valor único de corte. Como referência histórica de estudos técnicos de zoneamento: a régua acima de 6,89 m está associada à linha de cheia de 10 anos, e cheias históricas relevantes ficaram em 8,89/8,90 m (1992), 8,12 m (2014), 8,37 m (2023) e 10,42 m (1983, a maior já registrada). A situação real em cada rua depende da cota do terreno, drenagem local e mapas de inundação — use estas referências com cautela, não como previsão exata.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Qual foi a maior cheia do Rio Iguaçu em União da Vitória?</summary>
+          <p>A maior cheia da série histórica oficial (estação 65310000, ANA/HidroWeb, dados desde 1930) foi em 18/07/1983, quando a régua atingiu 10,42 m. Na sequência vêm 1992 (8,89/8,90 m), 2023 (8,37 m), 1935 (8,16 m) e 2014 (8,12 m).</p>
+        </details>
+        <details class="faq-item">
+          <summary>Como funciona a régua do Rio Iguaçu?</summary>
+          <p>A régua mede o nível da água em metros a partir de um zero de referência local (739,61 m de cota altimétrica na estação de União da Vitória). Para converter o nível da régua em cota altimétrica, soma-se 739,61 m ao valor da régua.</p>
+        </details>
+        <details class="faq-item">
+          <summary>De onde vêm os dados deste site?</summary>
+          <p>Os dados oficiais são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), com a Copel como fonte de apoio. A coleta é automática e a página atualiza sozinha a cada poucos minutos, sem precisar recarregar.</p>
+        </details>
+      </div>
+    </section>
+
     <footer class="version-footer">
-      <span>Versão 1.24</span>
+      <span>Versão 1.25</span>
       <span id="visitCounter" class="visit-counter"></span>
     </footer>
   </main>
 
-  <script src="app.js?v=1.24"></script>
+  <script src="app.js?v=1.25"></script>
 </body>
 </html>
