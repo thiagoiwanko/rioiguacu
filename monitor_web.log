@@ -23997,3 +23997,13 @@ Stacktrace:
 [12/07/2026 23:08:14] Previsões extraídas: 6
 [12/07/2026 23:08:14] Dados atualizados com sucesso.
 [12/07/2026 23:08:14] data.json gravado (17493 bytes).
+[12/07/2026 23:11:11] Execução do scrape.py iniciada (GitHub Actions).
+[12/07/2026 23:11:31] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Read timed out. (read timeout=20)); usando Copel.
+[12/07/2026 23:11:31] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[12/07/2026 23:12:00] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4604 caracteres)
+[12/07/2026 23:12:00] Medições obtidas via Copel: 73
+[12/07/2026 23:12:00] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[12/07/2026 23:12:15] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[12/07/2026 23:12:15] Previsões extraídas: 6
+[12/07/2026 23:12:15] Dados atualizados com sucesso.
+[12/07/2026 23:12:15] data.json gravado (17666 bytes).
