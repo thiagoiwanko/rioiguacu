@@ -4,6 +4,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.29 — 2026-07-13
+
+- **Republicado o `scrape.py` com as cotas originais da Defesa Civil** (4,30/4,50/4,90/5,50 m, com os rótulos "ATENÇÃO MODERADA/ALTA/MUITO ALTA" e "ALERTA CRÍTICO - PLANO DE CONTINGÊNCIA ACIONADO") depois de uma publicação indevida (v1.27) ter trocado esses valores por outros não autorizados pelo usuário. Cotas de bairro e rótulo do painel ("Alertas de Nível") mantidos como estavam.
+- **Recriada a seção "Guia de Emergência e Informações Úteis" + "Perguntas frequentes"** no `index.html`, restaurando o conteúdo exato do commit da v1.26 (que tinha sido removido na v1.27 durante uma restauração de emergência pra v1.24). Rodapé atualizado pra "Versão 1.29".
+- Corrigido `index.html` que estava com uma versão menor/incompleta publicada por engano (sem rodapé/contador de visitas).
+- Disparo manual do workflow `update.yml` pra regenerar o `data.json` com os dados corretos, já que o agendador automático (Worker `rioiguacu-trigger`) tinha ficado sem disparar por ~48 min.
+
 ## v1.26 — 2026-07-13
 
 - **Nova seção "Guia de Emergência e Informações Úteis"** (entre a tabela de dados e o FAQ), com explicação de como funciona o monitoramento, bairros historicamente afetados por cheias (Navegantes, São Bernardo, Rio D'Areia, Limeira — lista baseada no relatório CENACID/UFPR já documentado no projeto, sem cravar cota exata por bairro) e contatos de emergência nacionais (Defesa Civil 199, Bombeiros 193, PM 190).
