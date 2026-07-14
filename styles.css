@@ -668,3 +668,29 @@ td {
     font-size: 11px;
   }
 }
+
+
+.safety-warning {
+  background: rgba(255, 61, 66, .12);
+  border: 1px solid rgba(255, 61, 66, .55);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 18px;
+}
+
+.safety-warning h3 {
+  margin: 0 0 10px;
+  color: var(--red);
+  font-size: 16px;
+}
+
+.safety-warning p {
+  margin: 0 0 10px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.safety-warning p:last-child {
+  margin-bottom: 0;
+}
