@@ -669,28 +669,37 @@ td {
   }
 }
 
-
 .safety-warning {
-  background: rgba(255, 61, 66, .12);
-  border: 1px solid rgba(255, 61, 66, .55);
+  background: rgba(255, 61, 66, .10);
+  border: 2px solid var(--red);
   border-radius: 14px;
-  padding: 16px 18px;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 26px rgba(255, 61, 66, .22);
 }
 
 .safety-warning h3 {
-  margin: 0 0 10px;
-  color: var(--red);
-  font-size: 16px;
+  margin: 0;
+  padding: 14px 18px;
+  background: var(--red);
+  color: #1a0506;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: .2px;
 }
 
 .safety-warning p {
-  margin: 0 0 10px;
+  margin: 14px 18px 12px;
   color: var(--text);
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.safety-warning p:first-of-type {
+  font-weight: 600;
+  color: #fff;
 }
 
 .safety-warning p:last-child {
-  margin-bottom: 0;
+  margin-bottom: 18px;
 }
