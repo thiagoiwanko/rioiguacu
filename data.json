@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-15T10:36",
+    "atualizado_em": "2026-07-15T10:41",
     "historico": [
       {
         "data_hora": "2026-07-15T00:00",
@@ -86,6 +86,14 @@
         "vazao_m3s": 1237,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-15T10:00",
+        "regua_m": 4.54,
+        "nivel_agua_m": 744.15,
+        "vazao_m3s": 1233,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -121,17 +129,17 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-15T09:00",
-      "regua_m": 4.547,
-      "nivel_agua_m": 744.157,
-      "vazao_m3s": 1237,
+      "data_hora": "2026-07-15T10:00",
+      "regua_m": 4.54,
+      "nivel_agua_m": 744.15,
+      "vazao_m3s": 1233,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "ATENÇÃO ALTA",
     "tendencia": {
-      "texto": "BAIXANDO -0.008 m/h",
-      "delta": -0.008000000000000007,
+      "texto": "BAIXANDO -0.007 m/h",
+      "delta": -0.006999999999999673,
       "direcao": "baixando"
     },
     "alerta_previsao": "Previsão em 48 h: pode atingir 4.54 m (ATENÇÃO ALTA).",
