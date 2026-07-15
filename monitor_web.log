@@ -33740,23 +33740,40 @@ Stacktrace:
 [15/07/2026 17:42:44] Previsões extraídas: 6
 [15/07/2026 17:42:44] Dados atualizados com sucesso.
 [15/07/2026 17:42:44] data.json gravado (17678 bytes).
-[15/07/2026 17:48:32] Execução do scrape.py iniciada (GitHub Actions).
-[15/07/2026 17:48:49] ANA: 18 medições obtidas com sucesso (estação 65310001).
-[15/07/2026 17:48:49] ANA: ainda sem dado novo (última segue 2026-07-15T17:00); usando Copel como redundância nesta rodada.
-[15/07/2026 17:48:49] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[15/07/2026 17:49:23] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[15/07/2026 17:49:23] Medições obtidas via Copel: 73
-[15/07/2026 17:49:23] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 17:49:37] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 17:49:37] Previsões extraídas: 6
-[15/07/2026 17:49:37] Ainda sem dado novo (última: 2026-07-15T17:00, fonte: Copel). Aguardando 30s para nova tentativa.
-[15/07/2026 17:50:22] ANA: 18 medições obtidas com sucesso (estação 65310001).
-[15/07/2026 17:50:22] ANA: ainda sem dado novo (última segue 2026-07-15T17:00); usando Copel como redundância nesta rodada.
-[15/07/2026 17:50:22] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[15/07/2026 17:50:55] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[15/07/2026 17:50:55] Medições obtidas via Copel: 73
-[15/07/2026 17:50:55] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 17:51:09] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 17:51:09] Previsões extraídas: 6
-[15/07/2026 17:51:09] Dados atualizados com sucesso.
-[15/07/2026 17:51:09] data.json gravado (17678 bytes).
+[15/07/2026 17:45:39] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 17:45:57] ANA: resposta sem itens utilizáveis (Não houve retorno de registros. Verifique!); usando Copel.
+[15/07/2026 17:45:57] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 17:46:41] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 17:46:41] Medições obtidas via Copel: 73
+[15/07/2026 17:46:41] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 17:46:56] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 17:46:56] Previsões extraídas: 6
+[15/07/2026 17:46:56] Ainda sem dado novo (última: 2026-07-15T17:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[15/07/2026 17:47:35] ANA: 18 medições obtidas com sucesso (estação 65310001).
+[15/07/2026 17:47:35] ANA: ainda sem dado novo (última segue 2026-07-15T17:00); usando Copel como redundância nesta rodada.
+[15/07/2026 17:47:35] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 17:47:52] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 17:47:52] Medições obtidas via Copel: 73
+[15/07/2026 17:47:52] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 17:48:06] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 17:48:06] Previsões extraídas: 6
+[15/07/2026 17:48:06] Dados atualizados com sucesso.
+[15/07/2026 17:48:06] data.json gravado (17678 bytes).
+[15/07/2026 17:51:37] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 17:51:37] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[15/07/2026 17:51:37] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 17:52:12] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 17:52:12] Medições obtidas via Copel: 73
+[15/07/2026 17:52:12] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 17:52:26] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 17:52:26] Previsões extraídas: 6
+[15/07/2026 17:52:26] Ainda sem dado novo (última: 2026-07-15T17:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[15/07/2026 17:52:56] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[15/07/2026 17:52:56] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 17:53:13] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 17:53:13] Medições obtidas via Copel: 73
+[15/07/2026 17:53:13] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 17:53:26] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 17:53:27] Previsões extraídas: 6
+[15/07/2026 17:53:27] Dados atualizados com sucesso.
+[15/07/2026 17:53:27] data.json gravado (17678 bytes).
