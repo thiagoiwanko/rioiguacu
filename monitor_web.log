@@ -31258,21 +31258,11 @@ Stacktrace:
 [15/07/2026 03:22:45] Previsões extraídas: 6
 [15/07/2026 03:22:45] Dados atualizados com sucesso.
 [15/07/2026 03:22:45] data.json gravado (17678 bytes).
-[15/07/2026 03:25:31] Execução do scrape.py iniciada (GitHub Actions).
-[15/07/2026 03:25:31] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
-[15/07/2026 03:25:31] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[15/07/2026 03:26:00] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[15/07/2026 03:26:00] Medições obtidas via Copel: 73
-[15/07/2026 03:26:00] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 03:26:15] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 03:26:15] Previsões extraídas: 6
-[15/07/2026 03:26:15] Ainda sem dado novo (última: 2026-07-15T03:00, fonte: Copel). Aguardando 30s para nova tentativa.
-[15/07/2026 03:26:45] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
-[15/07/2026 03:26:45] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[15/07/2026 03:27:02] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[15/07/2026 03:27:02] Medições obtidas via Copel: 73
-[15/07/2026 03:27:02] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 03:27:17] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 03:27:17] Previsões extraídas: 6
-[15/07/2026 03:27:17] Dados atualizados com sucesso.
-[15/07/2026 03:27:17] data.json gravado (17678 bytes).
+[15/07/2026 03:27:42] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 03:27:44] ANA: 3 medições obtidas com sucesso (estação 65310001).
+[15/07/2026 03:27:44] Medições obtidas via ANA: 3
+[15/07/2026 03:27:44] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 03:28:07] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 03:28:07] Previsões extraídas: 6
+[15/07/2026 03:28:07] Dados atualizados com sucesso.
+[15/07/2026 03:28:07] data.json gravado (3479 bytes).
