@@ -30897,11 +30897,21 @@ Stacktrace:
 [15/07/2026 01:27:36] Previsões extraídas: 6
 [15/07/2026 01:27:36] Dados atualizados com sucesso.
 [15/07/2026 01:27:36] data.json gravado (17678 bytes).
-[15/07/2026 01:30:38] Execução do scrape.py iniciada (GitHub Actions).
-[15/07/2026 01:30:52] ANA: 1 medições obtidas com sucesso (estação 65310001).
-[15/07/2026 01:30:52] Medições obtidas via ANA: 1
-[15/07/2026 01:30:52] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 01:31:15] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 01:31:15] Previsões extraídas: 6
-[15/07/2026 01:31:15] Dados atualizados com sucesso.
-[15/07/2026 01:31:15] data.json gravado (3071 bytes).
+[15/07/2026 01:31:36] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 01:31:36] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[15/07/2026 01:31:36] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 01:32:11] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 01:32:11] Medições obtidas via Copel: 73
+[15/07/2026 01:32:11] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 01:32:25] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 01:32:25] Previsões extraídas: 6
+[15/07/2026 01:32:25] Ainda sem dado novo (última: 2026-07-15T01:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[15/07/2026 01:32:55] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[15/07/2026 01:32:55] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 01:33:11] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 01:33:11] Medições obtidas via Copel: 73
+[15/07/2026 01:33:11] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 01:33:25] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 01:33:25] Previsões extraídas: 6
+[15/07/2026 01:33:25] Dados atualizados com sucesso.
+[15/07/2026 01:33:25] data.json gravado (17678 bytes).
