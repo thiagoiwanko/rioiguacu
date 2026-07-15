@@ -32618,13 +32618,13 @@ Stacktrace:
 [15/07/2026 11:14:03] Previsões extraídas: 6
 [15/07/2026 11:14:03] Dados atualizados com sucesso.
 [15/07/2026 11:14:03] data.json gravado (5097 bytes).
-[15/07/2026 11:15:31] Execução do scrape.py iniciada (GitHub Actions).
-[15/07/2026 11:15:31] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
-[15/07/2026 11:15:31] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[15/07/2026 11:15:50] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[15/07/2026 11:15:50] Medições obtidas via Copel: 73
-[15/07/2026 11:15:50] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 11:16:04] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 11:16:04] Previsões extraídas: 6
-[15/07/2026 11:16:04] Dados atualizados com sucesso.
-[15/07/2026 11:16:04] data.json gravado (17676 bytes).
+[15/07/2026 11:16:25] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 11:16:25] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[15/07/2026 11:16:25] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 11:16:48] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 11:16:48] Medições obtidas via Copel: 73
+[15/07/2026 11:16:48] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 11:17:02] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 11:17:02] Previsões extraídas: 6
+[15/07/2026 11:17:02] Dados atualizados com sucesso.
+[15/07/2026 11:17:02] data.json gravado (17676 bytes).
