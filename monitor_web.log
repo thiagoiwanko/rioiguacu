@@ -31248,13 +31248,13 @@ Stacktrace:
 [15/07/2026 03:16:54] Previsões extraídas: 6
 [15/07/2026 03:16:54] Dados atualizados com sucesso.
 [15/07/2026 03:16:54] data.json gravado (3479 bytes).
-[15/07/2026 03:20:38] Execução do scrape.py iniciada (GitHub Actions).
-[15/07/2026 03:20:58] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Read timed out. (read timeout=20)); usando Copel.
-[15/07/2026 03:20:58] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[15/07/2026 03:21:27] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[15/07/2026 03:21:27] Medições obtidas via Copel: 73
-[15/07/2026 03:21:27] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 03:21:41] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 03:21:41] Previsões extraídas: 6
-[15/07/2026 03:21:41] Dados atualizados com sucesso.
-[15/07/2026 03:21:41] data.json gravado (17678 bytes).
+[15/07/2026 03:22:02] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 03:22:03] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[15/07/2026 03:22:03] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[15/07/2026 03:22:31] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[15/07/2026 03:22:31] Medições obtidas via Copel: 73
+[15/07/2026 03:22:31] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 03:22:44] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 03:22:45] Previsões extraídas: 6
+[15/07/2026 03:22:45] Dados atualizados com sucesso.
+[15/07/2026 03:22:45] data.json gravado (17678 bytes).
