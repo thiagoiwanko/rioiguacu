@@ -34665,19 +34665,11 @@ Stacktrace:
 [15/07/2026 23:13:02] Previsões extraídas: 6
 [15/07/2026 23:13:02] Dados atualizados com sucesso.
 [15/07/2026 23:13:02] data.json gravado (17683 bytes).
-[15/07/2026 23:15:31] Execução do scrape.py iniciada (GitHub Actions).
-[15/07/2026 23:15:36] ANA: falha na coleta (502 Server Error: Bad Gateway for url: https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/OAUth/v1); usando Copel.
-[15/07/2026 23:15:36] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[15/07/2026 23:16:04] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[15/07/2026 23:16:04] Medições obtidas via Copel: 73
-[15/07/2026 23:16:04] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 23:16:18] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 23:16:18] Previsões extraídas: 6
-[15/07/2026 23:16:18] Ainda sem dado novo (última: 2026-07-15T23:00, fonte: Copel). Aguardando 30s para nova tentativa.
-[15/07/2026 23:17:01] ANA: 23 medições obtidas com sucesso (estação 65310001).
-[15/07/2026 23:17:01] Medições obtidas via ANA: 23
-[15/07/2026 23:17:01] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[15/07/2026 23:17:15] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[15/07/2026 23:17:15] Previsões extraídas: 6
-[15/07/2026 23:17:15] Dados atualizados com sucesso.
-[15/07/2026 23:17:15] data.json gravado (7539 bytes).
+[15/07/2026 23:17:39] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 23:18:00] ANA: 23 medições obtidas com sucesso (estação 65310001).
+[15/07/2026 23:18:00] Medições obtidas via ANA: 23
+[15/07/2026 23:18:00] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 23:18:24] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 23:18:24] Previsões extraídas: 6
+[15/07/2026 23:18:24] Dados atualizados com sucesso.
+[15/07/2026 23:18:24] data.json gravado (7539 bytes).
