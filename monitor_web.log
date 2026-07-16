@@ -34702,3 +34702,11 @@ Stacktrace:
 [15/07/2026 23:33:21] Previsões extraídas: 6
 [15/07/2026 23:33:21] Dados atualizados com sucesso.
 [15/07/2026 23:33:21] data.json gravado (17683 bytes).
+[15/07/2026 23:35:25] Execução do scrape.py iniciada (GitHub Actions).
+[15/07/2026 23:35:36] ANA: 23 medições obtidas com sucesso (estação 65310001).
+[15/07/2026 23:35:36] Medições obtidas via ANA: 23
+[15/07/2026 23:35:36] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[15/07/2026 23:36:12] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[15/07/2026 23:36:12] Previsões extraídas: 6
+[15/07/2026 23:36:12] Dados atualizados com sucesso.
+[15/07/2026 23:36:12] data.json gravado (7539 bytes).
