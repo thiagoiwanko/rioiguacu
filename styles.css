@@ -670,21 +670,20 @@ td {
 }
 
 .safety-warning {
-  background: rgba(255, 61, 66, .10);
-  border: 2px solid var(--red);
+  background: rgba(255, 61, 66, .08);
+  border: 1px solid rgba(255, 61, 66, .45);
   border-radius: 14px;
   margin-bottom: 20px;
   overflow: hidden;
-  box-shadow: 0 0 26px rgba(255, 61, 66, .22);
 }
 
 .safety-warning h3 {
   margin: 0;
   padding: 14px 18px;
-  background: var(--red);
-  color: #1a0506;
-  font-size: 17px;
-  font-weight: 800;
+  background: rgba(255, 61, 66, .55);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
   letter-spacing: .2px;
 }
 
