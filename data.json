@@ -1,11 +1,11 @@
 {
-  "ok": true,
-  "erro": null,
+  "ok": false,
+  "erro": "nenhuma medição foi encontrada (nem ANA, nem Copel)",
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-16T12:48",
+    "atualizado_em": "2026-07-16T12:42",
     "historico": [
       {
         "data_hora": "2026-07-13T12:00",
