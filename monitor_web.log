@@ -36109,14 +36109,13 @@ Stacktrace:
 [16/07/2026 07:18:06] Previsões extraídas: 6
 [16/07/2026 07:18:06] Dados atualizados com sucesso.
 [16/07/2026 07:18:06] data.json gravado (4294 bytes).
-[16/07/2026 07:20:40] Execução do scrape.py iniciada (GitHub Actions).
-[16/07/2026 07:20:48] ANA: 7 medições obtidas com sucesso (estação 65310001).
-[16/07/2026 07:20:48] ANA: ainda sem dado novo (última segue 2026-07-16T06:00); usando Copel como redundância nesta rodada.
-[16/07/2026 07:20:48] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[16/07/2026 07:21:14] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
-[16/07/2026 07:21:14] Medições obtidas via Copel: 73
-[16/07/2026 07:21:14] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[16/07/2026 07:21:28] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
-[16/07/2026 07:21:28] Previsões extraídas: 6
-[16/07/2026 07:21:28] Dados atualizados com sucesso.
-[16/07/2026 07:21:28] data.json gravado (17680 bytes).
+[16/07/2026 07:21:54] Execução do scrape.py iniciada (GitHub Actions).
+[16/07/2026 07:21:54] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Max retries exceeded with url: /hidrowebservice/EstacoesTelemetricas/OAUth/v1 (Caused by NewConnectionError("HTTPSConnection(host='www.ana.gov.br', port=443): Failed to establish a new connection: [Errno 101] Network is unreachable"))); usando Copel.
+[16/07/2026 07:21:54] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[16/07/2026 07:22:20] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[16/07/2026 07:22:20] Medições obtidas via Copel: 73
+[16/07/2026 07:22:20] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[16/07/2026 07:22:34] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[16/07/2026 07:22:35] Previsões extraídas: 6
+[16/07/2026 07:22:35] Dados atualizados com sucesso.
+[16/07/2026 07:22:35] data.json gravado (17680 bytes).
