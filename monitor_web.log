@@ -36657,3 +36657,23 @@ Stacktrace:
 [16/07/2026 10:54:44] Previsões extraídas: 6
 [16/07/2026 10:54:44] Dados atualizados com sucesso.
 [16/07/2026 10:54:44] data.json gravado (17680 bytes).
+[16/07/2026 10:55:31] Execução do scrape.py iniciada (GitHub Actions).
+[16/07/2026 10:55:34] ANA: 11 medições obtidas com sucesso (estação 65310001).
+[16/07/2026 10:55:34] ANA: ainda sem dado novo (última segue 2026-07-16T10:00); usando Copel como redundância nesta rodada.
+[16/07/2026 10:55:34] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[16/07/2026 10:55:55] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[16/07/2026 10:55:55] Medições obtidas via Copel: 73
+[16/07/2026 10:55:55] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[16/07/2026 10:56:09] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[16/07/2026 10:56:09] Previsões extraídas: 6
+[16/07/2026 10:56:09] Ainda sem dado novo (última: 2026-07-16T10:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[16/07/2026 10:56:40] ANA: 11 medições obtidas com sucesso (estação 65310001).
+[16/07/2026 10:56:40] ANA: ainda sem dado novo (última segue 2026-07-16T10:00); usando Copel como redundância nesta rodada.
+[16/07/2026 10:56:40] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[16/07/2026 10:56:58] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[16/07/2026 10:56:58] Medições obtidas via Copel: 73
+[16/07/2026 10:56:58] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[16/07/2026 10:57:12] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1064 caracteres)
+[16/07/2026 10:57:12] Previsões extraídas: 6
+[16/07/2026 10:57:12] Dados atualizados com sucesso.
+[16/07/2026 10:57:12] data.json gravado (17680 bytes).
