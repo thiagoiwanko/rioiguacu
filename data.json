@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-15T21:07",
+    "atualizado_em": "2026-07-15T21:11",
     "historico": [
       {
         "data_hora": "2026-07-12T21:00",
@@ -582,6 +582,14 @@
         "vazao_m3s": 1200,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-15T21:00",
+        "regua_m": 4.452,
+        "nivel_agua_m": 744.062,
+        "vazao_m3s": 1190,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -617,10 +625,10 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-15T20:00",
-      "regua_m": 4.46,
-      "nivel_agua_m": 744.07,
-      "vazao_m3s": 1200,
+      "data_hora": "2026-07-15T21:00",
+      "regua_m": 4.452,
+      "nivel_agua_m": 744.062,
+      "vazao_m3s": 1190,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
