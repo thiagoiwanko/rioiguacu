@@ -404,7 +404,29 @@ FONTE_ANA = "ANA – Agência Nacional de Águas e Saneamento Básico (estação
 FONTE_COPEL = "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)"
 
 
-def coletar_uma_vez(ultima_anterior=None):
+def mesclar_historico(historico_novo, historico_anterior):
+    """Une o histórico recém-coletado (via ANA ou Copel) com o histórico já
+    salvo no data.json da execução anterior, preenchendo por data_hora.
+
+    Sem isso, uma coleta cuja fonte responde com sucesso mas devolve uma
+    janela incompleta (ex.: ANA retornando só as horas de hoje, sem ontem)
+    substituía o histórico inteiro e "esquecia" horas que já tinham sido
+    coletadas com sucesso antes -- mesmo a Copel nunca era chamada pra
+    completar, porque tecnicamente a ANA "funcionou" (só que incompleta).
+
+    Com a mesclagem, o histórico do site é cumulativo: uma hora só some da
+    janela de JANELA_HISTORICO_HORAS quando fica velha demais, nunca porque
+    a coleta desta rodada não trouxe ela de novo. Em caso de conflito no
+    mesmo horário, o dado desta execução tem prioridade (mais recente)."""
+    por_hora = {item["data_hora"]: item for item in historico_anterior}
+    por_hora.update({item["data_hora"]: item for item in historico_novo})
+    limite = agora_br() - timedelta(hours=JANELA_HISTORICO_HORAS)
+    itens = [item for item in por_hora.values() if datetime.fromisoformat(item["data_hora"]) >= limite]
+    return sorted(itens, key=lambda item: item["data_hora"])
+
+
+def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
+    historico_anterior = historico_anterior or []
     historico = coletar_via_ana()
     fonte_historico = None
     url_historico = URL_HISTORICO_COPEL
@@ -426,6 +448,8 @@ def coletar_uma_vez(ultima_anterior=None):
         fonte_historico = FONTE_COPEL
         url_historico = URL_HISTORICO_COPEL
     log(f"Medições obtidas via {fonte_historico.split(' ')[0]}: {len(historico)}")
+
+    historico = mesclar_historico(historico, historico_anterior)
 
     # Previsão é exclusiva da Copel -- a ANA não oferece esse dado, então essa
     # parte roda sempre, independentemente da fonte do histórico acima.
@@ -513,15 +537,17 @@ def main():
     log("Execução do scrape.py iniciada (GitHub Actions).")
     anterior = carregar_anterior()
     ultima_anterior = None
+    historico_anterior = []
     if anterior and anterior.get("dados"):
         ultima_anterior = anterior["dados"].get("ultima", {}).get("data_hora")
+        historico_anterior = anterior["dados"].get("historico", [])
 
     payload = None
     erro = None
     tentativas = 2
     for tentativa in range(1, tentativas + 1):
         try:
-            payload = coletar_uma_vez(ultima_anterior)
+            payload = coletar_uma_vez(ultima_anterior, historico_anterior)
         except Exception as exc:
             erro = str(exc)
             log(f"Erro na coleta (tentativa {tentativa}): {exc}")
