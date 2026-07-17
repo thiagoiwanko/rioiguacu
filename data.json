@@ -3,9 +3,9 @@
   "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
-    "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
-    "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-16T23:27",
+    "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
+    "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
+    "atualizado_em": "2026-07-16T23:32",
     "historico": [
       {
         "data_hora": "2026-07-15T00:00",
@@ -203,7 +203,7 @@
         "data_hora": "2026-07-16T00:00",
         "regua_m": 4.427,
         "nivel_agua_m": 744.037,
-        "vazao_m3s": 1182,
+        "vazao_m3s": 1180,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -211,7 +211,7 @@
         "data_hora": "2026-07-16T01:00",
         "regua_m": 4.419,
         "nivel_agua_m": 744.029,
-        "vazao_m3s": 1178,
+        "vazao_m3s": 1180,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -219,7 +219,7 @@
         "data_hora": "2026-07-16T02:00",
         "regua_m": 4.408,
         "nivel_agua_m": 744.018,
-        "vazao_m3s": 1172,
+        "vazao_m3s": 1170,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -227,7 +227,7 @@
         "data_hora": "2026-07-16T03:00",
         "regua_m": 4.4,
         "nivel_agua_m": 744.01,
-        "vazao_m3s": 1169,
+        "vazao_m3s": 1170,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -235,7 +235,7 @@
         "data_hora": "2026-07-16T04:00",
         "regua_m": 4.392,
         "nivel_agua_m": 744.002,
-        "vazao_m3s": 1164,
+        "vazao_m3s": 1160,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -243,7 +243,7 @@
         "data_hora": "2026-07-16T05:00",
         "regua_m": 4.383,
         "nivel_agua_m": 743.993,
-        "vazao_m3s": 1158,
+        "vazao_m3s": 1160,
         "chuva_mm": 0.2,
         "chuva_acumulada_mm": 0.2
       },
@@ -259,7 +259,7 @@
         "data_hora": "2026-07-16T07:00",
         "regua_m": 4.366,
         "nivel_agua_m": 743.976,
-        "vazao_m3s": 1155,
+        "vazao_m3s": 1160,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.2
       },
@@ -267,7 +267,7 @@
         "data_hora": "2026-07-16T08:00",
         "regua_m": 4.359,
         "nivel_agua_m": 743.969,
-        "vazao_m3s": 1149,
+        "vazao_m3s": 1150,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.2
       },
@@ -275,7 +275,7 @@
         "data_hora": "2026-07-16T09:00",
         "regua_m": 4.35,
         "nivel_agua_m": 743.96,
-        "vazao_m3s": 1146,
+        "vazao_m3s": 1150,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.2
       },
@@ -291,7 +291,7 @@
         "data_hora": "2026-07-16T11:00",
         "regua_m": 4.334,
         "nivel_agua_m": 743.944,
-        "vazao_m3s": 1135,
+        "vazao_m3s": 1140,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.2
       },
@@ -299,7 +299,7 @@
         "data_hora": "2026-07-16T12:00",
         "regua_m": 4.326,
         "nivel_agua_m": 743.936,
-        "vazao_m3s": 1137,
+        "vazao_m3s": 1140,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.2
       },
@@ -307,7 +307,7 @@
         "data_hora": "2026-07-16T13:00",
         "regua_m": 4.318,
         "nivel_agua_m": 743.928,
-        "vazao_m3s": 1132,
+        "vazao_m3s": 1130,
         "chuva_mm": 0.2,
         "chuva_acumulada_mm": 0.4
       },
@@ -315,7 +315,7 @@
         "data_hora": "2026-07-16T14:00",
         "regua_m": 4.31,
         "nivel_agua_m": 743.92,
-        "vazao_m3s": 1126,
+        "vazao_m3s": 1130,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -323,7 +323,7 @@
         "data_hora": "2026-07-16T15:00",
         "regua_m": 4.3,
         "nivel_agua_m": 743.91,
-        "vazao_m3s": 1123,
+        "vazao_m3s": 1120,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -331,7 +331,7 @@
         "data_hora": "2026-07-16T16:00",
         "regua_m": 4.293,
         "nivel_agua_m": 743.903,
-        "vazao_m3s": 1117,
+        "vazao_m3s": 1120,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -339,7 +339,7 @@
         "data_hora": "2026-07-16T17:00",
         "regua_m": 4.285,
         "nivel_agua_m": 743.895,
-        "vazao_m3s": 1117,
+        "vazao_m3s": 1120,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -347,7 +347,7 @@
         "data_hora": "2026-07-16T18:00",
         "regua_m": 4.278,
         "nivel_agua_m": 743.888,
-        "vazao_m3s": 1114,
+        "vazao_m3s": 1110,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -355,7 +355,7 @@
         "data_hora": "2026-07-16T19:00",
         "regua_m": 4.271,
         "nivel_agua_m": 743.881,
-        "vazao_m3s": 1108,
+        "vazao_m3s": 1110,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -363,7 +363,7 @@
         "data_hora": "2026-07-16T20:00",
         "regua_m": 4.264,
         "nivel_agua_m": 743.874,
-        "vazao_m3s": 1102,
+        "vazao_m3s": 1100,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -371,7 +371,7 @@
         "data_hora": "2026-07-16T21:00",
         "regua_m": 4.257,
         "nivel_agua_m": 743.867,
-        "vazao_m3s": 1105,
+        "vazao_m3s": 1110,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
@@ -379,7 +379,7 @@
         "data_hora": "2026-07-16T22:00",
         "regua_m": 4.249,
         "nivel_agua_m": 743.859,
-        "vazao_m3s": 1099,
+        "vazao_m3s": 1100,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
       },
