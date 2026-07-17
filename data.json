@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-17T19:39",
+    "atualizado_em": "2026-07-17T19:42",
     "historico": [
       {
         "data_hora": "2026-07-15T20:00",
@@ -394,34 +394,34 @@
     ],
     "previsao": [
       {
-        "data_hora": "2026-07-17T21:00",
-        "regua_sem_chuva_m": 4.14,
-        "regua_com_chuva_m": 4.14
-      },
-      {
         "data_hora": "2026-07-18T03:00",
-        "regua_sem_chuva_m": 4.13,
-        "regua_com_chuva_m": 4.13
+        "regua_sem_chuva_m": 4.09,
+        "regua_com_chuva_m": 4.09
       },
       {
         "data_hora": "2026-07-18T09:00",
-        "regua_sem_chuva_m": 4.1,
-        "regua_com_chuva_m": 4.1
-      },
-      {
-        "data_hora": "2026-07-18T15:00",
         "regua_sem_chuva_m": 4.06,
         "regua_com_chuva_m": 4.06
       },
       {
+        "data_hora": "2026-07-18T15:00",
+        "regua_sem_chuva_m": 4.02,
+        "regua_com_chuva_m": 4.02
+      },
+      {
         "data_hora": "2026-07-18T21:00",
-        "regua_sem_chuva_m": 4.01,
-        "regua_com_chuva_m": 4.01
+        "regua_sem_chuva_m": 3.97,
+        "regua_com_chuva_m": 3.97
       },
       {
         "data_hora": "2026-07-19T03:00",
-        "regua_sem_chuva_m": 3.97,
-        "regua_com_chuva_m": 3.97
+        "regua_sem_chuva_m": 3.93,
+        "regua_com_chuva_m": 3.93
+      },
+      {
+        "data_hora": "2026-07-19T09:00",
+        "regua_sem_chuva_m": 3.89,
+        "regua_com_chuva_m": 3.89
       }
     ],
     "ultima": {
