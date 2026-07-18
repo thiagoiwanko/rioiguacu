@@ -6,6 +6,17 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.40 — 2026-07-18
+
+- **As 3 seções (Dados Visíveis, Ranking Sazonal, Enchentes Históricas) viraram acordeão no mesmo formato do FAQ** (`<details>/<summary>`), substituindo o padrão de abas com botões da v1.39. Ordem: Ranking Sazonal, Enchentes Históricas, Dados Visíveis (por último) — pedido do usuário. `setupTabs()` removido de `app.js`, já que o `<details>` nativo dispensa JS.
+- **Removida a seção "Guia de Emergência e Informações Úteis"** (perguntas "Como funciona o monitoramento" e "Quais bairros são afetados primeiro"), redundante com o FAQ novo da v1.39. Os **Contatos de Emergência** (Defesa Civil 199, Bombeiros 193, PM 190) foram movidos para dentro do aviso vermelho "Enchente é risco à vida".
+- FAQ renomeado de "Perguntas frequentes sobre o Rio Iguaçu" para só "Perguntas frequentes".
+- **"Alertas de Nível do Rio" ganhou um asterisco** com nota linkando para o FAQ ("*Para mais informações, consulte as Perguntas frequentes").
+- **Gauge/escala de cor atualizados pra bater com os 5 níveis reais** (Observação 3,70 / Atenção 4,20 / Alerta 5,00 / Emergência 5,50 / Enchente 6,50 m): `NIVEL_MAX_ESCALA` foi de 5,5 para 6,5 m e os stops de cor de `colorForLevel()` passaram a usar os valores reais dos limiares em vez de frações genéricas da escala antiga.
+- Removido o texto "Situação do rio: X" abaixo do gauge — redundante com o badge que já mostra o mesmo nível ao lado da cota atual.
+- **Cards Vazão e Chuva unidos num único bloco** (`.metric-split`, dois `.metric-block` lado a lado com divisória), reduzindo o espaço vazio que cada card tinha sozinho. `hero-grid` passou de 4 para 3 colunas.
+- Backup pré-edição: `backups/site-v1.39.zip`.
+
 ## v1.39 — 2026-07-18
 
 - **Reestruturação em abas:** as três seções que ficavam sempre visíveis abaixo do gráfico (Dados Visíveis, Ranking Sazonal, Enchentes Históricas) viraram uma única área com 3 abas clicáveis, todas fechadas por padrão. Pedido do usuário, pra reduzir o comprimento da página.
