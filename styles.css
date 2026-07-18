@@ -209,6 +209,12 @@ h2 {
   background: rgba(255, 61, 66, .16);
 }
 
+.level-badge.badge-observacao {
+  border-color: rgba(72, 167, 255, .5);
+  color: var(--blue);
+  background: rgba(72, 167, 255, .12);
+}
+
 .level-badge.badge-critico {
   display: flex;
   align-items: center;
@@ -288,7 +294,6 @@ h2 {
   transform: translateX(-100%);
 }
 
-
 .situation {
   margin-bottom: 0;
   color: var(--soft);
@@ -296,6 +301,9 @@ h2 {
 }
 
 .metric-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: linear-gradient(145deg, rgba(22, 34, 45, .78), rgba(12, 19, 27, .9));
@@ -304,17 +312,29 @@ h2 {
 
 .metric-card strong {
   display: block;
-  margin: 18px 0 6px;
+  margin: 14px 0 8px;
   font-size: 26px;
 }
 
 .metric-card small {
   color: var(--muted);
+  line-height: 1.5;
+}
+
+.trend-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
+  box-shadow: 0 0 10px currentColor;
 }
 
 .main-grid {
   display: grid;
   grid-template-columns: minmax(720px, 1fr) 360px;
+  align-items: start;
   gap: 14px;
 }
 
@@ -527,8 +547,42 @@ h2 {
   background: var(--green);
 }
 
-.table-panel {
+.tabs-panel {
+  padding: 18px;
   margin-bottom: 18px;
+}
+
+.tabs-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tab-btn {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .03);
+  color: var(--soft);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+  border-color: rgba(180, 215, 230, .35);
+}
+
+.tab-btn.active {
+  color: #04141a;
+  background: linear-gradient(135deg, #3fffe8, #69a9ff);
+  border-color: transparent;
+}
+
+.tab-panel {
+  margin-top: 16px;
 }
 
 .compact {
@@ -558,11 +612,13 @@ h2 {
 
 .table-wrap-full {
   max-height: none;
-  overflow: visible;
+  overflow-x: auto;
+  overflow-y: visible;
 }
 
-.episodes-panel {
-  margin-bottom: 18px;
+.table-wrap-full th,
+.table-wrap-full td {
+  white-space: nowrap;
 }
 
 table {
@@ -762,7 +818,6 @@ td {
   margin-bottom: 18px;
 }
 
-
 .info-panel,
 .faq-panel {
   padding: 18px;
@@ -879,6 +934,20 @@ td {
   color: var(--soft);
   font-size: 13px;
   line-height: 1.55;
+}
+
+.faq-item h3 {
+  margin: 20px 0 6px;
+  font-size: 14px;
+  color: var(--cyan);
+}
+
+.faq-item h3:first-of-type {
+  margin-top: 16px;
+}
+
+.faq-item strong {
+  color: var(--text);
 }
 
 @media (max-width: 640px) {
