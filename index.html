@@ -82,7 +82,7 @@
         "name": "De onde vêm os dados deste site?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Os dados oficiais são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), com a Copel como fonte de apoio. A coleta é automática e a página atualiza a cada poucos minutos."
+          "text": "Os dados em tempo real são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), operada pelo IAT (Instituto Água e Terra do Paraná), com a Copel como fonte de apoio. O histórico de longo prazo usa a série oficial ANA/HidroWeb da estação 65310000, desde 1930. A coleta é automática e a página atualiza a cada poucos minutos."
         }
       }
     ]
@@ -95,7 +95,7 @@
       <div>
         <p class="eyebrow">Monitoramento Hidrológico</p>
         <h1>Rio Iguaçu</h1>
-        <p class="subtitle">União da Vitória (PR) e Porto União (SC) · nível do rio em tempo real, com dados da ANA (Agência Nacional de Águas e Saneamento Básico) e a Copel como fonte de apoio</p>
+        <p class="subtitle">União da Vitória (PR) · nível do rio em tempo real, com dados da ANA (Agência Nacional de Águas e Saneamento Básico) e a Copel como fonte de apoio</p>
       </div>
       <div class="actions">
         <span id="syncStatus" class="sync">Iniciando...</span>
@@ -159,7 +159,7 @@
 
       <aside class="side-panel">
         <article class="references depth">
-          <h2>Cotas de Referência* (Cheias Históricas)</h2>
+          <h2>Cotas de Referência* <span class="nowrap">(Cheias Históricas)</span></h2>
           <div id="referenceList" class="reference-list"></div>
           <p class="reference-note"><span class="note-mark">*</span> A cota de cada bairro mostra com quantos metros na régua do rio a água começa a alcançar os primeiros terrenos daquele bairro (as partes mais baixas). É um valor aproximado e estimado — não deve ser tomado como certeza: a situação real pode variar conforme a localização e a altura do seu terreno dentro do bairro — há casas que a água alcança antes, e outras bem depois. O cálculo usa os endereços do Censo do IBGE e o mapa de altitudes do terreno do Governo do Paraná. Estas informações não substituem os avisos oficiais: em caso de emergência, siga sempre a Defesa Civil (fone 199).</p>
         </article>
@@ -199,7 +199,7 @@
                     <p>Os dados exibidos neste painel são coletados de estações telemétricas oficiais da ANA (Agência Nacional de Águas e Saneamento Básico) e da Copel. A página verifica novos dados a cada poucos minutos, mas a estação libera valores novos apenas de hora em hora. A previsão de nível considera os índices de chuva registrados nas últimas 48 horas nas cabeceiras do rio.</p>
 
           <h3>Quais bairros são afetados primeiro?</h3>
-          <p>Durante cheias históricas, bairros de cota mais baixa como Navegantes, São Bernardo, Rio D'Areia e Limeira, além de outras áreas ribeirinhas próximas ao centro de União da Vitória e Porto União, já registraram os primeiros impactos. A cota exata em que cada bairro é afetado depende da topografia e drenagem local — não há um valor único de corte confirmado por mapeamento oficial, então use esta lista como referência histórica, não como previsão exata.</p>
+          <p>Durante cheias históricas, bairros de cota mais baixa como Navegantes, São Bernardo, Rio D'Areia e Limeira, além de outras áreas ribeirinhas próximas ao centro de União da Vitória, já registraram os primeiros impactos. A cota exata em que cada bairro é afetado depende da topografia e drenagem local — não há um valor único de corte confirmado por mapeamento oficial, então use esta lista como referência histórica, não como previsão exata.</p>
         </div>
         <div class="info-col">
           <h3>Contatos de Emergência</h3>
@@ -220,7 +220,7 @@
           <p>O nível atual (cota de régua) aparece no topo desta página, no card "Cota atual", atualizado automaticamente a cada poucos minutos com dados da ANA (Agência Nacional de Águas e Saneamento Básico, estação telemétrica 65310001) e da Copel como fonte de apoio.</p>
         </details>
         <details class="faq-item">
-          <summary>A partir de que nível o Rio Iguaçu preocupa em União da Vitória e Porto União?</summary>
+          <summary>A partir de que nível o Rio Iguaçu preocupa em União da Vitória?</summary>
           <p>Não existe um valor único de corte. Como referência histórica de estudos técnicos de zoneamento: a régua acima de 6,89 m está associada à linha de cheia de 10 anos, e cheias históricas relevantes ficaram em 8,90 m (1992), 8,12 m (2014), 8,37 m (2023) e 10,42 m (1983, a maior já registrada). A situação real em cada rua depende da cota do terreno, drenagem local e mapas de inundação — use estas referências com cautela, não como previsão exata.</p>
         </details>
         <details class="faq-item">
@@ -233,7 +233,7 @@
         </details>
         <details class="faq-item">
           <summary>De onde vêm os dados deste site?</summary>
-          <p>Os dados oficiais são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), com a Copel como fonte de apoio. A coleta é automática e a página atualiza sozinha a cada poucos minutos, sem precisar recarregar. No entanto, a estação libera dados novos somente de hora em hora.</p>
+          <p>Os dados em tempo real são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), operada pelo IAT (Instituto Água e Terra do Paraná), com a Copel como fonte de apoio. O histórico de longo prazo (desde 1930) usa a série oficial ANA/HidroWeb da estação 65310000. A coleta é automática e a página atualiza sozinha a cada poucos minutos, sem precisar recarregar. No entanto, a estação telemétrica da ANA libera dados novos somente de hora em hora.</p>
         </details>
       </div>
     </section>
@@ -247,11 +247,11 @@
     </div>
 
     <footer class="version-footer">
-      <span>Versão 1.36</span>
+      <span>Versão 1.37</span>
       <span id="visitCounter" class="visit-counter"></span>
     </footer>
   </main>
 
-  <script src="app.js?v=1.36"></script>
+  <script src="app.js?v=1.37"></script>
 </body>
 </html>
