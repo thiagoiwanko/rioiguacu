@@ -450,6 +450,20 @@ h2 {
   box-shadow: 0 0 12px currentColor;
 }
 
+.swatch-event {
+  border-radius: 3px;
+  transform: rotate(45deg);
+}
+
+.reference-note {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(180, 215, 230, .18);
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
 .ref-row-current {
   position: relative;
   margin: 2px 0;
