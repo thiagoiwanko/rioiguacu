@@ -130,7 +130,7 @@ h2 {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: minmax(360px, 1.4fr) repeat(3, minmax(180px, .62fr));
+  grid-template-columns: minmax(360px, 1.4fr) minmax(280px, .95fr) minmax(180px, .62fr);
   gap: 14px;
 }
 
@@ -321,6 +321,24 @@ h2 {
   line-height: 1.5;
 }
 
+.metric-split {
+  flex-direction: row;
+  padding: 0;
+}
+
+.metric-block {
+  flex: 1;
+  min-width: 0;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metric-block:first-child {
+  border-right: 1px solid var(--line);
+}
+
 .trend-dot {
   display: inline-block;
   width: 10px;
@@ -494,6 +512,16 @@ h2 {
 .reference-note .note-mark {
   color: var(--soft);
   font-weight: 800;
+}
+
+.reference-note a {
+  color: var(--cyan);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.reference-note a:hover {
+  text-decoration: underline;
 }
 
 .ref-row-current {
@@ -773,6 +801,14 @@ td {
     gap: 6px 10px;
   }
 
+  .metric-split {
+    flex-direction: row;
+  }
+
+  .metric-block {
+    padding: 14px;
+  }
+
   .metric-card strong {
     font-size: 22px;
   }
@@ -815,7 +851,42 @@ td {
 }
 
 .safety-warning p:last-child {
-  margin-bottom: 18px;
+  margin-bottom: 12px;
+}
+
+.safety-contacts {
+  margin: 4px 18px 18px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, .15);
+}
+
+.safety-contacts strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.safety-contacts .emergency-list {
+  margin: 0;
+}
+
+.safety-contacts .emergency-list li {
+  color: #fff;
+}
+
+.safety-contacts .emergency-list a {
+  color: #fff;
+  text-decoration: underline;
+  font-weight: 800;
+}
+
+.safety-contacts .emergency-list a:hover {
+  text-decoration: none;
 }
 
 .info-panel,
