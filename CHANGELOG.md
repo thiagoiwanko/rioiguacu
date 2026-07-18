@@ -4,6 +4,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.36 — 2026-07-18
+
+- **Restaurada a cota "Menor nível histórico - estiagem de 2020" (1,29 m)** em `COTAS_BAIRROS` (`scrape.py` e `app.py`), que tinha ficado de fora da substituição completa da lista na v1.33.
+- **Cores das bolinhas da lista "Cotas de Referência" agora fixas por categoria**, em vez da escala de cor por severidade: amarelo para bairros, vermelho para enchentes históricas, verde para a menor cota já registrada. Pedido do usuário, pra facilitar a leitura visual da lista maior de 23 pontos.
+
+## v1.35 — 2026-07-18
+
+- **Melhorada a formatação da nota de rodapé** das Cotas de Referência: virou um "callout box" com fundo/borda sutil e mais respiro (padding), em vez de texto corrido colado no topo do card seguinte. Asterisco inicial destacado com `<span class="note-mark">`.
+
 ## v1.34 — 2026-07-18
 
 - **Marcador visual diferente para cotas de "Enchente de AAAA"** vs bairros na lista de Cotas de Referência: entradas de enchente histórica agora usam um losango (`swatch-event`, `border-radius: 3px; transform: rotate(45deg)`) em vez do círculo padrão, mantendo a mesma escala de cor por severidade. Pedido do usuário, pra facilitar a leitura rápida da lista maior de 23 pontos.
