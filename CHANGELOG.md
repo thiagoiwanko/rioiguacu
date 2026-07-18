@@ -4,6 +4,16 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.31 — 2026-07-18
+
+- **Corrigido bug grave que apagava o histórico diário em conflitos de push.** No bloco de retry do `update.yml` (acionado quando outra execução do workflow commita primeiro), o script restaurava `historico_diario.csv` a partir de um snapshot em `/tmp` calculado **antes** do `git reset --hard origin/main`. Como esse arquivo é cumulativo (1 linha por dia, upsert por data), qualquer commit que tivesse chegado nesse meio-tempo — inclusive um backfill manual — era apagado por completo ao ser sobrescrito pelo snapshot velho. Foi assim que o backfill histórico 2024–2026 (commit `1b13a66e`, +917 linhas) foi apagado 34 segundos depois pelo próprio bot (commit `3d72381e`, -917 linhas). Corrigido parando de restaurar `historico_diario.csv` nesse bloco: depois do reset o arquivo já está com a versão mais recente do remoto, e a linha do dia da execução atual (se ainda faltar) é recalculada normalmente na rodada seguinte, poucos minutos depois — sem risco de perder histórico de terceiros.
+- Motivação: descoberto ao investigar por que um backfill manual de `historico_diario.csv` (dados 2024–2026 da estação ANA 65310001) sumia minutos depois de ser commitado.
+- Nenhuma mudança visual no site — só correção de infraestrutura de coleta/publicação de dados.
+
+## v1.30 — data não registrada
+
+- Entrada pendente: o rodapé do site já mostra "Versão 1.30" ao vivo, mas esta versão não foi documentada aqui. Ainda não investigado o que mudou entre a v1.29 e a v1.30.
+
 ## v1.29 — 2026-07-13
 
 - **Republicado o `scrape.py` com as cotas originais da Defesa Civil** (4,30/4,50/4,90/5,50 m, com os rótulos "ATENÇÃO MODERADA/ALTA/MUITO ALTA" e "ALERTA CRÍTICO - PLANO DE CONTINGÊNCIA ACIONADO") depois de uma publicação indevida (v1.27) ter trocado esses valores por outros não autorizados pelo usuário. Cotas de bairro e rótulo do painel ("Alertas de Nível") mantidos como estavam.
