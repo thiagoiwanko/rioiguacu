@@ -185,7 +185,7 @@ function renderReferences(data) {
       }
       return `
         <div class="ref-row">
-          <i class="swatch" style="color:${colorForLevel(item.nivel)}; background:${colorForLevel(item.nivel)}"></i>
+          <i class="swatch${item.descricao.startsWith("Enchente de") ? " swatch-event" : ""}" style="color:${colorForLevel(item.nivel)}; background:${colorForLevel(item.nivel)}"></i>
           <strong>${item.nivel.toFixed(2)} m</strong>
           <span>${item.descricao}</span>
         </div>
