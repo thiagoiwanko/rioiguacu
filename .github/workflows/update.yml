@@ -79,8 +79,19 @@ jobs:
             git reset --hard origin/main
             cp /tmp/coleta_atual/data.json . 2>/dev/null || true
             cp /tmp/coleta_atual/monitor_web.log . 2>/dev/null || true
-            cp /tmp/coleta_atual/historico_diario.csv . 2>/dev/null || true
-            git add data.json monitor_web.log historico_diario.csv
+            # NÃO restaurar historico_diario.csv aqui (bug corrigido na v1.31).
+            # Esse arquivo é cumulativo (1 linha por dia, upsert por data) --
+            # o snapshot em /tmp foi calculado ANTES do reset, em cima do
+            # checkout antigo desta execução. Se outra execução (ou uma edição
+            # manual, ex.: backfill histórico) commitou historico_diario.csv
+            # nesse meio-tempo, restaurar o snapshot velho aqui apagava esse
+            # commit inteiro -- foi exatamente isso que aconteceu em 18/07/2026
+            # (commit 3d72381e apagou 917 linhas de backfill 34s depois de
+            # serem commitadas). Depois do reset, o arquivo já está com a
+            # versão mais recente do remoto; a linha do dia desta execução
+            # (se ainda faltar) é recalculada normalmente na próxima rodada,
+            # poucos minutos depois -- sem risco de perder histórico alheio.
+            git add data.json monitor_web.log
             sleep $((RANDOM % 6 + 2))
           done
           echo "Falha ao empurrar as mudanças após 5 tentativas."
