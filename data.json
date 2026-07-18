@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-18T12:47",
+    "atualizado_em": "2026-07-18T12:50",
     "historico": [
       {
         "data_hora": "2026-07-16T13:00",
@@ -442,36 +442,96 @@
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
-        "nivel": 1.29,
-        "descricao": "Menor nível histórico - estiagem de 2020"
+        "nivel": 4.67,
+        "descricao": "Cidade Jardim"
       },
       {
-        "nivel": 6.0,
-        "descricao": "Limeira / Rio d'Areia / Rocio"
+        "nivel": 5.08,
+        "descricao": "Rio D'Areia"
       },
       {
-        "nivel": 6.5,
-        "descricao": "São Basílio / Navegantes / Ponte Nova"
+        "nivel": 5.2,
+        "descricao": "São Basílio Magno"
       },
       {
-        "nivel": 7.0,
-        "descricao": "Cidade Jardim / Cristo Rei / Sagrada Família"
+        "nivel": 5.26,
+        "descricao": "Nossa Senhora do Rocio"
+      },
+      {
+        "nivel": 5.39,
+        "descricao": "Navegantes"
+      },
+      {
+        "nivel": 5.39,
+        "descricao": "São Bernardo"
+      },
+      {
+        "nivel": 5.39,
+        "descricao": "Ponte Nova"
+      },
+      {
+        "nivel": 5.45,
+        "descricao": "Sagrada Família"
+      },
+      {
+        "nivel": 5.54,
+        "descricao": "São Joaquim"
+      },
+      {
+        "nivel": 6.31,
+        "descricao": "Bento Munhoz da Rocha"
+      },
+      {
+        "nivel": 6.39,
+        "descricao": "Limeira"
+      },
+      {
+        "nivel": 6.39,
+        "descricao": "São Gabriel"
+      },
+      {
+        "nivel": 6.39,
+        "descricao": "Bom Jesus"
+      },
+      {
+        "nivel": 6.42,
+        "descricao": "Cristo Rei"
+      },
+      {
+        "nivel": 7.39,
+        "descricao": "Centro - União da Vitória"
+      },
+      {
+        "nivel": 7.82,
+        "descricao": "Enchente de 2019"
       },
       {
         "nivel": 8.12,
-        "descricao": "Referência da enchente de 2014"
+        "descricao": "Enchente de 2014"
+      },
+      {
+        "nivel": 8.16,
+        "descricao": "Enchente de 1935"
       },
       {
         "nivel": 8.37,
-        "descricao": "Referência da enchente de 2023"
+        "descricao": "Enchente de 2023"
+      },
+      {
+        "nivel": 8.39,
+        "descricao": "Nossa Senhora da Salete"
+      },
+      {
+        "nivel": 8.84,
+        "descricao": "Panorama"
       },
       {
         "nivel": 8.9,
-        "descricao": "Grande enchente de 1992"
+        "descricao": "Enchente de 1992"
       },
       {
         "nivel": 10.42,
-        "descricao": "Cheia histórica de 1983"
+        "descricao": "Enchente de 1983"
       }
     ],
     "cotas_alerta": [
