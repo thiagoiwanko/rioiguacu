@@ -28,14 +28,29 @@ JANELA_PREVISAO_HORAS = 48
 TIMEOUT_COLETA_SEGUNDOS = 90
 
 COTAS_BAIRROS = [
-    (1.29, "Menor nível histórico - estiagem de 2020"),
-    (6.00, "Limeira / Rio d'Areia / Rocio"),
-    (6.50, "São Basílio / Navegantes / Ponte Nova"),
-    (7.00, "Cidade Jardim / Cristo Rei / Sagrada Família"),
-    (8.12, "Referência da enchente de 2014"),
-    (8.37, "Referência da enchente de 2023"),
-    (8.90, "Grande enchente de 1992"),
-    (10.42, "Cheia histórica de 1983"),
+    (4.67, "Cidade Jardim"),
+    (5.08, "Rio D'Areia"),
+    (5.20, "São Basílio Magno"),
+    (5.26, "Nossa Senhora do Rocio"),
+    (5.39, "Navegantes"),
+    (5.39, "São Bernardo"),
+    (5.39, "Ponte Nova"),
+    (5.45, "Sagrada Família"),
+    (5.54, "São Joaquim"),
+    (6.31, "Bento Munhoz da Rocha"),
+    (6.39, "Limeira"),
+    (6.39, "São Gabriel"),
+    (6.39, "Bom Jesus"),
+    (6.42, "Cristo Rei"),
+    (7.39, "Centro - União da Vitória"),
+    (7.82, "Enchente de 2019"),
+    (8.12, "Enchente de 2014"),
+    (8.16, "Enchente de 1935"),
+    (8.37, "Enchente de 2023"),
+    (8.39, "Nossa Senhora da Salete"),
+    (8.84, "Panorama"),
+    (8.90, "Enchente de 1992"),
+    (10.42, "Enchente de 1983"),
 ]
 
 COTAS_ALERTA_DEFESA_CIVIL = [
