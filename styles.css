@@ -455,6 +455,10 @@ h2 {
   transform: rotate(45deg);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .reference-note {
   margin-top: 12px;
   padding: 12px 14px;
@@ -464,7 +468,8 @@ h2 {
   font-size: 11px;
   line-height: 1.65;
   color: var(--muted);
-}
+
+  text-align: justify;}
 
 .reference-note .note-mark {
   color: var(--soft);
