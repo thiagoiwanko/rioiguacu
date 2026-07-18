@@ -4,6 +4,10 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.32 — 2026-07-18
+
+- **Encurtado o rótulo da cota de alerta crítico** na lista `COTAS_ALERTA_DEFESA_CIVIL` (`scrape.py` e `app.py`), de "ALERTA CRÍTICO - PLANO DE CONTINGÊNCIA ACIONADO" para apenas "ALERTA CRÍTICO" — pedido do usuário. Afeta a linha da cota 5,50 m mostrada no painel "Alertas de Nível" do site. O texto do selo de situação no topo (que detalha bairros afetados conforme o nível sobe) foi mantido como estava, sem mudança.
+
 ## v1.31 — 2026-07-18
 
 - **Corrigido bug grave que apagava o histórico diário em conflitos de push.** No bloco de retry do `update.yml` (acionado quando outra execução do workflow commita primeiro), o script restaurava `historico_diario.csv` a partir de um snapshot em `/tmp` calculado **antes** do `git reset --hard origin/main`. Como esse arquivo é cumulativo (1 linha por dia, upsert por data), qualquer commit que tivesse chegado nesse meio-tempo — inclusive um backfill manual — era apagado por completo ao ser sobrescrito pelo snapshot velho. Foi assim que o backfill histórico 2024–2026 (commit `1b13a66e`, +917 linhas) foi apagado 34 segundos depois pelo próprio bot (commit `3d72381e`, -917 linhas). Corrigido parando de restaurar `historico_diario.csv` nesse bloco: depois do reset o arquivo já está com a versão mais recente do remoto, e a linha do dia da execução atual (se ainda faltar) é recalculada normalmente na rodada seguinte, poucos minutos depois — sem risco de perder histórico de terceiros.
