@@ -129,11 +129,25 @@ function chartBounds(data) {
 
 function severityClass(situacao) {
   const texto = situacao || "";
-  if (texto.startsWith("ALERTA CRÍTICO")) return "badge-critico";
-  if (texto.startsWith("ATENÇÃO MUITO ALTA")) return "badge-muito-alta";
-  if (texto.startsWith("ATENÇÃO ALTA")) return "badge-alta";
-  if (texto.startsWith("ATENÇÃO MODERADA")) return "badge-moderada";
+  if (texto.startsWith("ENCHENTE")) return "badge-critico";
+  if (texto.startsWith("EMERGÊNCIA")) return "badge-muito-alta";
+  if (texto.startsWith("ALERTA")) return "badge-alta";
+  if (texto.startsWith("ATENÇÃO")) return "badge-moderada";
+  if (texto.startsWith("OBSERVAÇÃO")) return "badge-observacao";
   return "badge-normal";
+}
+
+// Cor do indicador de tendência: verde/azul quando o rio está descendo
+// (mais rápido = cor mais forte), amarelo/vermelho quando está subindo,
+// ciano quando está estável. Limiar de "rápido" em m/h escolhido para
+// destacar variações fora do ritmo normal de oscilação horária do rio.
+function trendColor(tendencia) {
+  const delta = Math.abs((tendencia && tendencia.delta) || 0);
+  const direcao = (tendencia && tendencia.direcao) || "estavel";
+  if (direcao === "estavel" || delta < 0.01) return "var(--cyan)";
+  const rapido = delta >= 0.03;
+  if (direcao === "subindo") return rapido ? "var(--red)" : "var(--yellow)";
+  return rapido ? "var(--blue)" : "var(--green)";
 }
 
 function renderCards(data) {
@@ -153,7 +167,9 @@ function renderCards(data) {
   $("flowValue").textContent = `${last.vazao_m3s} m³/s`;
   $("rainValue").textContent = `${fmt1.format(last.chuva_mm)} mm`;
   $("rainAccum").textContent = `acumulada ${fmt1.format(last.chuva_acumulada_mm)} mm`;
-  $("trendValue").textContent = data.tendencia.texto;
+  const corTendencia = trendColor(data.tendencia);
+  $("trendValue").innerHTML = `<i class="trend-dot" style="background:${corTendencia}"></i>${data.tendencia.texto}`;
+  $("trendValue").style.color = corTendencia;
   $("forecastAlert").textContent = data.alerta_previsao;
   $("forecastAlert").className = data.previsao_disponivel ? "" : "warning";
   $("sourceLink").href = data.url_historico || "#";
@@ -471,6 +487,31 @@ function setupChartTooltip() {
   }, { passive: true });
 }
 
+// Abas "Dados Visíveis / Ranking Sazonal / Enchentes Históricas": ficam
+// ocultas por padrão (nenhuma selecionada), e abrem só quando clicadas.
+// Clicar na aba já aberta a fecha de novo.
+function setupTabs() {
+  const buttons = document.querySelectorAll(".tab-btn");
+  const panels = document.querySelectorAll(".tab-panel");
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const alvo = btn.getAttribute("data-tab");
+      const jaAberta = btn.classList.contains("active");
+      buttons.forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
+      });
+      panels.forEach((p) => { p.hidden = true; });
+      if (!jaAberta) {
+        btn.classList.add("active");
+        btn.setAttribute("aria-selected", "true");
+        const painel = document.querySelector(`.tab-panel[data-panel="${alvo}"]`);
+        if (painel) painel.hidden = false;
+      }
+    });
+  });
+}
+
 // Contador de visitas via Worker + KV do próprio Cloudflare (sem depender de terceiros).
 // Falha silenciosamente se o serviço estiver fora do ar: é só um número informativo
 // no rodapé, não deve afetar o resto do site. Conta acessos (hits), não visitantes únicos.
@@ -489,6 +530,7 @@ async function trackVisit() {
 
 window.addEventListener("resize", () => state.data && renderChart(state.data));
 setupChartTooltip();
+setupTabs();
 refresh(false);
 trackVisit();
 setInterval(() => refresh(false), 5 * 60 * 1000);

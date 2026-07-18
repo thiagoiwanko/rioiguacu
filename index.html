@@ -1,429 +1,415 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nível do Rio Iguaçu Hoje - União da Vitória e Porto União | Monitor em Tempo Real</title>
-  <meta name="description" content="Nível do Rio Iguaçu em tempo real em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel.">
-  <link rel="canonical" href="https://rioiguacu.com/">
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://rioiguacu.com/">
-  <meta property="og:title" content="Rio Iguaçu Hoje: nível, vazão, chuva e alerta de enchente em tempo real">
-  <meta property="og:description" content="Site gratuito e público pra acompanhar o Rio Iguaçu em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel, atualizados a cada 5 minutos.">
-  <meta property="og:image" content="https://rioiguacu.com/og-image.png">
-  <meta property="og:image:width" content="630">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Logo do Rio Iguaçu Hoje">
-  <meta property="og:locale" content="pt_BR">
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Rio Iguaçu Hoje: nível, vazão, chuva e alerta de enchente em tempo real">
-  <meta name="twitter:description" content="Site gratuito e público pra acompanhar o Rio Iguaçu em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel.">
-  <meta name="twitter:image" content="https://rioiguacu.com/og-image.png">
-  <link rel="stylesheet" href="styles.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Monitor Rio Iguaçu",
-    "url": "https://rioiguacu.com/",
-    "description": "Monitoramento em tempo real do nível do Rio Iguaçu em União da Vitória (PR) e Porto União (SC), com dados oficiais da ANA (Agência Nacional de Águas e Saneamento Básico) e da Copel.",
-    "inLanguage": "pt-BR",
-    "about": {
-      "@type": "Place",
-      "name": "Rio Iguaçu em União da Vitória e Porto União"
-    }
-  }
-  </script>
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Qual é o nível do Rio Iguaçu hoje em União da Vitória?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "O nível atual (cota de régua) aparece no topo da página rioiguacu.com, atualizado automaticamente a cada poucos minutos com dados da ANA (estação telemétrica 65310001) e da Copel como fonte de apoio."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "A partir de que nível o Rio Iguaçu preocupa em União da Vitória e Porto União?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Como referência histórica de estudos técnicos de zoneamento, a régua acima de 6,89 m está associada à linha de cheia de 10 anos, e cheias históricas relevantes ficaram em 8,90 m (1992), 8,12 m (2014), 8,37 m (2023) e 10,42 m (1983, a maior já registrada). A situação real em cada rua depende da cota do terreno, drenagem local e mapas de inundação."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Qual foi a maior cheia do Rio Iguaçu em União da Vitória?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A maior cheia da série histórica oficial (estação 65310000, ANA/HidroWeb, dados desde 1930) foi em 18/07/1983, quando a régua atingiu 10,42 m. Na sequência vêm 1992 (8,90 m), 2023 (8,37 m), 1935 (8,16 m) e 2014 (8,12 m)."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Como funciona a régua do Rio Iguaçu?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A régua mede o nível da água em metros a partir de um zero de referência local (739,61 m de cota altimétrica na estação de União da Vitória). Para converter o nível da régua em cota altimétrica, soma-se 739,61 m ao valor da régua."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "De onde vêm os dados deste site?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Os dados em tempo real são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), operada pelo IAT (Instituto Água e Terra do Paraná), com a Copel como fonte de apoio. O histórico de longo prazo usa a série oficial ANA/HidroWeb da estação 65310000, desde 1930. A coleta é automática e a página atualiza a cada poucos minutos."
-        }
-      }
-    ]
-  }
-  </script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nível do Rio Iguaçu Hoje - União da Vitória e Porto União | Monitor em Tempo Real</title>
+<meta name="description" content="Nível do Rio Iguaçu em tempo real em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel.">
+<link rel="canonical" href="https://rioiguacu.com/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://rioiguacu.com/">
+<meta property="og:title" content="Rio Iguaçu Hoje: nível, vazão, chuva e alerta de enchente em tempo real">
+<meta property="og:description" content="Site gratuito e público pra acompanhar o Rio Iguaçu em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel, atualizados a cada 5 minutos.">
+<meta property="og:image" content="https://rioiguacu.com/og-image.png">
+<meta property="og:image:width" content="630">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo do Rio Iguaçu Hoje">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rio Iguaçu Hoje: nível, vazão, chuva e alerta de enchente em tempo real">
+<meta name="twitter:description" content="Site gratuito e público pra acompanhar o Rio Iguaçu em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel.">
+<meta name="twitter:image" content="https://rioiguacu.com/og-image.png">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebSite",
+"name": "Monitor Rio Iguaçu",
+"url": "https://rioiguacu.com/",
+"description": "Monitoramento em tempo real do nível do Rio Iguaçu em União da Vitória (PR) e Porto União (SC), com dados oficiais da ANA (Agência Nacional de Águas e Saneamento Básico) e da Copel.",
+"inLanguage": "pt-BR",
+"about": {
+"@type": "Place",
+"name": "Rio Iguaçu em União da Vitória e Porto União"
+}
+}
+</script>
 </head>
 <body>
-  <main class="shell">
-    <header class="topbar">
-      <div>
-        <p class="eyebrow">Monitoramento Hidrológico</p>
-        <h1>Rio Iguaçu</h1>
-        <p class="subtitle">União da Vitória (PR) · nível do rio em tempo real, com dados da ANA (Agência Nacional de Águas e Saneamento Básico) e a Copel como fonte de apoio</p>
-      </div>
-      <div class="actions">
-        <span id="syncStatus" class="sync">Iniciando...</span>
-      </div>
-    </header>
+<main class="shell">
+<header class="topbar">
+<div>
+<p class="eyebrow">Monitoramento Hidrológico</p>
+<h1>Rio Iguaçu</h1>
+<p class="subtitle">União da Vitória (PR) · nível do rio em tempo real, com dados da ANA (Agência Nacional de Águas e Saneamento Básico)</p>
+</div>
+<div class="actions">
+<span id="syncStatus" class="sync">Iniciando...</span>
+</div>
+</header>
 
-    <section class="hero-grid">
-      <article class="level-card depth">
-        <div class="card-head">
-          <span>Cota atual</span>
-          <strong id="lastTime">--/-- --:--</strong>
-        </div>
-        <div class="level-wrap">
-          <div id="levelValue" class="level-value">--,-- m</div>
-          <div id="levelBadge" class="level-badge">Aguardando dados</div>
-        </div>
-        <div class="gauge">
-          <div class="gauge-fill"></div>
-          <div id="gaugeMarker" class="gauge-marker"></div>
-        </div>
-        <p id="situationText" class="situation">Coletando dados do rio.</p>
-      </article>
+<section class="hero-grid">
+<article class="level-card depth">
+<div class="card-head">
+<span>Cota atual</span>
+<strong id="lastTime">--/-- --:--</strong>
+</div>
+<div class="level-wrap">
+<div id="levelValue" class="level-value">--,-- m</div>
+<div id="levelBadge" class="level-badge">Aguardando dados</div>
+</div>
+<div class="gauge">
+<div class="gauge-fill"></div>
+<div id="gaugeMarker" class="gauge-marker"></div>
+</div>
+<p id="situationText" class="situation">Coletando dados do rio.</p>
+</article>
 
-      <article class="metric-card">
-        <span>Vazão</span>
-        <strong id="flowValue">-- m³/s</strong>
-        <small>última medição visível</small>
-      </article>
+<article class="metric-card">
+<span>Vazão</span>
+<strong id="flowValue">-- m³/s</strong>
+<small>última medição visível</small>
+</article>
 
-      <article class="metric-card">
-        <span>Chuva</span>
-        <strong id="rainValue">-- mm</strong>
-        <small id="rainAccum">acumulada -- mm</small>
-      </article>
+<article class="metric-card">
+<span>Chuva</span>
+<strong id="rainValue">-- mm</strong>
+<small id="rainAccum">acumulada -- mm</small>
+</article>
 
-      <article class="metric-card">
-        <span>Tendência</span>
-        <strong id="trendValue">--</strong>
-        <small id="forecastAlert">previsão em análise</small>
-      </article>
-    </section>
+<article class="metric-card">
+<span>Tendência</span>
+<strong id="trendValue">--</strong>
+<small id="forecastAlert">previsão em análise</small>
+</article>
+</section>
 
-    <section class="main-grid">
-      <article class="chart-panel depth">
-        <div class="panel-title">
-          <div>
-            <h2>Cota do Rio Iguaçu</h2>
-          </div>
-          <div class="legend-mini">
-            <span><i class="dot history"></i>Histórico</span>
-            <span><i class="line wet"></i>Previsão</span>
-            <span><i class="dot rain"></i>Chuva horária (mm)</span>
-          </div>
-        </div>
-      <div class="chart-wrap">
-        <div id="chart" class="chart"></div>
-        <div id="chartTooltip" class="chart-tooltip" hidden></div>
-      </div>
-      <pre id="diagnosticBox" class="diagnostic" hidden></pre>
-    </article>
+<section class="main-grid">
+<article class="chart-panel depth">
+<div class="panel-title">
+<div>
+<h2>Cota do Rio Iguaçu</h2>
+</div>
+<div class="legend-mini">
+<span><i class="dot history"></i>Histórico</span>
+<span><i class="line wet"></i>Previsão</span>
+<span><i class="dot rain"></i>Chuva horária (mm)</span>
+</div>
+</div>
+<div class="chart-wrap">
+<div id="chart" class="chart"></div>
+<div id="chartTooltip" class="chart-tooltip" hidden></div>
+</div>
+<pre id="diagnosticBox" class="diagnostic" hidden></pre>
+</article>
 
-      <aside class="side-panel">
-        <article class="references depth">
-          <h2>Cotas de Referência* <span class="nowrap">(Cheias Históricas)</span></h2>
-          <div id="referenceList" class="reference-list"></div>
-          <p class="reference-note"><span class="note-mark">*</span> A cota de cada bairro mostra com quantos metros na régua do rio a água começa a alcançar os primeiros terrenos daquele bairro (as partes mais baixas). É um valor aproximado e estimado — não deve ser tomado como certeza: a situação real pode variar conforme a localização e a altura do seu terreno dentro do bairro — há casas que a água alcança antes, e outras bem depois. O cálculo usa os endereços do Censo do IBGE e o mapa de altitudes do terreno do Governo do Paraná. Estas informações não substituem os avisos oficiais: em caso de emergência, siga sempre a Defesa Civil (fone 199).</p>
-        </article>
-        <article class="alerts depth">
-          <h2>Alertas de Nível do Rio</h2>
-          <div id="alertList" class="alert-list"></div>
-        </article>
-      </aside>
-    </section>
+<aside class="side-panel">
+<article class="references depth">
+<h2>Cotas de Referência* <span class="nowrap">(Cheias Históricas)</span></h2>
+<div id="referenceList" class="reference-list"></div>
+<p class="reference-note"><span class="note-mark">*</span> A cota de cada bairro mostra com quantos metros na régua do rio a água começa a alcançar os primeiros terrenos daquele bairro (as partes mais baixas). É um valor aproximado e estimado — não deve ser tomado como certeza: a situação real pode variar conforme a localização e a altura do seu terreno dentro do bairro — há casas que a água alcança antes, e outras bem depois. O cálculo usa os endereços do Censo do IBGE e o mapa de altitudes do terreno do Governo do Paraná. Estas informações não substituem os avisos oficiais: em caso de emergência, siga sempre a Defesa Civil (fone 199).</p>
+</article>
+<article class="alerts depth">
+<h2>Alertas de Nível do Rio</h2>
+<div id="alertList" class="alert-list"></div>
+</article>
+</aside>
+</section>
 
-    <section class="episodes-panel depth">
-      <div class="panel-title compact">
-        <h2>Enchentes Históricas (nível ≥ 6,89 m)</h2>
-      </div>
-      <div class="table-wrap table-wrap-full">
-        <table>
-          <thead>
-            <tr>
-              <th>Início</th>
-              <th>Fim</th>
-              <th>Duração (dias)</th>
-              <th>Nível de pico (m)</th>
-              <th>Data do pico</th>
-              <th>Mês do pico</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>08/07/1983</td>
-              <td>06/08/1983</td>
-              <td>30</td>
-              <td>10,42 m</td>
-              <td>18/07/1983</td>
-              <td>Julho</td>
-            </tr>
-            <tr>
-              <td>30/05/1992</td>
-              <td>17/06/1992</td>
-              <td>19</td>
-              <td>8,90 m</td>
-              <td>08/06/1992</td>
-              <td>Junho</td>
-            </tr>
-            <tr>
-              <td>10/10/2023</td>
-              <td>17/11/2023</td>
-              <td>39</td>
-              <td>8,37 m</td>
-              <td>20/10/2023</td>
-              <td>Outubro</td>
-            </tr>
-            <tr>
-              <td>09/10/1935</td>
-              <td>25/10/1935</td>
-              <td>17</td>
-              <td>8,16 m</td>
-              <td>17/10/1935</td>
-              <td>Outubro</td>
-            </tr>
-            <tr>
-              <td>09/06/2014</td>
-              <td>23/06/2014</td>
-              <td>15</td>
-              <td>8,12 m</td>
-              <td>17/06/2014</td>
-              <td>Junho</td>
-            </tr>
-            <tr>
-              <td>06/06/2019</td>
-              <td>11/06/2019</td>
-              <td>6</td>
-              <td>7,82 m</td>
-              <td>08/06/2019</td>
-              <td>Junho</td>
-            </tr>
-            <tr>
-              <td>03/08/1957</td>
-              <td>22/08/1957</td>
-              <td>20</td>
-              <td>7,28 m</td>
-              <td>20/08/1957</td>
-              <td>Agosto</td>
-            </tr>
-            <tr>
-              <td>05/10/1993</td>
-              <td>10/10/1993</td>
-              <td>6</td>
-              <td>7,25 m</td>
-              <td>06/10/1993</td>
-              <td>Outubro</td>
-            </tr>
-            <tr>
-              <td>07/10/1998</td>
-              <td>15/10/1998</td>
-              <td>9</td>
-              <td>7,19 m</td>
-              <td>12/10/1998</td>
-              <td>Outubro</td>
-            </tr>
-            <tr>
-              <td>08/05/2010</td>
-              <td>09/05/2010</td>
-              <td>2</td>
-              <td>7,00 m</td>
-              <td>08/05/2010</td>
-              <td>Maio</td>
-            </tr>
-            <tr>
-              <td>17/09/1957</td>
-              <td>25/09/1957</td>
-              <td>9</td>
-              <td>6,95 m</td>
-              <td>24/09/1957</td>
-              <td>Setembro</td>
-            </tr>
-            <tr>
-              <td>13/01/1971</td>
-              <td>13/01/1971</td>
-              <td>1</td>
-              <td>6,89 m</td>
-              <td>13/01/1971</td>
-              <td>Janeiro</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="reference-note">Critério: nível ≥ 6,89 m (cheia de 10 anos / limite de zoneamento, SEC-CORPRERI). Dias com esse nível a até 15 dias de intervalo foram agrupados no mesmo episódio. Fonte: ANA/HidroWeb (estação 65310000, série histórica 1930–2023) e estação telemétrica 65310001 (2024 em diante).</p>
-    </section>
+<section class="tabs-panel depth">
+<div class="tabs-nav" role="tablist" aria-label="Dados detalhados do Rio Iguaçu">
+<button type="button" class="tab-btn" data-tab="dados" role="tab" aria-selected="false">Dados Visíveis <span id="sourceLabel"></span></button>
+<button type="button" class="tab-btn" data-tab="ranking" role="tab" aria-selected="false">Ranking Sazonal</button>
+<button type="button" class="tab-btn" data-tab="enchentes" role="tab" aria-selected="false">Enchentes Históricas</button>
+</div>
 
-    <section class="episodes-panel depth">
-      <div class="panel-title compact">
-        <h2>Ranking Sazonal</h2>
-      </div>
-      <div class="ranking-grid">
-        <div>
-          <p class="subtitle" style="margin-bottom:6px;">Mês em que ocorreu o pico anual (não necessariamente enchente) · 1930–2025</p>
-          <div class="table-wrap table-wrap-full">
-            <table>
-              <thead><tr><th>Mês</th><th>Anos em que foi o pico do ano</th></tr></thead>
-              <tbody>
-                <tr><td>Outubro</td><td>20</td></tr>
-                <tr><td>Junho</td><td>13</td></tr>
-                <tr><td>Julho</td><td>9</td></tr>
-                <tr><td>Maio</td><td>8</td></tr>
-                <tr><td>Agosto</td><td>8</td></tr>
-                <tr><td>Dezembro</td><td>8</td></tr>
-                <tr><td>Janeiro</td><td>7</td></tr>
-                <tr><td>Setembro</td><td>7</td></tr>
-                <tr><td>Março</td><td>5</td></tr>
-                <tr><td>Fevereiro</td><td>4</td></tr>
-                <tr><td>Novembro</td><td>4</td></tr>
-                <tr><td>Abril</td><td>3</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div>
-          <p class="subtitle" style="margin-bottom:6px;">Mês do pico de cada episódio de cheia (≥ 6,89 m) · 1930–07/2026</p>
-          <div class="table-wrap table-wrap-full">
-            <table>
-              <thead><tr><th>Mês</th><th>Episódios de cheia (≥6,89 m)</th></tr></thead>
-              <tbody>
-                <tr><td>Outubro</td><td>4</td></tr>
-                <tr><td>Junho</td><td>3</td></tr>
-                <tr><td>Janeiro</td><td>1</td></tr>
-                <tr><td>Maio</td><td>1</td></tr>
-                <tr><td>Julho</td><td>1</td></tr>
-                <tr><td>Agosto</td><td>1</td></tr>
-                <tr><td>Setembro</td><td>1</td></tr>
-                <tr><td>Fevereiro</td><td>0</td></tr>
-                <tr><td>Março</td><td>0</td></tr>
-                <tr><td>Abril</td><td>0</td></tr>
-                <tr><td>Novembro</td><td>0</td></tr>
-                <tr><td>Dezembro</td><td>0</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <p class="reference-note">Atualizado em 18/07/2026: inclui picos de 2024 (Dezembro, 5,48 m) e 2025 (Junho, 4,57 m), fonte telemétrica 65310001. 2026 (parcial) não entra na contagem. Fonte: ANA/HidroWeb (estação 65310000, série histórica 1930–2023) e estação telemétrica 65310001 (2024 em diante).</p>
-    </section>
+<div class="tab-panel" data-panel="dados" hidden>
+<div class="panel-title compact">
+<h2>Dados visíveis</h2>
+<a id="sourceLink" href="#" target="_blank" rel="noreferrer">Abrir fonte</a>
+</div>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Data/hora</th>
+<th>Régua</th>
+<th>Vazão</th>
+<th>Chuva</th>
+<th>Acum.</th>
+</tr>
+</thead>
+<tbody id="dataRows"></tbody>
+</table>
+</div>
+</div>
 
-    <section class="table-panel depth">
-      <div class="panel-title compact">
-        <h2>Dados visíveis <span id="sourceLabel"></span></h2>
-        <a id="sourceLink" href="#" target="_blank" rel="noreferrer">Abrir fonte</a>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Data/hora</th>
-              <th>Régua</th>
-              <th>Vazão</th>
-              <th>Chuva</th>
-              <th>Acum.</th>
-            </tr>
-          </thead>
-          <tbody id="dataRows"></tbody>
-        </table>
-      </div>
-    </section>
+<div class="tab-panel" data-panel="ranking" hidden>
+<div class="panel-title compact">
+<h2>Ranking Sazonal</h2>
+</div>
+<div class="ranking-grid">
+<div>
+<p class="subtitle" style="margin-bottom:6px;">Em que mês o rio costuma atingir o pico do ano (o nível mais alto de cada ano, nem sempre uma enchente) · 1930–2025</p>
+<div class="table-wrap table-wrap-full">
+<table>
+<thead><tr><th>Mês</th><th>Anos em que foi o pico do ano</th></tr></thead>
+<tbody>
+<tr><td>Outubro</td><td>20</td></tr>
+<tr><td>Junho</td><td>13</td></tr>
+<tr><td>Julho</td><td>9</td></tr>
+<tr><td>Maio</td><td>8</td></tr>
+<tr><td>Agosto</td><td>8</td></tr>
+<tr><td>Dezembro</td><td>8</td></tr>
+<tr><td>Janeiro</td><td>7</td></tr>
+<tr><td>Setembro</td><td>7</td></tr>
+<tr><td>Março</td><td>5</td></tr>
+<tr><td>Fevereiro</td><td>4</td></tr>
+<tr><td>Novembro</td><td>4</td></tr>
+<tr><td>Abril</td><td>3</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div>
+<p class="subtitle" style="margin-bottom:6px;">Em que mês costuma ocorrer o pico de cada enchente (nível ≥ 6,89 m, cheia de 10 anos) · 1930–07/2026</p>
+<div class="table-wrap table-wrap-full">
+<table>
+<thead><tr><th>Mês</th><th>Episódios de cheia (≥6,89 m)</th></tr></thead>
+<tbody>
+<tr><td>Outubro</td><td>4</td></tr>
+<tr><td>Junho</td><td>3</td></tr>
+<tr><td>Janeiro</td><td>1</td></tr>
+<tr><td>Maio</td><td>1</td></tr>
+<tr><td>Julho</td><td>1</td></tr>
+<tr><td>Agosto</td><td>1</td></tr>
+<tr><td>Setembro</td><td>1</td></tr>
+<tr><td>Fevereiro</td><td>0</td></tr>
+<tr><td>Março</td><td>0</td></tr>
+<tr><td>Abril</td><td>0</td></tr>
+<tr><td>Novembro</td><td>0</td></tr>
+<tr><td>Dezembro</td><td>0</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p class="reference-note">Atualizado em 18/07/2026: inclui picos de 2024 (Dezembro, 5,48 m) e 2025 (Junho, 4,57 m), fonte telemétrica 65310001. 2026 (parcial) não entra na contagem. Fonte: ANA/HidroWeb (estação 65310000, série histórica 1930–2023) e estação telemétrica 65310001 (2024 em diante).</p>
+</div>
 
-    <section class="info-panel depth">
-      <h2>Guia de Emergência e Informações Úteis</h2>
-      <div class="info-grid">
-        <div class="info-col">
-          <h3>Como funciona o monitoramento?</h3>
-                    <p>Os dados exibidos neste painel são coletados de estações telemétricas oficiais da ANA (Agência Nacional de Águas e Saneamento Básico) e da Copel. A página verifica novos dados a cada poucos minutos, mas a estação libera valores novos apenas de hora em hora. A previsão de nível considera os índices de chuva registrados nas últimas 48 horas nas cabeceiras do rio.</p>
+<div class="tab-panel" data-panel="enchentes" hidden>
+<div class="panel-title compact">
+<h2>Enchentes Históricas (nível ≥ 6,89 m)</h2>
+</div>
+<p class="subtitle" style="margin-bottom:10px;">Por que 6,89 m? É a cota associada à "cheia de 10 anos" nos estudos técnicos de zoneamento da SEC-CORPRERI para União da Vitória — o limite a partir do qual a área passa a ter risco recorrente de inundação. Abaixo, todos os episódios em que a régua ultrapassou esse valor desde 1930.</p>
+<div class="table-wrap table-wrap-full">
+<table>
+<thead>
+<tr>
+<th>Início</th>
+<th>Fim</th>
+<th>Duração (dias)</th>
+<th>Nível de pico (m)</th>
+<th>Data do pico</th>
+<th>Mês do pico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08/07/1983</td>
+<td>06/08/1983</td>
+<td>30</td>
+<td>10,42 m</td>
+<td>18/07/1983</td>
+<td>Julho</td>
+</tr>
+<tr>
+<td>30/05/1992</td>
+<td>17/06/1992</td>
+<td>19</td>
+<td>8,90 m</td>
+<td>08/06/1992</td>
+<td>Junho</td>
+</tr>
+<tr>
+<td>10/10/2023</td>
+<td>17/11/2023</td>
+<td>39</td>
+<td>8,37 m</td>
+<td>20/10/2023</td>
+<td>Outubro</td>
+</tr>
+<tr>
+<td>09/10/1935</td>
+<td>25/10/1935</td>
+<td>17</td>
+<td>8,16 m</td>
+<td>17/10/1935</td>
+<td>Outubro</td>
+</tr>
+<tr>
+<td>09/06/2014</td>
+<td>23/06/2014</td>
+<td>15</td>
+<td>8,12 m</td>
+<td>17/06/2014</td>
+<td>Junho</td>
+</tr>
+<tr>
+<td>06/06/2019</td>
+<td>11/06/2019</td>
+<td>6</td>
+<td>7,82 m</td>
+<td>08/06/2019</td>
+<td>Junho</td>
+</tr>
+<tr>
+<td>03/08/1957</td>
+<td>22/08/1957</td>
+<td>20</td>
+<td>7,28 m</td>
+<td>20/08/1957</td>
+<td>Agosto</td>
+</tr>
+<tr>
+<td>05/10/1993</td>
+<td>10/10/1993</td>
+<td>6</td>
+<td>7,25 m</td>
+<td>06/10/1993</td>
+<td>Outubro</td>
+</tr>
+<tr>
+<td>07/10/1998</td>
+<td>15/10/1998</td>
+<td>9</td>
+<td>7,19 m</td>
+<td>12/10/1998</td>
+<td>Outubro</td>
+</tr>
+<tr>
+<td>08/05/2010</td>
+<td>09/05/2010</td>
+<td>2</td>
+<td>7,00 m</td>
+<td>08/05/2010</td>
+<td>Maio</td>
+</tr>
+<tr>
+<td>17/09/1957</td>
+<td>25/09/1957</td>
+<td>9</td>
+<td>6,95 m</td>
+<td>24/09/1957</td>
+<td>Setembro</td>
+</tr>
+<tr>
+<td>13/01/1971</td>
+<td>13/01/1971</td>
+<td>1</td>
+<td>6,89 m</td>
+<td>13/01/1971</td>
+<td>Janeiro</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="reference-note">Critério: nível ≥ 6,89 m (cheia de 10 anos / limite de zoneamento, SEC-CORPRERI). Dias com esse nível a até 15 dias de intervalo foram agrupados no mesmo episódio. Fonte: ANA/HidroWeb (estação 65310000, série histórica 1930–2023) e estação telemétrica 65310001 (2024 em diante).</p>
+</div>
+</section>
 
-          <h3>Quais bairros são afetados primeiro?</h3>
-          <p>Durante cheias históricas, bairros de cota mais baixa como Navegantes, São Bernardo, Rio D'Areia e Limeira, além de outras áreas ribeirinhas próximas ao centro de União da Vitória, já registraram os primeiros impactos. A cota exata em que cada bairro é afetado depende da topografia e drenagem local — não há um valor único de corte confirmado por mapeamento oficial, então use esta lista como referência histórica, não como previsão exata.</p>
-        </div>
-        <div class="info-col">
-          <h3>Contatos de Emergência</h3>
-          <ul class="emergency-list">
-            <li><strong>Defesa Civil (emergências, em todo o Brasil):</strong> <a href="tel:199">199</a></li>
-            <li><strong>Corpo de Bombeiros:</strong> <a href="tel:193">193</a></li>
-            <li><strong>Polícia Militar:</strong> <a href="tel:190">190</a></li>
-          </ul>
-          </div>
-      </div>
-    </section>
+<section class="info-panel depth">
+<h2>Guia de Emergência e Informações Úteis</h2>
+<div class="info-grid">
+<div class="info-col">
+<h3>Como funciona o monitoramento?</h3>
+<p>Os dados exibidos neste painel são coletados de estações telemétricas oficiais da ANA (Agência Nacional de Águas e Saneamento Básico) e da Copel. A página verifica novos dados a cada poucos minutos, mas a estação libera valores novos apenas de hora em hora. A previsão de nível considera os índices de chuva registrados nas últimas 48 horas nas cabeceiras do rio.</p>
 
-    <section class="faq-panel depth">
-      <h2>Perguntas frequentes sobre o Rio Iguaçu</h2>
-      <div class="faq-list">
-        <details class="faq-item">
-          <summary>Qual é o nível do Rio Iguaçu hoje em União da Vitória?</summary>
-          <p>O nível atual (cota de régua) aparece no topo desta página, no card "Cota atual", atualizado automaticamente a cada poucos minutos com dados da ANA (Agência Nacional de Águas e Saneamento Básico, estação telemétrica 65310001) e da Copel como fonte de apoio.</p>
-        </details>
-        <details class="faq-item">
-          <summary>A partir de que nível o Rio Iguaçu preocupa em União da Vitória?</summary>
-          <p>Não existe um valor único de corte. Como referência histórica de estudos técnicos de zoneamento: a régua acima de 6,89 m está associada à linha de cheia de 10 anos, e cheias históricas relevantes ficaram em 8,90 m (1992), 8,12 m (2014), 8,37 m (2023) e 10,42 m (1983, a maior já registrada). A situação real em cada rua depende da cota do terreno, drenagem local e mapas de inundação — use estas referências com cautela, não como previsão exata.</p>
-        </details>
-        <details class="faq-item">
-          <summary>Qual foi a maior cheia do Rio Iguaçu em União da Vitória?</summary>
-          <p>A maior cheia da série histórica oficial (estação 65310000, ANA/HidroWeb, dados desde 1930) foi em 18/07/1983, quando a régua atingiu 10,42 m. Na sequência vêm 1992 (8,90 m), 2023 (8,37 m), 1935 (8,16 m) e 2014 (8,12 m).</p>
-        </details>
-        <details class="faq-item">
-          <summary>Como funciona a régua do Rio Iguaçu?</summary>
-          <p>A régua mede o nível da água em metros a partir de um zero de referência local (739,61 m de cota altimétrica na estação de União da Vitória). Para converter o nível da régua em cota altimétrica, soma-se 739,61 m ao valor da régua.</p>
-        </details>
-        <details class="faq-item">
-          <summary>De onde vêm os dados deste site?</summary>
-          <p>Os dados em tempo real são da ANA (Agência Nacional de Águas e Saneamento Básico), estação telemétrica 65310001 (UHE Gov. Bento Munhoz, União da Vitória), operada pelo IAT (Instituto Água e Terra do Paraná), com a Copel como fonte de apoio. O histórico de longo prazo (desde 1930) usa a série oficial ANA/HidroWeb da estação 65310000. A coleta é automática e a página atualiza sozinha a cada poucos minutos, sem precisar recarregar. No entanto, a estação telemétrica da ANA libera dados novos somente de hora em hora.</p>
-        </details>
-      </div>
-    </section>
+<h3>Quais bairros são afetados primeiro?</h3>
+<p>Durante cheias históricas, bairros de cota mais baixa como Navegantes, São Bernardo, Rio D'Areia e Limeira, além de outras áreas ribeirinhas próximas ao centro de União da Vitória, já registraram os primeiros impactos. A cota exata em que cada bairro é afetado depende da topografia e drenagem local — não há um valor único de corte confirmado por mapeamento oficial, então use esta lista como referência histórica, não como previsão exata.</p>
+</div>
+<div class="info-col">
+<h3>Contatos de Emergência</h3>
+<ul class="emergency-list">
+<li><strong>Defesa Civil (emergências, em todo o Brasil):</strong> <a href="tel:199">199</a></li>
+<li><strong>Corpo de Bombeiros:</strong> <a href="tel:193">193</a></li>
+<li><strong>Polícia Militar:</strong> <a href="tel:190">190</a></li>
+</ul>
+</div>
+</div>
+</section>
 
-        <div class="safety-warning">
-      <h3>⚠️ Enchente é risco à vida. Leia com atenção.</h3>
-      <p>Este site mostra dados de referência sobre o nível do Rio Iguaçu e pode conter erros, atrasos ou falhas técnicas. Ele não é um sistema oficial de alerta e não substitui, em nenhuma hipótese, os avisos da Defesa Civil.</p>
-      <p>Em situação de enchente, siga sempre as orientações oficiais da Defesa Civil do seu município, mesmo que os dados aqui mostrem um cenário diferente. Se houver ordem de evacuação, evacue. Não atravesse ruas, pontes ou áreas alagadas a pé ou de veículo — a força da água pode arrastar pessoas e carros mesmo em níveis que parecem baixos.</p>
-      <p>Tenha sempre um plano de emergência: documentos, remédios e itens essenciais separados, e um local seguro combinado com a família. Em caso de risco iminente, ligue 199 (Defesa Civil) ou 193 (Bombeiros).</p>
-      <p>Use este site como apoio à informação, nunca como única fonte para decidir sobre sua segurança.</p>
-    </div>
+<section class="faq-panel depth">
+<h2>Perguntas frequentes sobre o Rio Iguaçu</h2>
+<div class="faq-list">
+<details class="faq-item">
+<summary>Como foram definidos os níveis de alerta e as cotas por bairro deste site?</summary>
+<p>Cobre somente o que o site exibe: níveis de alerta, cotas por bairro e as fontes dos dados. Todos os números derivam de fontes auditadas do projeto: a série de medições da ANA desde 1930 e o banco de cotas de terreno (endereços do CNEFE/IBGE + relevo GeoPR/IAT). Nenhum critério externo foi utilizado.</p>
 
-    <footer class="version-footer">
-      <span>Versão 1.38</span>
-      <span id="visitCounter" class="visit-counter"></span>
-    </footer>
-  </main>
+<h3>Como foram definidos os níveis de alerta deste site?</h3>
+<p>Os níveis foram definidos por análise estatística da série histórica de medições diárias do Rio Iguaçu em União da Vitória, mantida pela Agência Nacional de Águas e Saneamento Básico (ANA) desde 1930 — mais de 35 mil registros diários de nível de régua, disponíveis publicamente no portal HidroWeb (estação 65310000).</p>
+<p>Dessa série foram calculados dois parâmetros fundamentais: a <strong>média histórica</strong>, de 2,67 m, e o <strong>desvio padrão</strong>, de 1,08 m — medida estatística que expressa quanto o nível do rio costuma variar em torno da média. Aplicando o modelo da <strong>distribuição normal</strong>, ferramenta clássica da estatística para descrever fenômenos naturais, cada nível de alerta corresponde a um grau crescente de afastamento do comportamento habitual do rio — e, portanto, a um grau crescente de raridade.</p>
+<p>Como rios não seguem perfeitamente a distribuição normal — o Iguaçu possui um piso físico próximo de 1,30 m, mas não possui teto nas enchentes —, cada limiar foi verificado também por contagem direta na série histórica: a frequência real com que aquele nível foi atingido em 96 anos de medições. Os dois métodos convergem, e são as frequências reais que apresentamos a seguir, por serem verificáveis por qualquer pessoa a partir dos dados públicos.</p>
 
-  <script src="app.js?v=1.38"></script>
+<h3>O que significa cada nível?</h3>
+<p><strong>Observação — 3,70 m.</strong> Corresponde à média histórica acrescida de um desvio padrão (2,67 + 1,08). Indica que o rio deixou sua faixa habitual de operação: em 96 anos, apenas 15% dos dias registraram nível superior. Não há efeito sobre áreas urbanas; é o ponto em que o acompanhamento diário passa a ser recomendado.</p>
+<p><strong>Atenção — 4,20 m.</strong> Corresponde ao percentil 90 da série: em 9 de cada 10 dias da história, o rio esteve abaixo deste nível. É também o primeiro nível em que o banco de cotas do projeto identifica um endereço com terreno abaixo da linha d'água. Registre-se ainda o fator velocidade: nas subidas mais rápidas documentadas, o rio partiu desta faixa e elevou-se mais de 3 metros em 48 horas.</p>
+<p><strong>Alerta — 5,00 m.</strong> Corresponde à média acrescida de dois desvios padrão — na distribuição normal, o limiar clássico de anormalidade estatística. Apenas 1 dia em cada 20 da série histórica superou este nível. No banco de cotas do projeto, cerca de 50 endereços apresentam terreno abaixo da linha d'água nesta marca, e a maior subida diária já registrada (1,78 m em 24 horas, em 1992) é suficiente para conduzir o rio deste nível ao degrau seguinte em um único dia.</p>
+<p><strong>Emergência — 5,50 m.</strong> Superado em apenas 1 dia a cada 40 da série histórica. Neste nível, o banco de cotas registra uma mudança de escala: o número de endereços com terreno abaixo da linha d'água salta para aproximadamente 380 — mais de 1% dos endereços da cidade. O atingimento deixa de ser pontual.</p>
+<p><strong>Enchente — 6,50 m.</strong> Neste nível, aproximadamente 1 em cada 10 endereços da cidade apresenta terreno abaixo da linha d'água (2,5 mil endereços no banco do projeto). Trata-se de evento raro: ocorreu em menos de 1% dos dias da série, concentrados em 18 dos 96 anos medidos — porém com atingimento em larga escala quando ocorre.</p>
+
+<h3>Por que o alerta pode ser elevado antes de o rio atingir esses níveis?</h3>
+<p>Porque a série histórica demonstra que o Iguaçu é capaz de subidas abruptas: 1,78 m em 24 horas (1992) e 3,34 m em 48 horas (2014). Por essa razão, o site monitora também a velocidade de elevação. Quando o rio sobe 0,85 m ou mais em 24 horas — taxa superada em apenas 1% de todas as subidas registradas desde 1930 —, o alerta é elevado em um degrau, independentemente do nível absoluto da régua.</p>
+
+<h3>E quando o rio está muito baixo?</h3>
+<p>Níveis inferiores a 1,50 m caracterizam estiagem. Essa condição ocorreu em apenas 2,5% dos dias desde 1930; o mínimo histórico registrado é de 1,30 m, em 2020.</p>
+
+<h3>Como chegamos à cota de cada bairro?</h3>
+<p>Para cada bairro, reunimos todos os seus endereços registrados no Censo do IBGE e associamos a cada um a altitude do terreno, obtida do mapeamento oficial do relevo do Paraná. A cota publicada é o nível de régua em que <strong>1% dos endereços do bairro</strong> fica com o terreno abaixo da linha d'água.</p>
+<p>Por que 1%, e não o terreno mais baixo do bairro? Porque o ponto mais baixo é, quase sempre, uma exceção isolada — um terreno encostado no rio, uma faixa de margem — e usá-lo como referência distorceria o número, sugerindo que o bairro inteiro é atingido muito antes do que a realidade mostra. O corte de 1% deixa essas exceções ribeirinhas para trás e marca o ponto em que a água começa, de fato, a alcançar os primeiros terrenos representativos do bairro. A cota só é publicada para bairros com quantidade suficiente de endereços para o cálculo ser estatisticamente válido.</p>
+<p>É um valor aproximado e estimado — não deve ser tomado como certeza. A situação real varia conforme a localização e a altura de cada terreno dentro do bairro: há casas que a água alcança antes, e outras bem depois.</p>
+
+<h3>O que é a ANA?</h3>
+<p>A Agência Nacional de Águas e Saneamento Básico (ANA) é a autarquia federal responsável, entre outras atribuições, pela rede nacional de monitoramento dos rios brasileiros. É ela que mantém e publica, em portal aberto (HidroWeb), as séries de medições usadas neste site.</p>
+
+<h3>De onde vêm as medições do rio?</h3>
+<p>De duas estações oficiais da ANA em União da Vitória. A estação fluviométrica <strong>65310000</strong> registra o nível do rio desde 22 de maio de 1930 — é a série histórica, com dados revisados e consolidados até 2023. A estação telemétrica <strong>65310001</strong> mede automaticamente, de hora em hora, e é a fonte das leituras em tempo real exibidas no site. As duas usam o mesmo zero de régua, situado na cota altimétrica de 739,61 m — valor confirmado pelo projeto por comparação entre as leituras de régua e o nível d'água correspondente.</p>
+
+<h3>O que é o CNEFE?</h3>
+<p>É o Cadastro Nacional de Endereços para Fins Estatísticos, mantido pelo IBGE e atualizado a cada Censo. É a lista pública e oficial dos endereços do país, e é dela que vêm os endereços usados no cálculo das cotas por bairro.</p>
+
+<h3>De onde vem a altitude dos terrenos?</h3>
+<p>Do mapeamento oficial do relevo do Paraná, publicado pelo GeoPR — portal de dados geográficos do Instituto Água e Terra (IAT), órgão ambiental do governo estadual — a partir de levantamento aerofotogramétrico a laser realizado em 2012. Esse mapeamento tem margem de erro que pode alcançar dezenas de centímetros, razão pela qual todas as cotas do site são tratadas como estimativas e a verificação de campo segue em andamento.</p>
+
+<h3>Esses números são exatos?</h3>
+<p>Os níveis do rio, sim — provêm das medições oficiais da ANA. As cotas de terreno, contudo, são estimativas: derivam de levantamento cartográfico cuja margem de erro pode alcançar dezenas de centímetros, os terrenos variam dentro de uma mesma rua, e a verificação de campo encontra-se em andamento. As contagens de endereços devem, portanto, ser lidas como ordens de grandeza — não como afirmação sobre qualquer imóvel específico. Estes níveis constituem referência de planejamento, não garantia. Em situação de cheia, prevalecem as orientações dos órgãos oficiais de proteção e defesa civil.</p>
+
+<h3>Fontes</h3>
+<p>Série histórica diária: ANA/HidroWeb, estação fluviométrica 65310000 — União da Vitória (1930–2023); dados recentes: estação telemétrica ANA 65310001 (2024 em diante). Banco de cotas do projeto: endereços do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE/IBGE) associados ao relevo derivado das curvas de nível do GeoPR — Instituto Água e Terra do Paraná (levantamento aerofotogramétrico a laser, 2012); zero da régua na cota altimétrica 739,61 m, confirmado por comparação entre leituras de régua e nível d'água. Todos os cálculos podem ser reproduzidos a partir dessas bases públicas.</p>
+</details>
+</div>
+</section>
+
+<div class="safety-warning">
+<h3>⚠️ Enchente é risco à vida. Leia com atenção.</h3>
+<p>Este site mostra dados de referência sobre o nível do Rio Iguaçu e pode conter erros, atrasos ou falhas técnicas. Ele não é um sistema oficial de alerta e não substitui, em nenhuma hipótese, os avisos da Defesa Civil.</p>
+<p>Em situação de enchente, siga sempre as orientações oficiais da Defesa Civil do seu município, mesmo que os dados aqui mostrem um cenário diferente. Se houver ordem de evacuação, evacue. Não atravesse ruas, pontes ou áreas alagadas a pé ou de veículo — a força da água pode arrastar pessoas e carros mesmo em níveis que parecem baixos.</p>
+<p>Tenha sempre um plano de emergência: documentos, remédios e itens essenciais separados, e um local seguro combinado com a família. Em caso de risco iminente, ligue 199 (Defesa Civil) ou 193 (Bombeiros).</p>
+<p>Use este site como apoio à informação, nunca como única fonte para decidir sobre sua segurança.</p>
+</div>
+
+<footer class="version-footer">
+<span>Versão 1.39</span>
+<span id="visitCounter" class="visit-counter"></span>
+</footer>
+</main>
+
+<script src="app.js?v=1.39"></script>
 </body>
 </html>

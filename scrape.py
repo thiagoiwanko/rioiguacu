@@ -77,12 +77,28 @@ COTAS_BAIRROS = [
     (10.42, "Enchente de 1983"),
 ]
 
+# Níveis de alerta definidos por análise estatística da série histórica ANA
+# (65310000, 1930-2023): média 2,67 m, desvio padrão 1,08 m, modelo de
+# distribuição normal validado por contagem direta de frequência real na
+# série. Ver proposta completa em FAQ_NIVEIS_ALERTA_PROPOSTA.md (18/07/2026).
+#   Observação  3,70 m = média + 1 desvio padrão (P85)
+#   Atenção     4,20 m = percentil 90
+#   Alerta      5,00 m = média + 2 desvios padrão (P95)
+#   Emergência  5,50 m = P97,5
+#   Enchente    6,50 m = ~1 em cada 10 endereços da cidade abaixo da régua
 COTAS_ALERTA_DEFESA_CIVIL = [
-    (4.30, "ATENÇÃO MODERADA"),
-    (4.50, "ATENÇÃO ALTA"),
-    (4.90, "ATENÇÃO MUITO ALTA"),
-    (5.50, "ALERTA CRÍTICO"),
+    (3.70, "OBSERVAÇÃO"),
+    (4.20, "ATENÇÃO"),
+    (5.00, "ALERTA"),
+    (5.50, "EMERGÊNCIA"),
+    (6.50, "ENCHENTE"),
 ]
+
+# Escalada por velocidade: a série histórica mostra subidas abruptas (1,78 m
+# em 24h em 1992; 3,34 m em 48h em 2014). Quando o rio sobe LIMIAR_SUBIDA_24H_M
+# ou mais em 24 horas -- taxa superada em ~1% de todas as subidas desde 1930 --
+# o alerta é elevado em um degrau, independentemente do nível absoluto da régua.
+LIMIAR_SUBIDA_24H_M = 0.85
 
 
 def log(mensagem):
@@ -328,31 +344,42 @@ def coletar_texto(url):
             pass
 
 
-def definir_situacao(regua):
-    if regua < 4.30:
-        return "NÍVEL NORMAL - monitoramento diário"
-    if regua < 4.50:
-        return "ATENÇÃO MODERADA"
-    if regua < 4.90:
-        return "ATENÇÃO ALTA"
-    if regua < 5.50:
-        return "ATENÇÃO MUITO ALTA"
-    texto = "ALERTA CRÍTICO - Plano de Contingência acionado; início do impacto nas primeiras residências"
-    if regua < 6.0:
-        return texto
-    if regua < 6.5:
-        return f"{texto}; afetando Limeira / Rio d'Areia / Rocio"
-    if regua < 7.0:
-        return f"{texto}; afetando Limeira / Rio d'Areia / Rocio / São Basílio / Navegantes / Ponte Nova"
-    if regua < 8.12:
-        return f"{texto}; afetando Limeira / Rio d'Areia / Rocio / São Basílio / Navegantes / Ponte Nova / Cidade Jardim / Cristo Rei / Sagrada Família"
-    if regua < 8.37:
-        return f"{texto}; próximo da enchente de 2014"
-    if regua < 8.90:
-        return f"{texto}; próximo da enchente de 2023"
-    if regua < 10.42:
-        return f"{texto}; próximo da enchente de 1992"
-    return f"{texto}; CHEIA HISTÓRICA - nível comparável a 1983"
+# Degraus de situação, do mais baixo ao mais alto. O primeiro (0.0) é a
+# linha de base "normal" -- não faz parte de COTAS_ALERTA_DEFESA_CIVIL porque
+# não é um nível de alerta, é a ausência de alerta.
+NIVEIS_SITUACAO = [(0.0, "NÍVEL NORMAL - monitoramento diário")] + COTAS_ALERTA_DEFESA_CIVIL
+
+
+def _tier_por_nivel(regua):
+    tier = 0
+    for i, (limite, _) in enumerate(NIVEIS_SITUACAO):
+        if regua >= limite:
+            tier = i
+    return tier
+
+
+def definir_situacao(regua, historico=None):
+    tier = _tier_por_nivel(regua)
+
+    # Escalada por velocidade: se a subida nas últimas 24h já atingiu o
+    # limiar, eleva um degrau mesmo que o nível absoluto ainda não justifique.
+    if historico:
+        try:
+            agora_dt = datetime.fromisoformat(historico[-1]["data_hora"])
+            ref_24h = agora_dt - timedelta(hours=24)
+            niveis_24h = [
+                item["regua_m"] for item in historico
+                if datetime.fromisoformat(item["data_hora"]) >= ref_24h
+                and isinstance(item.get("regua_m"), (int, float))
+            ]
+            if niveis_24h:
+                subida_24h = regua - min(niveis_24h)
+                if subida_24h >= LIMIAR_SUBIDA_24H_M and tier < len(NIVEIS_SITUACAO) - 1:
+                    tier += 1
+        except Exception:
+            pass
+
+    return NIVEIS_SITUACAO[tier][1]
 
 
 def calcular_tendencia(historico):
@@ -401,7 +428,7 @@ def montar_payload(historico, previsao, fonte_historico, url_historico):
         "historico": historico,
         "previsao": previsao,
         "ultima": ultima,
-        "situacao": definir_situacao(regua),
+        "situacao": definir_situacao(regua, historico),
         "tendencia": calcular_tendencia(historico),
         "alerta_previsao": verificar_alerta_previsao(historico, previsao),
         "previsao_disponivel": bool(previsao),
@@ -463,7 +490,7 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
         historico = extrair_medicoes(texto_historico)
         fonte_historico = FONTE_COPEL
         url_historico = URL_HISTORICO_COPEL
-    log(f"Medições obtidas via {fonte_historico.split(' ')[0]}: {len(historico)}")
+        log(f"Medições obtidas via {fonte_historico.split(' ')[0]}: {len(historico)}")
 
     historico = mesclar_historico(historico, historico_anterior)
 
