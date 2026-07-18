@@ -68,19 +68,19 @@
 <div class="gauge-fill"></div>
 <div id="gaugeMarker" class="gauge-marker"></div>
 </div>
-<p id="situationText" class="situation">Coletando dados do rio.</p>
 </article>
 
-<article class="metric-card">
+<article class="metric-card metric-split">
+<div class="metric-block">
 <span>Vazão</span>
 <strong id="flowValue">-- m³/s</strong>
 <small>última medição visível</small>
-</article>
-
-<article class="metric-card">
+</div>
+<div class="metric-block">
 <span>Chuva</span>
 <strong id="rainValue">-- mm</strong>
 <small id="rainAccum">acumulada -- mm</small>
+</div>
 </article>
 
 <article class="metric-card">
@@ -116,45 +116,20 @@
 <p class="reference-note"><span class="note-mark">*</span> A cota de cada bairro mostra com quantos metros na régua do rio a água começa a alcançar os primeiros terrenos daquele bairro (as partes mais baixas). É um valor aproximado e estimado — não deve ser tomado como certeza: a situação real pode variar conforme a localização e a altura do seu terreno dentro do bairro — há casas que a água alcança antes, e outras bem depois. O cálculo usa os endereços do Censo do IBGE e o mapa de altitudes do terreno do Governo do Paraná. Estas informações não substituem os avisos oficiais: em caso de emergência, siga sempre a Defesa Civil (fone 199).</p>
 </article>
 <article class="alerts depth">
-<h2>Alertas de Nível do Rio</h2>
+<h2>Alertas de Nível do Rio*</h2>
 <div id="alertList" class="alert-list"></div>
+<p class="reference-note"><span class="note-mark">*</span> Para mais informações, consulte as <a href="#faqSection">Perguntas frequentes</a>.</p>
 </article>
 </aside>
 </section>
 
 <section class="tabs-panel depth">
-<div class="tabs-nav" role="tablist" aria-label="Dados detalhados do Rio Iguaçu">
-<button type="button" class="tab-btn" data-tab="dados" role="tab" aria-selected="false">Dados Visíveis <span id="sourceLabel"></span></button>
-<button type="button" class="tab-btn" data-tab="ranking" role="tab" aria-selected="false">Ranking Sazonal</button>
-<button type="button" class="tab-btn" data-tab="enchentes" role="tab" aria-selected="false">Enchentes Históricas</button>
-</div>
+<h2>Dados e Histórico</h2>
+<div class="faq-list">
 
-<div class="tab-panel" data-panel="dados" hidden>
-<div class="panel-title compact">
-<h2>Dados visíveis</h2>
-<a id="sourceLink" href="#" target="_blank" rel="noreferrer">Abrir fonte</a>
-</div>
-<div class="table-wrap">
-<table>
-<thead>
-<tr>
-<th>Data/hora</th>
-<th>Régua</th>
-<th>Vazão</th>
-<th>Chuva</th>
-<th>Acum.</th>
-</tr>
-</thead>
-<tbody id="dataRows"></tbody>
-</table>
-</div>
-</div>
-
-<div class="tab-panel" data-panel="ranking" hidden>
-<div class="panel-title compact">
-<h2>Ranking Sazonal</h2>
-</div>
-<div class="ranking-grid">
+<details class="faq-item">
+<summary>Ranking Sazonal</summary>
+<div class="ranking-grid" style="margin-top:10px;">
 <div>
 <p class="subtitle" style="margin-bottom:6px;">Em que mês o rio costuma atingir o pico do ano (o nível mais alto de cada ano, nem sempre uma enchente) · 1930–2025</p>
 <div class="table-wrap table-wrap-full">
@@ -201,13 +176,11 @@
 </div>
 </div>
 <p class="reference-note">Atualizado em 18/07/2026: inclui picos de 2024 (Dezembro, 5,48 m) e 2025 (Junho, 4,57 m), fonte telemétrica 65310001. 2026 (parcial) não entra na contagem. Fonte: ANA/HidroWeb (estação 65310000, série histórica 1930–2023) e estação telemétrica 65310001 (2024 em diante).</p>
-</div>
+</details>
 
-<div class="tab-panel" data-panel="enchentes" hidden>
-<div class="panel-title compact">
-<h2>Enchentes Históricas (nível ≥ 6,89 m)</h2>
-</div>
-<p class="subtitle" style="margin-bottom:10px;">Por que 6,89 m? É a cota associada à "cheia de 10 anos" nos estudos técnicos de zoneamento da SEC-CORPRERI para União da Vitória — o limite a partir do qual a área passa a ter risco recorrente de inundação. Abaixo, todos os episódios em que a régua ultrapassou esse valor desde 1930.</p>
+<details class="faq-item">
+<summary>Enchentes Históricas (nível ≥ 6,89 m)</summary>
+<p class="subtitle" style="margin:10px 0 10px;">Por que 6,89 m? É a cota associada à "cheia de 10 anos" nos estudos técnicos de zoneamento da SEC-CORPRERI para União da Vitória — o limite a partir do qual a área passa a ter risco recorrente de inundação. Abaixo, todos os episódios em que a régua ultrapassou esse valor desde 1930.</p>
 <div class="table-wrap table-wrap-full">
 <table>
 <thead>
@@ -321,32 +294,32 @@
 </table>
 </div>
 <p class="reference-note">Critério: nível ≥ 6,89 m (cheia de 10 anos / limite de zoneamento, SEC-CORPRERI). Dias com esse nível a até 15 dias de intervalo foram agrupados no mesmo episódio. Fonte: ANA/HidroWeb (estação 65310000, série histórica 1930–2023) e estação telemétrica 65310001 (2024 em diante).</p>
+</details>
+
+<details class="faq-item">
+<summary>Dados Visíveis <span id="sourceLabel"></span></summary>
+<p style="margin:10px 0;"><a id="sourceLink" href="#" target="_blank" rel="noreferrer">Abrir fonte</a></p>
+<div class="table-wrap">
+<table>
+<thead>
+<tr>
+<th>Data/hora</th>
+<th>Régua</th>
+<th>Vazão</th>
+<th>Chuva</th>
+<th>Acum.</th>
+</tr>
+</thead>
+<tbody id="dataRows"></tbody>
+</table>
+</div>
+</details>
+
 </div>
 </section>
 
-<section class="info-panel depth">
-<h2>Guia de Emergência e Informações Úteis</h2>
-<div class="info-grid">
-<div class="info-col">
-<h3>Como funciona o monitoramento?</h3>
-<p>Os dados exibidos neste painel são coletados de estações telemétricas oficiais da ANA (Agência Nacional de Águas e Saneamento Básico) e da Copel. A página verifica novos dados a cada poucos minutos, mas a estação libera valores novos apenas de hora em hora. A previsão de nível considera os índices de chuva registrados nas últimas 48 horas nas cabeceiras do rio.</p>
-
-<h3>Quais bairros são afetados primeiro?</h3>
-<p>Durante cheias históricas, bairros de cota mais baixa como Navegantes, São Bernardo, Rio D'Areia e Limeira, além de outras áreas ribeirinhas próximas ao centro de União da Vitória, já registraram os primeiros impactos. A cota exata em que cada bairro é afetado depende da topografia e drenagem local — não há um valor único de corte confirmado por mapeamento oficial, então use esta lista como referência histórica, não como previsão exata.</p>
-</div>
-<div class="info-col">
-<h3>Contatos de Emergência</h3>
-<ul class="emergency-list">
-<li><strong>Defesa Civil (emergências, em todo o Brasil):</strong> <a href="tel:199">199</a></li>
-<li><strong>Corpo de Bombeiros:</strong> <a href="tel:193">193</a></li>
-<li><strong>Polícia Militar:</strong> <a href="tel:190">190</a></li>
-</ul>
-</div>
-</div>
-</section>
-
-<section class="faq-panel depth">
-<h2>Perguntas frequentes sobre o Rio Iguaçu</h2>
+<section class="faq-panel depth" id="faqSection">
+<h2>Perguntas frequentes</h2>
 <div class="faq-list">
 <details class="faq-item">
 <summary>Como foram definidos os níveis de alerta e as cotas por bairro deste site?</summary>
@@ -400,16 +373,24 @@
 <h3>⚠️ Enchente é risco à vida. Leia com atenção.</h3>
 <p>Este site mostra dados de referência sobre o nível do Rio Iguaçu e pode conter erros, atrasos ou falhas técnicas. Ele não é um sistema oficial de alerta e não substitui, em nenhuma hipótese, os avisos da Defesa Civil.</p>
 <p>Em situação de enchente, siga sempre as orientações oficiais da Defesa Civil do seu município, mesmo que os dados aqui mostrem um cenário diferente. Se houver ordem de evacuação, evacue. Não atravesse ruas, pontes ou áreas alagadas a pé ou de veículo — a força da água pode arrastar pessoas e carros mesmo em níveis que parecem baixos.</p>
-<p>Tenha sempre um plano de emergência: documentos, remédios e itens essenciais separados, e um local seguro combinado com a família. Em caso de risco iminente, ligue 199 (Defesa Civil) ou 193 (Bombeiros).</p>
+<p>Tenha sempre um plano de emergência: documentos, remédios e itens essenciais separados, e um local seguro combinado com a família.</p>
 <p>Use este site como apoio à informação, nunca como única fonte para decidir sobre sua segurança.</p>
+<div class="safety-contacts">
+<strong>Contatos de Emergência</strong>
+<ul class="emergency-list">
+<li><strong>Defesa Civil (emergências, em todo o Brasil):</strong> <a href="tel:199">199</a></li>
+<li><strong>Corpo de Bombeiros:</strong> <a href="tel:193">193</a></li>
+<li><strong>Polícia Militar:</strong> <a href="tel:190">190</a></li>
+</ul>
+</div>
 </div>
 
 <footer class="version-footer">
-<span>Versão 1.39</span>
+<span>Versão 1.40</span>
 <span id="visitCounter" class="visit-counter"></span>
 </footer>
 </main>
 
-<script src="app.js?v=1.39"></script>
+<script src="app.js?v=1.40"></script>
 </body>
 </html>
