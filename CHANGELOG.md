@@ -4,6 +4,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Sobre esta reconstrução (07/07/2026):** este arquivo estava desatualizado — parava na v1.5 — e por isso a v1.6 publicada em 07/07 acabou reusando um número de versão já existente e sobrescrevendo tudo que tinha sido feito entre v1.6 e v1.15 (mais grave: apagou o contador de visitas real, com histórico de mais de mil acessos). As entradas de v1.6 a v1.15 abaixo foram reconstruídas a partir do histórico de commits do GitHub (`git log --follow index.html`), não da memória do assistente. Ver `## v1.16` para a correção completa.
 
+## v1.34 — 2026-07-18
+
+- **Marcador visual diferente para cotas de "Enchente de AAAA"** vs bairros na lista de Cotas de Referência: entradas de enchente histórica agora usam um losango (`swatch-event`, `border-radius: 3px; transform: rotate(45deg)`) em vez do círculo padrão, mantendo a mesma escala de cor por severidade. Pedido do usuário, pra facilitar a leitura rápida da lista maior de 23 pontos.
+
+## v1.33 — 2026-07-18
+
+- **Substituída toda a tabela "Cotas de Referência (Cheias Históricas)"** (`COTAS_BAIRROS` em `scrape.py` e `app.py`) por uma nova lista de 23 pontos fornecida diretamente pelo usuário, com bairros específicos (Cidade Jardim, Rio D'Areia, São Basílio Magno, Nossa Senhora do Rocio, Navegantes, São Bernardo, Ponte Nova, Sagrada Família, São Joaquim, Bento Munhoz da Rocha, Limeira, São Gabriel, Bom Jesus, Cristo Rei, Centro - União da Vitória, Panorama, Nossa Senhora da Salete) e enchentes históricas (2019, 2014, 1935, 2023, 1992, 1983), substituindo a lista anterior de 8 pontos mais genéricos. **Nota de transparência:** esses valores foram fornecidos pelo usuário por instrução explícita, contornando a verificação cruzada de fontes normalmente exigida pela memória do projeto para dados de cota por bairro (que até então não tinham sido encontrados/confirmados em nenhuma fonte pesquisada) — o próprio usuário reconheceu essa trava e pediu para ignorá-la nesta ocasião.
+- **Adicionado título com asterisco e nota de metodologia** no `index.html`: "Cotas de Referência* (Cheias Históricas)" com nota de rodapé explicando que os valores são aproximados/estimados a partir de endereços do Censo do IBGE cruzados com o mapa de altitudes do Governo do Paraná, não substituem avisos oficiais, e reforçando o contato da Defesa Civil (199).
+
 ## v1.32 — 2026-07-18
 
 - **Encurtado o rótulo da cota de alerta crítico** na lista `COTAS_ALERTA_DEFESA_CIVIL` (`scrape.py` e `app.py`), de "ALERTA CRÍTICO - PLANO DE CONTINGÊNCIA ACIONADO" para apenas "ALERTA CRÍTICO" — pedido do usuário. Afeta a linha da cota 5,50 m mostrada no painel "Alertas de Nível" do site. O texto do selo de situação no topo (que detalha bairros afetados conforme o nível sobe) foi mantido como estava, sem mudança.
