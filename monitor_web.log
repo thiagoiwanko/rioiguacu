@@ -47705,19 +47705,19 @@ Stacktrace:
 [18/07/2026 19:13:08] Previsões extraídas: 6
 [18/07/2026 19:13:08] Dados atualizados com sucesso.
 [18/07/2026 19:13:08] data.json gravado (13719 bytes).
-[18/07/2026 19:15:44] Execução do scrape.py iniciada (GitHub Actions).
-[18/07/2026 19:15:57] ANA: 19 medições obtidas com sucesso (estação 65310001).
-[18/07/2026 19:15:57] Medições obtidas via ANA: 19
-[18/07/2026 19:15:57] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[18/07/2026 19:16:18] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
-[18/07/2026 19:16:18] Previsões extraídas: 6
-[18/07/2026 19:16:18] Ainda sem dado novo (última: 2026-07-18T19:00, fonte: ANA). Aguardando 30s para nova tentativa.
-[18/07/2026 19:17:08] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Read timed out. (read timeout=20)); usando Copel.
-[18/07/2026 19:17:08] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[18/07/2026 19:17:25] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4554 caracteres)
-[18/07/2026 19:17:25] Medições obtidas via Copel: 73
-[18/07/2026 19:17:25] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[18/07/2026 19:17:41] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
-[18/07/2026 19:17:41] Previsões extraídas: 6
-[18/07/2026 19:17:41] Dados atualizados com sucesso.
-[18/07/2026 19:17:41] data.json gravado (13719 bytes).
+[18/07/2026 19:18:09] Execução do scrape.py iniciada (GitHub Actions).
+[18/07/2026 19:18:09] ANA: falha na coleta (503 Server Error: Service Unavailable for url: https://www.ana.gov.br/hidrowebservice/EstacoesTelemetricas/OAUth/v1); usando Copel.
+[18/07/2026 19:18:09] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[18/07/2026 19:18:33] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4554 caracteres)
+[18/07/2026 19:18:33] Medições obtidas via Copel: 73
+[18/07/2026 19:18:33] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[18/07/2026 19:18:47] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
+[18/07/2026 19:18:47] Previsões extraídas: 6
+[18/07/2026 19:18:47] Ainda sem dado novo (última: 2026-07-18T19:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[18/07/2026 19:19:27] ANA: 19 medições obtidas com sucesso (estação 65310001).
+[18/07/2026 19:19:27] Medições obtidas via ANA: 19
+[18/07/2026 19:19:27] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[18/07/2026 19:19:41] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
+[18/07/2026 19:19:41] Previsões extraídas: 6
+[18/07/2026 19:19:41] Dados atualizados com sucesso.
+[18/07/2026 19:19:41] data.json gravado (13715 bytes).
