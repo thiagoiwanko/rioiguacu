@@ -28,6 +28,7 @@ JANELA_PREVISAO_HORAS = 48
 TIMEOUT_COLETA_SEGUNDOS = 90
 
 COTAS_BAIRROS = [
+    (1.29, "Menor nível histórico - estiagem de 2020"),
     (4.67, "Cidade Jardim"),
     (5.08, "Rio D'Areia"),
     (5.20, "São Basílio Magno"),
