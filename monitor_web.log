@@ -44735,17 +44735,21 @@ Stacktrace:
 [18/07/2026 04:28:29] Previsões extraídas: 6
 [18/07/2026 04:28:29] Dados atualizados com sucesso.
 [18/07/2026 04:28:29] data.json gravado (12617 bytes).
-[18/07/2026 04:30:38] Execução do scrape.py iniciada (GitHub Actions).
-[18/07/2026 04:30:56] ANA: 4 medições obtidas com sucesso (estação 65310001).
-[18/07/2026 04:30:56] Medições obtidas via ANA: 4
-[18/07/2026 04:30:56] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[18/07/2026 04:31:17] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1044 caracteres)
-[18/07/2026 04:31:18] Previsões extraídas: 6
-[18/07/2026 04:31:18] Ainda sem dado novo (última: 2026-07-18T04:00, fonte: ANA). Aguardando 30s para nova tentativa.
-[18/07/2026 04:32:03] ANA: 4 medições obtidas com sucesso (estação 65310001).
-[18/07/2026 04:32:03] Medições obtidas via ANA: 4
-[18/07/2026 04:32:03] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[18/07/2026 04:32:17] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1044 caracteres)
-[18/07/2026 04:32:17] Previsões extraídas: 6
-[18/07/2026 04:32:17] Dados atualizados com sucesso.
-[18/07/2026 04:32:17] data.json gravado (12617 bytes).
+[18/07/2026 04:32:38] Execução do scrape.py iniciada (GitHub Actions).
+[18/07/2026 04:32:59] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Read timed out. (read timeout=20)); usando Copel.
+[18/07/2026 04:32:59] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[18/07/2026 04:33:27] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[18/07/2026 04:33:27] Medições obtidas via Copel: 73
+[18/07/2026 04:33:27] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[18/07/2026 04:33:41] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1044 caracteres)
+[18/07/2026 04:33:41] Previsões extraídas: 6
+[18/07/2026 04:33:41] Ainda sem dado novo (última: 2026-07-18T04:00, fonte: Copel). Aguardando 30s para nova tentativa.
+[18/07/2026 04:34:32] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Read timed out. (read timeout=20)); usando Copel.
+[18/07/2026 04:34:32] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
+[18/07/2026 04:34:48] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4580 caracteres)
+[18/07/2026 04:34:48] Medições obtidas via Copel: 73
+[18/07/2026 04:34:48] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[18/07/2026 04:35:02] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1044 caracteres)
+[18/07/2026 04:35:02] Previsões extraídas: 6
+[18/07/2026 04:35:02] Dados atualizados com sucesso.
+[18/07/2026 04:35:02] data.json gravado (12619 bytes).
