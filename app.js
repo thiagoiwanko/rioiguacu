@@ -165,6 +165,12 @@ function renderCards(data) {
   $("levelValue").style.color = colorForLevel(level);
 }
 
+function corRefLista(item) {
+  if (item.descricao.startsWith("Enchente de")) return "var(--red)";
+  if (item.descricao.startsWith("Menor nível histórico")) return "var(--green)";
+  return "var(--yellow)";
+}
+
 function renderReferences(data) {
   const currentLevel = data.ultima.regua_m;
   const referencias = data.cotas_bairros
@@ -185,7 +191,7 @@ function renderReferences(data) {
       }
       return `
         <div class="ref-row">
-          <i class="swatch${item.descricao.startsWith("Enchente de") ? " swatch-event" : ""}" style="color:${colorForLevel(item.nivel)}; background:${colorForLevel(item.nivel)}"></i>
+          <i class="swatch${item.descricao.startsWith("Enchente de") ? " swatch-event" : ""}" style="color:${corRefLista(item)}; background:${corRefLista(item)}"></i>
           <strong>${item.nivel.toFixed(2)} m</strong>
           <span>${item.descricao}</span>
         </div>
