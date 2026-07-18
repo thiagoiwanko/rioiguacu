@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-18T20:18",
+    "atualizado_em": "2026-07-18T20:22",
     "historico": [
       {
         "data_hora": "2026-07-16T21:00",
@@ -432,13 +432,13 @@
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
-    "situacao": "NÍVEL NORMAL - monitoramento diário",
+    "situacao": "OBSERVAÇÃO",
     "tendencia": {
       "texto": "BAIXANDO -0.007 m/h",
       "delta": -0.007000000000000117,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão em 48 h sem atingir cotas críticas.",
+    "alerta_previsao": "Previsão em 48 h: pode atingir 3.91 m (OBSERVAÇÃO).",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
@@ -540,20 +540,24 @@
     ],
     "cotas_alerta": [
       {
-        "nivel": 4.3,
-        "descricao": "ATENÇÃO MODERADA"
+        "nivel": 3.7,
+        "descricao": "OBSERVAÇÃO"
       },
       {
-        "nivel": 4.5,
-        "descricao": "ATENÇÃO ALTA"
+        "nivel": 4.2,
+        "descricao": "ATENÇÃO"
       },
       {
-        "nivel": 4.9,
-        "descricao": "ATENÇÃO MUITO ALTA"
+        "nivel": 5.0,
+        "descricao": "ALERTA"
       },
       {
         "nivel": 5.5,
-        "descricao": "ALERTA CRÍTICO"
+        "descricao": "EMERGÊNCIA"
+      },
+      {
+        "nivel": 6.5,
+        "descricao": "ENCHENTE"
       }
     ],
     "janela_historico_horas": 48,
