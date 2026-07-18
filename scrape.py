@@ -51,6 +51,7 @@ def agora_br():
 ESPERA_NOVA_TENTATIVA_SEGUNDOS = 30
 
 COTAS_BAIRROS = [
+    (1.29, "Menor nível histórico - estiagem de 2020"),
     (4.67, "Cidade Jardim"),
     (5.08, "Rio D'Areia"),
     (5.20, "São Basílio Magno"),
