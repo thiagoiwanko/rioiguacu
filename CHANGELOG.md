@@ -8,6 +8,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.55 — 2026-07-19
+
+- **Corrigido o travamento do visualizador de PDF em `estudo.html`** (relatado pelo usuário: a página parava de responder e só cerca de 13 das 20 páginas chegavam a aparecer). Causa raiz: a v1.54 disparava a renderização de todas as 20 páginas do PDF em `<canvas>` simultaneamente, em escala alta (até 2,5× `devicePixelRatio`×1,4) — trabalho pesado demais de uma vez para a thread principal do navegador.
+- **Correção do arquivo verificada:** o `artigo-cientifico-uv.pdf` publicado no repositório foi conferido byte a byte (`md5sum`) contra o arquivo mais recente enviado pelo usuário — são idênticos, 20 páginas, 244 KB. O problema nunca foi o arquivo estar errado/truncado; era o travamento cortando o carregamento visual no meio.
+- **Novo comportamento, a pedido do usuário ("rolagem igual livro"):** as 20 páginas agora ficam empilhadas dentro de uma área de rolagem contínua (`#pdfViewerBook`, altura máx. 85vh), cada uma com espaço reservado no layout (proporção A4 fixa via `aspect-ratio`) desde o início, para não haver salto de página enquanto carrega. A renderização de cada página só acontece quando ela se aproxima da área visível (via `IntersectionObserver`, com margem de 600px), uma de cada vez em fila — em vez de todas de uma vez.
+- Removida também a caixa de metadados acima do visualizador ("Artigo científico — formatação ABNT (PDF)... Responsável: Thiago Jorge Iwanko...") do lado "Para especialistas", a pedido do usuário — ficou só o título `<h1>` acima do visualizador.
+- CSS de navegação por botões (Anterior/Próxima), de uma tentativa intermediária descartada em favor da rolagem contínua, removido por não ter mais markup correspondente.
+- Backup pré-edição: `backups/site-v1.54.zip` (reconstrói o estado ao vivo real da v1.54, que já estava travando — a v1.54 nunca tinha recebido esse backup formalmente).
+
 ## v1.54 — 2026-07-19
 
 - **Lado "Para especialistas" de `estudo.html` substituído por um visualizador de PDF embutido**, a pedido do usuário: agora mostra o artigo científico em formatação ABNT (`artigo-cientifico-uv.pdf`, 20 páginas, fornecido pelo usuário), publicado na raiz do repositório, em vez do texto em HTML usado nas v1.51–v1.53.
