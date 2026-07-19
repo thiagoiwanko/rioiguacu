@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.59 — 2026-07-19
+
+- **PDF do artigo científico removido de `estudo.html`, a pedido explícito do usuário**, junto com todo indício dele: o arquivo `artigo-cientifico-uv.pdf` foi apagado do repositório, o script do `pdf.js` (biblioteca externa) foi removido, e o `<div class="pdf-viewer-wrap">`/`carregarPdfEspecialistas()` (HTML, CSS e JS relacionados ao visualizador) foram excluídos por completo — não sobra mais nenhuma referência a PDF em `estudo.html`.
+- O lado "Para especialistas" agora mostra apenas o título e uma mensagem simples: "Esta seção está em revisão no momento. O artigo técnico completo será republicado em breve." O lado "Para o público" não foi alterado.
+- **Motivo:** apesar da correção de cache da v1.58, o usuário reportou que o problema persistia; decidiu remover o PDF do ar por enquanto e reenviá-lo (com autorização explícita de publicação) numa próxima etapa.
+- Backup pré-edição: `backups/site-v1.58.zip` (inclui o PDF de 21 páginas com correções ABNT, para restauração caso o usuário reenvie o mesmo arquivo).
+
 ## v1.58 — 2026-07-19
 
 - **Causa real do "aparecem só 13/20 páginas" identificada:** não era mais o travamento (corrigido na v1.55) — era **cache do navegador**. O `pdf.js` buscava sempre a mesma URL fixa `artigo-cientifico-uv.pdf`, sem parâmetro de versão; quando o conteúdo do arquivo mudou (v1.57), navegadores que já tinham aberto `estudo.html` antes continuaram servindo a cópia antiga do PDF do cache local, mesmo com o arquivo novo já publicado no GitHub/Cloudflare (confirmado buscando o arquivo ao vivo direto por HTTP, sem passar pelo navegador: o conteúdo publicado sempre esteve correto, 21 páginas, "Nota Técnica — Versão 1.3").
