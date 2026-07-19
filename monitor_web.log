@@ -48911,18 +48911,15 @@ Stacktrace:
 [19/07/2026 01:18:31] Previsões extraídas: 6
 [19/07/2026 01:18:31] Dados atualizados com sucesso.
 [19/07/2026 01:18:31] data.json gravado (13793 bytes).
-[19/07/2026 01:20:40] Execução do scrape.py iniciada (GitHub Actions).
-[19/07/2026 01:21:01] ANA: falha na coleta (HTTPSConnectionPool(host='www.ana.gov.br', port=443): Read timed out. (read timeout=20)); usando Copel.
-[19/07/2026 01:21:01] Iniciando coleta: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf
-[19/07/2026 01:21:27] Coleta concluída: https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf (4542 caracteres)
-[19/07/2026 01:21:28] Medições obtidas via Copel: 73
-[19/07/2026 01:21:28] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[19/07/2026 01:21:43] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
-[19/07/2026 01:21:44] Previsões extraídas: 6
-[19/07/2026 01:21:44] Ainda sem dado novo (última: 2026-07-19T01:00, fonte: Copel). Aguardando 30s para nova tentativa.
-[19/07/2026 01:22:18] ANA: 1 medições obtidas com sucesso (estação 65310001).
-[19/07/2026 01:22:18] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[19/07/2026 01:22:33] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
-[19/07/2026 01:22:33] Previsões extraídas: 6
-[19/07/2026 01:22:33] Dados atualizados com sucesso.
-[19/07/2026 01:22:33] data.json gravado (13793 bytes).
+[19/07/2026 01:22:58] Execução do scrape.py iniciada (GitHub Actions).
+[19/07/2026 01:23:02] ANA: 1 medições obtidas com sucesso (estação 65310001).
+[19/07/2026 01:23:02] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[19/07/2026 01:23:32] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
+[19/07/2026 01:23:32] Previsões extraídas: 6
+[19/07/2026 01:23:32] Ainda sem dado novo (última: 2026-07-19T01:00, fonte: ANA). Aguardando 30s para nova tentativa.
+[19/07/2026 01:24:04] ANA: 1 medições obtidas com sucesso (estação 65310001).
+[19/07/2026 01:24:04] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[19/07/2026 01:24:18] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
+[19/07/2026 01:24:18] Previsões extraídas: 6
+[19/07/2026 01:24:18] Dados atualizados com sucesso.
+[19/07/2026 01:24:18] data.json gravado (13793 bytes).
