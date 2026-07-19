@@ -6,6 +6,20 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.45 — 2026-07-18
+
+- **FAQ bastante ampliado**, com conteúdo revisado e fornecido pelo usuário:
+  - "O que é a ANA?" reescrita.
+  - Novas perguntas: "O que é o HidroWeb?", "O que é uma estação fluviométrica?" e "O que é uma estação telemétrica?" — estas duas últimas substituem a antiga pergunta única "De onde vêm as medições do rio?", detalhando separadamente a 65310000 (histórica) e a 65310001 (tempo real).
+  - Nova pergunta: `O que é o "nível de régua"? É a profundidade do rio?`, explicando o conceito de régua/zero de régua e a conversão pra cota altimétrica (739,61 m).
+  - Nova pergunta: "O que é o IAT?".
+  - "De onde vem a altitude dos terrenos?" e "O que é o CNEFE?" reescritas (mais diretas, já que "IAT" passou a ter pergunta própria antes delas).
+  - "Esses números são exatos?" ganhou menção explícita à fonte das cotas de terreno (GeoPR/IAT).
+  - Ordem reorganizada: ANA → HidroWeb → estação fluviométrica → estação telemétrica → nível de régua → IAT → altitude dos terrenos → CNEFE → exatidão → botão → Fontes.
+- **Botão de destaque no fim do FAQ** ("Quer entender a fundo? Veja de onde vêm os dados →"), substituindo o item de acordeão "Quer conhecer mais sobre este projeto?" da v1.44 — link para `estudo.html`, agora estilizado como botão (`.faq-cta-button`, novo em `styles.css`) em vez de pergunta.
+- Página `estudo.html` renomeada/retitulada para "De onde vêm os dados: o estudo por trás do rioiguacu.com", mantendo o aviso de "em breve" até o artigo real ser publicado.
+- Backup pré-edição: `backups/site-v1.44.zip`.
+
 ## v1.44 — 2026-07-18
 
 - Subtítulo de Enchentes Históricas simplificado mais uma vez, para "Abaixo, os meses em que ocorreram cada grande enchente." (removido o "(nível ≥ 6,89 m)" do final, a pedido do usuário).
