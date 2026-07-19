@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-19T11:07",
+    "atualizado_em": "2026-07-19T11:11",
     "historico": [
       {
         "data_hora": "2026-07-17T12:00",
@@ -382,6 +382,14 @@
         "vazao_m3s": 918,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-19T11:00",
+        "regua_m": 3.83,
+        "nivel_agua_m": 743.44,
+        "vazao_m3s": 913,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -417,17 +425,17 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-19T10:00",
-      "regua_m": 3.84,
-      "nivel_agua_m": 743.45,
-      "vazao_m3s": 918,
+      "data_hora": "2026-07-19T11:00",
+      "regua_m": 3.83,
+      "nivel_agua_m": 743.44,
+      "vazao_m3s": 913,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "OBSERVAÇÃO",
     "tendencia": {
-      "texto": "Baixando cerca de 0,7 cm por hora",
-      "delta": -0.007000000000000117,
+      "texto": "Baixando cerca de 1,0 cm por hora",
+      "delta": -0.009999999999999787,
       "direcao": "baixando"
     },
     "alerta_previsao": "Previsão da Copel para as próximas 48 horas: 3,84 m. Não é um alerta oficial da Defesa Civil.",
