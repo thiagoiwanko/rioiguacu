@@ -6,6 +6,19 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.48 — 2026-07-18
+
+Ajustes de clareza no texto visível, a partir de uma revisão pedida pelo usuário ("analise o texto, visível, se nao esta confuso"):
+
+- **Ordem invertida no quadro lateral**: "Referências por Bairro*" passou a vir antes de "Enchentes Históricas*" (pedido do usuário na sessão anterior, ainda pendente).
+- **Nome de aviso "Atualizado em... · próxima atualização às..." movido do cabeçalho para o rodapé**, na mesma linha da versão e do contador de visitas — antes ficava isolado no topo, junto com o título.
+- **Acordeão "Enchentes Históricas (nível ≥ 6,89 m)" renomeado para "Mais detalhes sobre as Enchentes Históricas"**, dentro de "Dados e Histórico" — corrige a confusão de ter dois elementos com o mesmo nome na página (o quadro lateral resumido e essa tabela completa com 12 episódios, datas e duração). Subtítulo também reescrito pra descrever melhor o conteúdo da tabela.
+- **FAQ "Fontes" removido, consolidado dentro de "De onde vêm os dados do site?"**: as duas perguntas cobriam basicamente a mesma informação em formatos diferentes (uma em prosa, outra em bloco técnico denso), dando a impressão de resposta duplicada. Os fatos que só apareciam em "Fontes" (período exato de cada estação — fluviométrica até 2023, telemétrica desde 2024 — e a nota de que os cálculos são reproduzíveis a partir das bases públicas) foram incorporados ao parágrafo "Nível do rio". O dado do zero da régua (739,61 m) não foi duplicado aqui porque já está explicado em "O que é o 'nível de régua'?".
+- **Novo parágrafo "Previsão de 48 horas" na mesma pergunta**, com link para o painel de Monitoramento Hidrológico da Copel (`copel.com/mhbweb/paginas/previsao.jsf`) — corrige uma atribuição incompleta: o número de 48h mostrado no site (no gráfico e no card Tendência) sempre veio direto da previsão publicada pela própria Copel, não de um cálculo deste site. O texto anterior ("Estimativa automática... Não é uma previsão oficial") dava a entender o contrário.
+- **Mesma correção de atribuição no backend (`scrape.py`)**: `verificar_alerta_previsao()` agora retorna "Previsão da Copel para as próximas 48 horas: X m. Não é um alerta oficial da Defesa Civil." em vez de "Estimativa automática... Não é uma previsão oficial."
+- **Subtítulos das duas tabelas do "Ranking Sazonal" reescritos** com o diferencial em negrito logo no início ("Todos os anos" vs. "Só as grandes enchentes") — antes as duas começavam com "Em que mês..." e eram fáceis de confundir numa leitura rápida, já que os números de outubro lideram nas duas.
+- Backup pré-edição: `backups/site-v1.47.zip`.
+
 ## v1.47 — 2026-07-18
 
 - **Corrigido espaço vazio abaixo do gráfico**, reportado pelo usuário ("vc consegue perceber o espaço vazio que ficou abaixo do grafico?"). Causa: desde a v1.46 (item 2), a coluna direita (`.side-panel`) passou a ter 3 quadros empilhados (Enchentes Históricas, Referências por Bairro, Alertas), ficando bem mais alta que a coluna esquerda (só o card do gráfico) — sobrava um vão grande abaixo do gráfico.
