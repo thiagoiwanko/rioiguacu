@@ -6,6 +6,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.49 — 2026-07-18/19
+
+- **Subtítulo "Só as grandes enchentes" corrigido de "1930–07/2026" para "1930–2025"**, alinhando com o formato do outro subtítulo ("Todos os anos... 1930–2025") — pedido do usuário. O período de 2026 nunca teve nenhum episódio de enchente registrado na tabela, então a mudança não altera nenhum dado, só o rótulo.
+- **Texto "cheia de 10 anos" removido do mesmo subtítulo** (ficou só "nível ≥ 6,89 m", como em todos os outros lugares do site), encurtando a linha o suficiente pra evitar quebra em 2 linhas na maioria das telas.
+- **Corrigido o "degrau" entre as duas mini-tabelas do Ranking Sazonal**, reportado pelo usuário com print: quando um dos dois subtítulos quebrava em 2 linhas e o outro ficava em 1, a tabela de baixo começava em alturas diferentes. Adicionado `min-height` no CSS (`.ranking-grid > div > p.subtitle`) reservando o mesmo espaço vertical pros dois subtítulos, independente de quantas linhas o texto ocupar — removido no mobile (coluna única, onde o alinhamento lado a lado não se aplica).
+- Backup pré-edição: `backups/site-v1.48.zip`.
+
 ## v1.48 — 2026-07-18
 
 Ajustes de clareza no texto visível, a partir de uma revisão pedida pelo usuário ("analise o texto, visível, se nao esta confuso"):

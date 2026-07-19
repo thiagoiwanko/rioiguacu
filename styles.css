@@ -985,6 +985,10 @@ td {
   margin-top: 4px;
 }
 
+.ranking-grid > div > p.subtitle {
+  min-height: 2.6em;
+}
+
 .ranking-grid table {
   font-size: 12px;
 }
@@ -1136,5 +1140,9 @@ td {
   .ranking-grid {
     grid-template-columns: 1fr;
     gap: 4px;
+  }
+
+  .ranking-grid > div > p.subtitle {
+    min-height: 0;
   }
 }
