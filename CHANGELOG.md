@@ -8,6 +8,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.53 — 2026-07-19
+
+- **Recuo de primeira linha (`text-indent`) adicionado aos parágrafos de `estudo.html`**, a pedido do usuário ("vi que não tem espaçamento inicial nos parágrafos") — formatação de artigo tradicional, aplicada aos dois lados (Para o público e Para especialistas), já que ambos usam a mesma classe `.article p`. Excluído do recuo o bloco de metadados (`.article-meta`), o resumo (`.abstract p`), as palavras-chave (`.keywords`) e a nota final (`.note-final`), que continuam sem recuo por não serem parágrafos de corpo de texto corrido.
+- Backup pré-edição: `backups/site-v1.52.zip`.
+
 ## v1.52 — 2026-07-19
 
 - **Conteúdo do lado "Para o público" de `estudo.html` substituído por uma nova versão**, fornecida pelo usuário em `ESTUDO_VERSAO_POPULAR.docx` (revisão do texto da v1.51). Principais mudanças de conteúdo:
