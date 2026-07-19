@@ -405,7 +405,7 @@ def calcular_tendencia(historico):
 
 def verificar_alerta_previsao(historico, previsao):
     if not historico or not previsao:
-        return "Sem estimativa disponível para as próximas 48 horas."
+        return "Sem previsão da Copel disponível para as próximas 48 horas."
     agora_base = datetime.fromisoformat(historico[-1]["data_hora"])
     limite = agora_base + timedelta(hours=JANELA_PREVISAO_HORAS)
     valores = []
@@ -416,13 +416,15 @@ def verificar_alerta_previsao(historico, previsao):
             if item.get("regua_com_chuva_m") is not None:
                 valores.append(item["regua_com_chuva_m"])
     if not valores:
-        return "Sem estimativa disponível para as próximas 48 horas."
+        return "Sem previsão da Copel disponível para as próximas 48 horas."
     maior = max(valores)
     valor_fmt = f"{maior:.2f}".replace(".", ",")
-    # Linguagem deliberadamente não-oficial: isto é uma projeção simples a
-    # partir do histórico recente + chuva, não uma previsão hidrológica
-    # validada -- não deve soar como um boletim oficial da Defesa Civil/ANA.
-    return f"Estimativa automática para as próximas 48 horas: {valor_fmt} m. Não é uma previsão oficial."
+    # A previsão em si já vem pronta da Copel (URL_PREVISAO) -- aqui só
+    # extraímos o maior valor previsto dentro da janela de 48h. O texto deixa
+    # claro que é a previsão publicada pela concessionária, não um cálculo
+    # deste site, e que não é um alerta oficial da Defesa Civil/ANA (que não
+    # publicam previsão para este rio).
+    return f"Previsão da Copel para as próximas 48 horas: {valor_fmt} m. Não é um alerta oficial da Defesa Civil."
 
 
 def montar_payload(historico, previsao, fonte_historico, url_historico):
