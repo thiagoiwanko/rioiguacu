@@ -25,7 +25,7 @@
 <meta name="twitter:title" content="Rio Iguaçu Hoje: nível, vazão, chuva e alerta de enchente em tempo real">
 <meta name="twitter:description" content="Site gratuito e público pra acompanhar o Rio Iguaçu em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel.">
 <meta name="twitter:image" content="https://rioiguacu.com/og-image.png">
-<link rel="stylesheet" href="styles.css?v=1.45">
+<link rel="stylesheet" href="styles.css?v=1.46">
 <script type="application/ld+json">
 {
 "@context": "https://schema.org",
@@ -48,6 +48,7 @@
 <p class="eyebrow">Monitoramento Hidrológico</p>
 <h1>Rio Iguaçu</h1>
 <p class="subtitle">União da Vitória (PR) · nível do rio em tempo real, com dados da ANA (Agência Nacional de Águas e Saneamento Básico)</p>
+<p class="source-note" id="sourceNote"></p>
 </div>
 <div class="actions">
 <span id="syncStatus" class="sync">Iniciando...</span>
@@ -57,7 +58,7 @@
 <section class="hero-grid">
 <article class="level-card depth">
 <div class="card-head">
-<span>Cota atual</span>
+<span>Nível atual do rio</span>
 <strong id="lastTime">--/-- --:--</strong>
 </div>
 <div class="level-wrap">
@@ -111,8 +112,13 @@
 
 <aside class="side-panel">
 <article class="references depth">
-<h2>Cotas de Referência* <span class="nowrap">(Cheias Históricas)</span></h2>
-<div id="referenceList" class="reference-list"></div>
+<h2>Enchentes Históricas*</h2>
+<div id="enchentesList" class="reference-list"></div>
+<p class="reference-note"><span class="note-mark">*</span> Maiores enchentes já registradas e o menor nível histórico, para comparação com o nível atual do rio.</p>
+</article>
+<article class="references depth">
+<h2>Referências por Bairro*</h2>
+<div id="bairrosList" class="reference-list"></div>
 <p class="reference-note"><span class="note-mark">*</span> A cota de cada bairro mostra com quantos metros na régua do rio a água começa a alcançar os primeiros terrenos daquele bairro (as partes mais baixas). É um valor aproximado e estimado — não deve ser tomado como certeza: a situação real pode variar conforme a localização e a altura do seu terreno dentro do bairro — há casas que a água alcança antes, e outras bem depois. O cálculo usa os endereços do Censo do IBGE e o mapa de altitudes do terreno do Governo do Paraná. Estas informações não substituem os avisos oficiais: em caso de emergência, siga sempre a Defesa Civil (fone 199).</p>
 </article>
 <article class="alerts depth">
@@ -323,9 +329,13 @@
 <div class="faq-list">
 <details class="faq-item">
 <summary>Como foram definidos os níveis de alerta deste site?</summary>
+<p>A partir do histórico real do Rio Iguaçu em União da Vitória: quase um século de medições diárias da ANA. Quanto mais raro um nível foi ao longo desse histórico, mais alto o degrau de alerta que ele recebe.</p>
+<details>
+<summary>Ver metodologia</summary>
 <p>Os níveis foram definidos por análise estatística da série histórica de medições diárias do Rio Iguaçu em União da Vitória, mantida pela Agência Nacional de Águas e Saneamento Básico (ANA) desde 1930 — mais de 35 mil registros diários de nível de régua, disponíveis publicamente no portal HidroWeb (estação 65310000).</p>
 <p>Dessa série foram calculados dois parâmetros fundamentais: a <strong>média histórica</strong>, de 2,67 m, e o <strong>desvio padrão</strong>, de 1,08 m — medida estatística que expressa quanto o nível do rio costuma variar em torno da média. Aplicando o modelo da <strong>distribuição normal</strong>, ferramenta clássica da estatística para descrever fenômenos naturais, cada nível de alerta corresponde a um grau crescente de afastamento do comportamento habitual do rio — e, portanto, a um grau crescente de raridade.</p>
 <p>Como rios não seguem perfeitamente a distribuição normal — o Iguaçu possui um piso físico próximo de 1,30 m, mas não possui teto nas enchentes —, cada limiar foi verificado também por contagem direta na série histórica: a frequência real com que aquele nível foi atingido em 96 anos de medições. Os dois métodos convergem, e são as frequências reais que apresentamos a seguir, por serem verificáveis por qualquer pessoa a partir dos dados públicos.</p>
+</details>
 </details>
 
 <details class="faq-item">
@@ -355,44 +365,16 @@
 </details>
 
 <details class="faq-item">
-<summary>O que é a ANA?</summary>
-<p>A Agência Nacional de Águas e Saneamento Básico (ANA) é a autarquia federal responsável, entre outras atribuições, pela rede nacional de monitoramento dos rios brasileiros — milhares de estações de medição espalhadas pelo país. São as estações da ANA em União da Vitória que fornecem todas as medições de nível usadas neste site.</p>
-</details>
-
-<details class="faq-item">
-<summary>O que é o HidroWeb?</summary>
-<p>É o portal público da ANA onde ficam armazenadas as séries de medições de todas as estações da rede nacional. Qualquer pessoa pode consultar e baixar os dados, sem custo. Foi do HidroWeb que este projeto obteve a série completa do Rio Iguaçu em União da Vitória desde 1930 — a mesma que fundamenta os níveis de alerta e as estatísticas do site.</p>
-</details>
-
-<details class="faq-item">
-<summary>O que é uma estação fluviométrica?</summary>
-<p>É uma instalação fixa à margem do rio destinada a medir seu nível (e, em muitos casos, sua vazão) sempre no mesmo ponto, dia após dia. A medição de referência é feita na régua — uma escala graduada fixada na margem. A estação fluviométrica de União da Vitória (código 65310000) opera desde 22 de maio de 1930 e é uma das séries mais longas da região: são mais de 35 mil dias de registro. Seus dados passam por revisão técnica da ANA (a chamada consistência) antes da publicação definitiva.</p>
-</details>
-
-<details class="faq-item">
-<summary>O que é uma estação telemétrica?</summary>
-<p>É uma estação automática: sensores medem o nível do rio sem depender de leitura humana e transmitem os dados à distância. A estação telemétrica de União da Vitória (código 65310001) registra o nível de hora em hora, todos os dias, e é ela que permite ao site mostrar o rio "agora" — cada leitura nova chega ao site logo depois de medida. Como esses dados são transmitidos na hora, sem a revisão técnica que a série histórica recebe, o site os trata como dados brutos: bons para acompanhamento em tempo real, sujeitos a falhas ocasionais do sensor.</p>
+<summary>De onde vêm os dados do site?</summary>
+<p><strong>Nível do rio:</strong> da Agência Nacional de Águas e Saneamento Básico (ANA), autarquia federal responsável pela rede nacional de monitoramento dos rios brasileiros. A estação telemétrica de União da Vitória (código 65310001) mede o nível a cada hora e é ela que permite ao site mostrar o rio "agora"; a estação fluviométrica (código 65310000), com série contínua desde 1930 e mais de 35 mil dias de registro, sustenta os níveis de alerta e as estatísticas históricas do site. Ambas ficam publicadas no HidroWeb, o portal público de dados da ANA. Nos raros minutos em que a ANA ainda não publicou a leitura da hora, o site usa a Copel como fonte redundante.</p>
+<p><strong>Endereços:</strong> do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE), mantido pelo IBGE e atualizado a cada Censo — sempre de forma agregada, sem identificar moradores.</p>
+<p><strong>Altitude dos terrenos:</strong> do mapeamento oficial do relevo publicado no GeoPR, portal do Instituto Água e Terra (IAT), órgão do Governo do Paraná responsável pelo meio ambiente e pelos recursos hídricos do estado. O levantamento é aerofotogramétrico a laser, de 2012, com margem de erro que pode alcançar dezenas de centímetros — por isso as cotas por bairro são tratadas como estimativas, com verificação de campo em andamento.</p>
 </details>
 
 <details class="faq-item">
 <summary>O que é o "nível de régua"? É a profundidade do rio?</summary>
 <p>Não é profundidade. A régua é uma escala fixada na margem, e o "zero" dela não é o fundo do rio: é um ponto de referência fixo, escolhido abaixo do nível das águas mais baixas. O que o site mostra — "rio a 4,00 m" — é a altura da água acima desse zero.</p>
 <p>O zero da régua de União da Vitória está na cota altimétrica de 739,61 m (altitude em relação à referência oficial de nível do mar usada no Brasil). Isso permite a conversão que sustenta todo o estudo: rio a 4,00 m de régua significa água na altitude de 743,61 m. Como a altitude dos terrenos da cidade é medida na mesma referência, dá para comparar diretamente o nível do rio com a altura de cada bairro — é assim que nascem as cotas por bairro exibidas no site.</p>
-</details>
-
-<details class="faq-item">
-<summary>O que é o IAT?</summary>
-<p>O Instituto Água e Terra (IAT) é o órgão do Governo do Paraná responsável pelo meio ambiente e pelos recursos hídricos no estado. Entre suas atribuições está manter o GeoPR, portal público de mapas e dados geográficos do Paraná — a fonte do mapeamento de relevo usado neste estudo.</p>
-</details>
-
-<details class="faq-item">
-<summary>De onde vem a altitude dos terrenos?</summary>
-<p>Do mapeamento oficial do relevo publicado no GeoPR/IAT, produzido a partir de levantamento aerofotogramétrico a laser realizado em 2012 sobre a região. A partir dele, o projeto associou uma altitude a cada endereço da cidade. Esse mapeamento tem margem de erro que pode alcançar dezenas de centímetros, razão pela qual todas as cotas do site são tratadas como estimativas e a verificação de campo segue em andamento.</p>
-</details>
-
-<details class="faq-item">
-<summary>O que é o CNEFE?</summary>
-<p>É o Cadastro Nacional de Endereços para Fins Estatísticos, mantido pelo IBGE e atualizado a cada Censo — a lista pública e oficial dos endereços do país, com a localização de cada um. É dela que vêm os endereços usados no cálculo das cotas por bairro, sempre de forma agregada, sem identificar moradores.</p>
 </details>
 
 <details class="faq-item">
@@ -426,11 +408,11 @@
 </div>
 
 <footer class="version-footer">
-<span>Versão 1.45</span>
+<span>Versão 1.46</span>
 <span id="visitCounter" class="visit-counter"></span>
 </footer>
 </main>
 
-<script src="app.js?v=1.45"></script>
+<script src="app.js?v=1.46"></script>
 </body>
 </html>

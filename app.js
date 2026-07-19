@@ -62,9 +62,21 @@ return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 return "rgb(255,48,48)";
 }
 
+// Enchentes históricas e o recorde de estiagem são "extremos históricos":
+// eventos raros e pontuais. Cotas de bairro são estimativas de metodologia
+// diferente (endereço + relevo). Usado tanto para separar os dois quadros
+// da lateral quanto para decidir o que aparece como linha no gráfico.
+function isHistoricalExtreme(item) {
+return item.descricao.startsWith("Enchente de") || item.descricao.startsWith("Menor nível histórico");
+}
+
+// Linhas do gráfico: só alertas + extremos históricos (enchentes e o menor
+// nível já registrado). As ~20 cotas de bairro ficam de fora -- são
+// referências úteis na lista lateral, mas amontoadas no gráfico deixavam
+// ele ilegível (linhas quase coincidentes, muitas só com número).
 function allReferences(data) {
 const map = new Map();
-data.cotas_bairros.forEach((item) => map.set(Number(item.nivel), item.descricao));
+data.cotas_bairros.filter(isHistoricalExtreme).forEach((item) => map.set(Number(item.nivel), item.descricao));
 data.cotas_alerta.forEach((item) => map.set(Number(item.nivel), item.descricao));
 return [...map.entries()].map(([nivel, descricao]) => ({ nivel, descricao })).sort((a, b) => a.nivel - b.nivel);
 }
@@ -176,6 +188,12 @@ $("forecastAlert").className = data.previsao_disponivel ? "" : "warning";
 $("sourceLink").href = data.url_historico || "#";
 const fonteCurta = (data.fonte || "").split(/[–-]/)[0].trim();
 $("sourceLabel").textContent = fonteCurta ? `(${fonteCurta})` : "";
+const sourceNoteEl = $("sourceNote");
+if (sourceNoteEl) {
+sourceNoteEl.textContent = fonteCurta
+? `Fonte desta atualização: ${fonteCurta}${fonteCurta.toLowerCase() === "copel" ? " (redundância, ANA ainda não publicou esta hora)" : ""}`
+: "";
+}
 
 const marker = Math.max(0, Math.min(100, (level / NIVEL_MAX_ESCALA) * 100));
 $("gaugeMarker").style.left = `calc(${marker}% - 2px)`;
@@ -188,14 +206,11 @@ if (item.descricao.startsWith("Menor nível histórico")) return "var(--green)";
 return "var(--yellow)";
 }
 
-function renderReferences(data) {
-const currentLevel = data.ultima.regua_m;
-const referencias = data.cotas_bairros
+function referenceRowsHtml(items, currentLevel) {
+return items
 .map((item) => ({ ...item, isCurrent: false }))
 .concat([{ nivel: currentLevel, descricao: "", isCurrent: true }])
-.sort((a, b) => b.nivel - a.nivel);
-
-$("referenceList").innerHTML = referencias
+.sort((a, b) => b.nivel - a.nivel)
 .map((item) => {
 if (item.isCurrent) {
 return `
@@ -214,6 +229,40 @@ return `
 </div>
 `;
 }).join("");
+}
+
+// Centraliza a marca "O rio está aqui agora!" na área visível da lista,
+// como se pediu -- exceto quando isso empurraria o scroll além do início/fim
+// da lista, caso em que o navegador já trava sozinho no 0 ou no máximo
+// (então um nível muito baixo ou muito alto naturalmente fica na ponta,
+// não forçado para o centro).
+function centerCurrentMarker(containerId) {
+const container = $(containerId);
+if (!container) return;
+const currentEl = container.querySelector(".ref-row-current");
+if (!currentEl) return;
+const target = currentEl.offsetTop - (container.clientHeight / 2) + (currentEl.clientHeight / 2);
+container.scrollTop = Math.max(0, target);
+}
+
+let referenceListsCentered = false;
+
+function renderReferences(data) {
+const currentLevel = data.ultima.regua_m;
+const historicos = data.cotas_bairros.filter(isHistoricalExtreme);
+const bairros = data.cotas_bairros.filter((item) => !isHistoricalExtreme(item));
+
+$("enchentesList").innerHTML = referenceRowsHtml(historicos, currentLevel);
+$("bairrosList").innerHTML = referenceRowsHtml(bairros, currentLevel);
+
+// Só centraliza no primeiro carregamento -- nas atualizações periódicas
+// (a cada 5 min) não deve puxar o scroll de quem estiver lendo outra
+// parte da lista.
+if (!referenceListsCentered) {
+centerCurrentMarker("enchentesList");
+centerCurrentMarker("bairrosList");
+referenceListsCentered = true;
+}
 
 $("alertList").innerHTML = data.cotas_alerta
 .slice()
@@ -374,12 +423,12 @@ const labelY = Math.min(cy + (isNarrow ? 18 : 22), height - pad.bottom - 6);
 return `
 <circle class="current-point-ring" cx="${cx}" cy="${cy}" r="5" fill="none" stroke="${color}" stroke-width="2"/>
 <circle class="current-point-dot" cx="${cx}" cy="${cy}" r="5" fill="${color}" stroke="#071019" stroke-width="1.5"/>
-<text class="current-point-label" x="${cx}" y="${labelY}" text-anchor="middle" fill="#eef7fb" font-size="${fs.current}" font-weight="800">Cota atual</text>
+<text class="current-point-label" x="${cx}" y="${labelY}" text-anchor="middle" fill="#eef7fb" font-size="${fs.current}" font-weight="800">Nível atual</text>
 `;
 })() : ""}
 ${wetPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#ff3d42"/>`).join("")}
 <text x="${pad.left}" y="${isNarrow ? 14 : 18}" fill="#9fb4c1" font-size="${fs.axisTitle}">Leitura da régua (m)</text>
-${histPoints.map((p, idx) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="${idx === histPoints.length - 1 ? "Cota atual" : "Histórico"}"/>`).join("")}
+${histPoints.map((p, idx) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="${idx === histPoints.length - 1 ? "Nível atual" : "Histórico"}"/>`).join("")}
 ${wetPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão"/>`).join("")}
 <rect x="${pad.left}" y="${rainPlotTop}" width="${plotW}" height="${rain.barsH}" rx="6" fill="rgba(72,167,255,.05)" stroke="rgba(180,215,230,.14)"/>
 <text x="${pad.left}" y="${rainTitleY}" fill="#9fb4c1" font-size="${fs.axisTitle}">Chuva (mm)</text>

@@ -83,6 +83,12 @@ h2 {
   color: var(--soft);
 }
 
+.source-note {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 .actions {
   display: flex;
   align-items: center;
@@ -470,6 +476,23 @@ h2 {
   margin-top: 12px;
 }
 
+.reference-list {
+  max-height: 250px;
+  overflow-y: auto;
+  padding-right: 4px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(180, 215, 230, .35) transparent;
+}
+
+.reference-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reference-list::-webkit-scrollbar-thumb {
+  background: rgba(180, 215, 230, .35);
+  border-radius: 6px;
+}
+
 .ref-row,
 .alert-row {
   display: grid;
@@ -503,9 +526,9 @@ h2 {
   border-radius: 10px;
   background: rgba(159, 180, 193, .06);
   border: 1px solid rgba(180, 215, 230, .14);
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.65;
-  color: var(--muted);
+  color: var(--soft);
 
   text-align: justify;}
 
@@ -1049,6 +1072,39 @@ td {
 
 .faq-item strong {
   color: var(--text);
+}
+
+.faq-item details {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.faq-item details summary {
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan);
+  list-style: none;
+}
+
+.faq-item details summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item details summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 6px;
+  transition: transform .15s ease;
+}
+
+.faq-item details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.faq-item details p {
+  margin: 10px 0 0;
 }
 
 @media (max-width: 640px) {
