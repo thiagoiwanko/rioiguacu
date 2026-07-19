@@ -25,7 +25,7 @@
 <meta name="twitter:title" content="Rio Iguaçu Hoje: nível, vazão, chuva e alerta de enchente em tempo real">
 <meta name="twitter:description" content="Site gratuito e público pra acompanhar o Rio Iguaçu em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel.">
 <meta name="twitter:image" content="https://rioiguacu.com/og-image.png">
-<link rel="stylesheet" href="styles.css?v=1.44">
+<link rel="stylesheet" href="styles.css?v=1.45">
 <script type="application/ld+json">
 {
 "@context": "https://schema.org",
@@ -356,37 +356,55 @@
 
 <details class="faq-item">
 <summary>O que é a ANA?</summary>
-<p>A Agência Nacional de Águas e Saneamento Básico (ANA) é a autarquia federal responsável, entre outras atribuições, pela rede nacional de monitoramento dos rios brasileiros. É ela que mantém e publica, em portal aberto (HidroWeb), as séries de medições usadas neste site.</p>
+<p>A Agência Nacional de Águas e Saneamento Básico (ANA) é a autarquia federal responsável, entre outras atribuições, pela rede nacional de monitoramento dos rios brasileiros — milhares de estações de medição espalhadas pelo país. São as estações da ANA em União da Vitória que fornecem todas as medições de nível usadas neste site.</p>
 </details>
 
 <details class="faq-item">
-<summary>De onde vêm as medições do rio?</summary>
-<p>De duas estações oficiais da ANA em União da Vitória. A estação fluviométrica <strong>65310000</strong> registra o nível do rio desde 22 de maio de 1930 — é a série histórica, com dados revisados e consolidados até 2023. A estação telemétrica <strong>65310001</strong> mede automaticamente, de hora em hora, e é a fonte das leituras em tempo real exibidas no site. As duas usam o mesmo zero de régua, situado na cota altimétrica de 739,61 m — valor confirmado pelo projeto por comparação entre as leituras de régua e o nível d'água correspondente.</p>
+<summary>O que é o HidroWeb?</summary>
+<p>É o portal público da ANA onde ficam armazenadas as séries de medições de todas as estações da rede nacional. Qualquer pessoa pode consultar e baixar os dados, sem custo. Foi do HidroWeb que este projeto obteve a série completa do Rio Iguaçu em União da Vitória desde 1930 — a mesma que fundamenta os níveis de alerta e as estatísticas do site.</p>
 </details>
 
 <details class="faq-item">
-<summary>O que é o CNEFE?</summary>
-<p>É o Cadastro Nacional de Endereços para Fins Estatísticos, mantido pelo IBGE e atualizado a cada Censo. É a lista pública e oficial dos endereços do país, e é dela que vêm os endereços usados no cálculo das cotas por bairro.</p>
+<summary>O que é uma estação fluviométrica?</summary>
+<p>É uma instalação fixa à margem do rio destinada a medir seu nível (e, em muitos casos, sua vazão) sempre no mesmo ponto, dia após dia. A medição de referência é feita na régua — uma escala graduada fixada na margem. A estação fluviométrica de União da Vitória (código 65310000) opera desde 22 de maio de 1930 e é uma das séries mais longas da região: são mais de 35 mil dias de registro. Seus dados passam por revisão técnica da ANA (a chamada consistência) antes da publicação definitiva.</p>
+</details>
+
+<details class="faq-item">
+<summary>O que é uma estação telemétrica?</summary>
+<p>É uma estação automática: sensores medem o nível do rio sem depender de leitura humana e transmitem os dados à distância. A estação telemétrica de União da Vitória (código 65310001) registra o nível de hora em hora, todos os dias, e é ela que permite ao site mostrar o rio "agora" — cada leitura nova chega ao site logo depois de medida. Como esses dados são transmitidos na hora, sem a revisão técnica que a série histórica recebe, o site os trata como dados brutos: bons para acompanhamento em tempo real, sujeitos a falhas ocasionais do sensor.</p>
+</details>
+
+<details class="faq-item">
+<summary>O que é o "nível de régua"? É a profundidade do rio?</summary>
+<p>Não é profundidade. A régua é uma escala fixada na margem, e o "zero" dela não é o fundo do rio: é um ponto de referência fixo, escolhido abaixo do nível das águas mais baixas. O que o site mostra — "rio a 4,00 m" — é a altura da água acima desse zero.</p>
+<p>O zero da régua de União da Vitória está na cota altimétrica de 739,61 m (altitude em relação à referência oficial de nível do mar usada no Brasil). Isso permite a conversão que sustenta todo o estudo: rio a 4,00 m de régua significa água na altitude de 743,61 m. Como a altitude dos terrenos da cidade é medida na mesma referência, dá para comparar diretamente o nível do rio com a altura de cada bairro — é assim que nascem as cotas por bairro exibidas no site.</p>
+</details>
+
+<details class="faq-item">
+<summary>O que é o IAT?</summary>
+<p>O Instituto Água e Terra (IAT) é o órgão do Governo do Paraná responsável pelo meio ambiente e pelos recursos hídricos no estado. Entre suas atribuições está manter o GeoPR, portal público de mapas e dados geográficos do Paraná — a fonte do mapeamento de relevo usado neste estudo.</p>
 </details>
 
 <details class="faq-item">
 <summary>De onde vem a altitude dos terrenos?</summary>
-<p>Do mapeamento oficial do relevo do Paraná, publicado pelo GeoPR — portal de dados geográficos do Instituto Água e Terra (IAT), órgão ambiental do governo estadual — a partir de levantamento aerofotogramétrico a laser realizado em 2012. Esse mapeamento tem margem de erro que pode alcançar dezenas de centímetros, razão pela qual todas as cotas do site são tratadas como estimativas e a verificação de campo segue em andamento.</p>
+<p>Do mapeamento oficial do relevo publicado no GeoPR/IAT, produzido a partir de levantamento aerofotogramétrico a laser realizado em 2012 sobre a região. A partir dele, o projeto associou uma altitude a cada endereço da cidade. Esse mapeamento tem margem de erro que pode alcançar dezenas de centímetros, razão pela qual todas as cotas do site são tratadas como estimativas e a verificação de campo segue em andamento.</p>
+</details>
+
+<details class="faq-item">
+<summary>O que é o CNEFE?</summary>
+<p>É o Cadastro Nacional de Endereços para Fins Estatísticos, mantido pelo IBGE e atualizado a cada Censo — a lista pública e oficial dos endereços do país, com a localização de cada um. É dela que vêm os endereços usados no cálculo das cotas por bairro, sempre de forma agregada, sem identificar moradores.</p>
 </details>
 
 <details class="faq-item">
 <summary>Esses números são exatos?</summary>
-<p>Os níveis do rio, sim — provêm das medições oficiais da ANA. As cotas de terreno, contudo, são estimativas: derivam de levantamento cartográfico cuja margem de erro pode alcançar dezenas de centímetros, os terrenos variam dentro de uma mesma rua, e a verificação de campo encontra-se em andamento. As contagens de endereços devem, portanto, ser lidas como ordens de grandeza — não como afirmação sobre qualquer imóvel específico. Estes níveis constituem referência de planejamento, não garantia. Em situação de cheia, prevalecem as orientações dos órgãos oficiais de proteção e defesa civil.</p>
+<p>Os níveis do rio, sim — provêm das medições oficiais da ANA. As cotas de terreno, contudo, são estimativas: derivam do levantamento cartográfico do GeoPR/IAT, cuja margem de erro pode alcançar dezenas de centímetros, os terrenos variam dentro de uma mesma rua, e a verificação de campo encontra-se em andamento. As contagens de endereços devem, portanto, ser lidas como ordens de grandeza — não como afirmação sobre qualquer imóvel específico. Estes níveis constituem referência de planejamento, não garantia. Em situação de cheia, prevalecem as orientações dos órgãos oficiais de proteção e defesa civil.</p>
 </details>
+
+<a href="estudo.html" class="faq-cta-button">Quer entender a fundo? Veja de onde vêm os dados →</a>
 
 <details class="faq-item">
 <summary>Fontes</summary>
 <p>Série histórica diária: ANA/HidroWeb, estação fluviométrica 65310000 — União da Vitória (1930–2023); dados recentes: estação telemétrica ANA 65310001 (2024 em diante). Banco de cotas do projeto: endereços do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE/IBGE) associados ao relevo derivado das curvas de nível do GeoPR — Instituto Água e Terra do Paraná (levantamento aerofotogramétrico a laser, 2012); zero da régua na cota altimétrica 739,61 m, confirmado por comparação entre leituras de régua e nível d'água. Todos os cálculos podem ser reproduzidos a partir dessas bases públicas.</p>
-</details>
-
-<details class="faq-item">
-<summary>Quer conhecer mais sobre este projeto?</summary>
-<p>Para nos conhecer mais e conhecer nosso estudo, <a href="estudo.html">clique aqui</a>.</p>
 </details>
 </div>
 </section>
@@ -408,11 +426,11 @@
 </div>
 
 <footer class="version-footer">
-<span>Versão 1.44</span>
+<span>Versão 1.45</span>
 <span id="visitCounter" class="visit-counter"></span>
 </footer>
 </main>
 
-<script src="app.js?v=1.44"></script>
+<script src="app.js?v=1.45"></script>
 </body>
 </html>

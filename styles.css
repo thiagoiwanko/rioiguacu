@@ -534,6 +534,26 @@ h2 {
   text-decoration: underline;
 }
 
+.faq-cta-button {
+  display: block;
+  text-align: center;
+  margin: 4px 0;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(24, 217, 210, .45);
+  background: rgba(24, 217, 210, .10);
+  color: var(--cyan);
+  font-weight: 800;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background .15s ease, border-color .15s ease;
+}
+
+.faq-cta-button:hover {
+  background: rgba(24, 217, 210, .18);
+  border-color: rgba(24, 217, 210, .7);
+}
+
 .ref-row-current {
   position: relative;
   margin: 2px 0;
