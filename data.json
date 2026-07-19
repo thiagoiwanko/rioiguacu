@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-19T08:09",
+    "atualizado_em": "2026-07-19T08:11",
     "historico": [
       {
         "data_hora": "2026-07-17T09:00",
@@ -382,23 +382,21 @@
         "vazao_m3s": 926,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-19T08:00",
+        "regua_m": 3.854,
+        "nivel_agua_m": 743.464,
+        "vazao_m3s": 921,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
       {
-        "data_hora": "2026-07-19T03:00",
-        "regua_sem_chuva_m": 3.91,
-        "regua_com_chuva_m": 3.91
-      },
-      {
-        "data_hora": "2026-07-19T09:00",
-        "regua_sem_chuva_m": 3.87,
-        "regua_com_chuva_m": 3.87
-      },
-      {
         "data_hora": "2026-07-19T15:00",
-        "regua_sem_chuva_m": 3.83,
-        "regua_com_chuva_m": 3.83
+        "regua_sem_chuva_m": 3.84,
+        "regua_com_chuva_m": 3.84
       },
       {
         "data_hora": "2026-07-19T21:00",
@@ -414,23 +412,33 @@
         "data_hora": "2026-07-20T09:00",
         "regua_sem_chuva_m": 3.71,
         "regua_com_chuva_m": 3.71
+      },
+      {
+        "data_hora": "2026-07-20T15:00",
+        "regua_sem_chuva_m": 3.67,
+        "regua_com_chuva_m": 3.67
+      },
+      {
+        "data_hora": "2026-07-20T21:00",
+        "regua_sem_chuva_m": 3.64,
+        "regua_com_chuva_m": 3.64
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-19T07:00",
-      "regua_m": 3.861,
-      "nivel_agua_m": 743.471,
-      "vazao_m3s": 926,
+      "data_hora": "2026-07-19T08:00",
+      "regua_m": 3.854,
+      "nivel_agua_m": 743.464,
+      "vazao_m3s": 921,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "OBSERVAÇÃO",
     "tendencia": {
-      "texto": "Baixando cerca de 0,8 cm por hora",
-      "delta": -0.008000000000000007,
+      "texto": "Baixando cerca de 0,7 cm por hora",
+      "delta": -0.007000000000000117,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão da Copel para as próximas 48 horas: 3,87 m. Não é um alerta oficial da Defesa Civil.",
+    "alerta_previsao": "Previsão da Copel para as próximas 48 horas: 3,84 m. Não é um alerta oficial da Defesa Civil.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
