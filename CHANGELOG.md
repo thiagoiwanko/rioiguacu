@@ -6,6 +6,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.47 — 2026-07-18
+
+- **Corrigido espaço vazio abaixo do gráfico**, reportado pelo usuário ("vc consegue perceber o espaço vazio que ficou abaixo do grafico?"). Causa: desde a v1.46 (item 2), a coluna direita (`.side-panel`) passou a ter 3 quadros empilhados (Enchentes Históricas, Referências por Bairro, Alertas), ficando bem mais alta que a coluna esquerda (só o card do gráfico) — sobrava um vão grande abaixo do gráfico.
+- **Solução**: `.main-grid` reestruturado com `grid-template-areas`, movendo as seções "Dados e Histórico" e "Perguntas frequentes" para dentro da coluna esquerda, empilhadas abaixo do gráfico (`chart` → `history` → `faq`), com `.side-panel` ocupando as 3 linhas à direita (`side`). No mobile (`max-width: 1120px`), a ordem de empilhamento vira gráfico → side-panel → histórico → FAQ. Pedido do usuário: "reduza para que caiba ali a parte dados historicos e perguntas frequentes".
+- Nenhuma mudança de conteúdo/dados — só reposicionamento via CSS Grid e ajuste da estrutura de `<section>` no `index.html` (as duas seções passaram a ser filhas diretas de `.main-grid`, e não mais de um bloco separado depois dele).
+- Backup pré-edição: `backups/site-v1.46.zip`.
+
 ## v1.46 — 2026-07-18
 
 Lote de correções enviado pelo usuário em formato de tabela (Prioridade/Problema/Correção), confirmado para implementação em lote único ("Tudo de uma vez"):

@@ -358,12 +358,29 @@ h2 {
 .main-grid {
   display: grid;
   grid-template-columns: minmax(720px, 1fr) 360px;
+  grid-template-areas:
+    "chart side"
+    "history side"
+    "faq side";
   align-items: start;
   gap: 14px;
 }
 
 .chart-panel {
+  grid-area: chart;
   min-height: 570px;
+}
+
+.side-panel {
+  grid-area: side;
+}
+
+.tabs-panel {
+  grid-area: history;
+}
+
+.faq-panel {
+  grid-area: faq;
 }
 
 .panel-title {
@@ -630,7 +647,6 @@ h2 {
 
 .tabs-panel {
   padding: 18px;
-  margin-bottom: 18px;
 }
 
 .tabs-nav {
@@ -820,6 +836,11 @@ td {
 
   .main-grid {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      "chart"
+      "side"
+      "history"
+      "faq";
   }
 }
 
@@ -942,10 +963,13 @@ td {
   text-decoration: none;
 }
 
-.info-panel,
-.faq-panel {
+.info-panel {
   padding: 18px;
   margin-bottom: 18px;
+}
+
+.faq-panel {
+  padding: 18px;
 }
 .info-grid {
   display: grid;
