@@ -6,6 +6,18 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+**Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
+
+## v1.51 — 2026-07-19
+
+- **Nova página `estudo.html`, substituindo o placeholder "Em breve"** (existente desde a v1.44/v1.45): agora tem conteúdo real, com um seletor no topo com duas opções — **"Para o público"** e **"Para especialistas"** (nomes escolhidos pelo usuário entre as opções propostas, no lugar de "leigos").
+- **"Para o público"**: guia em linguagem simples para a população e a imprensa, conteúdo fornecido pelo usuário (`ESTUDO_VERSAO_POPULAR_IMPRENSA.md`) — explica de onde vêm os números do site, como os níveis de alerta foram definidos, os cuidados que o leitor deve ter com as cotas de bairro, o papel da Defesa Civil e recomendações específicas para jornalistas que forem citar os dados.
+- **"Para especialistas"**: artigo científico completo, conteúdo fornecido pelo usuário (`ARTIGO_CIENTIFICO_MONITORAMENTO_CHEIAS_UV_1.md`) — método estatístico-geoespacial (análise de frequência por Gumbel/GEV e L-momentos, teste de tendência de Mann-Kendall, dinâmica de subidas/recessões, exposição urbana por comparação altimétrica), verificação frente a práticas de referência (USGS Bulletin 17C, Flood Estimation Handbook, WMO, Diretiva europeia de inundações), resultados, discussão, limitações e agenda de evolução em 3 camadas, com lista de referências.
+- **Texto do artigo técnico justificado (`text-align: justify`) e organizado em layout de artigo científico** (título, bloco de metadados, resumo destacado, palavras-chave, seções numeradas, tabela de resultados, lista de referências em fonte menor), a pedido explícito do usuário ("o texto precisa ser justificado, e organizado o layout como artigo") — implementado via bloco `<style>` próprio dentro de `estudo.html`, sem alterar o `styles.css` compartilhado do resto do site.
+- Alternância entre as duas visões via pequeno script inline em `estudo.html` (não depende de `app.js`), reaproveitando as classes já existentes `.tabs-nav`/`.tab-btn`/`.tab-btn.active` do restante do site para o seletor.
+- Nenhuma mudança em `index.html` — o link já existente no FAQ ("Quer entender a fundo? Veja de onde vêm os dados →", adicionado na v1.45) já apontava corretamente para `estudo.html`.
+- Backup pré-edição: `backups/site-v1.50.zip`.
+
 ## v1.50 — 2026-07-19
 
 - **Correção definitiva do alinhamento entre as duas tabelas do "Ranking Sazonal"**, depois que a v1.49 (baseada só em `min-height` chutado) não resolveu em telas mais estreitas — usuário reportou de volta com print mostrando o degrau ainda presente. Causa raiz: `min-height` era um valor fixo estimado pra "no máximo 2 linhas", mas em janelas mais estreitas o subtítulo mais longo ("Só as grandes enchentes...") passou a quebrar em mais linhas do que isso reservava.
@@ -56,13 +68,13 @@ Lote de correções enviado pelo usuário em formato de tabela (Prioridade/Probl
 ## v1.45 — 2026-07-18
 
 - **FAQ bastante ampliado**, com conteúdo revisado e fornecido pelo usuário:
-  - "O que é a ANA?" reescrita.
-  - Novas perguntas: "O que é o HidroWeb?", "O que é uma estação fluviométrica?" e "O que é uma estação telemétrica?" — estas duas últimas substituem a antiga pergunta única "De onde vêm as medições do rio?", detalhando separadamente a 65310000 (histórica) e a 65310001 (tempo real).
-  - Nova pergunta: `O que é o "nível de régua"? É a profundidade do rio?`, explicando o conceito de régua/zero de régua e a conversão pra cota altimétrica (739,61 m).
-  - Nova pergunta: "O que é o IAT?".
-  - "De onde vem a altitude dos terrenos?" e "O que é o CNEFE?" reescritas (mais diretas, já que "IAT" passou a ter pergunta própria antes delas).
-  - "Esses números são exatos?" ganhou menção explícita à fonte das cotas de terreno (GeoPR/IAT).
-  - Ordem reorganizada: ANA → HidroWeb → estação fluviométrica → estação telemétrica → nível de régua → IAT → altitude dos terrenos → CNEFE → exatidão → botão → Fontes.
+- "O que é a ANA?" reescrita.
+- Novas perguntas: "O que é o HidroWeb?", "O que é uma estação fluviométrica?" e "O que é uma estação telemétrica?" — estas duas últimas substituem a antiga pergunta única "De onde vêm as medições do rio?", detalhando separadamente a 65310000 (histórica) e a 65310001 (tempo real).
+- Nova pergunta: `O que é o "nível de régua"? É a profundidade do rio?`, explicando o conceito de régua/zero de régua e a conversão pra cota altimétrica (739,61 m).
+- Nova pergunta: "O que é o IAT?".
+- "De onde vem a altitude dos terrenos?" e "O que é o CNEFE?" reescritas (mais diretas, já que "IAT" passou a ter pergunta própria antes delas).
+- "Esses números são exatos?" ganhou menção explícita à fonte das cotas de terreno (GeoPR/IAT).
+- Ordem reorganizada: ANA → HidroWeb → estação fluviométrica → estação telemétrica → nível de régua → IAT → altitude dos terrenos → CNEFE → exatidão → botão → Fontes.
 - **Botão de destaque no fim do FAQ** ("Quer entender a fundo? Veja de onde vêm os dados →"), substituindo o item de acordeão "Quer conhecer mais sobre este projeto?" da v1.44 — link para `estudo.html`, agora estilizado como botão (`.faq-cta-button`, novo em `styles.css`) em vez de pergunta.
 - Página `estudo.html` renomeada/retitulada para "De onde vêm os dados: o estudo por trás do rioiguacu.com", mantendo o aviso de "em breve" até o artigo real ser publicado.
 - Backup pré-edição: `backups/site-v1.44.zip`.
