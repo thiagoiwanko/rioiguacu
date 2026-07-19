@@ -49301,15 +49301,15 @@ Stacktrace:
 [19/07/2026 03:19:05] Previsões extraídas: 6
 [19/07/2026 03:19:05] Dados atualizados com sucesso.
 [19/07/2026 03:19:05] data.json gravado (13791 bytes).
-[19/07/2026 03:20:34] Execução do scrape.py iniciada (GitHub Actions).
-[19/07/2026 03:20:49] ANA: 3 medições obtidas com sucesso (estação 65310001).
-[19/07/2026 03:20:49] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[19/07/2026 03:21:11] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
-[19/07/2026 03:21:11] Previsões extraídas: 6
-[19/07/2026 03:21:11] Ainda sem dado novo (última: 2026-07-19T03:00, fonte: ANA). Aguardando 30s para nova tentativa.
-[19/07/2026 03:21:44] ANA: 3 medições obtidas com sucesso (estação 65310001).
-[19/07/2026 03:21:44] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
-[19/07/2026 03:21:58] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
-[19/07/2026 03:21:58] Previsões extraídas: 6
-[19/07/2026 03:21:58] Dados atualizados com sucesso.
-[19/07/2026 03:21:58] data.json gravado (13791 bytes).
+[19/07/2026 03:22:22] Execução do scrape.py iniciada (GitHub Actions).
+[19/07/2026 03:22:33] ANA: 3 medições obtidas com sucesso (estação 65310001).
+[19/07/2026 03:22:33] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[19/07/2026 03:22:59] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
+[19/07/2026 03:22:59] Previsões extraídas: 6
+[19/07/2026 03:22:59] Ainda sem dado novo (última: 2026-07-19T03:00, fonte: ANA). Aguardando 30s para nova tentativa.
+[19/07/2026 03:23:34] ANA: 3 medições obtidas com sucesso (estação 65310001).
+[19/07/2026 03:23:34] Iniciando coleta: https://www.copel.com/mhbweb/paginas/previsao.jsf
+[19/07/2026 03:23:48] Coleta concluída: https://www.copel.com/mhbweb/paginas/previsao.jsf (1038 caracteres)
+[19/07/2026 03:23:48] Previsões extraídas: 6
+[19/07/2026 03:23:48] Dados atualizados com sucesso.
+[19/07/2026 03:23:48] data.json gravado (13791 bytes).
