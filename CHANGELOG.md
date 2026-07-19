@@ -6,6 +6,21 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.43 — 2026-07-18
+
+- **FAQ reestruturado: cada pergunta agora é seu próprio item de acordeão**, no mesmo padrão visual dos demais itens (Ranking Sazonal, Enchentes Históricas, Dados Visíveis), em vez de um único item guarda-chuva com 11 subtítulos `<h3>` dentro. Pedido do usuário ("faça que cada pergunta daquela vire uma abinha"). Isso também corrigiu, na raiz, um bug visual relatado pelo usuário: o `<h3>` aninhado dentro do `<details>` estava renderizando grande/branco em vez do estilo pequeno (14px)/ciano pretendido — como não há mais `<h3>` aninhado, a hierarquia invertida deixa de existir.
+- **Removido o parágrafo de abertura do FAQ** ("Cobre somente o que o site exibe: níveis de alerta, cotas por bairro e as fontes dos dados. Todos os números derivam de fontes auditadas do projeto... Nenhum critério externo foi utilizado."), sinalizado pelo usuário como confuso e sem relação com a pergunta do resumo — usava jargão interno (CNEFE, GeoPR/IAT) sem contexto para quem chega no site sem conhecer os bastidores do projeto.
+- **Corrigido bug de cache do `styles.css`:** o `<link>` não tinha parâmetro de versão (diferente do `app.js?v=X.XX`), então o navegador podia manter indefinidamente uma cópia antiga do CSS em cache. Agora é `styles.css?v=1.43`.
+- Subtítulo da 1ª tabela do Ranking Sazonal simplificado para "Em que mês o rio atingiu o pico do ano (o nível mais alto de cada ano) · 1930–2025", a pedido do usuário. (Esse ajuste tinha sido rascunhado localmente como "v1.42" antes de ganhar sua forma final — nunca chegou a ser publicado como versão separada; entra direto nesta v1.43.)
+- Backup pré-edição: `backups/site-v1.41.zip`.
+
+## v1.41 — 2026-07-18
+
+- Subtítulo da 2ª tabela do Ranking Sazonal reformulado para "Em que mês ocorreu o pico de cada enchente (considerado enchentes de 10 anos com cota mínima ≥ 6,89 m) · 1930–07/2026", a pedido do usuário (texto anterior estava confuso).
+- Removida a frase "Atualizado em 18/07/2026: inclui picos de 2024 (Dezembro, 5,48 m) e 2025 (Junho, 4,57 m), fonte telemétrica 65310001. 2026 (parcial) não entra na contagem." da nota de rodapé do Ranking Sazonal, a pedido do usuário.
+- Subtítulo de Enchentes Históricas simplificado para "Abaixo, os meses em que ocorreram cada enchente (nível ≥ 6,89 m)", removendo a explicação sobre o critério de 6,89 m que ficava ali (o usuário pediu para cortar em duas etapas, terminando nesse texto mínimo).
+- Backup pré-edição: `backups/site-v1.40.zip`.
+
 ## v1.40 — 2026-07-18
 
 - **As 3 seções (Dados Visíveis, Ranking Sazonal, Enchentes Históricas) viraram acordeão no mesmo formato do FAQ** (`<details>/<summary>`), substituindo o padrão de abas com botões da v1.39. Ordem: Ranking Sazonal, Enchentes Históricas, Dados Visíveis (por último) — pedido do usuário. `setupTabs()` removido de `app.js`, já que o `<details>` nativo dispensa JS.
