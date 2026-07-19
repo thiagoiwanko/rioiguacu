@@ -8,6 +8,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.57 — 2026-07-19
+
+- **Substituído `artigo-cientifico-uv.pdf` pela versão corrigida enviada pelo usuário** (correções de formatação ABNT). Novo arquivo enviado como `NOTA_TECNICA_MONITORAMENTO_CHEIAS_UV_ABNT.pdf`, publicado no repositório com o mesmo nome de sempre (`artigo-cientifico-uv.pdf`), sem necessidade de alterar `estudo.html` — só o conteúdo do PDF muda. 21 páginas A4 (era 20 na versão anterior), mesmo título e autoria, texto extraído confere com o artigo já usado.
+- Backup pré-edição: `backups/site-v1.56.zip` (contém a versão anterior do PDF, 20 páginas, para rollback se necessário).
+
 ## v1.56 — 2026-07-19
 
 - **Adicionado `data-nosnippet` aos blocos de dados que mudam a cada 5 minutos em `index.html`**, a pedido do usuário: o Google estava usando esses números (vazão, chuva, tendência, régua) no trecho de resultado de busca (snippet), e como o snippet é indexado/atualizado com atraso, alguém que só lê a busca sem entrar no site podia ver um número de horas/dias atrás pensando que era o valor atual — risco real de confusão numa situação de enchente. `data-nosnippet` sinaliza ao Google para não usar aquele trecho no texto do resultado de busca (não afeta o SEO/ranking da página, só o que aparece como preview).
