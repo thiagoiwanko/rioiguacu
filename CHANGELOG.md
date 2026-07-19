@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.58 — 2026-07-19
+
+- **Causa real do "aparecem só 13/20 páginas" identificada:** não era mais o travamento (corrigido na v1.55) — era **cache do navegador**. O `pdf.js` buscava sempre a mesma URL fixa `artigo-cientifico-uv.pdf`, sem parâmetro de versão; quando o conteúdo do arquivo mudou (v1.57), navegadores que já tinham aberto `estudo.html` antes continuaram servindo a cópia antiga do PDF do cache local, mesmo com o arquivo novo já publicado no GitHub/Cloudflare (confirmado buscando o arquivo ao vivo direto por HTTP, sem passar pelo navegador: o conteúdo publicado sempre esteve correto, 21 páginas, "Nota Técnica — Versão 1.3").
+- **Correção:** a chamada `pdfjsLib.getDocument(...)` agora usa `artigo-cientifico-uv.pdf?v=1.58`, com o número de versão do site como cache-buster. A cada futura substituição do PDF, o parâmetro de versão deve ser incrementado junto — do contrário, o mesmo problema se repete.
+- **Novo arquivo do artigo** (já publicado na v1.57): correções de formatação ABNT enviadas pelo usuário. 21 páginas A4, mesmo título e autoria da versão anterior.
+- Backup pré-edição: `backups/site-v1.57.zip`.
+
 ## v1.57 — 2026-07-19
 
 - **Substituído `artigo-cientifico-uv.pdf` pela versão corrigida enviada pelo usuário** (correções de formatação ABNT). Novo arquivo enviado como `NOTA_TECNICA_MONITORAMENTO_CHEIAS_UV_ABNT.pdf`, publicado no repositório com o mesmo nome de sempre (`artigo-cientifico-uv.pdf`), sem necessidade de alterar `estudo.html` — só o conteúdo do PDF muda. 21 páginas A4 (era 20 na versão anterior), mesmo título e autoria, texto extraído confere com o artigo já usado.
