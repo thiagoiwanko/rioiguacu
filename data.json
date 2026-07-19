@@ -3,9 +3,9 @@
   "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
-    "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
-    "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-19T20:37",
+    "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
+    "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
+    "atualizado_em": "2026-07-19T20:39",
     "historico": [
       {
         "data_hora": "2026-07-17T21:00",
@@ -299,7 +299,7 @@
         "data_hora": "2026-07-19T09:00",
         "regua_m": 3.847,
         "nivel_agua_m": 743.457,
-        "vazao_m3s": 924,
+        "vazao_m3s": 923,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -331,7 +331,7 @@
         "data_hora": "2026-07-19T13:00",
         "regua_m": 3.816,
         "nivel_agua_m": 743.426,
-        "vazao_m3s": 911,
+        "vazao_m3s": 910,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
