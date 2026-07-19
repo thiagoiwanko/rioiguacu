@@ -8,6 +8,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.54 — 2026-07-19
+
+- **Lado "Para especialistas" de `estudo.html` substituído por um visualizador de PDF embutido**, a pedido do usuário: agora mostra o artigo científico em formatação ABNT (`artigo-cientifico-uv.pdf`, 20 páginas, fornecido pelo usuário), publicado na raiz do repositório, em vez do texto em HTML usado nas v1.51–v1.53.
+- **Implementação:** biblioteca `pdf.js` (cdnjs, v3.11.174) renderiza cada página do PDF num `<canvas>`, empilhados verticalmente dentro de `estudo.html` — não é um `<iframe>`/`<embed>` com o visualizador nativo do navegador, justamente para não expor o botão de download/impressão que os visualizadores nativos (Chrome, Edge, Safari) mostram por padrão. Carregamento em modo lazy: o PDF só é buscado e renderizado no primeiro clique em "Para especialistas", não no carregamento da página.
+- **Bloqueio de download:** clique direito desabilitado sobre a área do visualizador (`oncontextmenu="return false"`) e nenhum link direto para o arquivo em nenhum lugar da página. **Ressalva importante, documentada aqui para transparência:** como o arquivo `artigo-cientifico-uv.pdf` precisa ficar publicamente acessível na mesma origem para o `pdf.js` conseguir buscá-lo, não existe bloqueio de download 100% à prova de tudo em um site estático sem backend/autenticação — alguém com conhecimento técnico (aba de rede do navegador, view-source) ainda consegue obter o arquivo. O que foi implementado é a barreira de interface padrão (sem botão de download visível, sem menu de contexto, sem visualizador nativo com toolbar) — não uma proteção criptográfica ou de acesso.
+- Removida a caixa de metadados do lado "Para o público" ("Guia para a população e a imprensa · Versão 1.1..."), a pedido do usuário.
+- Novo arquivo estático no repositório: `artigo-cientifico-uv.pdf` (244 KB, 20 páginas A4, formatação ABNT).
+- Backup pré-edição: `backups/site-v1.53.zip`.
+
 ## v1.53 — 2026-07-19
 
 - **Recuo de primeira linha (`text-indent`) adicionado aos parágrafos de `estudo.html`**, a pedido do usuário ("vi que não tem espaçamento inicial nos parágrafos") — formatação de artigo tradicional, aplicada aos dois lados (Para o público e Para especialistas), já que ambos usam a mesma classe `.article p`. Excluído do recuo o bloco de metadados (`.article-meta`), o resumo (`.abstract p`), as palavras-chave (`.keywords`) e a nota final (`.note-final`), que continuam sem recuo por não serem parágrafos de corpo de texto corrido.
