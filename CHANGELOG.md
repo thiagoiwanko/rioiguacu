@@ -6,6 +6,14 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.44 — 2026-07-18
+
+- Subtítulo de Enchentes Históricas simplificado mais uma vez, para "Abaixo, os meses em que ocorreram cada grande enchente." (removido o "(nível ≥ 6,89 m)" do final, a pedido do usuário).
+- **Nova pergunta no FAQ:** "Quer conhecer mais sobre este projeto?", com link para uma nova página `estudo.html` — reservada para um artigo com a metodologia documentada a nível científico, que o usuário vai publicar depois. Criada uma página `estudo.html` provisória ("Em breve...") pra esse link não ficar quebrado até o conteúdo real ser publicado.
+- Resposta de "E quando o rio está muito baixo?" ampliada com mais estatística: 59 episódios de estiagem em 96 anos, concentrados entre outono e início da primavera, e o mais longo (122 dias) em 2006.
+- Nova regra de estilo `.faq-item p a` (cor ciano, negrito), reaproveitando o padrão visual já usado em `.reference-note a`, para os links dentro de respostas do FAQ.
+- Backup pré-edição: `backups/site-v1.43.zip`.
+
 ## v1.43 — 2026-07-18
 
 - **FAQ reestruturado: cada pergunta agora é seu próprio item de acordeão**, no mesmo padrão visual dos demais itens (Ranking Sazonal, Enchentes Históricas, Dados Visíveis), em vez de um único item guarda-chuva com 11 subtítulos `<h3>` dentro. Pedido do usuário ("faça que cada pergunta daquela vire uma abinha"). Isso também corrigiu, na raiz, um bug visual relatado pelo usuário: o `<h3>` aninhado dentro do `<details>` estava renderizando grande/branco em vez do estilo pequeno (14px)/ciano pretendido — como não há mais `<h3>` aninhado, a hierarquia invertida deixa de existir.
