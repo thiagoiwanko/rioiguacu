@@ -3,9 +3,9 @@
   "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
-    "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
-    "url_historico": "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf",
-    "atualizado_em": "2026-07-19T06:12",
+    "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
+    "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
+    "atualizado_em": "2026-07-19T06:16",
     "historico": [
       {
         "data_hora": "2026-07-17T07:00",
