@@ -7,7 +7,7 @@
 <meta name="description" content="Conheça o estudo técnico e científico por trás do Monitor Rio Iguaçu.">
 <link rel="canonical" href="https://rioiguacu.com/estudo.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="stylesheet" href="styles.css?v=1.54">
+<link rel="stylesheet" href="styles.css?v=1.55">
 <style>
 .content-toggle {
   margin-bottom: 18px;
@@ -182,15 +182,40 @@
   padding: 40px 0;
 }
 
+.pdf-viewer-book {
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y proximity;
+  border-radius: 10px;
+  background: #0d1720;
+  border: 1px solid var(--line);
+  padding: 10px;
+}
+
+.pdf-viewer-book::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pdf-viewer-book::-webkit-scrollbar-thumb {
+  background: rgba(180, 215, 230, .35);
+  border-radius: 6px;
+}
+
 .pdf-page-canvas {
   display: block;
   width: 100%;
   height: auto;
-  margin: 0 0 14px;
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, .3);
+  aspect-ratio: 210 / 297;
+  background: #16222c;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  scroll-snap-align: start;
   user-select: none;
+}
+
+.pdf-page-canvas:last-child {
+  margin-bottom: 0;
 }
 </style>
 </head>
@@ -276,16 +301,11 @@
 <section class="faq-panel depth content-view" id="viewEspecialistas">
 <div class="article">
 <h1>Monitoramento e caracterização estatística de cheias do Rio Iguaçu em União da Vitória (PR)</h1>
-<p class="article-meta" style="text-indent:0;">
-<strong>Artigo científico — formatação ABNT (PDF), julho de 2026</strong><br>
-Responsável: Thiago Jorge Iwanko — projeto rioiguacu.com — União da Vitória/PR — thiagoiwanko@gmail.com
-</p>
-<p style="text-indent:0;">Visualização abaixo, sem botão de download na barra de ferramentas. O documento completo — metodologia, verificação frente à literatura de referência, resultados e referências bibliográficas — está nas 20 páginas do PDF.</p>
 </div>
 
 <div class="pdf-viewer-wrap" id="pdfViewerWrap" oncontextmenu="return false">
 <div id="pdfViewerStatus" class="pdf-viewer-status">Carregando o artigo em PDF…</div>
-<div id="pdfViewerPages"></div>
+<div id="pdfViewerBook" class="pdf-viewer-book"></div>
 </div>
 
 <p style="margin:18px 0 0; max-width:780px; margin-left:auto; margin-right:auto;"><a href="index.html" style="color:var(--cyan); font-weight:800; text-decoration:none;">&larr; Voltar para o monitor do Rio Iguaçu</a></p>
@@ -313,7 +333,7 @@ function mostrarView(qual) {
 
 function carregarPdfEspecialistas() {
   var statusEl = document.getElementById('pdfViewerStatus');
-  var pagesEl = document.getElementById('pdfViewerPages');
+  var bookEl = document.getElementById('pdfViewerBook');
   if (typeof pdfjsLib === 'undefined') {
     statusEl.textContent = 'Não foi possível carregar o visualizador de PDF. Tente novamente mais tarde.';
     return;
@@ -321,20 +341,49 @@ function carregarPdfEspecialistas() {
   pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
   pdfjsLib.getDocument('artigo-cientifico-uv.pdf').promise.then(function (pdf) {
     statusEl.remove();
-    var scale = Math.min(2.5, (window.devicePixelRatio || 1) * 1.4);
-    for (var num = 1; num <= pdf.numPages; num++) {
-      (function (pageNum) {
-        pdf.getPage(pageNum).then(function (page) {
+    var scale = Math.min(2, (window.devicePixelRatio || 1) * 1.2);
+    var renderQueue = Promise.resolve();
+    var pending = {};
+
+    function renderPage(pageNum, canvas) {
+      if (canvas.dataset.rendered === '1' || pending[pageNum]) return;
+      pending[pageNum] = true;
+      renderQueue = renderQueue.then(function () {
+        return pdf.getPage(pageNum).then(function (page) {
           var viewport = page.getViewport({ scale: scale });
-          var canvas = document.createElement('canvas');
-          canvas.className = 'pdf-page-canvas';
           canvas.width = viewport.width;
           canvas.height = viewport.height;
           var ctx = canvas.getContext('2d');
-          pagesEl.appendChild(canvas);
-          page.render({ canvasContext: ctx, viewport: viewport });
+          return page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function () {
+            canvas.dataset.rendered = '1';
+            delete pending[pageNum];
+          });
         });
-      })(num);
+      }).catch(function () {
+        delete pending[pageNum];
+      });
+    }
+
+    var observer = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var canvas = entry.target;
+          renderPage(parseInt(canvas.dataset.pageNum, 10), canvas);
+          observer.unobserve(canvas);
+        }
+      });
+    }, { root: bookEl, rootMargin: '600px 0px', threshold: 0.01 }) : null;
+
+    for (var num = 1; num <= pdf.numPages; num++) {
+      var canvas = document.createElement('canvas');
+      canvas.className = 'pdf-page-canvas';
+      canvas.dataset.pageNum = String(num);
+      bookEl.appendChild(canvas);
+      if (observer) {
+        observer.observe(canvas);
+      } else {
+        renderPage(num, canvas);
+      }
     }
   }).catch(function () {
     statusEl.textContent = 'Não foi possível carregar o artigo em PDF. Tente recarregar a página.';
