@@ -7,7 +7,161 @@
 <meta name="description" content="Conheça o estudo técnico e científico por trás do Monitor Rio Iguaçu.">
 <link rel="canonical" href="https://rioiguacu.com/estudo.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="stylesheet" href="styles.css?v=1.50">
+<link rel="stylesheet" href="styles.css?v=1.51">
+<style>
+.content-toggle {
+  margin-bottom: 18px;
+}
+
+.content-toggle .tabs-nav {
+  justify-content: center;
+}
+
+.content-view {
+  display: none;
+}
+
+.content-view.active {
+  display: block;
+}
+
+.article {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.article p {
+  text-align: justify;
+  line-height: 1.75;
+  color: var(--soft);
+  font-size: 14px;
+  margin: 0 0 14px;
+}
+
+.article h1 {
+  font-size: 26px;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.article .article-meta {
+  margin: 0 0 22px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: rgba(159, 180, 193, .06);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.article .article-meta strong {
+  color: var(--soft);
+}
+
+.article h2 {
+  margin: 30px 0 12px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  font-size: 18px;
+  color: var(--cyan);
+}
+
+.article h2:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.article h3 {
+  margin: 20px 0 8px;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.article .abstract {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(24, 217, 210, .06);
+  border: 1px solid rgba(24, 217, 210, .18);
+  margin-bottom: 18px;
+}
+
+.article .abstract p {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.article .abstract p:last-child {
+  margin-bottom: 0;
+}
+
+.article .keywords {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 24px;
+}
+
+.article table {
+  width: 100%;
+  margin: 6px 0 18px;
+  font-size: 13px;
+}
+
+.article strong {
+  color: var(--text);
+}
+
+.article ul, .article ol {
+  margin: 0 0 14px;
+  padding-left: 22px;
+  color: var(--soft);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.article ul li, .article ol li {
+  margin-bottom: 6px;
+}
+
+.article .refs {
+  margin: 0 0 16px;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.article .refs li {
+  margin-bottom: 8px;
+}
+
+.article .note-final {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 12px;
+  font-style: italic;
+  text-align: justify;
+}
+
+.popular .article p {
+  font-size: 15px;
+}
+
+.popular .article ol {
+  font-size: 15px;
+  color: var(--soft);
+}
+
+.popular .article .safety-note {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(255, 61, 66, .06);
+  border: 1px solid rgba(255, 61, 66, .25);
+}
+</style>
 </head>
 <body>
 <main class="shell">
@@ -19,15 +173,218 @@
 </div>
 </header>
 
-<section class="faq-panel depth">
-<h2>Em breve</h2>
-<p style="margin:10px 0;">Estamos preparando o artigo completo, documentado a nível científico, com a metodologia usada nos níveis de alerta e nas cotas por bairro deste site. Volte em breve para conferir.</p>
-<p style="margin:10px 0;"><a href="index.html" style="color:var(--cyan); font-weight:800; text-decoration:none;">&larr; Voltar para o monitor do Rio Iguaçu</a></p>
+<section class="content-toggle">
+<div class="tabs-nav">
+<button type="button" class="tab-btn active" id="btnPublico" onclick="mostrarView('publico')">Para o público</button>
+<button type="button" class="tab-btn" id="btnEspecialistas" onclick="mostrarView('especialistas')">Para especialistas</button>
+</div>
+</section>
+
+<section class="faq-panel depth content-view popular active" id="viewPublico">
+<div class="article">
+
+<h1>Como o rioiguacu.com chega aos seus números</h1>
+<p class="article-meta"><strong>Guia para a população e a imprensa</strong> · Versão 1.0 (proposta), julho de 2026 · projeto rioiguacu.com</p>
+
+<p>Este texto explica, em linguagem simples, de onde vêm as informações do site, como elas são calculadas, o que elas podem e o que não podem dizer — e por que, em emergência, quem manda é a Defesa Civil.</p>
+
+<h2>De onde vêm os números</h2>
+<p>Tudo começa com uma régua no rio. Desde 22 de maio de 1930, o nível do Rio Iguaçu em União da Vitória é medido todos os dias por uma estação oficial do governo federal (a ANA — Agência Nacional de Águas e Saneamento Básico). São mais de 35 mil dias de medição, quase um século. Hoje, uma estação automática mede o nível de hora em hora e é ela que abastece o site em tempo real.</p>
+<p>O site não inventa nem ajusta nenhum número do rio: ele mostra a medição oficial e faz contas em cima dela — contas que qualquer pessoa pode refazer, porque os dados são públicos e os métodos estão explicados no nosso estudo técnico.</p>
+
+<h2>Como os níveis de alerta do site foram definidos</h2>
+<p>Não foi por opinião. Nós estudamos os 96 anos de medições e perguntamos aos dados: o que é normal para este rio? A resposta: na maior parte da vida, o Iguaçu fica em torno de 2 metros. Subir é cada vez mais raro — e cada nível do site marca um degrau dessa raridade.</p>
+<p>Os percentuais abaixo respondem a uma única pergunta: de todos os mais de 35 mil dias medidos desde 1930, em quantos o rio esteve acima daquele nível?</p>
+<ul>
+<li><strong>3,70 m — Observação.</strong> O rio saiu do comportamento habitual. Esteve acima disso em 15% dos dias.</li>
+<li><strong>4,20 m — Atenção.</strong> Esteve acima disso em 10% dos dias.</li>
+<li><strong>5,00 m — Alerta.</strong> Esteve acima disso em 5% dos dias.</li>
+<li><strong>5,50 m — Emergência.</strong> Esteve acima disso em 2,5% dos dias.</li>
+<li><strong>6,50 m — Enchente.</strong> Esteve acima disso em menos de 1% dos dias — é raro, mas, quando acontece, o atingimento é grande.</li>
+</ul>
+<p>O site também vigia a <strong>velocidade</strong>: se o rio sobe muito rápido (0,85 m ou mais em um dia, coisa que só aconteceu em 1% das subidas da história), o aviso sobe um degrau mesmo antes de o nível chegar lá. Isso existe porque o Iguaçu já mostrou pressa: em 2014, subiu mais de 3 metros em dois dias.</p>
+<p>E um dado que surpreende: enchente aqui não é água que passa rápido. Quando o rio passa de 5,50 m, ele costuma ficar semanas no alto — a descida típica é de só 11 centímetros por dia.</p>
+
+<h2>E a cota dos bairros?</h2>
+<p>Para cada bairro, juntamos os endereços do Censo do IBGE com a altitude do terreno medida pelo mapeamento oficial do Paraná. A cota publicada é o nível de rio em que os primeiros terrenos representativos do bairro começam a ficar abaixo da linha d'água — descontando terrenos isolados encostados na margem, que distorceriam o número do bairro inteiro.</p>
+
+<h2>Os cuidados que você deve ter com esses números</h2>
+<p>Aqui está a parte mais importante deste texto.</p>
+<p><strong>As cotas de terreno são aproximadas.</strong> O mapeamento de altitude tem margem de erro que pode chegar a dezenas de centímetros, e dentro de um mesmo bairro — até de uma mesma rua — há terrenos mais altos e mais baixos. A cota do bairro é uma referência de planejamento, não uma sentença sobre a sua casa. Há casas que a água alcança antes do número publicado, e outras bem depois.</p>
+<p><strong>O site mostra até onde a água "alcança" no mapa das alturas — não por onde ela vai passar.</strong> Prever o caminho real da água (ruas, valetas, bueiros, barreiras) exige estudos de engenharia que ainda não existem aqui. Estamos trabalhando para chegar lá, e dizemos isso abertamente.</p>
+<p><strong>Nível de régua não é profundidade.</strong> "Rio a 4 metros" não significa 4 metros de água na rua — significa 4 metros acima do zero da régua oficial, um ponto fixo de referência no rio.</p>
+<p><strong>Quando faltou medição, nós avisamos.</strong> Nos raros dias sem dado (3 dias em 96 anos), o valor foi preenchido por estimativa e está marcado como ESTIMADO. Nunca tratamos estimativa como medição — e você também não deve.</p>
+
+<div class="safety-note">
+<h2 style="margin-top:0;">O lugar da Defesa Civil — e o nosso</h2>
+<p>O rioiguacu.com <strong>não emite alertas oficiais</strong>. Isso é atribuição da Defesa Civil, que tem seus próprios critérios operacionais, equipes e plano de contingência. O nosso papel é informar com dados de qualidade; o papel dela é decidir e agir.</p>
+<p>Em situação de cheia, a orientação é uma só: <strong>siga a Defesa Civil (telefone 199)</strong>. Se em algum momento o site disser uma coisa e a Defesa Civil disser outra, obedeça à Defesa Civil — sem discussão. Nenhum site substitui uma ordem de remoção, e minutos importam.</p>
+<p style="margin-bottom:0;">Cadastre-se também nos canais oficiais de aviso do Paraná: mande um SMS com o CEP para o número 40199 e você passa a receber os avisos da Defesa Civil estadual para a sua região.</p>
+</div>
+
+<h2>Para jornalistas</h2>
+<p>Ao citar os dados do site, três pedidos que protegem você e o leitor:</p>
+<ol>
+<li><strong>Cite a origem da medição</strong>: "medição oficial da ANA, estação de União da Vitória, exibida pelo rioiguacu.com". O site é a vitrine; a medição é do órgão federal.</li>
+<li><strong>Trate as cotas de bairro como aproximação</strong>: prefira "a partir de cerca de X metros o bairro começa a ser atingido" a "o bairro alaga em X metros".</li>
+<li><strong>Não converta os níveis do site em alerta oficial</strong>: "o site indica nível de atenção" é correto; "foi decretado alerta" só se a Defesa Civil decretou.</li>
+</ol>
+<p>Os métodos completos, com as fórmulas e as fontes, estão publicados no estudo técnico do projeto — e nossos dados podem ser conferidos por qualquer pessoa nas fontes oficiais (ANA/HidroWeb, IBGE, GeoPR). É assim que queremos ser cobrados: pelos dados.</p>
+
+<h2>Por que você pode confiar</h2>
+<p>Porque não pedimos confiança — mostramos o caminho da conta. Cada número do site tem fonte pública, método explicado e limitação declarada. Quando erramos, corrigimos e registramos a correção. Quando um dado é estimado, ele vem carimbado. E quando o assunto é a sua segurança, apontamos para quem tem autoridade de verdade: a Defesa Civil.</p>
+
+<p class="note-final">Última revisão: julho de 2026. Em emergência: Defesa Civil — 199. Bombeiros — 193.</p>
+
+</div>
+<p style="margin:18px 0 0;"><a href="index.html" style="color:var(--cyan); font-weight:800; text-decoration:none;">&larr; Voltar para o monitor do Rio Iguaçu</a></p>
+</section>
+
+<section class="faq-panel depth content-view" id="viewEspecialistas">
+<div class="article">
+
+<h1>Monitoramento e caracterização estatística de cheias do Rio Iguaçu em União da Vitória (PR): método, verificação frente às práticas de referência e agenda de evolução</h1>
+<p class="article-meta">
+<strong>Artigo científico — versão 1.0 (proposta para revisão), julho de 2026</strong><br>
+Responsável: Thiago Jorge Iwanko — projeto rioiguacu.com — União da Vitória/PR — thiagoiwanko@gmail.com<br>
+Público-alvo: estudantes, técnicos e hidrólogos.<br>
+Estado editorial: manuscrito interno do projeto, submetido a auditoria cruzada por recomputação independente antes de qualquer publicação.
+</p>
+
+<div class="abstract">
+<h3 style="margin-top:0;">Resumo</h3>
+<p>Este artigo documenta e submete a verificação o método estatístico-geoespacial empregado pelo rioiguacu.com, sistema público e independente de monitoramento do nível do Rio Iguaçu nas cidades gêmeas de União da Vitória (PR) e Porto União (SC). O método combina: (i) caracterização estatística da série diária de níveis da estação ANA 65310000 (1930–2023, complementada pela telemétrica 65310001 de 2024 em diante), (ii) análise de frequência de cheias por máximos anuais com as distribuições de Gumbel e GEV ajustadas por L-momentos, (iii) teste de tendência de Mann-Kendall, (iv) análise de velocidade de variação, duração de episódios e probabilidades condicionais de transição, e (v) estimativa de exposição urbana por comparação entre altitudes de terreno (CNEFE/IBGE associado a modelo derivado de curvas de nível GeoPR/IAT) e a linha d'água correspondente a cada nível de régua. Cada componente é confrontado com as práticas normatizadas ou consolidadas na literatura (USGS Bulletin 17C; Flood Estimation Handbook; Hosking &amp; Wallis; WMO; Diretiva 2007/60/CE; literatura brasileira de hidrologia estatística). Conclui-se que o método é adequado e corretamente enquadrado como sistema de monitoramento, caracterização de frequência e triagem de exposição — e que não constitui, nem pretende constituir, modelo hidrodinâmico validado de inundação. São documentados os resultados locais, entre eles a detecção de tendência significativa de intensificação do regime de cheias (Z = +2,58 para máximos anuais), as estimativas de tempo de retorno (nível diário de 10 anos ≈ 7,2 m na série completa; ≈ 7,7 m no regime 1978–2025) e a curva de exposição de endereços. A base legal do uso dos dados e os limites institucionais de comunicação são examinados. Apresenta-se, por fim, agenda de evolução em três camadas rumo a uma arquitetura híbrida com módulo de previsão de nível e módulo hidrodinâmico espacial.</p>
+</div>
+<p class="keywords"><strong>Palavras-chave:</strong> cheias urbanas; análise de frequência; L-momentos; não-estacionariedade; exposição; Rio Iguaçu; ciência cidadã com dados públicos.</p>
+
+<h2>1. Introdução</h2>
+<p>União da Vitória (PR) e Porto União (SC) formam um aglomerado urbano contínuo assentado na planície de inundação do médio Rio Iguaçu, a jusante de uma bacia de contribuição de 24.200 km². A série de medições iniciada em 1930 documenta eventos extremos recorrentes — 10,42 m de régua em 1983, 8,90 m em 1992, 8,37 m em 2023 — e um regime no qual variações de poucos decímetros no nível alteram substancialmente a extensão do atingimento urbano. Entre eventos, a referência da população tende a se apoiar na memória, heterogênea e degradável; o rioiguacu.com foi construído para substituí-la por registro: medições oficiais contínuas, métodos declarados e margens de erro explícitas, em acesso público e gratuito.</p>
+<p>O objetivo deste artigo é triplo: (1) reconstruir formalmente o método em operação, tornando-o reprodutível; (2) verificá-lo componente a componente frente às práticas normatizadas e à literatura de referência, respondendo se as técnicas empregadas são as corretas para as perguntas que o sistema se propõe a responder; (3) delimitar com precisão o que o método não responde, e qual a agenda tecnicamente defensável de evolução. A distinção conceitual que organiza todo o trabalho é a separação entre <strong>prever ou caracterizar o nível do rio</strong> — problema unidimensional, tratável com estatística de séries e de extremos — e <strong>prever a extensão, profundidade e dinâmica da inundação</strong> — problema espacial, que exige modelagem hidrodinâmica com geometria de canal, estruturas e rugosidade. O sistema aqui descrito opera integralmente no primeiro problema e produz, para o segundo, apenas triagem de exposição declaradamente estática.</p>
+
+<h2>2. Dados e base legal</h2>
+<h3>2.1 Níveis fluviais</h3>
+<p>A fonte primária é a rede da Agência Nacional de Águas e Saneamento Básico (ANA). A estação fluviométrica 65310000 (União da Vitória; responsável COPEL, operadora IAT-PR) fornece a série diária desde 22/05/1930, com dados consistidos publicados no portal HidroWeb até 31/12/2023 — 34.150 registros. A estação telemétrica 65310001 (setor elétrico, Resolução Conjunta ANA/ANEEL nº 03/2010; sensor de nível por pressão desde 28/04/2005) fornece leituras horárias, obtidas pelo serviço de dados abertos da ANA e agregadas pelo projeto em médias diárias (930 dias no período 2024–07/2026, tratados como dado bruto). Os inventários oficiais de ambas as estações foram incorporados à documentação do projeto; registram-se, como fatos relevantes à interpretação: a identidade de seção entre os dois códigos (mesma área de drenagem; distância planimétrica da ordem de 10² m), a data de reequipamento de 28/04/2005 (marco para estudos de homogeneidade) e a existência de curvas de descarga cadastradas somente até 31/12/2014 — razão pela qual a vazão é tratada neste projeto como grandeza auxiliar e todas as análises se apoiam em nível.</p>
+<p>O tratamento aplicado às leituras telemétricas compreende: descarte de códigos de falha do sensor (sentinela 777777,7 cm) e de valores fisicamente implausíveis; agregação diária somente de dias com leituras válidas; e marcação explícita de valores estimados — na série atual, 3 dias (0,009% do total) preenchidos por interpolação linear, identificados como ESTIMADO e excluíveis de qualquer análise. Lacunas não são preenchidas silenciosamente.</p>
+<p>O zero da régua situa-se na cota altimétrica 739,61 m, verificado pelo projeto por comparação entre leituras simultâneas de régua e nível d'água em cota altimétrica (<code>cota = 739,61 + régua</code>); a equivalência formal de datum vertical entre a referência da régua e o modelo de terreno permanece como pendência de metadados, declarada na seção 7.</p>
+
+<h3>2.2 Endereços e relevo</h3>
+<p>A base de endereços é o Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE/IBGE, Censo 2022), com coordenadas geográficas, empregada exclusivamente de forma agregada. O relevo provém das curvas de nível com equidistância de 1 m publicadas no GeoPR (Instituto Água e Terra do Paraná), derivadas de perfilamento a laser de 2012; o modelo de terreno resultante tem erro vertical potencial de dezenas de centímetros, e a base de 26.130 endereços com cota utilizada nas análises é a versão auditada por recomputação independente no âmbito do projeto (classes internas de qualidade B/C; nenhuma cota é tratada como de precisão centimétrica, requisito interno reservado à classe A10, ainda vazia).</p>
+
+<h3>2.3 Base legal do uso dos dados</h3>
+<p>O arcabouço que sustenta a licitude e a adequação do uso das fontes é o seguinte. Os dados hidrológicos da ANA são públicos por força do regime de transparência ativa da Lei de Acesso à Informação (Lei nº 12.527/2011) e da missão institucional da agência (Lei nº 9.984/2000); a operação da estação telemétrica pelo agente do setor elétrico decorre da Resolução Conjunta ANA/ANEEL nº 03/2010. O CNEFE é divulgado pelo IBGE como base pública para fins estatísticos; o projeto o emprega de forma agregada, sem tratamento de dados pessoais — não há cadastro de moradores, identificação de titulares nem cruzamento com bases nominativas, mantendo o uso fora do escopo material da Lei Geral de Proteção de Dados (Lei nº 13.709/2018); qualquer futuro cadastro voluntário para alertas deverá observá-la integralmente (consentimento, finalidade, minimização e eliminação). Os dados geoespaciais do GeoPR/IAT são publicados para acesso livre pelo órgão estadual. Quanto aos limites de atuação: a Política Nacional de Proteção e Defesa Civil (Lei nº 12.608/2012) atribui aos órgãos de proteção e defesa civil a competência pelos alertas oficiais e pela resposta; o sistema aqui descrito é instrumento de informação e monitoramento, subordina sua comunicação a essa competência e o declara em todas as interfaces públicas.</p>
+
+<h2>3. Método</h2>
+<h3>3.1 Caracterização do regime diário</h3>
+<p>Sobre os 35.080 registros diários calculam-se estatísticas descritivas (média 2,67 m; mediana 2,35 m; desvio padrão 1,08 m; assimetria +1,61) e percentis empíricos. Dois níveis informacionais do sistema derivam do modelo normal — Observação, 3,70 m (μ+1σ) e Alerta, 5,00 m (μ+2σ) — e todos os níveis são verificados e comunicados pela frequência empírica correspondente (15%, 10%, 5%, 2,5% e &lt;1% dos dias acima de 3,70/4,20/5,00/5,50/6,50 m, respectivamente). A adoção da contagem direta como valor publicado evita dependência de hipótese distribucional no regime diário, cuja assimetria inviabiliza a normal nas caudas (o evento de 1983 corresponderia a &gt;7σ) e resiste também à transformação logarítmica (assimetria residual +0,64).</p>
+
+<h3>3.2 Análise de frequência de cheias</h3>
+<p>Da série extraem-se 95 máximos anuais válidos (anos com ≥300 dias; 1930 e 2026 excluídos por incompletude). Ajustam-se as distribuições de Gumbel e GEV pelo método dos L-momentos amostrais (b₀, b₁, b₂ → λ₁, λ₂, τ₃; Gumbel: α = λ₂/ln 2, ξ = λ₁ − 0,5772α; GEV: aproximação de Hosking para κ). O quantil de retorno de Gumbel é x(T) = ξ − α ln(−ln(1 − 1/T)). A verificação de aderência é feita por posições de plotagem de Weibull sobre os máximos observados. A escolha metodológica — máximos anuais + distribuição de extremos + L-momentos — segue o arcabouço padrão da análise de frequência de cheias: é o desenho normatizado nos EUA pelo Bulletin 17C (com a Log-Pearson III sobre picos), o adotado no Reino Unido pelo Flood Estimation Handbook (análise por L-momentos) e o recomendado pela literatura brasileira de referência (Naghettini &amp; Pinto, 2007); a robustez dos L-momentos em amostras com extremos é estabelecida por Hosking &amp; Wallis (1997).</p>
+
+<h3>3.3 Tendência e estacionariedade</h3>
+<p>Aplica-se o teste não-paramétrico de Mann-Kendall, bilateral, às séries de máximos e de médias anuais, complementado por comparação de frequências entre as metades do registro (1931–1977 × 1978–2025) e por reajuste das distribuições no subperíodo recente. O procedimento responde à recomendação contemporânea de não assumir estacionariedade sem teste (Milly et al., 2008).</p>
+
+<h3>3.4 Dinâmica de eventos</h3>
+<p>Sobre pares e ternos de dias consecutivos calculam-se distribuições de subidas de 24 h e 48 h, taxas de recessão condicionadas a nível ≥ 5,50 m e durações de episódios contínuos acima de limiares (5,0/5,5/6,5 m). Define-se o gatilho dinâmico do sistema como o percentil 99 das subidas diárias (0,85 m/24 h). Estimam-se probabilidades condicionais de transição por contagem exaustiva na série: P(atingir 5,50 m em ≤48 h | faixa de nível corrente, classe de variação em 24 h), publicáveis somente com o tamanho amostral de cada célula. Trata-se de indicador estritamente retrospectivo — frequência histórica de desfechos em condições análogas —, não de previsão hidrológica.</p>
+
+<h3>3.5 Exposição urbana e estatística por bairro</h3>
+<p>Para cada nível de régua h, a linha d'água nominal é 739,61 + h; conta-se o número de endereços com cota de terreno inferior. Por bairro, publica-se o percentil 1 (P1): o nível de régua em que 1% dos endereços do bairro fica abaixo da linha d'água, com número mínimo de endereços para validade estatística. A escolha do P1 — em lugar do mínimo — remove o vício do ponto isolado de margem (frequentemente artefato do modelo de relevo, que concentra endereços em cotas inteiras) e produz, por construção, um conjunto pequeno e auditável em campo (tipicamente 5–20 endereços por bairro). O enquadramento conceitual — caracterizar perigo/exposição por cenários de probabilidade com indicação de população exposta — é o mesmo da Diretiva 2007/60/CE. A limitação estrutural é declarada: a comparação terreno×linha d'água é estática, não modela conectividade hidráulica, drenagem urbana nem propagação; terreno abaixo da linha é condição necessária, não suficiente, para alagamento, e cota de terreno não é cota de soleira nem de piso.</p>
+
+<h3>3.6 Publicação, marcação e auditoria</h3>
+<p>Três regras transversais completam o método: (i) todo valor estimado é marcado como tal e nenhuma lacuna é preenchida silenciosamente; (ii) toda estatística publicada carrega fonte, data e limitação, sem falsa precisão (nenhum produto atual exibe centímetros como exatidão); (iii) auditoria cruzada — os resultados de um agente do projeto só são publicados após recomputação independente por outro, com laudo registrado, e as bases versionadas permitem reproduzir cada número.</p>
+
+<h2>4. Verificação: os métodos empregados são os corretos?</h2>
+<p>A verificação confronta cada escolha com a prática de referência para a pergunta que ela responde.</p>
+<p><strong>Frequência de extremos.</strong> Para "quão raro é um nível?", a prática normatizada internacionalmente é a análise de frequência sobre máximos anuais com distribuições de extremos — exatamente o desenho adotado. As diferenças em relação ao Bulletin 17C (que usa Log-Pearson III sobre vazões de pico) são justificadas pelo contexto: trabalha-se em nível (a grandeza operacionalmente relevante e a única com linhagem íntegra pós-2014) e com Gumbel/GEV por L-momentos, par consagrado pelo FEH e por Hosking &amp; Wallis. A concordância Gumbel–GEV até T=25 (κ = +0,06) e a validação por plotagem empírica sustentam a adequação. Limite honesto: com 95 anos, T&gt;50 é extrapolação, e o evento de 1983 excede o quantil centenário ajustado — razão pela qual o sistema não comunica níveis de retorno como tetos.</p>
+<p><strong>Regime diário e níveis informacionais.</strong> O uso da normal restringe-se ao regime central, onde é defensável; os valores publicados são frequências empíricas, prática imune a erro de especificação distribucional. A arquitetura em degraus progressivos com gatilho dinâmico corresponde à estrutura recomendada pelo manual de previsão e aviso de cheias da OMM (WMO-No. 1072).</p>
+<p><strong>Tendência.</strong> Mann-Kendall é o teste padrão da hidrologia para tendência monotônica; sua aplicação a máximos e médias, com partição do registro e reajuste no subperíodo recente, implementa a resposta mínima adequada ao problema de não-estacionariedade apontado pela literatura. A evolução formal (GEV com parâmetros dependentes do tempo) está corretamente posicionada como agenda, não como pré-requisito.</p>
+<p><strong>Exposição.</strong> A triagem por comparação altimétrica é método legítimo e amplamente utilizado como primeira camada de mapeamento de perigo, desde que — como aqui — declarada estática e não convertida em afirmação por imóvel. O P1 é uma salvaguarda estatística contra o vício do mínimo, com a virtude adicional da auditabilidade de campo. O que a literatura exige além disso (hidrodinâmica 1D/2D com geometria, rugosidade e validação por manchas observadas) está reconhecido como camada futura, dependente de dados ainda inexistentes no projeto (batimetria, seções, estruturas).</p>
+<p><strong>Validações externas convergentes.</strong> Três verificações independentes, não utilizadas como fonte dos métodos, corroboram os resultados: o nível de 6,89 m usado no zoneamento local como cheia de 10 anos equivale a T ≈ 8 anos na curva ajustada; as referências oficiais de nível cadastradas pela ANA na estação 65310000 (estiagem 1,58 m; atenção 4,02 m; alerta 4,72 m) distam 8–28 cm dos níveis derivados estatisticamente pelo projeto (1,50/4,20/5,00 m); e os P1 dos bairros ribeirinhos concentram-se na faixa em que a exposição municipal historicamente se inicia. Convergência de três sistemas de referência construídos por caminhos distintos é evidência de robustez mútua.</p>
+<p><strong>Síntese da verificação.</strong> Para as perguntas que o sistema responde — caracterização do regime, frequência de extremos, tendência, dinâmica temporal e triagem de exposição — os métodos empregados são os corretos segundo a prática consolidada, estruturados, reprodutíveis e comunicados dentro de seus limites. Para as perguntas que o sistema não responde — mancha, profundidade, velocidade, risco por imóvel — o método correto (hidrodinâmica acoplada, com validação por eventos) está identificado e programado, e o sistema abstém-se de simulá-lo por atalho.</p>
+
+<h2>5. Resultados</h2>
+<p><strong>Regime e níveis.</strong> Metade dos dias históricos entre 1,88 e 3,15 m; níveis informacionais 3,70/4,20/5,00/5,50/6,50 m excedidos em 15%/10%/5%/2,5%/&lt;1% dos dias. Em escala anual: 59% dos anos atingem 5,00 m; 44% atingem 5,50 m; 19% atingem 6,50 m.</p>
+<p><strong>Frequência de extremos (níveis diários máximos).</strong></p>
+<table>
+<thead>
+<tr><th>T (anos)</th><th>Gumbel</th><th>GEV</th><th>Gumbel 1978–2025</th></tr>
+</thead>
+<tbody>
+<tr><td>2</td><td>5,19</td><td>5,24</td><td>5,58</td></tr>
+<tr><td>5</td><td>6,39</td><td>6,43</td><td>6,85</td></tr>
+<tr><td>10</td><td>7,18</td><td>7,17</td><td>7,69</td></tr>
+<tr><td>25</td><td>8,17</td><td>8,06</td><td>8,75</td></tr>
+<tr><td>50</td><td>8,92</td><td>8,69</td><td>9,54</td></tr>
+</tbody>
+</table>
+<p><strong>Tendência.</strong> Mann-Kendall Z = +2,58 (máximos) e +2,68 (médias), significativos a 5%; anos com pico ≥5,50 m: 30% (1931–1977) → 58% (1978–2025).</p>
+<p><strong>Dinâmica.</strong> Maiores subidas: +1,78 m/24 h (1992) e +3,34 m/48 h (2014); recessão mediana acima de 5,50 m: 0,11 m/dia; episódios ≥5,50 m: 65, duração mediana 11 dias (máx. 69). Probabilidade condicional de atingir 5,50 m em ≤48 h: 76% (nível 5,0–5,5 m subindo ≥0,5 m/dia; n=21), 48% (subindo &lt;0,5; n=69), 9% (estável/caindo; n=546); nas faixas inferiores estáveis, ≈0%.</p>
+<p><strong>Sazonalidade e estiagens.</strong> Outubro concentra 20/95 picos anuais e a maior densidade de dias ≥5,50 m (63/1000); fevereiro–março, as menores (5/1000). Estiagens (&lt;1,50 m): 1.054 dias em 59 episódios agrupados; mais longa em 2006 (122 dias); mínimo histórico 1,30 m (2020).</p>
+<p><strong>Exposição.</strong> Endereços com terreno abaixo da linha d'água: 0,3% em T2; 4,1% em T5; 13,4% em T10 (22,1% no T10 do regime recente); 24,3% em T25; 42,2% no nível de 1983. Exposição anual esperada (integração da curva de exposição contra a distribuição de máximos anuais): ≈1.100 endereços/ano (série completa) e ≈1.600 (regime recente).</p>
+
+<h2>6. Discussão</h2>
+<p>Quatro tensões estruturam a leitura dos resultados. <strong>Transparência × sofisticação:</strong> o método é integralmente reprodutível com dados públicos e aritmética documentada — atributo raro em sistemas locais — ao custo de não produzir saída espacial dinâmica; a evolução proposta preserva a camada transparente como interface pública e acrescenta camadas mais sofisticadas por baixo, com verificação por eventos. <strong>Acurácia × explicabilidade:</strong> o indicador condicional de 48 h ilustra o compromisso adotado — desempenho inferior ao de um previsor calibrado, explicabilidade total (é contagem histórica com n declarado); a incorporação futura de ML/AI deverá vir acompanhada de governança e interpretabilidade. <strong>Detecção de mudança × atribuição:</strong> a tendência detectada é estatisticamente sólida e operacionalmente relevante (justifica a dupla curva e o reprocessamento anual), mas o estudo não atribui causa — clima, uso do solo e alterações de calha permanecem hipóteses não testadas aqui. <strong>Produto de pesquisa × produto institucional:</strong> os níveis do sistema são informacionais; os limiares operacionais de resposta pertencem à Defesa Civil, e a convergência observada entre os dois sistemas de referência (seção 4) é bem-vinda exatamente porque cada um conserva sua função.</p>
+
+<h2>7. Limitações</h2>
+<p>(1) Série de níveis diários: picos instantâneos excedem os valores analisados, e os tempos de retorno referem-se a máximos diários. (2) Dados 2024–2026 brutos, sem consistência da ANA. (3) Erro vertical do modelo de terreno de até dezenas de centímetros, com artefato documentado de concentração em cotas inteiras; contagens de endereços são ordens de grandeza. (4) Análise de exposição estática, sem hidráulica. (5) Extrapolação além de T≈50. (6) Pendência de registro formal da equivalência de datum vertical régua×terreno (verificada empiricamente; documentação de metadados em curso). (7) Vazões com linhagem documentada apenas até 2014. (8) Tendência sem atribuição de causa. (9) A base de endereços utilizada é a versão auditada; revisões posteriores só ingressam após nova auditoria.</p>
+
+<h2>8. Agenda de evolução</h2>
+<p>Camada 1 (existente): monitoramento público com estatística verificada — manter, com reprocessamento anual e publicação de dupla curva. Camada 2 (previsão de nível): comparação controlada entre baseline empírico, modelo probabilístico com bandas de incerteza, ML/AI e, condicionada à consolidação da chuva de montante (rede enumerável pelos serviços de dados da ANA), módulo conceitual chuva-vazão; validação por eventos reservados (leave-one-event-out), métricas de pico, tempo de pico e permanência acima de limiares, além de RMSE/MAE/NSE/KGE. Camada 3 (espacial): levantamento de batimetria, seções, estruturas e rugosidade; modelagem 1D/2D acoplada; validação por manchas observadas (registros de campo, imagens, SAR); retroanálise obrigatória das cheias de 2014 e 2023 antes de qualquer alerta operacional por logradouro. Transversais: harmonização formal de datum; controle altimétrico independente rumo ao requisito interno de erro &lt;10 cm; banco georreferenciado de eventos; integração institucional com Defesa Civil municipal e estadual, mantida a separação de competências.</p>
+
+<h2>9. Conclusão</h2>
+<p>O rioiguacu.com demonstra que é possível operar monitoramento público de cheias metodologicamente verificável usando exclusivamente dados oficiais abertos: seus componentes estatísticos seguem a prática normatizada internacional para as perguntas que respondem, seus resultados sobrevivem a validações externas independentes, seu uso de dados tem base legal íntegra e seus limites são declarados em vez de disfarçados. A contribuição local mais relevante ao conhecimento é a caracterização atualizada do regime — em particular a tendência significativa de intensificação, que desloca a cheia decenal de projeto de 7,2 m para 7,7 m quando estimada no regime recente. O caminho cientificamente defensável é evoluir esse núcleo para uma arquitetura híbrida em que previsão de nível e mapeamento espacial de inundação sejam tratados como problemas complementares, cada um com sua validação, sob integração institucional com o sistema oficial de proteção e defesa civil.</p>
+
+<h2>Referências</h2>
+<h3>Literatura científica e normativa</h3>
+<ul class="refs">
+<li>BEVEN, K.; BINLEY, A. The future of distributed models: model calibration and uncertainty prediction. <em>Hydrological Processes</em>, v. 6, p. 279–298, 1992.</li>
+<li>CHOW, V. T.; MAIDMENT, D. R.; MAYS, L. W. <em>Applied Hydrology</em>. New York: McGraw-Hill, 1988.</li>
+<li>ENGLAND, J. F. et al. <em>Guidelines for Determining Flood Flow Frequency — Bulletin 17C</em>. USGS Techniques and Methods 4-B5, 2019.</li>
+<li>GUMBEL, E. J. <em>Statistics of Extremes</em>. New York: Columbia University Press, 1958.</li>
+<li>GUPTA, H. V.; KLING, H.; YILMAZ, K. K.; MARTINEZ, G. F. Decomposition of the mean squared error and NSE performance criteria. <em>Journal of Hydrology</em>, v. 377, p. 80–91, 2009.</li>
+<li>HOSKING, J. R. M.; WALLIS, J. R. <em>Regional Frequency Analysis: An Approach Based on L-Moments</em>. Cambridge: Cambridge University Press, 1997.</li>
+<li>MILLY, P. C. D. et al. Stationarity Is Dead: Whither Water Management? <em>Science</em>, v. 319, p. 573–574, 2008.</li>
+<li>MORIASI, D. N. et al. Model evaluation guidelines for systematic quantification of accuracy in watershed simulations. <em>Transactions of the ASABE</em>, v. 50, n. 3, p. 885–900, 2007.</li>
+<li>MOSAVI, A.; OZTURK, P.; CHAU, K.-W. Flood prediction using machine learning models: literature review. <em>Water</em>, v. 10, n. 11, 1536, 2018.</li>
+<li>NAGHETTINI, M.; PINTO, É. J. A. <em>Hidrologia Estatística</em>. Belo Horizonte: CPRM — Serviço Geológico do Brasil, 2007.</li>
+<li>NASH, J. E.; SUTCLIFFE, J. V. River flow forecasting through conceptual models — Part I. <em>Journal of Hydrology</em>, v. 10, p. 282–290, 1970.</li>
+<li>TENG, J. et al. Flood inundation modelling: a review of methods, recent advances and uncertainty analysis. <em>Environmental Modelling &amp; Software</em>, v. 90, p. 201–216, 2017.</li>
+<li>TUCCI, C. E. M. (Org.). <em>Hidrologia: ciência e aplicação</em>. 4. ed. Porto Alegre: UFRGS/ABRH, 2007.</li>
+<li>UK Centre for Ecology &amp; Hydrology. <em>Flood Estimation Handbook</em>.</li>
+<li>UNIÃO EUROPEIA. <em>Diretiva 2007/60/CE</em> — avaliação e gestão dos riscos de inundações.</li>
+<li>WMO. <em>Manual on Flood Forecasting and Warning</em> (WMO-No. 1072). Genebra, 2011.</li>
+</ul>
+<h3>Legislação e atos normativos</h3>
+<ul class="refs">
+<li>BRASIL. Lei nº 9.984/2000 (criação da ANA). — Lei nº 12.527/2011 (Lei de Acesso à Informação). — Lei nº 12.608/2012 (Política Nacional de Proteção e Defesa Civil). — Lei nº 13.709/2018 (Lei Geral de Proteção de Dados Pessoais).</li>
+<li>ANA/ANEEL. Resolução Conjunta nº 03/2010 (monitoramento hidrológico por concessionárias do setor elétrico).</li>
+</ul>
+<h3>Fontes de dados e sistemas</h3>
+<ul class="refs">
+<li>ANA — HidroWeb (snirh.gov.br/hidroweb) e serviço de dados abertos HidroWebService (ana.gov.br/hidrowebservice).</li>
+<li>IBGE — CNEFE, Censo Demográfico 2022 (ibge.gov.br).</li>
+<li>IAT/PR — GeoPR (geopr.iat.pr.gov.br).</li>
+<li>SGB — SACE, Sistema de Alerta de Eventos Críticos (sgb.gov.br/sace/). CEMADEN (cemaden.gov.br).</li>
+<li>Repositório do projeto: github.com/thiagoiwanko/rioiguacu.</li>
+</ul>
+
+<p class="note-final">Nota de integridade: todas as referências desta lista foram verificadas quanto à existência e pertinência; indicações bibliográficas adicionais sugeridas em documentos de trabalho do projeto (revisões de ML/AI de curto prazo, acoplamento hidrológico-hidrodinâmico, aplicações híbridas urbanas e diretrizes de verificação de previsões) serão incorporadas somente após conferência individual. Em situação de emergência, prevalecem as orientações dos órgãos de proteção e defesa civil (telefone 199).</p>
+
+</div>
+<p style="margin:18px 0 0;"><a href="index.html" style="color:var(--cyan); font-weight:800; text-decoration:none;">&larr; Voltar para o monitor do Rio Iguaçu</a></p>
 </section>
 
 <footer class="version-footer">
 <span>Rio Iguaçu Hoje</span>
 </footer>
 </main>
+
+<script>
+function mostrarView(qual) {
+  document.getElementById('viewPublico').classList.toggle('active', qual === 'publico');
+  document.getElementById('viewEspecialistas').classList.toggle('active', qual === 'especialistas');
+  document.getElementById('btnPublico').classList.toggle('active', qual === 'publico');
+  document.getElementById('btnEspecialistas').classList.toggle('active', qual === 'especialistas');
+}
+</script>
 </body>
 </html>
