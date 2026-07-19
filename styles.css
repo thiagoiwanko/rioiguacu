@@ -981,13 +981,18 @@ td {
 .ranking-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 6px 18px;
   margin-top: 4px;
 }
 
-.ranking-grid > div > p.subtitle {
-  min-height: 2.6em;
-}
+/* As duas colunas viram uma grade de 2 linhas (subtítulos na linha 1, tabelas
+   na linha 2) via `order`, então cada linha se ajusta à altura do maior
+   conteúdo -- garante que as duas tabelas sempre comecem na mesma altura,
+   não importa em quantas linhas cada subtítulo quebrar. */
+.rank-sub-1 { order: 1; }
+.rank-sub-2 { order: 2; }
+.rank-table-1 { order: 3; }
+.rank-table-2 { order: 4; }
 
 .ranking-grid table {
   font-size: 12px;
@@ -1142,7 +1147,10 @@ td {
     gap: 4px;
   }
 
-  .ranking-grid > div > p.subtitle {
-    min-height: 0;
-  }
+  /* Coluna única: volta pra ordem natural de leitura (subtítulo 1, tabela 1,
+     subtítulo 2, tabela 2) em vez da ordem de 2 linhas usada no desktop. */
+  .rank-sub-1 { order: 1; }
+  .rank-table-1 { order: 2; }
+  .rank-sub-2 { order: 3; }
+  .rank-table-2 { order: 4; }
 }

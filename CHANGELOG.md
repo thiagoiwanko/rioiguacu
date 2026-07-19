@@ -6,6 +6,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.50 — 2026-07-19
+
+- **Correção definitiva do alinhamento entre as duas tabelas do "Ranking Sazonal"**, depois que a v1.49 (baseada só em `min-height` chutado) não resolveu em telas mais estreitas — usuário reportou de volta com print mostrando o degrau ainda presente. Causa raiz: `min-height` era um valor fixo estimado pra "no máximo 2 linhas", mas em janelas mais estreitas o subtítulo mais longo ("Só as grandes enchentes...") passou a quebrar em mais linhas do que isso reservava.
+- **Solução estrutural**: o HTML das duas colunas foi achatado (removidos os `<div>` que agrupavam cada subtítulo+tabela) e agora os 4 elementos (2 subtítulos, 2 tabelas) são filhos diretos do `.ranking-grid`, com a ordem visual controlada por `order` no CSS — isso faz o CSS Grid tratá-los como uma grade de verdade com 2 linhas (subtítulos na linha 1, tabelas na linha 2), onde cada linha se ajusta automaticamente à altura do maior conteúdo. Funciona em qualquer largura de tela, sem precisar estimar altura em `em`/`px`. A ordem no HTML continua a ordem natural de leitura (subtítulo 1, tabela 1, subtítulo 2, tabela 2), preservada no mobile via reset do `order` na media query — só o desktop reorganiza visualmente em 2 linhas.
+- Backup pré-edição: `backups/site-v1.49.zip`.
+
 ## v1.49 — 2026-07-18/19
 
 - **Subtítulo "Só as grandes enchentes" corrigido de "1930–07/2026" para "1930–2025"**, alinhando com o formato do outro subtítulo ("Todos os anos... 1930–2025") — pedido do usuário. O período de 2026 nunca teve nenhum episódio de enchente registrado na tabela, então a mudança não altera nenhum dado, só o rótulo.
