@@ -25,7 +25,7 @@
 <meta name="twitter:title" content="Rio Iguaçu Hoje: nível, vazão, chuva e alerta de enchente em tempo real">
 <meta name="twitter:description" content="Site gratuito e público pra acompanhar o Rio Iguaçu em União da Vitória (PR) e Porto União (SC): cota atual, vazão, chuva, previsão de 48h e alertas de enchente, com dados oficiais da ANA e da Copel.">
 <meta name="twitter:image" content="https://rioiguacu.com/og-image.png">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="styles.css?v=1.43">
 <script type="application/ld+json">
 {
 "@context": "https://schema.org",
@@ -131,7 +131,7 @@
 <summary>Ranking Sazonal</summary>
 <div class="ranking-grid" style="margin-top:10px;">
 <div>
-<p class="subtitle" style="margin-bottom:6px;">Quantas vezes cada mês concentrou o pico do ano (o nível mais alto registrado em cada ano, nem sempre uma enchente) · 1930–2025</p>
+<p class="subtitle" style="margin-bottom:6px;">Em que mês o rio atingiu o pico do ano (o nível mais alto de cada ano) · 1930–2025</p>
 <div class="table-wrap table-wrap-full">
 <table>
 <thead><tr><th>Mês</th><th>Anos em que foi o pico do ano</th></tr></thead>
@@ -322,48 +322,65 @@
 <h2>Perguntas frequentes</h2>
 <div class="faq-list">
 <details class="faq-item">
-<summary>Como foram definidos os níveis de alerta e as cotas por bairro deste site?</summary>
-<p>Cobre somente o que o site exibe: níveis de alerta, cotas por bairro e as fontes dos dados. Todos os números derivam de fontes auditadas do projeto: a série de medições da ANA desde 1930 e o banco de cotas de terreno (endereços do CNEFE/IBGE + relevo GeoPR/IAT). Nenhum critério externo foi utilizado.</p>
-
-<h3>Como foram definidos os níveis de alerta deste site?</h3>
+<summary>Como foram definidos os níveis de alerta deste site?</summary>
 <p>Os níveis foram definidos por análise estatística da série histórica de medições diárias do Rio Iguaçu em União da Vitória, mantida pela Agência Nacional de Águas e Saneamento Básico (ANA) desde 1930 — mais de 35 mil registros diários de nível de régua, disponíveis publicamente no portal HidroWeb (estação 65310000).</p>
 <p>Dessa série foram calculados dois parâmetros fundamentais: a <strong>média histórica</strong>, de 2,67 m, e o <strong>desvio padrão</strong>, de 1,08 m — medida estatística que expressa quanto o nível do rio costuma variar em torno da média. Aplicando o modelo da <strong>distribuição normal</strong>, ferramenta clássica da estatística para descrever fenômenos naturais, cada nível de alerta corresponde a um grau crescente de afastamento do comportamento habitual do rio — e, portanto, a um grau crescente de raridade.</p>
 <p>Como rios não seguem perfeitamente a distribuição normal — o Iguaçu possui um piso físico próximo de 1,30 m, mas não possui teto nas enchentes —, cada limiar foi verificado também por contagem direta na série histórica: a frequência real com que aquele nível foi atingido em 96 anos de medições. Os dois métodos convergem, e são as frequências reais que apresentamos a seguir, por serem verificáveis por qualquer pessoa a partir dos dados públicos.</p>
+</details>
 
-<h3>O que significa cada nível?</h3>
+<details class="faq-item">
+<summary>O que significa cada nível?</summary>
 <p><strong>Observação — 3,70 m.</strong> Corresponde à média histórica acrescida de um desvio padrão (2,67 + 1,08). Indica que o rio deixou sua faixa habitual de operação: em 96 anos, apenas 15% dos dias registraram nível superior. Não há efeito sobre áreas urbanas; é o ponto em que o acompanhamento diário passa a ser recomendado.</p>
 <p><strong>Atenção — 4,20 m.</strong> Corresponde ao percentil 90 da série: em 9 de cada 10 dias da história, o rio esteve abaixo deste nível. É também o primeiro nível em que o banco de cotas do projeto identifica um endereço com terreno abaixo da linha d'água. Registre-se ainda o fator velocidade: nas subidas mais rápidas documentadas, o rio partiu desta faixa e elevou-se mais de 3 metros em 48 horas.</p>
 <p><strong>Alerta — 5,00 m.</strong> Corresponde à média acrescida de dois desvios padrão — na distribuição normal, o limiar clássico de anormalidade estatística. Apenas 1 dia em cada 20 da série histórica superou este nível. No banco de cotas do projeto, cerca de 50 endereços apresentam terreno abaixo da linha d'água nesta marca, e a maior subida diária já registrada (1,78 m em 24 horas, em 1992) é suficiente para conduzir o rio deste nível ao degrau seguinte em um único dia.</p>
 <p><strong>Emergência — 5,50 m.</strong> Superado em apenas 1 dia a cada 40 da série histórica. Neste nível, o banco de cotas registra uma mudança de escala: o número de endereços com terreno abaixo da linha d'água salta para aproximadamente 380 — mais de 1% dos endereços da cidade. O atingimento deixa de ser pontual.</p>
 <p><strong>Enchente — 6,50 m.</strong> Neste nível, aproximadamente 1 em cada 10 endereços da cidade apresenta terreno abaixo da linha d'água (2,5 mil endereços no banco do projeto). Trata-se de evento raro: ocorreu em menos de 1% dos dias da série, concentrados em 18 dos 96 anos medidos — porém com atingimento em larga escala quando ocorre.</p>
+</details>
 
-<h3>Por que o alerta pode ser elevado antes de o rio atingir esses níveis?</h3>
+<details class="faq-item">
+<summary>Por que o alerta pode ser elevado antes de o rio atingir esses níveis?</summary>
 <p>Porque a série histórica demonstra que o Iguaçu é capaz de subidas abruptas: 1,78 m em 24 horas (1992) e 3,34 m em 48 horas (2014). Por essa razão, o site monitora também a velocidade de elevação. Quando o rio sobe 0,85 m ou mais em 24 horas — taxa superada em apenas 1% de todas as subidas registradas desde 1930 —, o alerta é elevado em um degrau, independentemente do nível absoluto da régua.</p>
+</details>
 
-<h3>E quando o rio está muito baixo?</h3>
+<details class="faq-item">
+<summary>E quando o rio está muito baixo?</summary>
 <p>Níveis inferiores a 1,50 m caracterizam estiagem. Essa condição ocorreu em apenas 2,5% dos dias desde 1930; o mínimo histórico registrado é de 1,30 m, em 2020.</p>
+</details>
 
-<h3>Como chegamos à cota de cada bairro?</h3>
+<details class="faq-item">
+<summary>Como chegamos à cota de cada bairro?</summary>
 <p>Para cada bairro, reunimos todos os seus endereços registrados no Censo do IBGE e associamos a cada um a altitude do terreno, obtida do mapeamento oficial do relevo do Paraná. A cota publicada é o nível de régua em que <strong>1% dos endereços do bairro</strong> fica com o terreno abaixo da linha d'água.</p>
 <p>Por que 1%, e não o terreno mais baixo do bairro? Porque o ponto mais baixo é, quase sempre, uma exceção isolada — um terreno encostado no rio, uma faixa de margem — e usá-lo como referência distorceria o número, sugerindo que o bairro inteiro é atingido muito antes do que a realidade mostra. O corte de 1% deixa essas exceções ribeirinhas para trás e marca o ponto em que a água começa, de fato, a alcançar os primeiros terrenos representativos do bairro. A cota só é publicada para bairros com quantidade suficiente de endereços para o cálculo ser estatisticamente válido.</p>
 <p>É um valor aproximado e estimado — não deve ser tomado como certeza. A situação real varia conforme a localização e a altura de cada terreno dentro do bairro: há casas que a água alcança antes, e outras bem depois.</p>
+</details>
 
-<h3>O que é a ANA?</h3>
+<details class="faq-item">
+<summary>O que é a ANA?</summary>
 <p>A Agência Nacional de Águas e Saneamento Básico (ANA) é a autarquia federal responsável, entre outras atribuições, pela rede nacional de monitoramento dos rios brasileiros. É ela que mantém e publica, em portal aberto (HidroWeb), as séries de medições usadas neste site.</p>
+</details>
 
-<h3>De onde vêm as medições do rio?</h3>
+<details class="faq-item">
+<summary>De onde vêm as medições do rio?</summary>
 <p>De duas estações oficiais da ANA em União da Vitória. A estação fluviométrica <strong>65310000</strong> registra o nível do rio desde 22 de maio de 1930 — é a série histórica, com dados revisados e consolidados até 2023. A estação telemétrica <strong>65310001</strong> mede automaticamente, de hora em hora, e é a fonte das leituras em tempo real exibidas no site. As duas usam o mesmo zero de régua, situado na cota altimétrica de 739,61 m — valor confirmado pelo projeto por comparação entre as leituras de régua e o nível d'água correspondente.</p>
+</details>
 
-<h3>O que é o CNEFE?</h3>
+<details class="faq-item">
+<summary>O que é o CNEFE?</summary>
 <p>É o Cadastro Nacional de Endereços para Fins Estatísticos, mantido pelo IBGE e atualizado a cada Censo. É a lista pública e oficial dos endereços do país, e é dela que vêm os endereços usados no cálculo das cotas por bairro.</p>
+</details>
 
-<h3>De onde vem a altitude dos terrenos?</h3>
+<details class="faq-item">
+<summary>De onde vem a altitude dos terrenos?</summary>
 <p>Do mapeamento oficial do relevo do Paraná, publicado pelo GeoPR — portal de dados geográficos do Instituto Água e Terra (IAT), órgão ambiental do governo estadual — a partir de levantamento aerofotogramétrico a laser realizado em 2012. Esse mapeamento tem margem de erro que pode alcançar dezenas de centímetros, razão pela qual todas as cotas do site são tratadas como estimativas e a verificação de campo segue em andamento.</p>
+</details>
 
-<h3>Esses números são exatos?</h3>
+<details class="faq-item">
+<summary>Esses números são exatos?</summary>
 <p>Os níveis do rio, sim — provêm das medições oficiais da ANA. As cotas de terreno, contudo, são estimativas: derivam de levantamento cartográfico cuja margem de erro pode alcançar dezenas de centímetros, os terrenos variam dentro de uma mesma rua, e a verificação de campo encontra-se em andamento. As contagens de endereços devem, portanto, ser lidas como ordens de grandeza — não como afirmação sobre qualquer imóvel específico. Estes níveis constituem referência de planejamento, não garantia. Em situação de cheia, prevalecem as orientações dos órgãos oficiais de proteção e defesa civil.</p>
+</details>
 
-<h3>Fontes</h3>
+<details class="faq-item">
+<summary>Fontes</summary>
 <p>Série histórica diária: ANA/HidroWeb, estação fluviométrica 65310000 — União da Vitória (1930–2023); dados recentes: estação telemétrica ANA 65310001 (2024 em diante). Banco de cotas do projeto: endereços do Cadastro Nacional de Endereços para Fins Estatísticos (CNEFE/IBGE) associados ao relevo derivado das curvas de nível do GeoPR — Instituto Água e Terra do Paraná (levantamento aerofotogramétrico a laser, 2012); zero da régua na cota altimétrica 739,61 m, confirmado por comparação entre leituras de régua e nível d'água. Todos os cálculos podem ser reproduzidos a partir dessas bases públicas.</p>
 </details>
 </div>
@@ -386,11 +403,11 @@
 </div>
 
 <footer class="version-footer">
-<span>Versão 1.41</span>
+<span>Versão 1.43</span>
 <span id="visitCounter" class="visit-counter"></span>
 </footer>
 </main>
 
-<script src="app.js?v=1.41"></script>
+<script src="app.js?v=1.43"></script>
 </body>
 </html>
