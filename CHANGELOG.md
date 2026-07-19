@@ -8,6 +8,19 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.52 — 2026-07-19
+
+- **Conteúdo do lado "Para o público" de `estudo.html` substituído por uma nova versão**, fornecida pelo usuário em `ESTUDO_VERSAO_POPULAR.docx` (revisão do texto da v1.51). Principais mudanças de conteúdo:
+- Aviso explícito adicionado: "os nomes abaixo são categorias informacionais próprias do rioiguacu.com. Eles não representam decreto, alerta ou ordem oficial da Defesa Civil."
+- Novo parágrafo com a probabilidade condicional de 48h documentada no artigo técnico (21 casos históricos de nível 5,00–5,50 m subindo ≥0,5 m/dia; 76% atingiram 5,50 m em até 48h), com ressalva explícita de que não é previsão do evento atual.
+- Novo parágrafo sobre a tendência de intensificação (30% dos anos com pico ≥5,50 m em 1931–1977 vs. 58% em 1978–2025, estatisticamente significativa, sem atribuição de causa).
+- Parágrafo sobre limitação do modelo reforçado: "O site identifica terrenos abaixo de uma linha d'água teórica — não o caminho real da água" (antes: "mostra até onde a água 'alcança'... não por onde ela vai passar"), deixando mais explícito que terreno abaixo da linha é exposição potencial, não garantia de alagamento.
+- Novo parágrafo sobre a pendência de nivelamento topográfico formal entre o zero da régua e o modelo de terreno (já documentada tecnicamente no artigo científico desde a v1.51, agora também exposta na versão popular).
+- Recomendação a jornalistas sobre cotas de bairro reformulada para deixar explícito que a cota é do terreno, não da soleira/piso da casa.
+- Removido o parágrafo introdutório genérico ("Este texto explica, em linguagem simples...") — a nova versão vai direto ao conteúdo.
+- O lado "Para especialistas" (artigo científico) e a estrutura/estilo geral da página não foram alterados nesta versão.
+- Backup pré-edição: `backups/site-v1.51.zip`.
+
 ## v1.51 — 2026-07-19
 
 - **Nova página `estudo.html`, substituindo o placeholder "Em breve"** (existente desde a v1.44/v1.45): agora tem conteúdo real, com um seletor no topo com duas opções — **"Para o público"** e **"Para especialistas"** (nomes escolhidos pelo usuário entre as opções propostas, no lugar de "leigos").
