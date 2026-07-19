@@ -386,16 +386,26 @@ def calcular_tendencia(historico):
     if len(historico) < 2:
         return {"texto": "Sem dados suficientes para tendência.", "delta": 0, "direcao": "estavel"}
     delta = historico[-1]["regua_m"] - historico[-2]["regua_m"]
-    if delta > 0:
-        return {"texto": f"SUBINDO +{delta:.3f} m/h", "delta": delta, "direcao": "subindo"}
-    if delta < 0:
-        return {"texto": f"BAIXANDO {delta:.3f} m/h", "delta": delta, "direcao": "baixando"}
-    return {"texto": "ESTÁVEL", "delta": 0, "direcao": "estavel"}
+    if delta == 0:
+        return {"texto": "Estável", "delta": 0, "direcao": "estavel"}
+    direcao = "subindo" if delta > 0 else "baixando"
+    verbo = "Subindo" if delta > 0 else "Baixando"
+    abs_delta_m = abs(delta)
+    # Abaixo de 1 m/h (a grande maioria do tempo), mostra em cm -- mais fácil
+    # de ler que um decimal de metro ("0,6 cm" em vez de "0.006 m"). Taxas
+    # raras/extremas acima disso continuam em metros.
+    if abs_delta_m < 1:
+        valor = f"{abs_delta_m * 100:.1f}".replace(".", ",")
+        texto = f"{verbo} cerca de {valor} cm por hora"
+    else:
+        valor = f"{abs_delta_m:.2f}".replace(".", ",")
+        texto = f"{verbo} cerca de {valor} m por hora"
+    return {"texto": texto, "delta": delta, "direcao": direcao}
 
 
 def verificar_alerta_previsao(historico, previsao):
     if not historico or not previsao:
-        return "Sem previsão disponível para alertas futuros."
+        return "Sem estimativa disponível para as próximas 48 horas."
     agora_base = datetime.fromisoformat(historico[-1]["data_hora"])
     limite = agora_base + timedelta(hours=JANELA_PREVISAO_HORAS)
     valores = []
@@ -406,12 +416,13 @@ def verificar_alerta_previsao(historico, previsao):
             if item.get("regua_com_chuva_m") is not None:
                 valores.append(item["regua_com_chuva_m"])
     if not valores:
-        return "Sem previsão futura dentro das próximas 48 h."
+        return "Sem estimativa disponível para as próximas 48 horas."
     maior = max(valores)
-    for cota, descricao in sorted(COTAS_ALERTA_DEFESA_CIVIL, reverse=True):
-        if maior >= cota:
-            return f"Previsão em 48 h: pode atingir {maior:.2f} m ({descricao})."
-    return "Previsão em 48 h sem atingir cotas críticas."
+    valor_fmt = f"{maior:.2f}".replace(".", ",")
+    # Linguagem deliberadamente não-oficial: isto é uma projeção simples a
+    # partir do histórico recente + chuva, não uma previsão hidrológica
+    # validada -- não deve soar como um boletim oficial da Defesa Civil/ANA.
+    return f"Estimativa automática para as próximas 48 horas: {valor_fmt} m. Não é uma previsão oficial."
 
 
 def montar_payload(historico, previsao, fonte_historico, url_historico):

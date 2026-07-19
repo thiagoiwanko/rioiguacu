@@ -6,6 +6,20 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre v1.37/v1.38 (18/07/2026):** essas duas versões foram publicadas em sessões anteriores sem entrada correspondente neste changelog e sem backup em `backups/`. O gap não foi corrigido retroativamente por falta de detalhe confiável sobre o que mudou em cada uma — registrar aqui um resumo reconstruído de memória seria arriscar detalhes errados. A partir da v1.39 o processo voltou a seguir a REGRA OBRIGATÓRIA do CLAUDE.md.
 
+## v1.46 — 2026-07-18
+
+Lote de correções enviado pelo usuário em formato de tabela (Prioridade/Problema/Correção), confirmado para implementação em lote único ("Tudo de uma vez"):
+
+- **[Crítica] "Cota atual" renomeado para "Nível atual do rio"** no card principal e nas legendas do gráfico — o termo antigo soava como cota altimétrica ou profundidade, não como leitura de régua.
+- **[Crítica] Quadro "Cotas de Referência* (Cheias Históricas)" separado em dois quadros distintos**: "Enchentes Históricas*" (as 6 grandes enchentes + o menor nível já registrado) e "Referências por Bairro*" (as ~17 estimativas por bairro), cada um com sua própria marca "O rio está aqui agora!". Ambos ganharam barra de rolagem (`max-height` + `overflow-y:auto` em `.reference-list`) com o título sempre visível fora da área rolável; a marca do nível atual é centralizada automaticamente na primeira carga (`centerCurrentMarker()`, novo em `app.js`), sem forçar rolagem nas atualizações seguintes.
+- **[Alta] Fonte da atualização exibida dinamicamente no cabeçalho**: novo elemento `#sourceNote`, populado por `renderCards()`, mostra "Fonte desta atualização: ANA" ou "Fonte desta atualização: Copel (redundância, ANA ainda não publicou esta hora)" — corrige a inconsistência entre o cabeçalho (que sempre citava só a ANA) e a fonte real de cada leitura.
+- **[Média] Gráfico com menos linhas de referência**: agora mostra só os 5 níveis de alerta + os extremos históricos (enchentes e o menor nível), tirando do gráfico as ~17 cotas de bairro (que continuam na lista lateral) — o gráfico tinha ficado ilegível com tantas linhas próximas, várias só com número.
+- **[Média] Primeira pergunta do FAQ ("Como foram definidos os níveis de alerta deste site?") reestruturada**: resposta simples primeiro; média, desvio padrão e distribuição normal foram movidos para dentro de um acordeão aninhado "Ver metodologia".
+- **[Média] Tendência e previsão de 48h reformuladas em `scrape.py`**, para linguagem não técnica e em pt-BR: "BAIXANDO -0.006 m/h" virou algo como "Baixando cerca de 0,6 cm por hora" (troca automática para metros acima de 1 m/h de variação); "Previsão em 48 h: pode atingir 3.91 m (ALERTA)." virou "Estimativa automática para as próximas 48 horas: 3,91 m. Não é uma previsão oficial." — deixa claro que não é um boletim oficial da Defesa Civil/ANA.
+- **[Baixa] Nota de rodapé das listas (bairros, enchentes, fontes) com fonte maior e mais contraste**: 11px → 13px, cor `var(--muted)` → `var(--soft)`.
+- **FAQ consolidado**: as perguntas "O que é a ANA?", "O que é o HidroWeb?", "O que é uma estação fluviométrica?", "O que é uma estação telemétrica?", "O que é o IAT?", "De onde vem a altitude dos terrenos?" e "O que é o CNEFE?" (todas adicionadas na v1.45) foram unificadas em uma única pergunta "De onde vêm os dados do site?", com três blocos curtos (nível do rio: ANA/Copel; endereços: CNEFE/IBGE; altitude: GeoPR/IAT). As perguntas `O que é o "nível de régua"?` e "Esses números são exatos?" continuam separadas.
+- Backup pré-edição: `backups/site-v1.45.zip`.
+
 ## v1.45 — 2026-07-18
 
 - **FAQ bastante ampliado**, com conteúdo revisado e fornecido pelo usuário:
