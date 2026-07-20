@@ -878,6 +878,13 @@ td {
       "history"
       "faq";
   }
+
+  /* Abaixo de 1120px o main-grid vira coluna única (100% de largura) --
+     o safety-warning acompanha, senão ficaria mais estreito que o FAQ
+     logo acima dele nesse breakpoint. */
+  .safety-warning {
+    max-width: none;
+  }
 }
 
 @media (max-width: 640px) {
@@ -936,6 +943,12 @@ td {
   border-radius: 14px;
   margin-bottom: 20px;
   overflow: hidden;
+  /* Mesma largura da coluna do FAQ/gráfico/histórico em .main-grid (coluna 1,
+     minmax(720px, 1fr)) -- antes o bloco esticava até a largura total do
+     .shell, bem maior que a coluna 360px + 14px de gap reservada pro
+     side-panel. 374px = 360px (side-panel) + 14px (gap). Pedido do usuário,
+     20/07/2026: "MANTENHA O TAMANHO DO BLOCO ANTERIOR PERGUNTAS FREQUENTES". */
+  max-width: calc(100% - 374px);
 }
 
 .safety-warning h3 {
