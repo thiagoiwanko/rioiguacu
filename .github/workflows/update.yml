@@ -63,18 +63,24 @@ jobs:
           # na raiz do repo igual index.html, também ficava acessível direto
           # em rioiguacu.com/monitor_web.log -- vazamento descoberto em
           # varredura de 20/07/2026.
-          git add data.json historico_diario.csv
+          #
+          # data.json e historico_diario.csv agora vivem em public/ (mesma
+          # varredura de 20/07/2026) -- essa é a pasta configurada como
+          # "Build output directory" no Cloudflare Pages, então só o que está
+          # dentro dela é servido publicamente; scrape.py já grava os dois
+          # arquivos direto em public/ (ver PUBLIC_DIR em scrape.py).
+          git add public/data.json public/historico_diario.csv
           # Só publica (e só gera deploy no Cloudflare Pages) quando o
           # data.json ou o historico_diario.csv realmente mudaram.
-          if git diff --staged --quiet -- data.json historico_diario.csv; then
+          if git diff --staged --quiet -- public/data.json public/historico_diario.csv; then
             echo "Sem mudança em data.json/historico_diario.csv; não publica nesta rodada."
             exit 0
           fi
           # Guarda os arquivos recém-coletados fora do repo, pois em caso de
           # conflito de push vamos resetar a árvore local para o remoto.
           mkdir -p /tmp/coleta_atual
-          cp data.json /tmp/coleta_atual/ 2>/dev/null || true
-          cp historico_diario.csv /tmp/coleta_atual/ 2>/dev/null || true
+          cp public/data.json /tmp/coleta_atual/ 2>/dev/null || true
+          cp public/historico_diario.csv /tmp/coleta_atual/ 2>/dev/null || true
           for i in 1 2 3 4 5; do
             git commit -m "Atualiza dados do Rio Iguaçu" -q || true
             if git push; then
@@ -84,7 +90,7 @@ jobs:
             echo "Push rejeitado (tentativa $i/5): outra execução chegou primeiro. Sincronizando..."
             git fetch origin main
             git reset --hard origin/main
-            cp /tmp/coleta_atual/data.json . 2>/dev/null || true
+            cp /tmp/coleta_atual/data.json public/ 2>/dev/null || true
             # NÃO restaurar historico_diario.csv aqui (bug corrigido na v1.31).
             # Esse arquivo é cumulativo (1 linha por dia, upsert por data) --
             # o snapshot em /tmp foi calculado ANTES do reset, em cima do
@@ -97,7 +103,7 @@ jobs:
             # versão mais recente do remoto; a linha do dia desta execução
             # (se ainda faltar) é recalculada normalmente na próxima rodada,
             # poucos minutos depois -- sem risco de perder histórico alheio.
-            git add data.json
+            git add public/data.json
             sleep $((RANDOM % 6 + 2))
           done
           echo "Falha ao empurrar as mudanças após 5 tentativas."
