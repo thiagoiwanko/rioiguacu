@@ -15,10 +15,18 @@ from selenium.webdriver.common.by import By
 
 APP_VERSION = "GitHub Actions 1.0"
 BASE_DIR = Path(__file__).resolve().parent
-DATA_PATH = BASE_DIR / "data.json"
+# public/ é a pasta servida pelo Cloudflare Pages (Build output directory) --
+# reestruturação de 20/07/2026 pra parar de expor o repositório inteiro (ver
+# PRIORIDADE 1 no CLAUDE.md). data.json e historico_diario.csv são os únicos
+# arquivos que este script grava e que também são públicos, por isso vão
+# dentro de public/; monitor_web.log e o cache de token da ANA continuam na
+# raiz do repo (nunca commitados/publicados).
+PUBLIC_DIR = BASE_DIR / "public"
+PUBLIC_DIR.mkdir(exist_ok=True)
+DATA_PATH = PUBLIC_DIR / "data.json"
 LOG_PATH = BASE_DIR / "monitor_web.log"
 ANA_TOKEN_CACHE_PATH = BASE_DIR / ".ana_token_cache.json"
-HISTORICO_DIARIO_PATH = BASE_DIR / "historico_diario.csv"
+HISTORICO_DIARIO_PATH = PUBLIC_DIR / "historico_diario.csv"
 HISTORICO_DIARIO_CABECALHO = "Data;NivelMaximo_m;NivelMinimo_m;NivelUltimo_m;VazaoUltimo_m3s;Fonte\n"
 
 URL_HISTORICO_COPEL = "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf"
