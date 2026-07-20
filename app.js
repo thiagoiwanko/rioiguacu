@@ -38,18 +38,22 @@ minute: "2-digit",
 
 // Escala do gráfico/gauge alinhada aos 5 níveis estatísticos de alerta
 // (Observação 3,70 / Atenção 4,20 / Alerta 5,00 / Emergência 5,50 / Enchente 6,50 m).
+// O piso da escala é o mínimo histórico já registrado (1,30 m, em 2020), não zero --
+// o rio nunca opera perto de zero, então usar 1,30 m como base aproveita melhor
+// a faixa visual do gauge para variação real do nível.
+const NIVEL_MIN_ESCALA = 1.3;
 const NIVEL_MAX_ESCALA = 6.5;
 
 function colorForLevel(level) {
 const stops = [
-[0, [21, 108, 255]],
+[NIVEL_MIN_ESCALA, [21, 108, 255]],
 [3.70, [32, 231, 224]],
 [4.20, [40, 244, 94]],
 [5.00, [255, 236, 63]],
 [5.50, [255, 156, 40]],
 [6.50, [255, 48, 48]],
 ];
-const value = Math.max(0, Math.min(NIVEL_MAX_ESCALA, level));
+const value = Math.max(NIVEL_MIN_ESCALA, Math.min(NIVEL_MAX_ESCALA, level));
 for (let i = 0; i < stops.length - 1; i++) {
 const [a, ca] = stops[i];
 const [b, cb] = stops[i + 1];
@@ -195,7 +199,7 @@ sourceNoteEl.textContent = fonteCurta
 : "";
 }
 
-const marker = Math.max(0, Math.min(100, (level / NIVEL_MAX_ESCALA) * 100));
+const marker = Math.max(0, Math.min(100, ((level - NIVEL_MIN_ESCALA) / (NIVEL_MAX_ESCALA - NIVEL_MIN_ESCALA)) * 100));
 $("gaugeMarker").style.left = `calc(${marker}% - 2px)`;
 $("levelValue").style.color = colorForLevel(level);
 }
