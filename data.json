@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-20T13:09",
+    "atualizado_em": "2026-07-20T13:11",
     "historico": [
       {
         "data_hora": "2026-07-18T14:00",
@@ -382,6 +382,14 @@
         "vazao_m3s": 834,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-20T13:00",
+        "regua_m": 3.629,
+        "nivel_agua_m": 743.239,
+        "vazao_m3s": 829,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -417,10 +425,10 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-20T12:00",
-      "regua_m": 3.638,
-      "nivel_agua_m": 743.248,
-      "vazao_m3s": 834,
+      "data_hora": "2026-07-20T13:00",
+      "regua_m": 3.629,
+      "nivel_agua_m": 743.239,
+      "vazao_m3s": 829,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
@@ -430,7 +438,7 @@
       "delta": -0.008999999999999897,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 33 horas (21/07 21h): 3,45 m. Não é um alerta oficial da Defesa Civil.",
+    "alerta_previsao": "Previsão para daqui a 32 horas (21/07 21h): 3,45 m. Não é um alerta oficial da Defesa Civil.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
