@@ -441,7 +441,11 @@ def verificar_alerta_previsao(historico, previsao):
 
 def montar_payload(historico, previsao, fonte_historico, url_historico):
     if not historico:
-        raise RuntimeError("nenhuma medição foi encontrada (nem ANA, nem Copel)")
+        # Esta mensagem pode ir parar no campo público "erro" do data.json
+        # (main() grava str(exc) ali quando a coleta falha por completo) --
+        # por isso não nomeia a fonte redundante (ver PRIORIDADE 1 no
+        # CLAUDE.md, 20/07/2026).
+        raise RuntimeError("nenhuma medição foi encontrada (nem via ANA, nem via fonte redundante)")
 
     ultima = historico[-1]
     regua = float(ultima["regua_m"])
@@ -464,10 +468,13 @@ def montar_payload(historico, previsao, fonte_historico, url_historico):
     }
 
 
-# Nomes de fonte exibidos no site (campo "fonte" do data.json). O app.js lê
-# esse texto e mostra dinamicamente, então quando a redundância da Copel
-# entra em ação (raro, só nos minutos em que a ANA ainda não fechou a hora)
-# o site mostra a fonte real daquela leitura, nunca uma informação fixa/errada.
+# FONTE_ANA é o único texto que pode ir para o campo público "fonte" do
+# data.json -- sempre, mesmo quando a leitura técnica real veio da Copel
+# como redundância (raro, só nos minutos em que a ANA ainda não fechou a
+# hora). O projeto não tem autorização da Copel pra divulgar publicamente
+# que os dados vêm dela (PRIORIDADE 1 no CLAUDE.md, 20/07/2026). FONTE_COPEL
+# existe só para diagnóstico interno (mensagens de log em monitor_web.log,
+# que não é publicado) -- nunca deve ser passada para montar_payload().
 FONTE_ANA = "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)"
 FONTE_COPEL = "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)"
 
@@ -496,7 +503,10 @@ def mesclar_historico(historico_novo, historico_anterior):
 def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
     historico_anterior = historico_anterior or []
     historico = coletar_via_ana()
-    fonte_historico = None
+    # fonte_tecnica é só para diagnóstico interno (mensagens de log em
+    # monitor_web.log, nunca publicado) -- o campo público "fonte" do
+    # data.json é sempre FONTE_ANA, ver montar_payload() mais abaixo.
+    fonte_tecnica = None
     # url_historico sempre aponta pro HidroWeb da ANA no payload público,
     # mesmo quando a leitura técnica veio da Copel como redundância -- o
     # projeto não tem autorização da Copel pra divulgar publicamente que os
@@ -505,7 +515,7 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
     if historico:
         nova_ultima_ana = historico[-1]["data_hora"]
         if ultima_anterior is None or nova_ultima_ana != ultima_anterior:
-            fonte_historico = FONTE_ANA
+            fonte_tecnica = FONTE_ANA
             url_historico = URL_HISTORICO_ANA
         else:
             # A ANA respondeu, mas ainda é o mesmo dado de antes (a hora ainda
@@ -517,10 +527,10 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
     if not historico:
         texto_historico = coletar_texto(URL_HISTORICO_COPEL)
         historico = extrair_medicoes(texto_historico)
-        fonte_historico = FONTE_COPEL
+        fonte_tecnica = FONTE_COPEL
         # url_historico permanece URL_HISTORICO_ANA (definido acima) mesmo
         # aqui -- nunca expor a URL da Copel no data.json público.
-        log(f"Medições obtidas via {fonte_historico.split(' ')[0]}: {len(historico)}")
+        log(f"Medições obtidas via {fonte_tecnica.split(' ')[0]}: {len(historico)}")
 
     historico = mesclar_historico(historico, historico_anterior)
 
@@ -534,7 +544,11 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
     except Exception as exc:
         log(f"Previsão indisponível: {exc}")
 
-    return montar_payload(historico, previsao, fonte_historico, url_historico)
+    # O campo público "fonte" é sempre FONTE_ANA, mesmo quando fonte_tecnica
+    # foi a Copel nesta rodada -- mesma decisão já aplicada a url_historico
+    # acima (ver PRIORIDADE 1 no CLAUDE.md, 20/07/2026). fonte_tecnica não é
+    # usada aqui de propósito: ela só serve pros logs internos já emitidos.
+    return montar_payload(historico, previsao, FONTE_ANA, url_historico)
 
 
 def carregar_anterior():

@@ -879,12 +879,6 @@ td {
       "faq";
   }
 
-  /* Abaixo de 1120px o main-grid vira coluna única (100% de largura) --
-     o safety-warning acompanha, senão ficaria mais estreito que o FAQ
-     logo acima dele nesse breakpoint. */
-  .safety-warning {
-    max-width: none;
-  }
 }
 
 @media (max-width: 640px) {
@@ -949,6 +943,23 @@ td {
      side-panel. 374px = 360px (side-panel) + 14px (gap). Pedido do usuário,
      20/07/2026: "MANTENHA O TAMANHO DO BLOCO ANTERIOR PERGUNTAS FREQUENTES". */
   max-width: calc(100% - 374px);
+}
+
+/* Este bloco precisa vir DEPOIS da regra .safety-warning acima (não dentro
+   do primeiro @media (max-width: 1120px), lá em cima no arquivo) -- CSS
+   resolve empate de especificidade pela ordem de origem, então uma regra
+   de media query que aparece ANTES da regra base é irrelevante: a regra
+   base (sem @media), por vir depois no arquivo, sempre vencia e o
+   max-width: calc(100% - 374px) ficava aplicado mesmo no celular, dando
+   largura negativa e quebrando o layout. Bug introduzido na v1.72,
+   corrigido na v1.73 (usuário reportou "estragou no modo celular").
+   Abaixo de 1120px o main-grid vira coluna única (100% de largura) -- o
+   safety-warning acompanha, senão ficaria mais estreito que o FAQ logo
+   acima dele nesse breakpoint. */
+@media (max-width: 1120px) {
+  .safety-warning {
+    max-width: none;
+  }
 }
 
 .safety-warning h3 {
