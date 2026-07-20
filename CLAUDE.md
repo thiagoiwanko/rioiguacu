@@ -6,6 +6,17 @@
 
 Isso significa que qualquer instrução de restaurar (uma versão, um arquivo, um backup) exige fidelidade byte a byte ao estado de referência pedido — nunca uma aproximação, nunca uma versão "corrigida" ou "melhorada" por iniciativa própria, mesmo que pareça haver um erro no conteúdo original. Se algo no conteúdo original parecer errado/desatualizado, isso deve ser levantado como pergunta ao usuário, nunca alterado silenciosamente durante uma restauração. Essa regra vale pra qualquer sessão futura neste projeto e tem prioridade sobre julgamento próprio sobre "o que parece certo".
 
+## PRIORIDADE 1 — Nunca citar "Copel" publicamente no site (20/07/2026)
+
+**O projeto não tem autorização da Copel para divulgar publicamente que os dados vêm dela.** Motivo explícito do usuário: "esqueci que não temos autorização da Copel de momento, então não podemos divulgar que o dado vem de lá". **A coleta técnica continua normalmente** (scraping da Copel como fonte da previsão de 48h e como fonte redundante do nível atual nos minutos em que a API da ANA ainda não publicou a leitura da hora — usuário confirmou explicitamente "mas vamos manter a coleta") — a restrição é só sobre **exibir/nomear a Copel em qualquer lugar visível do site público** (`index.html`, `app.js`, textos gerados por `scrape.py` que vão pro `data.json`, meta tags, FAQ, etc.).
+
+Na prática, isso significa:
+- O rótulo de fonte no site (`#sourceLabel`, `#sourceNote`) sempre mostra "ANA", mesmo quando a leitura técnica real veio da Copel como redundância (`app.js`, v1.69).
+- O texto da previsão de 48h (`alerta_previsao`, gerado por `verificar_alerta_previsao()` em `scrape.py`) não cita nenhuma fonte — nem "Copel", nem "concessionária", nem link pro site da Copel (v1.69 removeu do FAQ estático, v1.70 corrigiu o texto dinâmico que tinha escapado dessa primeira revisão).
+- Isso vale pra **qualquer texto novo que vier a ser exibido no site** — antes de publicar qualquer string nova gerada a partir de `data.fonte`, `data.alerta_previsao` ou qualquer outro campo que possa carregar "Copel", checar se ela vai aparecer pro usuário e, se sim, não nomear a fonte.
+- `app.py` (monitor local, roda só na máquina do usuário via `abrir_monitor_web.bat`, nunca é publicado) não foi alterado — a restrição é só sobre o que é público.
+- Essa é uma restrição de autorização/compliance, não só de preferência estética — não reverter isso "para simplificar" ou "porque parece mais informativo" sem confirmar com o usuário que a autorização mudou.
+
 ## Preferências de comunicação
 
 **Responder sempre em português** (pedido explícito do usuário, 13/07/2026, reforçado com "sempre em português, coloque isso na memória"). Vale para qualquer sessão futura neste projeto.
