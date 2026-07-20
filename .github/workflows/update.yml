@@ -51,13 +51,21 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json monitor_web.log historico_diario.csv
+          # monitor_web.log NUNCA é adicionado ao commit (desde 20/07/2026) --
+          # ele continua sendo escrito normalmente no runner (útil pra
+          # debugar uma execução específica pelos logs do próprio GitHub
+          # Actions), mas parou de ser publicado no repositório público.
+          # Motivo: as mensagens de log citam "Copel" e a URL real dela
+          # (www.copel.com/...) em texto puro -- o projeto não tem
+          # autorização da Copel pra divulgar publicamente que os dados vêm
+          # dela (PRIORIDADE 1 no CLAUDE.md). O arquivo era commitado junto
+          # com data.json/historico_diario.csv a cada execução e, por estar
+          # na raiz do repo igual index.html, também ficava acessível direto
+          # em rioiguacu.com/monitor_web.log -- vazamento descoberto em
+          # varredura de 20/07/2026.
+          git add data.json historico_diario.csv
           # Só publica (e só gera deploy no Cloudflare Pages) quando o
-          # data.json ou o historico_diario.csv realmente mudaram --
-          # monitor_web.log muda em toda execução (é só texto de log) e não
-          # deve, sozinho, disparar um deploy. É isso que permite rodar a
-          # cada 5 min (via Worker) sem reintroduzir o engarrafamento de
-          # deploys da v1.6.
+          # data.json ou o historico_diario.csv realmente mudaram.
           if git diff --staged --quiet -- data.json historico_diario.csv; then
             echo "Sem mudança em data.json/historico_diario.csv; não publica nesta rodada."
             exit 0
@@ -66,7 +74,6 @@ jobs:
           # conflito de push vamos resetar a árvore local para o remoto.
           mkdir -p /tmp/coleta_atual
           cp data.json /tmp/coleta_atual/ 2>/dev/null || true
-          cp monitor_web.log /tmp/coleta_atual/ 2>/dev/null || true
           cp historico_diario.csv /tmp/coleta_atual/ 2>/dev/null || true
           for i in 1 2 3 4 5; do
             git commit -m "Atualiza dados do Rio Iguaçu" -q || true
@@ -78,7 +85,6 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/coleta_atual/data.json . 2>/dev/null || true
-            cp /tmp/coleta_atual/monitor_web.log . 2>/dev/null || true
             # NÃO restaurar historico_diario.csv aqui (bug corrigido na v1.31).
             # Esse arquivo é cumulativo (1 linha por dia, upsert por data) --
             # o snapshot em /tmp foi calculado ANTES do reset, em cima do
@@ -91,7 +97,7 @@ jobs:
             # versão mais recente do remoto; a linha do dia desta execução
             # (se ainda faltar) é recalculada normalmente na próxima rodada,
             # poucos minutos depois -- sem risco de perder histórico alheio.
-            git add data.json monitor_web.log
+            git add data.json
             sleep $((RANDOM % 6 + 2))
           done
           echo "Falha ao empurrar as mudanças após 5 tentativas."
