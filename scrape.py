@@ -412,11 +412,11 @@ def verificar_alerta_previsao(historico, previsao):
     if not futuros:
         return "Sem previsão da Copel disponível para as próximas 48 horas."
 
-    # Valor "verdadeiro" pra daqui a 48h -- não o pico da janela inteira.
-    # Pega o ponto de previsão mais próximo do horário-alvo (a previsão da
-    # Copel nem sempre cai exatamente em cima de 48h) e usa o cenário "com
-    # chuva" quando disponível, coerente com a linha "Previsão" plotada no
-    # gráfico (app.js só desenha pontos com regua_com_chuva_m preenchido).
+    # Valor "verdadeiro" pro horário-alvo (48h à frente) -- não o pico da
+    # janela inteira. Pega o ponto de previsão mais próximo do alvo e usa o
+    # cenário "com chuva" quando disponível, coerente com a linha "Previsão"
+    # plotada no gráfico (app.js só desenha pontos com regua_com_chuva_m
+    # preenchido).
     mais_proximo = min(
         futuros,
         key=lambda item: abs(datetime.fromisoformat(item["data_hora"]) - alvo),
@@ -425,14 +425,18 @@ def verificar_alerta_previsao(historico, previsao):
     if valor is None:
         valor = mais_proximo.get("regua_sem_chuva_m")
     valor_fmt = f"{valor:.2f}".replace(".", ",")
-    quando_fmt = datetime.fromisoformat(mais_proximo["data_hora"]).strftime("%d/%m %Hh")
+    data_hora_ponto = datetime.fromisoformat(mais_proximo["data_hora"])
+    quando_fmt = data_hora_ponto.strftime("%d/%m %Hh")
 
-    # A previsão em si já vem pronta da Copel (URL_PREVISAO) -- aqui só
-    # localizamos o ponto mais próximo de 48h à frente. O texto deixa claro
-    # que é a previsão publicada pela concessionária, não um cálculo deste
-    # site, e que não é um alerta oficial da Defesa Civil/ANA (que não
-    # publicam previsão para este rio).
-    return f"Previsão da Copel para daqui a 48 horas ({quando_fmt}): {valor_fmt} m. Não é um alerta oficial da Defesa Civil."
+    # A Copel nem sempre publica previsão cobrindo as 48h completas (às vezes
+    # a janela disponível é mais curta, ex.: ~35h) -- por isso calculamos e
+    # mostramos o número real de horas até o ponto usado, em vez de afirmar
+    # "48 horas" mesmo quando o ponto mais próximo está bem aquém disso. O
+    # texto deixa claro que é a previsão publicada pela concessionária, não
+    # um cálculo deste site, e que não é um alerta oficial da Defesa
+    # Civil/ANA (que não publicam previsão para este rio).
+    horas_reais = round((data_hora_ponto - agora_base).total_seconds() / 3600)
+    return f"Previsão da Copel para daqui a {horas_reais} horas ({quando_fmt}): {valor_fmt} m. Não é um alerta oficial da Defesa Civil."
 
 
 def montar_payload(historico, previsao, fonte_historico, url_historico):
