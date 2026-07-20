@@ -8,6 +8,14 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.60 — 2026-07-19
+
+- **PDF do artigo científico readicionado a `estudo.html`, com autorização explícita do usuário**, sendo esta a cópia definitiva a ser usada (`4c7d560c2f665f5a877284c14073c24f`, 21 páginas, correções ABNT).
+- **Mantido o nome de arquivo original enviado pelo usuário** — `NOTA_TECNICA_MONITORAMENTO_CHEIAS_UV_ABNT.pdf` — em vez de renomear para o genérico `artigo-cientifico-uv.pdf` usado nas versões anteriores. O código de `estudo.html` (`pdfjsLib.getDocument(...)`) foi atualizado para buscar esse nome exato.
+- Visualizador restaurado exatamente na versão funcional da v1.58 (rolagem contínua tipo livro, renderização lazy por página via `IntersectionObserver`, sem travamento).
+- Cache-buster do PDF em `?v=1.60`.
+- Backup pré-edição: `backups/site-v1.59.zip`.
+
 ## v1.59 — 2026-07-19
 
 - **PDF do artigo científico removido de `estudo.html`, a pedido explícito do usuário**, junto com todo indício dele: o arquivo `artigo-cientifico-uv.pdf` foi apagado do repositório, o script do `pdf.js` (biblioteca externa) foi removido, e o `<div class="pdf-viewer-wrap">`/`carregarPdfEspecialistas()` (HTML, CSS e JS relacionados ao visualizador) foram excluídos por completo — não sobra mais nenhuma referência a PDF em `estudo.html`.

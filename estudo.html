@@ -7,7 +7,7 @@
 <meta name="description" content="Conheça o estudo técnico e científico por trás do Monitor Rio Iguaçu.">
 <link rel="canonical" href="https://rioiguacu.com/estudo.html">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="stylesheet" href="styles.css?v=1.59">
+<link rel="stylesheet" href="styles.css?v=1.60">
 <style>
 .content-toggle {
   margin-bottom: 18px;
@@ -170,13 +170,52 @@
   border: 1px solid rgba(255, 61, 66, .25);
 }
 
-.specialist-placeholder {
+.pdf-viewer-wrap {
   max-width: 780px;
   margin: 0 auto;
+}
+
+.pdf-viewer-status {
   text-align: center;
   color: var(--muted);
-  font-size: 14px;
-  padding: 60px 20px;
+  font-size: 13px;
+  padding: 40px 0;
+}
+
+.pdf-viewer-book {
+  max-height: 85vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y proximity;
+  border-radius: 10px;
+  background: #0d1720;
+  border: 1px solid var(--line);
+  padding: 10px;
+}
+
+.pdf-viewer-book::-webkit-scrollbar {
+  width: 6px;
+}
+
+.pdf-viewer-book::-webkit-scrollbar-thumb {
+  background: rgba(180, 215, 230, .35);
+  border-radius: 6px;
+}
+
+.pdf-page-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 210 / 297;
+  background: #16222c;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  scroll-snap-align: start;
+  user-select: none;
+}
+
+.pdf-page-canvas:last-child {
+  margin-bottom: 0;
 }
 </style>
 </head>
@@ -264,7 +303,10 @@
 <h1>Monitoramento e caracterização estatística de cheias do Rio Iguaçu em União da Vitória (PR)</h1>
 </div>
 
-<p class="specialist-placeholder">Esta seção está em revisão no momento. O artigo técnico completo será republicado em breve.</p>
+<div class="pdf-viewer-wrap" id="pdfViewerWrap" oncontextmenu="return false">
+<div id="pdfViewerStatus" class="pdf-viewer-status">Carregando o artigo em PDF…</div>
+<div id="pdfViewerBook" class="pdf-viewer-book"></div>
+</div>
 
 <p style="margin:18px 0 0; max-width:780px; margin-left:auto; margin-right:auto;"><a href="index.html" style="color:var(--cyan); font-weight:800; text-decoration:none;">&larr; Voltar para o monitor do Rio Iguaçu</a></p>
 </section>
@@ -274,12 +316,78 @@
 </footer>
 </main>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
+var pdfLoadStarted = false;
+
 function mostrarView(qual) {
   document.getElementById('viewPublico').classList.toggle('active', qual === 'publico');
   document.getElementById('viewEspecialistas').classList.toggle('active', qual === 'especialistas');
   document.getElementById('btnPublico').classList.toggle('active', qual === 'publico');
   document.getElementById('btnEspecialistas').classList.toggle('active', qual === 'especialistas');
+  if (qual === 'especialistas' && !pdfLoadStarted) {
+    pdfLoadStarted = true;
+    carregarPdfEspecialistas();
+  }
+}
+
+function carregarPdfEspecialistas() {
+  var statusEl = document.getElementById('pdfViewerStatus');
+  var bookEl = document.getElementById('pdfViewerBook');
+  if (typeof pdfjsLib === 'undefined') {
+    statusEl.textContent = 'Não foi possível carregar o visualizador de PDF. Tente novamente mais tarde.';
+    return;
+  }
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  pdfjsLib.getDocument('NOTA_TECNICA_MONITORAMENTO_CHEIAS_UV_ABNT.pdf?v=1.60').promise.then(function (pdf) {
+    statusEl.remove();
+    var scale = Math.min(2, (window.devicePixelRatio || 1) * 1.2);
+    var renderQueue = Promise.resolve();
+    var pending = {};
+
+    function renderPage(pageNum, canvas) {
+      if (canvas.dataset.rendered === '1' || pending[pageNum]) return;
+      pending[pageNum] = true;
+      renderQueue = renderQueue.then(function () {
+        return pdf.getPage(pageNum).then(function (page) {
+          var viewport = page.getViewport({ scale: scale });
+          canvas.width = viewport.width;
+          canvas.height = viewport.height;
+          var ctx = canvas.getContext('2d');
+          return page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function () {
+            canvas.dataset.rendered = '1';
+            delete pending[pageNum];
+          });
+        });
+      }).catch(function () {
+        delete pending[pageNum];
+      });
+    }
+
+    var observer = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var canvas = entry.target;
+          renderPage(parseInt(canvas.dataset.pageNum, 10), canvas);
+          observer.unobserve(canvas);
+        }
+      });
+    }, { root: bookEl, rootMargin: '600px 0px', threshold: 0.01 }) : null;
+
+    for (var num = 1; num <= pdf.numPages; num++) {
+      var canvas = document.createElement('canvas');
+      canvas.className = 'pdf-page-canvas';
+      canvas.dataset.pageNum = String(num);
+      bookEl.appendChild(canvas);
+      if (observer) {
+        observer.observe(canvas);
+      } else {
+        renderPage(num, canvas);
+      }
+    }
+  }).catch(function () {
+    statusEl.textContent = 'Não foi possível carregar o artigo em PDF. Tente recarregar a página.';
+  });
 }
 </script>
 </body>
