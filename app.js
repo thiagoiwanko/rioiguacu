@@ -37,7 +37,7 @@ minute: "2-digit",
 }
 
 // Escala do gráfico/gauge alinhada aos 5 níveis estatísticos de alerta
-// (Observação 3,70 / Atenção 4,20 / Alerta 5,00 / Emergência 5,50 / Enchente 6,50 m).
+// (Observação 3,70 / Atenção 4,20 / Alerta 5,00 / Emergência 5,50 / Grande enchente 6,50 m).
 // O piso da escala é o mínimo histórico já registrado (1,30 m, em 2020), não zero --
 // o rio nunca opera perto de zero, então usar 1,30 m como base aproveita melhor
 // a faixa visual do gauge para variação real do nível.
@@ -147,7 +147,7 @@ return { minY, maxY };
 
 function severityClass(situacao) {
 const texto = situacao || "";
-if (texto.startsWith("ENCHENTE")) return "badge-critico";
+if (texto.startsWith("GRANDE ENCHENTE")) return "badge-critico";
 if (texto.startsWith("EMERGÊNCIA")) return "badge-muito-alta";
 if (texto.startsWith("ALERTA")) return "badge-alta";
 if (texto.startsWith("ATENÇÃO")) return "badge-moderada";

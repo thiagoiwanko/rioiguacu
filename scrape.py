@@ -84,14 +84,14 @@ COTAS_BAIRROS = [
 #   Observação  3,70 m = média + 1 desvio padrão (P85)
 #   Atenção     4,20 m = percentil 90
 #   Alerta      5,00 m = média + 2 desvios padrão (P95)
-#   Emergência  5,50 m = P97,5
-#   Enchente    6,50 m = ~1 em cada 10 endereços da cidade abaixo da régua
+#   Emergência      5,50 m = P97,5
+#   Grande enchente 6,50 m = ~1 em cada 10 endereços da cidade abaixo da régua
 COTAS_ALERTA_DEFESA_CIVIL = [
     (3.70, "OBSERVAÇÃO"),
     (4.20, "ATENÇÃO"),
     (5.00, "ALERTA"),
     (5.50, "EMERGÊNCIA"),
-    (6.50, "ENCHENTE"),
+    (6.50, "GRANDE ENCHENTE"),
 ]
 
 # Escalada por velocidade: a série histórica mostra subidas abruptas (1,78 m

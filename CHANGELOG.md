@@ -8,6 +8,17 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.62 — 2026-07-19
+
+- **Nível de alerta "Enchente" renomeado para "Grande enchente" em todo o site**, a pedido do usuário. Alterado em três lugares para manter consistência:
+  - `scrape.py`: `COTAS_ALERTA_DEFESA_CIVIL` — `(6.50, "ENCHENTE")` → `(6.50, "GRANDE ENCHENTE")`. Esse valor alimenta tanto o campo `situacao` (badge do card "Nível atual do rio") quanto a lista "Alertas de Nível do Rio" da lateral, via `data.json`. Roda em GitHub Actions, então o novo rótulo passa a valer a partir da próxima coleta automática.
+  - `app.js`: `severityClass()` — a checagem `texto.startsWith("ENCHENTE")` (usada para aplicar a classe `badge-critico`, com o ícone de sirene) foi atualizada para `texto.startsWith("GRANDE ENCHENTE")`, senão o badge pararia de receber o estilo crítico.
+  - `index.html`: parágrafo da FAQ "O que significa cada nível?" renomeado de "Enchente — 6,50 m" para "Grande enchente — 6,50 m".
+- **Acrescentada uma linha-resumo no início da resposta "O que significa cada nível?"**, mostrando de forma compacta a progressão de raridade dos 5 níveis (15% → 10% → 5% → 2,5% → menos de 1%), antes dos parágrafos detalhados de cada um.
+- **Fora do escopo desta mudança, mantido de propósito:** os rótulos "Enchentes Históricas" (lista lateral) e "Enchente de 1983/1992/2014/2019/2023" (`COTAS_BAIRROS`) não foram alterados — descrevem eventos históricos específicos, não o nível de alerta em si, e continuam corretos como estão.
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.62`.
+- Backup pré-edição: `backups/site-v1.61.zip`.
+
 ## v1.61 — 2026-07-19
 
 - **Escala do gauge de nível ("Nível atual do rio") alterada de 0–6,50 m para 1,30–6,50 m**, a pedido do usuário. O piso passou a ser o mínimo histórico já registrado (1,30 m, em 2020), em vez de zero — o rio nunca opera perto de zero, então a nova faixa aproveita melhor o espaço visual do gauge para a variação real do nível. Alterado em `app.js`: nova constante `NIVEL_MIN_ESCALA = 1.3`, ajuste do primeiro degrau de cor em `colorForLevel()` e da fórmula de posição do marcador em `renderCards()` (antes `level / NIVEL_MAX_ESCALA`, agora `(level - NIVEL_MIN_ESCALA) / (NIVEL_MAX_ESCALA - NIVEL_MIN_ESCALA)`).
