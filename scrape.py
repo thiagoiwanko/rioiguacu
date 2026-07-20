@@ -405,12 +405,12 @@ def calcular_tendencia(historico):
 
 def verificar_alerta_previsao(historico, previsao):
     if not historico or not previsao:
-        return "Sem previsão da Copel disponível para as próximas 48 horas."
+        return "Sem previsão disponível para as próximas 48 horas."
     agora_base = datetime.fromisoformat(historico[-1]["data_hora"])
     alvo = agora_base + timedelta(hours=JANELA_PREVISAO_HORAS)
     futuros = [item for item in previsao if datetime.fromisoformat(item["data_hora"]) > agora_base]
     if not futuros:
-        return "Sem previsão da Copel disponível para as próximas 48 horas."
+        return "Sem previsão disponível para as próximas 48 horas."
 
     # Valor "verdadeiro" pro horário-alvo (48h à frente) -- não o pico da
     # janela inteira. Pega o ponto de previsão mais próximo do alvo e usa o
@@ -428,15 +428,15 @@ def verificar_alerta_previsao(historico, previsao):
     data_hora_ponto = datetime.fromisoformat(mais_proximo["data_hora"])
     quando_fmt = data_hora_ponto.strftime("%d/%m %Hh")
 
-    # A Copel nem sempre publica previsão cobrindo as 48h completas (às vezes
-    # a janela disponível é mais curta, ex.: ~35h) -- por isso calculamos e
+    # A fonte da previsão nem sempre cobre as 48h completas (às vezes a
+    # janela disponível é mais curta, ex.: ~35h) -- por isso calculamos e
     # mostramos o número real de horas até o ponto usado, em vez de afirmar
     # "48 horas" mesmo quando o ponto mais próximo está bem aquém disso. O
-    # texto deixa claro que é a previsão publicada pela concessionária, não
-    # um cálculo deste site, e que não é um alerta oficial da Defesa
-    # Civil/ANA (que não publicam previsão para este rio).
+    # texto não nomeia a fonte da previsão (decisão do usuário, 20/07/2026) --
+    # só deixa claro que não é um cálculo deste site nem um alerta oficial
+    # da Defesa Civil/ANA (que não publicam previsão para este rio).
     horas_reais = round((data_hora_ponto - agora_base).total_seconds() / 3600)
-    return f"Previsão da Copel para daqui a {horas_reais} horas ({quando_fmt}): {valor_fmt} m. Não é um alerta oficial da Defesa Civil."
+    return f"Previsão para daqui a {horas_reais} horas ({quando_fmt}): {valor_fmt} m. Não é um alerta oficial da Defesa Civil."
 
 
 def montar_payload(historico, previsao, fonte_historico, url_historico):
