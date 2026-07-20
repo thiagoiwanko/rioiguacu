@@ -8,6 +8,16 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.61 — 2026-07-19
+
+- **Escala do gauge de nível ("Nível atual do rio") alterada de 0–6,50 m para 1,30–6,50 m**, a pedido do usuário. O piso passou a ser o mínimo histórico já registrado (1,30 m, em 2020), em vez de zero — o rio nunca opera perto de zero, então a nova faixa aproveita melhor o espaço visual do gauge para a variação real do nível. Alterado em `app.js`: nova constante `NIVEL_MIN_ESCALA = 1.3`, ajuste do primeiro degrau de cor em `colorForLevel()` e da fórmula de posição do marcador em `renderCards()` (antes `level / NIVEL_MAX_ESCALA`, agora `(level - NIVEL_MIN_ESCALA) / (NIVEL_MAX_ESCALA - NIVEL_MIN_ESCALA)`).
+- **Revisão de texto nos parágrafos "Atenção", "Alerta" e "Emergência"** da pergunta "O que significa cada nível?" (`index.html`), a pedido do usuário:
+  - Atenção (4,20 m): removido o termo solto "percentil 90" (sem lastro estatístico no parágrafo, ao contrário de Observação/Alerta que citam desvios padrão explicitamente) e a frase sobre subida de "3 metros em 48 horas" (não fazia sentido no contexto). Texto agora afirma diretamente: "o rio esteve neste nível ou acima em apenas 10% dos dias da história."
+  - Alerta (5,00 m): "1 dia em cada 20" trocado por "5%"; removida a frase sobre a maior subida diária (1,78 m/24h, 1992) para não duplicar/deslocar o dado sem contexto.
+  - Emergência (5,50 m): "1 dia a cada 40" trocado por "2,5%"; acrescentada a informação de que, neste nível, alguns bairros já apresentam vários pontos de alagamento (deixa de ser um atingimento pontual).
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.61`.
+- Backup pré-edição: `backups/site-v1.60.zip`.
+
 ## v1.60 — 2026-07-19
 
 - **PDF do artigo científico readicionado a `estudo.html`, com autorização explícita do usuário**, sendo esta a cópia definitiva a ser usada (`4c7d560c2f665f5a877284c14073c24f`, 21 páginas, correções ABNT).
