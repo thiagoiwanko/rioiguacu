@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.72 — 2026-07-20
+
+- **Ajustada a largura do aviso de segurança** ("⚠️ Enchente é risco à vida. Leia com atenção.") — antes esticava até a largura total do `.shell` (bem mais largo que o resto do conteúdo abaixo dele), agora fica com a mesma largura da coluna do FAQ/gráfico/histórico em `.main-grid` (a coluna da esquerda, sem contar os 360px + 14px de gap reservados pro painel lateral). Pedido do usuário: "MANTENHA O TAMANHO DO BLOCO ANTERIOR PERGUNTAS FREQUENTES". `styles.css`: `.safety-warning` ganhou `max-width: calc(100% - 374px)`, revertido pra `max-width: none` no breakpoint `max-width: 1120px` (onde o `.main-grid` já vira coluna única de 100%).
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.72`.
+- Backup pré-edição: `backups/site-v1.71.zip`.
+
 ## v1.71 — 2026-07-20
 
 - **Removida a linha "Fonte desta atualização: ANA"** do subtítulo do cabeçalho (`#sourceNote`) — usuário apontou que ficou redundante com a frase logo acima, que já diz "com dados da ANA (Agência Nacional de Águas e Saneamento Básico)". `app.js`: `renderCards()` agora sempre limpa `#sourceNote` em vez de preenchê-lo; o rótulo `(ANA)` ao lado de "Dados Visíveis" (`#sourceLabel`) não foi tocado, continua mostrando a fonte igual antes.
