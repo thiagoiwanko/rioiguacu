@@ -8,6 +8,16 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.71 — 2026-07-20
+
+- **Removida a linha "Fonte desta atualização: ANA"** do subtítulo do cabeçalho (`#sourceNote`) — usuário apontou que ficou redundante com a frase logo acima, que já diz "com dados da ANA (Agência Nacional de Águas e Saneamento Básico)". `app.js`: `renderCards()` agora sempre limpa `#sourceNote` em vez de preenchê-lo; o rótulo `(ANA)` ao lado de "Dados Visíveis" (`#sourceLabel`) não foi tocado, continua mostrando a fonte igual antes.
+- **Motivo real por trás da remoção das referências a "Copel" (v1.69/v1.70), esclarecido pelo usuário nesta sessão:** o projeto não tem autorização da Copel para divulgar publicamente que os dados vêm dela — não é só uma simplificação visual. A coleta técnica continua normalmente (usuário confirmou explicitamente "vamos manter a coleta"); só a exibição pública nunca deve nomear a Copel. Documentado como PRIORIDADE 1 no `CLAUDE.md` pra nenhuma sessão futura reverter isso sem confirmar que a autorização mudou.
+- **Removido o link "Abrir fonte"** da seção "Dados Visíveis" (`#sourceLink` em `index.html`, atribuição de `.href` removida do `app.js`) — o link usava `data.url_historico`, que às vezes apontava pra URL real da Copel (`bacia-iguacu.jsf`), a mesma questão de autorização acima.
+- **Achado adicional (a pedido do usuário, "procure se existe mais algum link que direcione para copel.com"):** o campo `url_historico` do `data.json` público (gerado por `scrape.py`) continuava gravando a URL real da Copel quando essa era a fonte da leitura, mesmo sem link visível na página — um visitante que abrisse `rioiguacu.com/data.json` diretamente ainda veria isso no JSON cru. Corrigido em `scrape.py`: `url_historico` agora sempre resolve para `URL_HISTORICO_ANA`, nunca `URL_HISTORICO_COPEL`, independentemente da fonte técnica real da leitura — mesma lógica já aplicada ao campo `fonte` exibido no frontend.
+- **Removido "· próxima atualização às HH:MM" do status de sincronização** (`#syncStatus`, rodapé do gráfico) — a pedido do usuário. Agora mostra só "Atualizado em DD/MM, HH:MM" (ou "... · previsão indisponível" no caso de aviso), sem a estimativa da próxima atualização.
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.71`.
+- Backup pré-edição: `backups/site-v1.70.zip`.
+
 ## v1.70 — 2026-07-20
 
 - **Corrigido vazamento de "Copel" que a v1.69 tinha deixado passar.** A v1.69 removeu as referências a Copel do `index.html`/`app.js` (frontend), mas o texto "Previsão da Copel para daqui a X horas (...): Y m..." exibido no card de Tendência (`#forecastAlert`) vem pronto do `data.json`, gerado pela função `verificar_alerta_previsao()` em `scrape.py` — esse arquivo não tinha sido revisado na v1.69. Usuário reportou o vazamento ao ver o texto ao vivo.

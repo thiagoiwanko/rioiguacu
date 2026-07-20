@@ -497,7 +497,11 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
     historico_anterior = historico_anterior or []
     historico = coletar_via_ana()
     fonte_historico = None
-    url_historico = URL_HISTORICO_COPEL
+    # url_historico sempre aponta pro HidroWeb da ANA no payload público,
+    # mesmo quando a leitura técnica veio da Copel como redundância -- o
+    # projeto não tem autorização da Copel pra divulgar publicamente que os
+    # dados vêm dela (ver PRIORIDADE 1 no CLAUDE.md, 20/07/2026).
+    url_historico = URL_HISTORICO_ANA
     if historico:
         nova_ultima_ana = historico[-1]["data_hora"]
         if ultima_anterior is None or nova_ultima_ana != ultima_anterior:
@@ -514,7 +518,8 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
         texto_historico = coletar_texto(URL_HISTORICO_COPEL)
         historico = extrair_medicoes(texto_historico)
         fonte_historico = FONTE_COPEL
-        url_historico = URL_HISTORICO_COPEL
+        # url_historico permanece URL_HISTORICO_ANA (definido acima) mesmo
+        # aqui -- nunca expor a URL da Copel no data.json público.
         log(f"Medições obtidas via {fonte_historico.split(' ')[0]}: {len(historico)}")
 
     historico = mesclar_historico(historico, historico_anterior)
