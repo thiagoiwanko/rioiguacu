@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.67 — 2026-07-20
+
+- **Adicionado link de contato no rodapé** ("Fale conosco", `mailto:contato@rioiguacu.com`), a pedido do usuário, como canal de feedback simples. `contato@rioiguacu.com` foi configurado no Cloudflare Email Routing (domínio já gerenciado pelo Cloudflare), encaminhando para o email pessoal do usuário — confirmado funcionando (email de teste chegou, inicialmente na pasta de spam do Gmail). Avaliada e descartada, a pedido do usuário, a alternativa de um formulário embutido no site (exigiria um novo Cloudflare Worker com envio de email); optou-se pela solução mais simples.
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.67`.
+- Backup pré-edição: `backups/site-v1.66.zip`.
+
 ## v1.66 — 2026-07-19
 
 - Removido "(18 dos 96 anos)" do título do nível "Grande enchente" na FAQ "O que significa cada nível?", a pedido do usuário — título ficou "Grande enchente — 6,50 m · menos de 1% dos dias da história."
