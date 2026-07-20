@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.68 — 2026-07-20
+
+- **Reorganizado o rodapé**: o usuário achou que "ficou tudo misturado" com o link de contato na mesma linha da versão/contador/status de sincronização. Agora o contato fica em uma linha própria, acima, com o texto "Sugestões ou críticas? Fale conosco" (antes só "Fale conosco"). A linha de baixo (versão, contador de visitas, status de sincronização) foi agrupada em `<div class="footer-status">`. `styles.css`: `.version-footer` virou `flex-direction: column`; nova classe `.footer-status` mantém o layout horizontal da linha de baixo.
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.68`.
+- Backup pré-edição: `backups/site-v1.67.zip`.
+
 ## v1.67 — 2026-07-20
 
 - **Adicionado link de contato no rodapé** ("Fale conosco", `mailto:contato@rioiguacu.com`), a pedido do usuário, como canal de feedback simples. `contato@rioiguacu.com` foi configurado no Cloudflare Email Routing (domínio já gerenciado pelo Cloudflare), encaminhando para o email pessoal do usuário — confirmado funcionando (email de teste chegou, inicialmente na pasta de spam do Gmail). Avaliada e descartada, a pedido do usuário, a alternativa de um formulário embutido no site (exigiria um novo Cloudflare Worker com envio de email); optou-se pela solução mais simples.
