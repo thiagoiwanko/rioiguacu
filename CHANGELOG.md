@@ -8,6 +8,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.70 — 2026-07-20
+
+- **Corrigido vazamento de "Copel" que a v1.69 tinha deixado passar.** A v1.69 removeu as referências a Copel do `index.html`/`app.js` (frontend), mas o texto "Previsão da Copel para daqui a X horas (...): Y m..." exibido no card de Tendência (`#forecastAlert`) vem pronto do `data.json`, gerado pela função `verificar_alerta_previsao()` em `scrape.py` — esse arquivo não tinha sido revisado na v1.69. Usuário reportou o vazamento ao ver o texto ao vivo.
+  - `scrape.py`: as 3 strings retornadas por `verificar_alerta_previsao()` deixaram de citar "Copel" — "Sem previsão da Copel disponível..." → "Sem previsão disponível..."; "Previsão da Copel para daqui a X horas..." → "Previsão para daqui a X horas...". Nenhuma outra fonte é citada no lugar (nem "concessionária", nem link) — mesma decisão da v1.69, sem nome e sem descrição indireta.
+  - Demais ocorrências de "Copel" em `scrape.py` (comentários de código, mensagens de log em `monitor_web.log`, a constante interna `FONTE_COPEL`) não são exibidas a visitantes do site e foram mantidas — a constante `FONTE_COPEL` já é convertida para "ANA" na exibição pelo `app.js` (v1.69).
+  - `app.py` (monitor local, roda só na máquina do usuário via `abrir_monitor_web.bat` — não é o site público) também cita Copel (fonte fixa, sem integração com a ANA); não foi alterado por não ser "parte visual do site" público, mas fica registrado aqui caso o usuário queira revisar depois.
+  - O `data.json` ao vivo ainda vai mostrar o texto antigo até a próxima execução do `scrape.py` via GitHub Actions (dispara a cada ~5 min pelo Worker `rioiguacu-trigger`) — corrige sozinho, sem ação manual.
+- Backup pré-edição: `backups/site-v1.69.zip`.
+
 ## v1.69 — 2026-07-20
 
 - **Removidas as referências visuais a "Copel" no site**, a pedido explícito do usuário. Antes o site distinguia visualmente quando o nível atual vinha da ANA ou da Copel (fonte redundante, usada nos raros minutos em que a ANA ainda não publicou a leitura da hora); agora a exibição sempre mostra "ANA", independentemente de qual das duas foi a fonte técnica real da leitura — decisão do usuário, que observou que a Copel também capta da mesma estação física, então não há diferença de fundo na leitura em si, só na origem da publicação.
