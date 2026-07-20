@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.66 — 2026-07-19
+
+- Removido "(18 dos 96 anos)" do título do nível "Grande enchente" na FAQ "O que significa cada nível?", a pedido do usuário — título ficou "Grande enchente — 6,50 m · menos de 1% dos dias da história."
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.66`.
+- Backup pré-edição: `backups/site-v1.65.zip`.
+
 ## v1.65 — 2026-07-19
 
 - **Correção da v1.64: o texto da previsão não afirma mais "48 horas" quando a Copel não previu tão longe.** O usuário perguntou "mas existe o dado 48h depois?" — conferindo o `data.json` ao vivo, a resposta era não: a previsão publicada pela Copel naquele momento ia só até 35h à frente (não 48h). `verificar_alerta_previsao()` em `scrape.py` agora calcula e mostra o número real de horas entre agora e o ponto de previsão usado (`round((data_hora_ponto - agora_base).total_seconds() / 3600)`), em vez de sempre dizer "48 horas". Texto mudou de "Previsão da Copel para daqui a 48 horas (dd/mm HHh): X m" para "Previsão da Copel para daqui a N horas (dd/mm HHh): X m", onde N reflete a distância real do ponto de previsão mais próximo do alvo de 48h. Roda em GitHub Actions, então só aparece a partir da próxima coleta automática.
