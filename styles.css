@@ -546,12 +546,39 @@ h2 {
   font-size: 13px;
   line-height: 1.65;
   color: var(--soft);
-
-  text-align: justify;}
+}
 
 .reference-note .note-mark {
   color: var(--soft);
   font-weight: 800;
+}
+
+.reference-note summary {
+  cursor: pointer;
+  font-weight: 700;
+  color: var(--soft);
+  list-style: none;
+}
+
+.reference-note summary::-webkit-details-marker {
+  display: none;
+}
+
+.reference-note summary::before {
+  content: "▸";
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--cyan);
+  transition: transform .15s ease;
+}
+
+.reference-note[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.reference-note p {
+  margin: 10px 0 0;
+  text-align: justify;
 }
 
 .reference-note a {

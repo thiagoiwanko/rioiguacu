@@ -8,6 +8,14 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.63 — 2026-07-19
+
+- **Notas de rodapé de "Referências por Bairro*" e "Enchentes Históricas*" transformadas em campos colapsáveis** (`<details>`/`<summary>`), a pedido do usuário, pra reduzir a quantidade de texto visível na tela por padrão. Antes eram parágrafos sempre visíveis; agora aparecem fechados, com um resumo clicável ("Como interpretar esta lista" / "Sobre esta lista") e abrem sob demanda.
+- `styles.css`: nova regra `.reference-note summary`/`.reference-note[open]` (mesmo padrão visual — seta ▸ que gira 90° — já usado em `.faq-item details`), e o texto passou de `.reference-note` diretamente para `.reference-note p`.
+- A nota da terceira caixa ("Alertas de Nível do Rio*") não foi alterada — é uma linha só, sem necessidade de recolher.
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.63`.
+- Backup pré-edição: `backups/site-v1.62.zip`.
+
 ## v1.62 — 2026-07-19
 
 - **Nível de alerta "Enchente" renomeado para "Grande enchente" em todo o site**, a pedido do usuário. Alterado em três lugares para manter consistência:
