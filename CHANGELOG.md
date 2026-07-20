@@ -8,6 +8,17 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.74 — 2026-07-20
+
+- **Corrigida a exposição crítica descoberta na v1.73: o Cloudflare Pages estava servindo o repositório GitHub inteiro, não só os arquivos do site.** `rioiguacu.com/CLAUDE.md` (com o CPF do usuário) e `rioiguacu.com/monitor_web.log` (com URLs da Copel) estavam publicamente acessíveis, porque o projeto Cloudflare Pages não tinha "Build output directory" configurado.
+- **Reestruturação:** os 19 arquivos realmente públicos (`index.html`, `styles.css`, `app.js`, `estudo.html`, `data.json`, `historico_diario.csv`, favicons, `og-image.png`, `logo.png`, `robots.txt`, `sitemap.xml`, `_headers`, `.nojekyll`, PDF da nota técnica) foram movidos pra uma subpasta `public/` no repositório.
+- `scrape.py`: `PUBLIC_DIR = BASE_DIR / "public"` — `data.json` e `historico_diario.csv` agora são gravados diretamente em `public/`; `monitor_web.log` e o cache de token da ANA continuam na raiz, fora de `public/`.
+- `.github/workflows/update.yml`: `git add` passou a apontar pra `public/data.json` e `public/historico_diario.csv` (mantendo intacto o fix de 18/07/2026 contra perda de histórico em conflitos de push).
+- **Cloudflare Pages:** "Diretório de saída da build" configurado para `public` no ambiente Produção (Configurações → Build).
+- Limpeza de cópias órfãs de `data.json`/`historico_diario.csv` que a pipeline antiga recriou na raiz do repo durante a janela de migração (antes do scrape.py/update.yml serem atualizados) — apagadas sem afetar as versões corretas em `public/`.
+- **Verificado ao vivo:** `rioiguacu.com/CLAUDE.md` e `rioiguacu.com/monitor_web.log` agora retornam a página de fallback do site, não mais o conteúdo bruto. `index.html`, `estudo.html`, `styles.css`, `app.js`, `data.json` e o PDF continuam funcionando normalmente a partir de `public/`.
+- Backup pré-edição: `backups/site-v1.73.zip`.
+
 ## v1.73 — 2026-07-20
 
 - **Varredura completa por resquícios de "Copel"**, a pedido do usuário ("procure então resquícios de copel e retire"). `index.html`/`app.js`/`styles.css` já estavam limpos (v1.69-v1.71). Dois vazamentos novos encontrados e corrigidos:
