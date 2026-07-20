@@ -191,12 +191,14 @@ $("forecastAlert").textContent = data.alerta_previsao;
 $("forecastAlert").className = data.previsao_disponivel ? "" : "warning";
 $("sourceLink").href = data.url_historico || "#";
 const fonteCurta = (data.fonte || "").split(/[–-]/)[0].trim();
-$("sourceLabel").textContent = fonteCurta ? `(${fonteCurta})` : "";
+// Exibição sempre atribuída à ANA, mesmo quando a fonte técnica real
+// (data.fonte, vindo do scrape.py) é a Copel usada como redundância --
+// decisão explícita do usuário, 20/07/2026.
+const fonteExibida = fonteCurta.toLowerCase() === "copel" ? "ANA" : fonteCurta;
+$("sourceLabel").textContent = fonteExibida ? `(${fonteExibida})` : "";
 const sourceNoteEl = $("sourceNote");
 if (sourceNoteEl) {
-sourceNoteEl.textContent = fonteCurta
-? `Fonte desta atualização: ${fonteCurta}${fonteCurta.toLowerCase() === "copel" ? " (redundância, ANA ainda não publicou esta hora)" : ""}`
-: "";
+sourceNoteEl.textContent = fonteExibida ? `Fonte desta atualização: ${fonteExibida}` : "";
 }
 
 const marker = Math.max(0, Math.min(100, ((level - NIVEL_MIN_ESCALA) / (NIVEL_MAX_ESCALA - NIVEL_MIN_ESCALA)) * 100));

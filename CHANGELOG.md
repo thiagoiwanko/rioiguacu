@@ -8,6 +8,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.69 — 2026-07-20
+
+- **Removidas as referências visuais a "Copel" no site**, a pedido explícito do usuário. Antes o site distinguia visualmente quando o nível atual vinha da ANA ou da Copel (fonte redundante, usada nos raros minutos em que a ANA ainda não publicou a leitura da hora); agora a exibição sempre mostra "ANA", independentemente de qual das duas foi a fonte técnica real da leitura — decisão do usuário, que observou que a Copel também capta da mesma estação física, então não há diferença de fundo na leitura em si, só na origem da publicação.
+  - `app.js`: `renderCards()` agora mapeia `fonteCurta === "copel"` para exibir "ANA" tanto no rótulo `(fonte)` ao lado de "Dados Visíveis" quanto na nota "Fonte desta atualização: ...". A lógica de detecção da fonte técnica real (vinda de `data.fonte`, gerado pelo `scrape.py`) não foi alterada — só a exibição.
+  - `index.html`: meta description, `og:description`, `twitter:description` e a descrição do schema.org JSON-LD deixaram de citar "e da Copel", citando só a ANA.
+  - `index.html`, FAQ "De onde vêm os dados do site?": removida a frase sobre a Copel como fonte redundante do nível atual. O parágrafo sobre a **previsão de 48 horas** — que é um produto genuinamente da Copel (concessionária que opera as usinas, não a ANA) — deixou de citar qualquer fonte: nem "Copel" nem descrição indireta ("concessionária que opera as usinas"), e o link para o painel `copel.com` foi removido. O texto agora só diz que a previsão "não é um cálculo feito por este site, mas também não é um alerta oficial da Defesa Civil" — decisão explícita do usuário (sem nome, sem descrição, sem link).
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.69`.
+- Backup pré-edição: `backups/site-v1.68.zip`.
+
 ## v1.68 — 2026-07-20
 
 - **Reorganizado o rodapé**: o usuário achou que "ficou tudo misturado" com o link de contato na mesma linha da versão/contador/status de sincronização. Agora o contato fica em uma linha própria, acima, com o texto "Sugestões ou críticas? Fale conosco" (antes só "Fale conosco"). A linha de baixo (versão, contador de visitas, status de sincronização) foi agrupada em `<div class="footer-status">`. `styles.css`: `.version-footer` virou `flex-direction: column`; nova classe `.footer-status` mantém o layout horizontal da linha de baixo.
