@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.64 — 2026-07-19
+
+- **"Previsão da Copel" na Tendência agora mostra o valor real de daqui a 48h, não o pico da janela inteira**, a pedido do usuário (ele notou que, com o rio em queda, o texto mostrava 3,74 m — o pico bem no início da janela — enquanto o gráfico já apontava 3,52 m bem mais adiante, e achou confuso). `scrape.py`, `verificar_alerta_previsao()`: em vez de `max()` de todos os valores previstos nas próximas 48h, agora busca o ponto de previsão mais próximo do horário exatamente 48h à frente (a previsão da Copel nem sempre cai certinho em cima da marca), usa o cenário "com chuva" quando disponível (mesmo cenário que a linha vermelha "Previsão" do gráfico usa) e mostra também o horário exato desse ponto. Texto mudou de "Previsão da Copel para as próximas 48 horas: X m" para "Previsão da Copel para daqui a 48 horas (dd/mm HHh): X m". Como roda em GitHub Actions, o texto novo só aparece a partir da próxima coleta automática.
+- **Reestruturado o parágrafo "O que significa cada nível?"**: a linha-resumo de percentuais adicionada na v1.62 ficou "estranha separada" do resto (segundo o usuário) — removida como parágrafo próprio, e cada percentual movido para dentro do título de cada nível (ex.: "Atenção — 4,20 m · 10% dos dias da história."), eliminando a repetição que havia entre a linha-resumo e o corpo de cada parágrafo.
+- Cache-buster de `styles.css` e `app.js` atualizado para `?v=1.64`.
+- Backup pré-edição: `backups/site-v1.63.zip`.
+
 ## v1.63 — 2026-07-19
 
 - **Notas de rodapé de "Referências por Bairro*" e "Enchentes Históricas*" transformadas em campos colapsáveis** (`<details>`/`<summary>`), a pedido do usuário, pra reduzir a quantidade de texto visível na tela por padrão. Antes eram parágrafos sempre visíveis; agora aparecem fechados, com um resumo clicável ("Como interpretar esta lista" / "Sobre esta lista") e abrem sob demanda.
