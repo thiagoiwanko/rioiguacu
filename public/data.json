@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-21T18:49",
+    "atualizado_em": "2026-07-21T18:51",
     "historico": [
       {
         "data_hora": "2026-07-19T19:00",
@@ -374,45 +374,61 @@
         "vazao_m3s": 740,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-21T17:00",
+        "regua_m": 3.387,
+        "nivel_agua_m": 742.997,
+        "vazao_m3s": 735,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-21T18:00",
+        "regua_m": 3.378,
+        "nivel_agua_m": 742.988,
+        "vazao_m3s": 732,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
       {
         "data_hora": "2026-07-21T21:00",
-        "regua_sem_chuva_m": 3.37,
-        "regua_com_chuva_m": 3.41
+        "regua_sem_chuva_m": 3.4,
+        "regua_com_chuva_m": 3.4
       },
       {
         "data_hora": "2026-07-22T03:00",
-        "regua_sem_chuva_m": 3.34,
-        "regua_com_chuva_m": 3.37
-      },
-      {
-        "data_hora": "2026-07-22T09:00",
-        "regua_sem_chuva_m": 3.32,
+        "regua_sem_chuva_m": 3.33,
         "regua_com_chuva_m": 3.32
       },
       {
+        "data_hora": "2026-07-22T09:00",
+        "regua_sem_chuva_m": 3.34,
+        "regua_com_chuva_m": 3.33
+      },
+      {
         "data_hora": "2026-07-22T15:00",
-        "regua_sem_chuva_m": 3.29,
-        "regua_com_chuva_m": 3.27
+        "regua_sem_chuva_m": 3.28,
+        "regua_com_chuva_m": 3.25
       },
       {
         "data_hora": "2026-07-22T21:00",
-        "regua_sem_chuva_m": 3.21,
-        "regua_com_chuva_m": 3.22
+        "regua_sem_chuva_m": 3.23,
+        "regua_com_chuva_m": 3.25
       },
       {
         "data_hora": "2026-07-23T03:00",
-        "regua_sem_chuva_m": 3.19,
-        "regua_com_chuva_m": 3.2
+        "regua_sem_chuva_m": 3.2,
+        "regua_com_chuva_m": 3.23
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-21T16:00",
-      "regua_m": 3.395,
-      "nivel_agua_m": 743.005,
-      "vazao_m3s": 740,
+      "data_hora": "2026-07-21T18:00",
+      "regua_m": 3.378,
+      "nivel_agua_m": 742.988,
+      "vazao_m3s": 732,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
@@ -422,7 +438,7 @@
       "delta": -0.008999999999999897,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 35 horas (23/07 03h): 3,20 m. Não é um alerta oficial da Defesa Civil.",
+    "alerta_previsao": "Previsão para daqui a 33 horas (23/07 03h): 3,23 m. Não é um alerta oficial da Defesa Civil.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
