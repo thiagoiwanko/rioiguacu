@@ -132,9 +132,13 @@ Na v1.76 foi adicionado um aviso perto do relógio em "Nível atual do rio" (`#l
 
 O usuário pediu de volta na v1.78, com dois ajustes: texto reformulado pra deixar claro que o atraso é da estação/ANA (não da página) e que a atualização é automática assim que o dado chegar, e limiar subido de 5 min para 30 min (reduz a frequência do aviso). Termo "telemétrica" escolhido deliberadamente em vez de "pluviométrica" (sugestão hesitante do usuário) — a estação 65310001 mede nível/vazão/chuva e é classificada pela ANA como estação telemétrica; "pluviométrica" seria impreciso pra um aviso sobre atraso no nível do rio.
 
-Na v1.79 o texto foi encurtado e afinado a pedido do usuário ("frase menos comprida... ou menos grossa"): de "⚠️ Atraso no envio do dado pela estação telemétrica da ANA. Não é um problema da página — assim que a estação disponibilizar, o site atualiza automaticamente." (155 caracteres) para "⚠️ Atraso na estação da ANA — não é a página, atualiza sozinho quando chegar." (79 caracteres). `.delay-warning` também ficou mais leve visualmente: `font-weight: 600` (era 800), `max-width: 200px` (era 230px). Implementação: `checkStationDelay()`/`DELAY_WARNING_MIN` (=30) em `app.js`, `#delayWarning` dentro de `.card-head-time` no `index.html`.
+Na v1.79 o texto foi encurtado e afinado a pedido do usuário ("frase menos comprida... ou menos grossa"): de "⚠️ Atraso no envio do dado pela estação telemétrica da ANA. Não é um problema da página — assim que a estação disponibilizar, o site atualiza automaticamente." (155 caracteres) para "⚠️ Atraso na estação da ANA — não é a página, atualiza sozinho quando chegar." (79 caracteres).
 
-Se pedirem pra ajustar de novo (texto, limiar, ou remover), tratar como já teve 3 idas e vindas (v1.76 → v1.77 → v1.78 → v1.79) — não presumir preferência estética, perguntar/confirmar antes de mudanças grandes de layout.
+Na v1.80 o usuário pediu uma redação mais fluida (mesmo sentido, mais natural gramaticalmente) e um estilo mais discreto: texto final "A estação telemétrica está com falha ou em manutenção — assim que disponibilizarem os dados, o site atualiza automaticamente." (sem o emoji "⚠️"), com `.delay-warning` no mesmo estilo do texto "Versão X.XX" do rodapé — `color: var(--muted)` (cinza, não mais vermelho), `font-size: 12px`, `font-weight: 400` (normal, não mais negrito), `max-width: 220px`. Implementação: `checkStationDelay()`/`DELAY_WARNING_MIN` (=30) em `app.js`, `#delayWarning` dentro de `.card-head-time` no `index.html`.
+
+**Novo processo a partir da v1.80:** o usuário pediu (depois de uma dúvida sobre um texto publicado sem revisão prévia) que qualquer texto novo visível no site seja mostrado em chat para aprovação ANTES de publicar — vale para qualquer sessão futura, não só para o aviso de atraso.
+
+Se pedirem pra ajustar de novo (texto, limiar, ou remover), tratar como já teve 4 idas e vindas (v1.76 → v1.77 → v1.78 → v1.79 → v1.80) — não presumir preferência estética, mostrar o texto antes de publicar.
 
 ### Nota operacional: `raw.githubusercontent.com` não funciona mais pra buscar conteúdo ao vivo (repo ficou privado em 20/07/2026)
 
