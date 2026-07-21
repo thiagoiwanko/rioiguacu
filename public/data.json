@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-20T22:34",
+    "atualizado_em": "2026-07-20T22:36",
     "historico": [
       {
         "data_hora": "2026-07-18T23:00",
@@ -219,7 +219,7 @@
         "data_hora": "2026-07-20T01:00",
         "regua_m": 3.728,
         "nivel_agua_m": 743.338,
-        "vazao_m3s": 875,
+        "vazao_m3s": 874,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -251,7 +251,7 @@
         "data_hora": "2026-07-20T05:00",
         "regua_m": 3.697,
         "nivel_agua_m": 743.307,
-        "vazao_m3s": 862,
+        "vazao_m3s": 861,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -315,7 +315,7 @@
         "data_hora": "2026-07-20T13:00",
         "regua_m": 3.629,
         "nivel_agua_m": 743.239,
-        "vazao_m3s": 829,
+        "vazao_m3s": 828,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -323,7 +323,7 @@
         "data_hora": "2026-07-20T14:00",
         "regua_m": 3.62,
         "nivel_agua_m": 743.23,
-        "vazao_m3s": 826,
+        "vazao_m3s": 825,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -339,7 +339,7 @@
         "data_hora": "2026-07-20T16:00",
         "regua_m": 3.602,
         "nivel_agua_m": 743.212,
-        "vazao_m3s": 815,
+        "vazao_m3s": 814,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -347,7 +347,7 @@
         "data_hora": "2026-07-20T17:00",
         "regua_m": 3.595,
         "nivel_agua_m": 743.205,
-        "vazao_m3s": 815,
+        "vazao_m3s": 814,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -379,7 +379,7 @@
         "data_hora": "2026-07-20T21:00",
         "regua_m": 3.568,
         "nivel_agua_m": 743.178,
-        "vazao_m3s": 805,
+        "vazao_m3s": 804,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
