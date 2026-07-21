@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.75 — 2026-07-21
+
+- **Jitter de até ±1% nos valores da previsão** (`regua_sem_chuva_m` e `regua_com_chuva_m`, fonte exclusiva: Copel). Pedido explícito do usuário: os números publicados no site ficam bem próximos dos originais, mas não idênticos ponto a ponto — reforça a mesma lógica da PRIORIDADE 1 do CLAUDE.md (nunca nomear a Copel publicamente): mesmo sem citar a fonte, uma previsão numérica idêntica horário a horário ainda seria uma cópia reconhecível.
+- `scrape.py`: nova função `aplicar_jitter_previsao()`, chamada logo após `extrair_previsao()` em `coletar_uma_vez()`. O fator é sorteado independentemente para cada campo e cada horário (não reaproveita o mesmo valor entre `regua_sem_chuva_m`/`regua_com_chuva_m` do mesmo ponto, nem entre pontos diferentes), para não virar um deslocamento constante e perceptível. `data_hora` nunca é alterado.
+- Backup pré-edição: `backups/site-v1.74.zip` (já refletia o estado ao vivo, gerado minutos antes desta mudança).
+
 ## v1.74 — 2026-07-20
 
 - **Corrigida a exposição crítica descoberta na v1.73: o Cloudflare Pages estava servindo o repositório GitHub inteiro, não só os arquivos do site.** `rioiguacu.com/CLAUDE.md` (com o CPF do usuário) e `rioiguacu.com/monitor_web.log` (com URLs da Copel) estavam publicamente acessíveis, porque o projeto Cloudflare Pages não tinha "Build output directory" configurado.
