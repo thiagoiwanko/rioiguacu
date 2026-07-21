@@ -8,6 +8,14 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.80 — 2026-07-21
+
+- **Texto do aviso de atraso reformulado, sem emoji e com estilo discreto.** O usuário considerou o texto da v1.79 pouco fluido e pediu algo mais sutil, mantendo o mesmo sentido. Texto novo: "A estação telemétrica está com falha ou em manutenção — assim que disponibilizarem os dados, o site atualiza automaticamente." (sem o emoji "⚠️" no início).
+- `styles.css`: `.delay-warning` mudou de cor de alerta (`var(--red)`, negrito) para o mesmo estilo discreto do texto "Versão X.XX" do rodapé: `color: var(--muted)`, `font-size: 12px`, `font-weight: 400` (normal), `max-width: 220px` (texto é mais longo que as versões anteriores).
+- Antes de publicar, o texto foi mostrado ao usuário em chat pra aprovação prévia — mudança de processo pedida pelo usuário depois de uma dúvida sobre o conteúdo publicado sem revisão prévia.
+- Cache-buster de `styles.css`/`app.js` e versão do rodapé atualizados para `1.80`.
+- Backup pré-edição: `backups/site-v1.79.zip` (estado ao vivo já verificado ao publicar a v1.79).
+
 ## v1.79 — 2026-07-21
 
 - **Texto do aviso de atraso encurtado e mais leve.** O usuário pediu uma frase menos comprida e "menos grossa" que dissesse a mesma coisa. Novo texto: "⚠️ Atraso na estação da ANA — não é a página, atualiza sozinho quando chegar." (79 caracteres, contra 155 da versão v1.78). `styles.css`: `.delay-warning` com `font-weight: 600` (era 800) e `max-width: 200px` (era 230px, ajustado ao texto mais curto).
