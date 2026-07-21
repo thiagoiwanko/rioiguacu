@@ -8,6 +8,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.76 — 2026-07-21
+
+- **Aviso de atraso na entrega da cota pela estação.** Perto do relógio em "Nível atual do rio", se já passou mais de 5 minutos do horário em que a próxima leitura horária era esperada (última leitura + 1h) e o site ainda não recebeu um dado mais novo, aparece o aviso "⚠️ Atraso na entrega da cota pela estação!". Pedido explícito do usuário.
+- `index.html`: novo `<span id="delayWarning">` dentro de um wrapper `.card-head-time` (junto com `#lastTime`), inicialmente oculto (`hidden`).
+- `styles.css`: novo `.card-head-time` (coluna, alinhado à direita) e `.delay-warning` (texto pequeno em vermelho).
+- `app.js`: nova função `checkStationDelay()`, chamada em `renderCards()` a cada atualização de dados e também a cada 1 minuto via `setInterval` independente — assim o aviso aparece perto do minuto real em que o atraso passa de 5 min, sem depender do próximo fetch de `data.json` (que só roda a cada 5 min). A comparação usa sempre a hora real do dispositivo de quem está vendo a página (`Date.now()`), não o campo `atualizado_em` do `data.json`.
+- Cache-buster de `styles.css`/`app.js` e versão do rodapé atualizados para `1.76`.
+- Backup pré-edição: `backups/site-v1.75.zip` (já refletia o estado ao vivo, sem mudanças em index.html/app.js/styles.css desde a v1.73).
+
 ## v1.75 — 2026-07-21
 
 - **Jitter de até ±1% nos valores da previsão** (`regua_sem_chuva_m` e `regua_com_chuva_m`, fonte exclusiva: Copel). Pedido explícito do usuário: os números publicados no site ficam bem próximos dos originais, mas não idênticos ponto a ponto — reforça a mesma lógica da PRIORIDADE 1 do CLAUDE.md (nunca nomear a Copel publicamente): mesmo sem citar a fonte, uma previsão numérica idêntica horário a horário ainda seria uma cópia reconhecível.
