@@ -126,9 +126,9 @@ O contador **não é** hits.sh nem qualquer serviço de terceiro — é um Worke
 - Não tem link "Histórico de versões" no rodapé — foi removido de propósito na v1.8/v1.9 (02/07/2026) porque o usuário não queria isso ali.
 - Não tem botão "Atualizar" no cabeçalho — removido de propósito na v1.7 (02/07/2026); a atualização já é automática a cada 5 min via `setInterval` em `app.js`.
 
-### Aviso de atraso na entrega da cota pela estação (desde v1.76, 21/07/2026)
+### Aviso de atraso na entrega da cota pela estação — implementado e depois revertido (v1.76 → v1.77, 21/07/2026)
 
-Perto do relógio em "Nível atual do rio" (`#lastTime`), um `<span id="delayWarning">` (dentro do wrapper `.card-head-time`) aparece com o texto "⚠️ Atraso na entrega da cota pela estação!" quando já passou mais de 5 minutos (`DELAY_WARNING_MIN` em `app.js`) do horário em que a próxima leitura horária era esperada (`última leitura + 1h`). Função `checkStationDelay()` em `app.js`, chamada tanto em `renderCards()` (a cada fetch de `data.json`, a cada 5 min) quanto num `setInterval` próprio de 1 min — isso evita que o aviso demore até 5 min extras pra aparecer só porque calha de o limiar ser cruzado entre dois fetches. A comparação usa sempre `Date.now()` (hora real do dispositivo de quem está vendo a página), nunca o campo `atualizado_em` do `data.json` (que é só o horário em que o `scrape.py` rodou, não da estação).
+Na v1.76 foi adicionado um aviso perto do relógio em "Nível atual do rio" (`#lastTime`) que aparecia quando já tinha passado mais de 5 minutos do horário em que a próxima leitura horária era esperada. Testado ao vivo e tecnicamente funcionando (inclusive confirmado que a coleta estava mesmo atrasada nesse dia — estação parada em 16:00 com o relógio real já em 17:46, enquanto o `scrape.py` rodava normalmente). Mesmo assim, o usuário achou o resultado visual "não ficou bom" e pediu pra tirar — removido por completo na v1.77 (`index.html`, `styles.css`, `app.js`). **Não reintroduzir essa funcionalidade em sessão futura sem o usuário pedir de novo explicitamente** — já foi tentada uma vez e rejeitada por motivo de estética, não de funcionamento.
 
 ### Nota operacional: `raw.githubusercontent.com` não funciona mais pra buscar conteúdo ao vivo (repo ficou privado em 20/07/2026)
 

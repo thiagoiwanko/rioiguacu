@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.77 — 2026-07-21
+
+- **Remoção do aviso de atraso na entrega da cota (v1.76 revertida).** O usuário testou a v1.76 e considerou que o resultado visual "não ficou bom" — pedido explícito para tirar o aviso. Removido por completo: `index.html` (`<span id="delayWarning">` e o wrapper `.card-head-time`, voltando `#lastTime` para dentro do `.card-head` original), `styles.css` (regras `.card-head-time` e `.delay-warning`), `app.js` (`DELAY_WARNING_MIN`, `checkStationDelay()`, a chamada em `renderCards()` e o `setInterval` de 1 min que a reavaliava).
+- **Verificação do motivo do pedido:** ao investigar, confirmado que a coleta estava de fato atrasada no momento do pedido — `data.json` mostrava última leitura da estação às 16:00 (esperada a próxima às 17:00) enquanto o horário real já passava das 17:46, mais de 45 min de atraso. O `scrape.py` em si rodou normalmente às 17:44 (`atualizado_em`) — ou seja, o atraso é do lado da estação/fonte de dados (ANA/Copel), não do pipeline de coleta do site. A funcionalidade removida estava tecnicamente correta (o aviso apareceria certo nesse cenário), mas foi descontinuada mesmo assim a pedido do usuário.
+- Cache-buster de `styles.css`/`app.js` e versão do rodapé atualizados para `1.77`.
+- Backup pré-edição: `backups/site-v1.76.zip` (estado ao vivo já verificado ao publicar a v1.76).
+
 ## v1.76 — 2026-07-21
 
 - **Aviso de atraso na entrega da cota pela estação.** Perto do relógio em "Nível atual do rio", se já passou mais de 5 minutos do horário em que a próxima leitura horária era esperada (última leitura + 1h) e o site ainda não recebeu um dado mais novo, aparece o aviso "⚠️ Atraso na entrega da cota pela estação!". Pedido explícito do usuário.
