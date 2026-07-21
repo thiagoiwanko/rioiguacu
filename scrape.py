@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import re
 import time
 from datetime import datetime, timedelta
@@ -50,6 +51,11 @@ JANELA_HISTORICO_HORAS = 48
 JANELA_PREVISAO_HORAS = 48
 TIMEOUT_COLETA_SEGUNDOS = 90
 FUSO_BR = ZoneInfo("America/Sao_Paulo")
+
+# Variação aleatória aplicada aos valores da previsão (fonte exclusiva: Copel,
+# ver aplicar_jitter_previsao() mais abaixo) -- pedido explícito do usuário
+# (21/07/2026). Até 1% pra mais ou pra menos.
+JITTER_PREVISAO_MAX_FRACAO = 0.01
 
 
 def agora_br():
@@ -335,6 +341,34 @@ def extrair_previsao(texto):
     return sorted(unicos.values(), key=lambda item: item["data_hora"])
 
 
+def _jitter(valor):
+    if valor is None:
+        return None
+    fator = 1 + random.uniform(-JITTER_PREVISAO_MAX_FRACAO, JITTER_PREVISAO_MAX_FRACAO)
+    return round(valor * fator, 2)
+
+
+def aplicar_jitter_previsao(previsao):
+    """Aplica uma variação aleatória de até +-1% em cada valor numérico da
+    previsão (regua_sem_chuva_m e regua_com_chuva_m) -- pedido explícito do
+    usuário (21/07/2026). Os números publicados ficam bem próximos dos da
+    fonte original, mas não idênticos ponto a ponto: mesmo sem nomear a fonte
+    em lugar nenhum do site (PRIORIDADE 1 no CLAUDE.md), uma previsão numérica
+    idêntica, horário a horário, ainda seria uma cópia reconhecível.
+
+    O jitter é sorteado de novo pra cada campo e cada horário (nunca reusa o
+    mesmo fator entre regua_sem_chuva_m e regua_com_chuva_m do mesmo ponto,
+    nem entre pontos diferentes), pra não virar um deslocamento constante e
+    óbvio (ex.: "sempre +0,8%"). data_hora nunca é alterada."""
+    resultado = []
+    for item in previsao:
+        novo = dict(item)
+        novo["regua_sem_chuva_m"] = _jitter(item.get("regua_sem_chuva_m"))
+        novo["regua_com_chuva_m"] = _jitter(item.get("regua_com_chuva_m"))
+        resultado.append(novo)
+    return resultado
+
+
 def coletar_texto(url):
     log(f"Iniciando coleta: {url}")
     driver = abrir_navegador()
@@ -547,7 +581,7 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
     previsao = []
     try:
         texto_previsao = coletar_texto(URL_PREVISAO)
-        previsao = extrair_previsao(texto_previsao)
+        previsao = aplicar_jitter_previsao(extrair_previsao(texto_previsao))
         log(f"Previsões extraídas: {len(previsao)}")
     except Exception as exc:
         log(f"Previsão indisponível: {exc}")
