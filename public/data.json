@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-21T04:07",
+    "atualizado_em": "2026-07-21T04:11",
     "historico": [
       {
         "data_hora": "2026-07-19T05:00",
@@ -382,6 +382,14 @@
         "vazao_m3s": 783,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-07-21T04:00",
+        "regua_m": 3.506,
+        "nivel_agua_m": 743.116,
+        "vazao_m3s": 783,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
@@ -417,20 +425,20 @@
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-21T03:00",
-      "regua_m": 3.514,
-      "nivel_agua_m": 743.124,
+      "data_hora": "2026-07-21T04:00",
+      "regua_m": 3.506,
+      "nivel_agua_m": 743.116,
       "vazao_m3s": 783,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "NÍVEL NORMAL - monitoramento diário",
     "tendencia": {
-      "texto": "Baixando cerca de 1,0 cm por hora",
-      "delta": -0.010000000000000231,
+      "texto": "Baixando cerca de 0,8 cm por hora",
+      "delta": -0.008000000000000007,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 30 horas (22/07 09h): 3,35 m. Não é um alerta oficial da Defesa Civil.",
+    "alerta_previsao": "Previsão para daqui a 29 horas (22/07 09h): 3,35 m. Não é um alerta oficial da Defesa Civil.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
