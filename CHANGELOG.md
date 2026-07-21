@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.79 — 2026-07-21
+
+- **Texto do aviso de atraso encurtado e mais leve.** O usuário pediu uma frase menos comprida e "menos grossa" que dissesse a mesma coisa. Novo texto: "⚠️ Atraso na estação da ANA — não é a página, atualiza sozinho quando chegar." (79 caracteres, contra 155 da versão v1.78). `styles.css`: `.delay-warning` com `font-weight: 600` (era 800) e `max-width: 200px` (era 230px, ajustado ao texto mais curto).
+- Cache-buster de `styles.css`/`app.js` e versão do rodapé atualizados para `1.79`.
+- Backup pré-edição: `backups/site-v1.78.zip` (estado ao vivo já verificado ao publicar a v1.78).
+
 ## v1.78 — 2026-07-21
 
 - **Aviso de atraso reintroduzido, com novo texto e limiar maior.** O usuário pediu de volta a funcionalidade removida na v1.77, mas com dois ajustes: (1) o texto agora deixa explícito que o atraso é da estação/ANA, não da página, e que a atualização é automática assim que o dado chegar; (2) o limiar subiu de 5 min (v1.76) para 30 min, reduzindo a frequência com que o aviso aparece.
