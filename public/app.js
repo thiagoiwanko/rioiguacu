@@ -168,29 +168,10 @@ if (direcao === "subindo") return rapido ? "var(--red)" : "var(--yellow)";
 return rapido ? "var(--blue)" : "var(--green)";
 }
 
-// Aviso de atraso na entrega da cota pela estação: a leitura chega 1 vez por
-// hora, então a próxima é esperada 1h depois da última (last.data_hora + 1h).
-// Se já passou mais de DELAY_WARNING_MIN além desse horário esperado e o site
-// ainda não recebeu uma leitura mais nova, mostra um aviso perto do relógio
-// em "Nível atual do rio" -- ajuda a diferenciar "estação atrasada" de "site
-// com problema". Comparação sempre com a hora real do dispositivo de quem
-// está vendo a página (Date.now()), não com o campo "atualizado_em" do
-// data.json (que é só o horário em que o scrape.py rodou, não da estação).
-const DELAY_WARNING_MIN = 5;
-
-function checkStationDelay(ultimaDataHora) {
-const warningEl = $("delayWarning");
-if (!warningEl) return;
-const proximaEsperada = parseDate(ultimaDataHora).getTime() + 3600 * 1000;
-const atrasoMin = (Date.now() - proximaEsperada) / 60000;
-warningEl.hidden = !(atrasoMin > DELAY_WARNING_MIN);
-}
-
 function renderCards(data) {
 const last = data.ultima;
 const level = Number(last.regua_m);
 $("lastTime").textContent = formatDateTime(last.data_hora);
-checkStationDelay(last.data_hora);
 $("levelValue").textContent = `${fmt.format(level)} m`;
 
 const badgeClass = severityClass(data.situacao);
@@ -585,7 +566,3 @@ setupChartTooltip();
 refresh(false);
 trackVisit();
 setInterval(() => refresh(false), 5 * 60 * 1000);
-// Reavalia o aviso de atraso a cada minuto (não só a cada 5 min do refresh
-// de dados) -- assim o aviso aparece perto do minuto real em que o atraso
-// passa de DELAY_WARNING_MIN, mesmo sem esperar o próximo fetch de data.json.
-setInterval(() => state.data && state.data.ultima && checkStationDelay(state.data.ultima.data_hora), 60 * 1000);
