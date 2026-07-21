@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-21T15:42",
+    "atualizado_em": "2026-07-21T15:45",
     "historico": [
       {
         "data_hora": "2026-07-19T16:00",
@@ -395,33 +395,33 @@
     "previsao": [
       {
         "data_hora": "2026-07-21T21:00",
-        "regua_sem_chuva_m": 3.41,
-        "regua_com_chuva_m": 3.37
+        "regua_sem_chuva_m": 3.4,
+        "regua_com_chuva_m": 3.39
       },
       {
         "data_hora": "2026-07-22T03:00",
-        "regua_sem_chuva_m": 3.32,
+        "regua_sem_chuva_m": 3.34,
         "regua_com_chuva_m": 3.33
       },
       {
         "data_hora": "2026-07-22T09:00",
-        "regua_sem_chuva_m": 3.31,
-        "regua_com_chuva_m": 3.34
+        "regua_sem_chuva_m": 3.29,
+        "regua_com_chuva_m": 3.29
       },
       {
         "data_hora": "2026-07-22T15:00",
-        "regua_sem_chuva_m": 3.26,
-        "regua_com_chuva_m": 3.31
+        "regua_sem_chuva_m": 3.28,
+        "regua_com_chuva_m": 3.26
       },
       {
         "data_hora": "2026-07-22T21:00",
-        "regua_sem_chuva_m": 3.22,
-        "regua_com_chuva_m": 3.24
+        "regua_sem_chuva_m": 3.26,
+        "regua_com_chuva_m": 3.26
       },
       {
         "data_hora": "2026-07-23T03:00",
-        "regua_sem_chuva_m": 3.23,
-        "regua_com_chuva_m": 3.19
+        "regua_sem_chuva_m": 3.22,
+        "regua_com_chuva_m": 3.23
       }
     ],
     "ultima": {
@@ -438,7 +438,7 @@
       "delta": -0.008999999999999897,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 36 horas (23/07 03h): 3,19 m. Não é um alerta oficial da Defesa Civil.",
+    "alerta_previsao": "Previsão para daqui a 36 horas (23/07 03h): 3,23 m. Não é um alerta oficial da Defesa Civil.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
