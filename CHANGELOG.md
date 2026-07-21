@@ -8,6 +8,16 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.78 — 2026-07-21
+
+- **Aviso de atraso reintroduzido, com novo texto e limiar maior.** O usuário pediu de volta a funcionalidade removida na v1.77, mas com dois ajustes: (1) o texto agora deixa explícito que o atraso é da estação/ANA, não da página, e que a atualização é automática assim que o dado chegar; (2) o limiar subiu de 5 min (v1.76) para 30 min, reduzindo a frequência com que o aviso aparece.
+- **Nota de terminologia:** o usuário sugeriu "estação pluviométrica" ("se é que pode chamar assim"). Ajustado para "estação telemétrica da ANA" — a 65310001 é uma estação telemétrica que mede nível, vazão e chuva; "pluviométrica" se refere especificamente a estações de chuva, o que seria impreciso para um aviso sobre atraso na leitura do nível do rio.
+- `index.html`: `<span id="delayWarning">` de volta dentro do `.card-head-time`, com o novo texto: "⚠️ Atraso no envio do dado pela estação telemétrica da ANA. Não é um problema da página — assim que a estação disponibilizar, o site atualiza automaticamente."
+- `styles.css`: `.card-head-time`/`.delay-warning` de volta, com `max-width` do aviso aumentado de 180px para 230px (texto novo é mais longo).
+- `app.js`: `checkStationDelay()`/`DELAY_WARNING_MIN` de volta (agora = 30), chamada em `renderCards()` e no `setInterval` de 1 min.
+- Cache-buster de `styles.css`/`app.js` e versão do rodapé atualizados para `1.78`.
+- Backup pré-edição: `backups/site-v1.77.zip` (estado ao vivo já verificado ao publicar a v1.77).
+
 ## v1.77 — 2026-07-21
 
 - **Remoção do aviso de atraso na entrega da cota (v1.76 revertida).** O usuário testou a v1.76 e considerou que o resultado visual "não ficou bom" — pedido explícito para tirar o aviso. Removido por completo: `index.html` (`<span id="delayWarning">` e o wrapper `.card-head-time`, voltando `#lastTime` para dentro do `.card-head` original), `styles.css` (regras `.card-head-time` e `.delay-warning`), `app.js` (`DELAY_WARNING_MIN`, `checkStationDelay()`, a chamada em `renderCards()` e o `setInterval` de 1 min que a reavaliava).

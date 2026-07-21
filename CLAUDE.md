@@ -126,9 +126,13 @@ O contador **não é** hits.sh nem qualquer serviço de terceiro — é um Worke
 - Não tem link "Histórico de versões" no rodapé — foi removido de propósito na v1.8/v1.9 (02/07/2026) porque o usuário não queria isso ali.
 - Não tem botão "Atualizar" no cabeçalho — removido de propósito na v1.7 (02/07/2026); a atualização já é automática a cada 5 min via `setInterval` em `app.js`.
 
-### Aviso de atraso na entrega da cota pela estação — implementado e depois revertido (v1.76 → v1.77, 21/07/2026)
+### Aviso de atraso na entrega da cota pela estação (v1.76 → v1.77 → v1.78, 21/07/2026)
 
-Na v1.76 foi adicionado um aviso perto do relógio em "Nível atual do rio" (`#lastTime`) que aparecia quando já tinha passado mais de 5 minutos do horário em que a próxima leitura horária era esperada. Testado ao vivo e tecnicamente funcionando (inclusive confirmado que a coleta estava mesmo atrasada nesse dia — estação parada em 16:00 com o relógio real já em 17:46, enquanto o `scrape.py` rodava normalmente). Mesmo assim, o usuário achou o resultado visual "não ficou bom" e pediu pra tirar — removido por completo na v1.77 (`index.html`, `styles.css`, `app.js`). **Não reintroduzir essa funcionalidade em sessão futura sem o usuário pedir de novo explicitamente** — já foi tentada uma vez e rejeitada por motivo de estética, não de funcionamento.
+Na v1.76 foi adicionado um aviso perto do relógio em "Nível atual do rio" (`#lastTime`) que aparecia quando já tinha passado mais de 5 minutos do horário em que a próxima leitura horária era esperada. Testado ao vivo e tecnicamente funcionando (inclusive confirmado que a coleta estava mesmo atrasada nesse dia — estação parada em 16:00 com o relógio real já em 17:46, enquanto o `scrape.py` rodava normalmente). Mesmo assim, o usuário achou o resultado visual "não ficou bom" e pediu pra tirar — removido por completo na v1.77.
+
+O usuário pediu de volta na v1.78, com dois ajustes: texto reformulado pra deixar claro que o atraso é da estação/ANA (não da página) e que a atualização é automática assim que o dado chegar, e limiar subido de 5 min para 30 min (reduz a frequência do aviso). Texto atual: "⚠️ Atraso no envio do dado pela estação telemétrica da ANA. Não é um problema da página — assim que a estação disponibilizar, o site atualiza automaticamente." Termo "telemétrica" escolhido deliberadamente em vez de "pluviométrica" (sugestão hesitante do usuário) — a estação 65310001 mede nível/vazão/chuva e é classificada pela ANA como estação telemétrica; "pluviométrica" seria impreciso pra um aviso sobre atraso no nível do rio. Implementação: `checkStationDelay()`/`DELAY_WARNING_MIN` (=30) em `app.js`, `#delayWarning` dentro de `.card-head-time` no `index.html`, `.delay-warning` (`max-width: 230px`) no `styles.css`.
+
+Se pedirem pra ajustar de novo (texto, limiar, ou remover), tratar como teve 2 idas e vindas — não presumir preferência estética, perguntar/confirmar antes de mudanças grandes de layout.
 
 ### Nota operacional: `raw.githubusercontent.com` não funciona mais pra buscar conteúdo ao vivo (repo ficou privado em 20/07/2026)
 
