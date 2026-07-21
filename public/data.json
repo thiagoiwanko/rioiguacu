@@ -1,11 +1,11 @@
 {
-  "ok": false,
-  "erro": "Message: timeout: Timed out receiving message from renderer: -0.003\n  (Session info: chrome=150.0.7871.114)\nStacktrace:\n#0 0x5628aba7041a <unknown>\n#1 0x5628ab448689 <unknown>\n#2 0x5628ab43021a <unknown>\n#3 0x5628ab42fe96 <unknown>\n#4 0x5628ab42da7e <unknown>\n#5 0x5628ab42e3ff <unknown>\n#6 0x5628ab43d4e0 <unknown>\n#7 0x5628ab4573e7 <unknown>\n#8 0x5628ab45ec5b <unknown>\n#9 0x5628ab42eb59 <unknown>\n#10 0x5628ab457142 <unknown>\n#11 0x5628ab4e61f2 <unknown>\n#12 0x5628ab4911df <unknown>\n#13 0x5628ab492031 <unknown>\n#14 0x5628aba35bd7 <unknown>\n#15 0x5628aba343a8 <unknown>\n#16 0x5628aba1f076 <unknown>\n#17 0x5628aba34f7a <unknown>\n#18 0x5628aba06f70 <unknown>\n#19 0x5628aba5bc38 <unknown>\n#20 0x5628aba5bdd5 <unknown>\n#21 0x5628aba6efce <unknown>\n#22 0x7f821c09caa4 <unknown>\n#23 0x7f821c129c6c <unknown>\n",
+  "ok": true,
+  "erro": null,
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-21T11:49",
+    "atualizado_em": "2026-07-21T11:57",
     "historico": [
       {
         "data_hora": "2026-07-19T12:00",
@@ -395,32 +395,32 @@
     "previsao": [
       {
         "data_hora": "2026-07-21T15:00",
-        "regua_sem_chuva_m": 3.44,
-        "regua_com_chuva_m": 3.48
-      },
-      {
-        "data_hora": "2026-07-21T21:00",
-        "regua_sem_chuva_m": 3.44,
+        "regua_sem_chuva_m": 3.46,
         "regua_com_chuva_m": 3.44
       },
       {
-        "data_hora": "2026-07-22T03:00",
-        "regua_sem_chuva_m": 3.37,
+        "data_hora": "2026-07-21T21:00",
+        "regua_sem_chuva_m": 3.38,
         "regua_com_chuva_m": 3.4
       },
       {
+        "data_hora": "2026-07-22T03:00",
+        "regua_sem_chuva_m": 3.4,
+        "regua_com_chuva_m": 3.38
+      },
+      {
         "data_hora": "2026-07-22T09:00",
-        "regua_sem_chuva_m": 3.3,
+        "regua_sem_chuva_m": 3.34,
         "regua_com_chuva_m": 3.31
       },
       {
         "data_hora": "2026-07-22T15:00",
-        "regua_sem_chuva_m": 3.3,
-        "regua_com_chuva_m": 3.3
+        "regua_sem_chuva_m": 3.27,
+        "regua_com_chuva_m": 3.29
       },
       {
         "data_hora": "2026-07-22T21:00",
-        "regua_sem_chuva_m": 3.23,
+        "regua_sem_chuva_m": 3.24,
         "regua_com_chuva_m": 3.29
       }
     ],
