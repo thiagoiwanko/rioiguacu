@@ -343,6 +343,21 @@ h2 {
   line-height: 1.5;
 }
 
+/* Linha "08h às 09h" abaixo do valor de chuva -- indica o intervalo de 1h
+   coberto por "Chuva X mm" (pedido do usuário, 22/07/2026, v1.83). Fica
+   discreta, no mesmo estilo do resto das legendas pequenas. */
+.rain-hora {
+  display: block;
+  font-size: 11px;
+}
+
+/* "acumulada X mm" um pouco maior que o padrão de .metric-card small, pra
+   dar mais destaque ao total do dia (pedido do usuário, 22/07/2026, v1.83). */
+#rainAccum {
+  display: block;
+  font-size: 14px;
+}
+
 .metric-split {
   flex-direction: row;
   padding: 0;

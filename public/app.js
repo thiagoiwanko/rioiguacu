@@ -36,6 +36,18 @@ minute: "2-digit",
 });
 }
 
+// A chuva mostrada no card ("Chuva X mm") é a chuva medida na hora cheia do
+// dado mais recente (last.data_hora) -- ou seja, cobre a 1 hora terminada
+// nesse horário. Ex.: data_hora "09:00" -> chuva caiu entre 08h e 09h.
+// Pedido do usuário (22/07/2026, v1.83), pra deixar isso explícito no site.
+function formatRainHourRange(value) {
+const d = parseDate(value);
+const pad = (n) => String(n).padStart(2, "0");
+const fimHora = d.getHours();
+const inicioHora = (fimHora + 23) % 24;
+return `${pad(inicioHora)}h às ${pad(fimHora)}h`;
+}
+
 // Escala do gráfico/gauge alinhada aos 5 níveis estatísticos de alerta
 // (Observação 3,70 / Atenção 4,20 / Alerta 5,00 / Emergência 5,50 / Grande enchente 6,50 m).
 // O piso da escala é o mínimo histórico já registrado (1,30 m, em 2020), não zero --
@@ -206,6 +218,7 @@ levelBadge.innerHTML = badgeClass === "badge-critico"
 
 $("flowValue").textContent = `${last.vazao_m3s} m³/s`;
 $("rainValue").textContent = `${fmt1.format(last.chuva_mm)} mm`;
+$("rainHora").textContent = formatRainHourRange(last.data_hora);
 $("rainAccum").textContent = `acumulada ${fmt1.format(last.chuva_acumulada_mm)} mm`;
 const corTendencia = trendColor(data.tendencia);
 $("trendValue").innerHTML = `<i class="trend-dot" style="background:${corTendencia}"></i>${data.tendencia.texto}`;
