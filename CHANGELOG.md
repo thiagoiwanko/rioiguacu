@@ -8,6 +8,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.88 — 2026-07-22
+
+- **"Acumulada" reestruturado em rótulo + valor, igual "Chuva" + "X mm".** Antes (v1.83-v1.87) era um único `<small id="rainAccum">` com o texto "acumulada X mm" inteiro junto, o que fazia a palavra "acumulada" herdar o mesmo tamanho gigante do valor (26px) e quebrar linha de forma feia — usuário percebeu que a palavra "acumulada" ficava maior que o próprio rótulo "Chuva". Corrigido: `index.html` agora tem `<span class="rain-accum-label">Acumulada</span>` (herda `.metric-card span` — mesmo uppercase/cinza/12px de "Chuva") seguido de `<strong id="rainAccum">X mm</strong>` (herda `.metric-card strong` — mesmo 26px/22px mobile, branco, negrito do "0,0 mm"). `app.js` não escreve mais o prefixo "acumulada " no texto (só o valor). `styles.css`: removida a regra própria de `#rainAccum` (agora herda tudo automaticamente) e removido o override mobile redundante correspondente.
+- Backup pré-edição: `backups/site-v1.87-preedicao.zip`.
+
 ## v1.87 — 2026-07-22
 
 - **"acumulada X mm" agora com a mesma cor e peso do valor grande "X mm"**, não só o mesmo tamanho — a v1.86 só tinha igualado o `font-size`, mas a cor continuava `var(--muted)` (cinza, herdada de `.metric-card small`) e o peso continuava normal, ficando com aparência inconsistente ao lado do "0,0 mm". Agora `color: var(--text)` e `font-weight: 700`.
