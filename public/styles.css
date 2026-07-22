@@ -358,6 +358,14 @@ h2 {
   font-size: 14px;
 }
 
+/* "Fonte: ..." abaixo de "acumulada X mm" -- pedido do usuário, 22/07/2026,
+   v1.84. Fica discreta, no mesmo estilo de .rain-hora. */
+.rain-fonte {
+  display: block;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .metric-split {
   flex-direction: row;
   padding: 0;
