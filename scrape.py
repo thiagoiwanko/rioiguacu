@@ -474,11 +474,12 @@ def verificar_alerta_previsao(historico, previsao):
     # janela disponível é mais curta, ex.: ~35h) -- por isso calculamos e
     # mostramos o número real de horas até o ponto usado, em vez de afirmar
     # "48 horas" mesmo quando o ponto mais próximo está bem aquém disso. O
-    # texto não nomeia a fonte da previsão (decisão do usuário, 20/07/2026) --
-    # só deixa claro que não é um cálculo deste site nem um alerta oficial
-    # da Defesa Civil/ANA (que não publicam previsão para este rio).
+    # texto não nomeia a fonte da previsão (decisão do usuário, 20/07/2026).
+    # Frase final "Não é um alerta oficial da Defesa Civil." removida a
+    # pedido do usuário (22/07/2026, v1.81) -- texto fica só com o valor e
+    # o horário.
     horas_reais = round((data_hora_ponto - agora_base).total_seconds() / 3600)
-    return f"Previsão para daqui a {horas_reais} horas ({quando_fmt}): {valor_fmt} m. Não é um alerta oficial da Defesa Civil."
+    return f"Previsão para daqui a {horas_reais} horas ({quando_fmt}): {valor_fmt} m."
 
 
 def montar_payload(historico, previsao, fonte_historico, url_historico):

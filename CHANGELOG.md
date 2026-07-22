@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.81 — 2026-07-22
+
+- **Frase final removida do texto de previsão (`scrape.py`).** `verificar_alerta_previsao()` gerava "Previsão para daqui a X horas (DD/MM HHh): Y m. Não é um alerta oficial da Defesa Civil." — a pedido do usuário, a frase final foi removida; o texto agora termina em "... Y m.".
+- **"Dados Visíveis (ANA)" virou só "Dados Visíveis" (`app.js`).** `$("sourceLabel")` deixou de ser preenchido com `(ANA)` — fica sempre vazio agora, a pedido do usuário. Variáveis `fonteCurta`/`fonteExibida`, que só serviam pra montar esse texto, foram removidas por ficarem sem uso.
+- Cache-buster de `app.js` e versão do rodapé atualizados para `1.81`.
+- Backup pré-edição: `backups/site-v1.81-preedicao.zip` (estado ao vivo antes desta edição, incluindo a remoção de `CLAUDE.md`/`monitor_web.log` e o repositório já público).
+
 ## v1.80 — 2026-07-21
 
 - **Texto do aviso de atraso reformulado, sem emoji e com estilo discreto.** O usuário considerou o texto da v1.79 pouco fluido e pediu algo mais sutil, mantendo o mesmo sentido. Texto novo: "A estação telemétrica está com falha ou em manutenção — assim que disponibilizarem os dados, o site atualiza automaticamente." (sem o emoji "⚠️" no início).
