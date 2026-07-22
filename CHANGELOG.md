@@ -8,6 +8,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.85 — 2026-07-22
+
+- **"08h às 09h" (horário da chuva) agora do mesmo tamanho de "acumulada X mm"** (14px, antes 11px) — usuário considera as duas informações igualmente importantes. Só `.rain-hora` mudou em `styles.css`.
+- Backup pré-edição: `backups/site-v1.84-preedicao.zip`.
+
 ## v1.84 — 2026-07-22
 
 - **Nova linha "Fonte: estação telemétrica UHE Gov. Bento Munhoz União da Vitória" no card de Chuva**, abaixo de "acumulada X mm" — pedido do usuário, em resposta à pergunta "os dados de chuva vem de onde?". Texto estático em `index.html` (não depende de `data.fonte`, já que a chuva vem sempre da mesma estação física 65310001, seja via API da ANA ou via Copel como redundância técnica). Novo estilo `.rain-fonte` em `styles.css`.
