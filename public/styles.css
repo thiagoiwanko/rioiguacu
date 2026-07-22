@@ -354,12 +354,17 @@ h2 {
   font-size: 14px;
 }
 
-/* "acumulada X mm" no mesmo tamanho do valor grande "X mm" (.metric-card
-   strong, 26px/22px no mobile) -- pedido do usuário, 22/07/2026, v1.86.
-   Antes era 14px (v1.83). */
+/* "acumulada X mm" na mesma fonte e cor do valor grande "X mm" (.metric-card
+   strong): mesmo font-size (26px/22px no mobile), mesma cor (var(--text),
+   não mais var(--muted) herdado de .metric-card small) e mesmo peso (bold,
+   como o <strong>) -- pedido do usuário, 22/07/2026, v1.87 (v1.86 só tinha
+   igualado o tamanho, mas a cor/peso continuavam de "small", ficando
+   inconsistente com "0,0 mm"). */
 #rainAccum {
   display: block;
   font-size: 26px;
+  font-weight: 700;
+  color: var(--text);
 }
 
 /* "Fonte: ..." abaixo de "acumulada X mm" -- pedido do usuário, 22/07/2026,
