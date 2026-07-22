@@ -8,6 +8,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.86 — 2026-07-22
+
+- **"acumulada X mm" agora no mesmo tamanho do valor grande "X mm"** (26px/22px no mobile, igual `.metric-card strong`; antes 14px). Só `#rainAccum` mudou em `styles.css` (`.rain-hora` não mudou, segue em 14px).
+- Backup pré-edição: `backups/site-v1.85-preedicao.zip`.
+
 ## v1.85 — 2026-07-22
 
 - **"08h às 09h" (horário da chuva) agora do mesmo tamanho de "acumulada X mm"** (14px, antes 11px) — usuário considera as duas informações igualmente importantes. Só `.rain-hora` mudou em `styles.css`.
