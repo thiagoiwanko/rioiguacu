@@ -450,6 +450,10 @@ h2 {
   color: var(--red);
 }
 
+.dry {
+  color: var(--blue);
+}
+
 .chart-wrap {
   position: relative;
 }

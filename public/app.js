@@ -106,7 +106,7 @@ function chartBounds(data) {
 const currentLevel = data.ultima.regua_m;
 const hist = data.historico.map((d) => d.regua_m);
 const forecast = data.previsao
-.map((d) => d.regua_com_chuva_m)
+.flatMap((d) => [d.regua_com_chuva_m, d.regua_sem_chuva_m])
 .filter((v) => typeof v === "number");
 const values = [...hist, ...forecast, currentLevel];
 const minValue = Math.min(...values);
@@ -386,6 +386,35 @@ const wetPoints = [
 { data_hora: data.ultima.data_hora, value: data.ultima.regua_m },
 ...data.previsao.filter((item) => item.regua_com_chuva_m !== null).map((item) => ({ data_hora: item.data_hora, value: item.regua_com_chuva_m })),
 ];
+const dryPoints = [
+{ data_hora: data.ultima.data_hora, value: data.ultima.regua_m },
+...data.previsao.filter((item) => item.regua_sem_chuva_m !== null).map((item) => ({ data_hora: item.data_hora, value: item.regua_sem_chuva_m })),
+];
+
+// Quando os dois cenários (com/sem chuva) estão muito próximos -- divergência
+// relativa abaixo de 1% em todos os pontos --, mostrar duas linhas quase
+// coincidentes só confunde. Nesse caso o gráfico mostra uma única linha
+// "Previsão" (usa os valores "com chuva", já que são praticamente iguais aos
+// "sem chuva"); a legenda no cabeçalho do gráfico acompanha essa decisão.
+const paresPrevisao = data.previsao.filter(
+(item) => typeof item.regua_com_chuva_m === "number" && typeof item.regua_sem_chuva_m === "number"
+);
+const maxDivergenciaRel = paresPrevisao.length
+? Math.max(...paresPrevisao.map((item) => {
+const media = (item.regua_com_chuva_m + item.regua_sem_chuva_m) / 2;
+return media ? Math.abs(item.regua_com_chuva_m - item.regua_sem_chuva_m) / media : 0;
+}))
+: 0;
+const previsaoConvergente = paresPrevisao.length > 0 && maxDivergenciaRel < 0.01;
+
+const legendForecastSingle = $("legendForecastSingle");
+const legendForecastWet = $("legendForecastWet");
+const legendForecastDry = $("legendForecastDry");
+if (legendForecastSingle && legendForecastWet && legendForecastDry) {
+legendForecastSingle.hidden = !previsaoConvergente;
+legendForecastWet.hidden = previsaoConvergente;
+legendForecastDry.hidden = previsaoConvergente;
+}
 
 const yTicks = Array.from({ length: 6 }, (_, i) => minY + ((maxY - minY) / 5) * i);
 const xTicks = Array.from({ length: 5 }, (_, i) => new Date(start.getTime() + ((end.getTime() - start.getTime()) / 4) * i));
@@ -441,7 +470,12 @@ ${label ? `
 `}
 `;
 }).join("")}
+${previsaoConvergente
+? (wetPoints.length > 1 ? `<path d="${makePath(wetPoints, x, y)}" fill="none" stroke="#ff3d42" stroke-width="2.4" stroke-dasharray="8 7" opacity=".95"/>` : "")
+: `
+${dryPoints.length > 1 ? `<path d="${makePath(dryPoints, x, y)}" fill="none" stroke="#48a7ff" stroke-width="2.4" stroke-dasharray="4 4" opacity=".95"/>` : ""}
 ${wetPoints.length > 1 ? `<path d="${makePath(wetPoints, x, y)}" fill="none" stroke="#ff3d42" stroke-width="2.4" stroke-dasharray="8 7" opacity=".95"/>` : ""}
+`}
 <path d="${makePath(histPoints, x, y)}" fill="none" stroke="url(#waterLine)" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
 ${histPoints.slice(0, -1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="3" fill="#18d9d2" stroke="#071019" stroke-width="1.5"/>`).join("")}
 ${histPoints.length ? (() => {
@@ -456,10 +490,12 @@ return `
 <text class="current-point-label" x="${cx}" y="${labelY}" text-anchor="middle" fill="#eef7fb" font-size="${fs.current}" font-weight="800">Nível atual</text>
 `;
 })() : ""}
+${previsaoConvergente ? "" : dryPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#48a7ff"/>`).join("")}
 ${wetPoints.slice(1).map((p) => `<circle cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="4" fill="#ff3d42"/>`).join("")}
 <text x="${pad.left}" y="${isNarrow ? 14 : 18}" fill="#9fb4c1" font-size="${fs.axisTitle}">Leitura da régua (m)</text>
 ${histPoints.map((p, idx) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="${idx === histPoints.length - 1 ? "Nível atual" : "Histórico"}"/>`).join("")}
-${wetPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão"/>`).join("")}
+${previsaoConvergente ? "" : dryPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="Previsão (sem chuva)"/>`).join("")}
+${wetPoints.slice(1).map((p) => `<circle class="chart-hit" cx="${x(parseDate(p.data_hora))}" cy="${y(p.value)}" r="10" fill="rgba(0,0,0,0.001)" pointer-events="all" data-cota="${fmt.format(p.value)}" data-time="${formatDateTime(p.data_hora)}" data-kind="${previsaoConvergente ? "Previsão" : "Previsão (com chuva)"}"/>`).join("")}
 <rect x="${pad.left}" y="${rainPlotTop}" width="${plotW}" height="${rain.barsH}" rx="6" fill="rgba(72,167,255,.05)" stroke="rgba(180,215,230,.14)"/>
 <text x="${pad.left}" y="${rainTitleY}" fill="#9fb4c1" font-size="${fs.axisTitle}">Chuva (mm)</text>
 ${rainTicks.map((tick) => `
