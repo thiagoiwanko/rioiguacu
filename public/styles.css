@@ -332,9 +332,14 @@ h2 {
   box-shadow: 0 16px 44px rgba(0, 0, 0, .28);
 }
 
+/* Espaço acima do valor grande (rótulo -> valor) reduzido de 14px pra 6px --
+   pedido do usuário, 22/07/2026, v1.89: ficava muita distância entre "CHUVA"
+   e "0,0 mm", e entre "ACUMULADA" e "108,2 mm". Afeta igualmente #flowValue
+   e #trendValue (mesma regra genérica), o que é desejado -- deixa todos os
+   rótulos mais próximos dos valores. */
 .metric-card strong {
   display: block;
-  margin: 14px 0 8px;
+  margin: 6px 0 8px;
   font-size: 26px;
 }
 
@@ -365,6 +370,13 @@ h2 {
    Pedido do usuário, 22/07/2026. Sem CSS próprio agora -- só a marcação
    HTML mudou (index.html), os elementos herdam os estilos genéricos. */
 
+/* Espaço entre "16h às 17h" (.rain-hora) e "ACUMULADA" aumentado -- sem essa
+   margem os dois ficavam quase colados (span/small não têm margem própria).
+   Pedido do usuário, 22/07/2026, v1.89. */
+.rain-accum-label {
+  margin-top: 12px;
+}
+
 /* "Fonte: ..." abaixo de "acumulada X mm" -- pedido do usuário, 22/07/2026,
    v1.84. Fica discreta, no mesmo estilo de .rain-hora. */
 .rain-fonte {
@@ -378,13 +390,20 @@ h2 {
   padding: 0;
 }
 
+/* Alinhamento do conteúdo ao topo (era "center") -- com o bloco de Chuva mais
+   alto (5 linhas: rótulo, valor, horário, "acumulada", valor, fonte), o
+   bloco de Vazão (só 3 linhas) ficava com o conteúdo centralizado no meio de
+   um card muito mais alto que o necessário, parecendo um objeto grande
+   demais pro pouco texto. Pedido do usuário, 22/07/2026, v1.89. Só afeta
+   Vazão/Chuva (.metric-block, dentro de .metric-split) -- não afeta o card
+   "Tendência" (é .metric-card direto, sem .metric-block, mantém center). */
 .metric-block {
   flex: 1;
   min-width: 0;
   padding: 18px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .metric-block:first-child {
