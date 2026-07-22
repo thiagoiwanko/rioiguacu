@@ -214,12 +214,9 @@ $("forecastAlert").textContent = data.alerta_previsao;
 $("forecastAlert").className = data.previsao_disponivel ? "" : "warning";
 // Link "Abrir fonte" removido (v1.71) -- data.url_historico às vezes aponta
 // pra URL real da Copel, o que não pode ser exposto publicamente.
-const fonteCurta = (data.fonte || "").split(/[–-]/)[0].trim();
-// Exibição sempre atribuída à ANA, mesmo quando a fonte técnica real
-// (data.fonte, vindo do scrape.py) é a Copel usada como redundância --
-// decisão explícita do usuário, 20/07/2026.
-const fonteExibida = fonteCurta.toLowerCase() === "copel" ? "ANA" : fonteCurta;
-$("sourceLabel").textContent = fonteExibida ? `(${fonteExibida})` : "";
+// $("sourceLabel") fica sempre vazio -- "Dados Visíveis (ANA)" virou só
+// "Dados Visíveis" a pedido do usuário (22/07/2026, v1.81).
+$("sourceLabel").textContent = "";
 // A linha "Fonte desta atualização: ANA" foi removida (v1.71) por ficar
 // redundante com o subtítulo do cabeçalho, que já diz "com dados da ANA"
 // -- pedido do usuário, 20/07/2026. #sourceNote fica sempre vazio agora.
