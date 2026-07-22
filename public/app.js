@@ -219,7 +219,7 @@ levelBadge.innerHTML = badgeClass === "badge-critico"
 $("flowValue").textContent = `${last.vazao_m3s} m³/s`;
 $("rainValue").textContent = `${fmt1.format(last.chuva_mm)} mm`;
 $("rainHora").textContent = formatRainHourRange(last.data_hora);
-$("rainAccum").textContent = `acumulada ${fmt1.format(last.chuva_acumulada_mm)} mm`;
+$("rainAccum").textContent = `${fmt1.format(last.chuva_acumulada_mm)} mm`;
 const corTendencia = trendColor(data.tendencia);
 $("trendValue").innerHTML = `<i class="trend-dot" style="background:${corTendencia}"></i>${data.tendencia.texto}`;
 $("trendValue").style.color = corTendencia;
