@@ -329,10 +329,21 @@ def extrair_previsao(texto):
             continue
 
         try:
+            # A tabela da Copel lista as colunas nesta ordem: "Previsão com
+            # chuva" (régua, nível de água, vazão) primeiro, depois "Previsão
+            # sem chuva" (régua, nível de água, vazão). padrao_numero só casa
+            # números com 1-2 dígitos antes da vírgula, então só a régua de
+            # cada bloco entra em `numeros` -- nível de água tem 3 dígitos
+            # (ex.: 742,95) e vazão não tem vírgula. Ou seja, numeros[0] é
+            # sempre a régua "com chuva" (aparece primeiro na linha) e
+            # numeros[1] é a régua "sem chuva" (aparece depois). Bug
+            # encontrado em 22/07/2026 (v1.82): essa atribuição estava
+            # invertida desde sempre -- o campo "regua_com_chuva_m" publicado
+            # no site vinha, na verdade, do cenário sem chuva, e vice-versa.
             dados.append({
                 "data_hora": iso(_parse_data_hora(m.group(1), m.group(2))),
-                "regua_sem_chuva_m": numeros[0],
-                "regua_com_chuva_m": numeros[1] if len(numeros) >= 2 else None,
+                "regua_com_chuva_m": numeros[0],
+                "regua_sem_chuva_m": numeros[1] if len(numeros) >= 2 else None,
             })
         except Exception:
             pass
