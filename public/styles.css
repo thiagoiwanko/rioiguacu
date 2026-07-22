@@ -354,18 +354,16 @@ h2 {
   font-size: 14px;
 }
 
-/* "acumulada X mm" na mesma fonte e cor do valor grande "X mm" (.metric-card
-   strong): mesmo font-size (26px/22px no mobile), mesma cor (var(--text),
-   não mais var(--muted) herdado de .metric-card small) e mesmo peso (bold,
-   como o <strong>) -- pedido do usuário, 22/07/2026, v1.87 (v1.86 só tinha
-   igualado o tamanho, mas a cor/peso continuavam de "small", ficando
-   inconsistente com "0,0 mm"). */
-#rainAccum {
-  display: block;
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--text);
-}
+/* "Acumulada" (rótulo) + #rainAccum (valor "X mm") reestruturados na v1.88
+   pra ficar exatamente como "Chuva" + #rainValue: um <span> de rótulo
+   (pega o estilo de ".metric-card span" automaticamente -- mesmo
+   uppercase/cinza/12px do resto) seguido de um <strong> pro valor grande
+   (pega ".metric-card strong" automaticamente -- mesmo 26px/22px, branco,
+   negrito de "0,0 mm"). Antes (v1.83-v1.87) "acumulada X mm" era um único
+   <small> com o texto inteiro junto, o que fazia a palavra "acumulada"
+   ficar do mesmo tamanho gigante do valor e quebrar linha de forma feia.
+   Pedido do usuário, 22/07/2026. Sem CSS próprio agora -- só a marcação
+   HTML mudou (index.html), os elementos herdam os estilos genéricos. */
 
 /* "Fonte: ..." abaixo de "acumulada X mm" -- pedido do usuário, 22/07/2026,
    v1.84. Fica discreta, no mesmo estilo de .rain-hora. */
@@ -973,10 +971,6 @@ td {
   }
 
   .metric-card strong {
-    font-size: 22px;
-  }
-
-  #rainAccum {
     font-size: 22px;
   }
 
