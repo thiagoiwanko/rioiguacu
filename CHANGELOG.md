@@ -8,6 +8,15 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.82 — 2026-07-22
+
+- **Bug real corrigido: `regua_com_chuva_m`/`regua_sem_chuva_m` estavam trocados em `scrape.py` (`extrair_previsao()`).** A tabela da Copel lista "Previsão com chuva" primeiro e "Previsão sem chuva" depois, mas o regex que extrai só os números de régua (`padrao_numero`, que só casa 1-2 dígitos antes da vírgula — nível de água tem 3 dígitos e vazão não tem vírgula, então nenhum dos dois entra na lista) pegava `numeros[0]` (na verdade "com chuva", o primeiro bloco da linha) e gravava em `regua_sem_chuva_m`, e vice-versa. Ou seja, o site vinha publicando os dois campos invertidos desde sempre. Achado a partir de uma observação do usuário comparando o site com a página da Copel ("o da copel com chuva está bem alto, e o nosso baixo"). Corrigido: `regua_com_chuva_m = numeros[0]`, `regua_sem_chuva_m = numeros[1]`.
+- **Duas linhas de previsão de volta no gráfico (`app.js`).** Antes só existia uma linha "Previsão" (cenário com chuva, vermelho). Agora mostra as duas: com chuva (vermelho, tracejado 8-7, como já era) e sem chuva (azul, tracejado 4-4, nova) — ambas partindo do ponto atual e divergindo, igual ao formato da própria Copel.
+- **Convergência: quando os dois cenários estão a menos de 1% de diferença em todos os pontos da previsão, o gráfico mostra só uma linha "Previsão"** (evita duas linhas quase sobrepostas com legendas redundantes). `chartBounds()` também passou a considerar os dois cenários (antes só olhava `regua_com_chuva_m`) para o cálculo da escala vertical do gráfico.
+- Legenda do gráfico ganhou `#legendForecastWet`/`#legendForecastDry`/`#legendForecastSingle`, alternados via JS conforme a convergência calculada a cada atualização.
+- Cache-buster de `styles.css`/`app.js` e versão do rodapé atualizados para `1.82`.
+- Backup pré-edição: `backups/site-v1.81.zip` (estado ao vivo já verificado ao publicar a v1.81).
+
 ## v1.81 — 2026-07-22
 
 - **Frase final removida do texto de previsão (`scrape.py`).** `verificar_alerta_previsao()` gerava "Previsão para daqui a X horas (DD/MM HHh): Y m. Não é um alerta oficial da Defesa Civil." — a pedido do usuário, a frase final foi removida; o texto agora termina em "... Y m.".
