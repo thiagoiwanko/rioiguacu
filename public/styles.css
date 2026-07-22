@@ -344,20 +344,22 @@ h2 {
 }
 
 /* Linha "08h às 09h" abaixo do valor de chuva -- indica o intervalo de 1h
-   coberto por "Chuva X mm" (pedido do usuário, 22/07/2026, v1.83). Mesmo
-   tamanho de #rainAccum (14px) -- usuário pediu que o horário fique do
-   mesmo tamanho que o acumulado, já que considera as duas informações
-   igualmente importantes (22/07/2026, v1.85; antes era 11px). */
+   coberto por "Chuva X mm" (pedido do usuário, 22/07/2026, v1.83). Ficou do
+   mesmo tamanho de #rainAccum na v1.85 (14px), mas na v1.86 o #rainAccum
+   subiu pra 26px (mesmo tamanho do valor grande) e .rain-hora ficou em
+   14px -- usuário só pediu pra aumentar o acumulado dessa vez, não o
+   horário. Se pedir pra igualar de novo, reavaliar os dois tamanhos juntos. */
 .rain-hora {
   display: block;
   font-size: 14px;
 }
 
-/* "acumulada X mm" um pouco maior que o padrão de .metric-card small, pra
-   dar mais destaque ao total do dia (pedido do usuário, 22/07/2026, v1.83). */
+/* "acumulada X mm" no mesmo tamanho do valor grande "X mm" (.metric-card
+   strong, 26px/22px no mobile) -- pedido do usuário, 22/07/2026, v1.86.
+   Antes era 14px (v1.83). */
 #rainAccum {
   display: block;
-  font-size: 14px;
+  font-size: 26px;
 }
 
 /* "Fonte: ..." abaixo de "acumulada X mm" -- pedido do usuário, 22/07/2026,
@@ -966,6 +968,10 @@ td {
   }
 
   .metric-card strong {
+    font-size: 22px;
+  }
+
+  #rainAccum {
     font-size: 22px;
   }
 
