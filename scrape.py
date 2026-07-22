@@ -399,8 +399,10 @@ def coletar_texto(url):
 
 # Degraus de situação, do mais baixo ao mais alto. O primeiro (0.0) é a
 # linha de base "normal" -- não faz parte de COTAS_ALERTA_DEFESA_CIVIL porque
-# não é um nível de alerta, é a ausência de alerta.
-NIVEIS_SITUACAO = [(0.0, "NÍVEL NORMAL - monitoramento diário")] + COTAS_ALERTA_DEFESA_CIVIL
+# não é um nível de alerta, é a ausência de alerta. Texto encurtado pra só
+# "NÍVEL NORMAL" (sem "- monitoramento diário") a pedido do usuário,
+# 22/07/2026, v1.87.
+NIVEIS_SITUACAO = [(0.0, "NÍVEL NORMAL")] + COTAS_ALERTA_DEFESA_CIVIL
 
 
 def _tier_por_nivel(regua):

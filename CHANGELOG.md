@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.87 — 2026-07-22
+
+- **"acumulada X mm" agora com a mesma cor e peso do valor grande "X mm"**, não só o mesmo tamanho — a v1.86 só tinha igualado o `font-size`, mas a cor continuava `var(--muted)` (cinza, herdada de `.metric-card small`) e o peso continuava normal, ficando com aparência inconsistente ao lado do "0,0 mm". Agora `color: var(--text)` e `font-weight: 700`.
+- **Situação "NÍVEL NORMAL" sem o sufixo "- monitoramento diário"** — `NIVEIS_SITUACAO` em `scrape.py` encurtado a pedido do usuário.
+- Backup pré-edição: `backups/site-v1.86-preedicao.zip`.
+
 ## v1.86 — 2026-07-22
 
 - **"acumulada X mm" agora no mesmo tamanho do valor grande "X mm"** (26px/22px no mobile, igual `.metric-card strong`; antes 14px). Só `#rainAccum` mudou em `styles.css` (`.rain-hora` não mudou, segue em 14px).
