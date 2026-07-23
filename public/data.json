@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-23T19:59",
+    "atualizado_em": "2026-07-23T20:02",
     "historico": [
-      {
-        "data_hora": "2026-07-21T20:00",
-        "regua_m": 3.361,
-        "nivel_agua_m": 742.971,
-        "vazao_m3s": 724,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-07-21T21:00",
         "regua_m": 3.352,
@@ -395,13 +387,13 @@
     "previsao": [
       {
         "data_hora": "2026-07-24T03:00",
-        "regua_com_chuva_m": 4.24,
-        "regua_sem_chuva_m": 4.23
+        "regua_com_chuva_m": 4.23,
+        "regua_sem_chuva_m": 4.22
       },
       {
         "data_hora": "2026-07-24T09:00",
-        "regua_com_chuva_m": 4.29,
-        "regua_sem_chuva_m": 4.25
+        "regua_com_chuva_m": 4.25,
+        "regua_sem_chuva_m": 4.24
       },
       {
         "data_hora": "2026-07-24T15:00",
@@ -410,18 +402,18 @@
       },
       {
         "data_hora": "2026-07-24T21:00",
-        "regua_com_chuva_m": 4.25,
-        "regua_sem_chuva_m": 4.24
+        "regua_com_chuva_m": 4.3,
+        "regua_sem_chuva_m": 4.27
       },
       {
         "data_hora": "2026-07-25T03:00",
-        "regua_com_chuva_m": 4.3,
-        "regua_sem_chuva_m": 4.28
+        "regua_com_chuva_m": 4.27,
+        "regua_sem_chuva_m": 4.26
       },
       {
         "data_hora": "2026-07-25T09:00",
-        "regua_com_chuva_m": 4.33,
-        "regua_sem_chuva_m": 4.27
+        "regua_com_chuva_m": 4.27,
+        "regua_sem_chuva_m": 4.26
       }
     ],
     "ultima": {
@@ -438,7 +430,7 @@
       "delta": 0.008000000000000007,
       "direcao": "subindo"
     },
-    "alerta_previsao": "Previsão para daqui a 38 horas (25/07 09h): 4,33 m.",
+    "alerta_previsao": "Previsão para daqui a 38 horas (25/07 09h): 4,27 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
