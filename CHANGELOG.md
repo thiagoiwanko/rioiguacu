@@ -8,6 +8,14 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.90 — 2026-07-23
+
+- **A previsão de 48h deixa de ser publicada quando a Copel fica mais de 3h sem atualizar a tabela.** Pedido explícito do usuário: quando a previsão atrasa, os horários dela (que deveriam ser futuros) ficam presos no passado em relação ao "agora" real, e o gráfico desenha um "dente" (ziguezague) misturando pontos de previsão vencidos com o histórico medido — o que derruba a credibilidade do site. Confirmado ao vivo antes desta mudança: `data.json` tinha `atualizado_em: 2026-07-23T06:39` mas o primeiro ponto de `previsao` era `2026-07-23T03:00`, já quase 3h40 no passado.
+- `scrape.py`: nova função `_fingerprint_previsao()` calcula um hash da tabela de previsão **antes do jitter** (precisa ser antes, porque o jitter é sorteado de novo a cada rodada e mudaria o hash mesmo com a fonte parada). `coletar_uma_vez()` compara esse hash com o da rodada anterior (carregado de volta do próprio `data.json` público, campo novo `previsao_fingerprint`); se mudou, marca `previsao_atualizada_em` como agora; se não mudou, mantém o horário anterior. Se `agora - previsao_atualizada_em` passar de `LIMIAR_PREVISAO_DESATUALIZADA_HORAS` (3h), a previsão não é publicada nesta rodada (`previsao: []` no `data.json`) — o gráfico e o texto de alerta já lidam bem com previsão vazia (mostram "Sem previsão disponível para as próximas 48 horas."), sem precisar de nenhuma mudança em `app.js`/`index.html`/`styles.css`.
+- Novos campos técnicos no `data.json` público: `previsao_fingerprint` (hash) e `previsao_atualizada_em` (horário da última mudança real detectada) — não citam "Copel" nem expõem nada além disso, servem só de estado entre execuções do GitHub Actions.
+- Testado localmente (fora do repo) com dados simulados: primeira execução nunca marca como desatualizada; mesma previsão ao longo de 3h+ passa a ser suprimida; qualquer mudança real na tabela reseta a contagem; falha de extração não reseta o relógio (só "congela" o estado anterior).
+- Backup pré-edição: `backups/site-v1.89-preedicao.zip`.
+
 ## v1.89 — 2026-07-22
 
 - **Ajustes finos de espaçamento no card Chuva/Vazão**, todos em `styles.css`, a pedido do usuário reagindo à v1.88 publicada:
