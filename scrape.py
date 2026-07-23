@@ -1,3 +1,4 @@
+import hashlib
 import json
 import os
 import random
@@ -56,6 +57,17 @@ FUSO_BR = ZoneInfo("America/Sao_Paulo")
 # ver aplicar_jitter_previsao() mais abaixo) -- pedido explícito do usuário
 # (21/07/2026). Até 1% pra mais ou pra menos.
 JITTER_PREVISAO_MAX_FRACAO = 0.01
+
+# Se a tabela de previsão da Copel ficar mais tempo que isso sem nenhuma
+# mudança real (mesmos horários/valores brutos, antes do jitter), paramos de
+# publicar a previsão no site -- pedido explícito do usuário, 23/07/2026:
+# quando a Copel atrasa a atualização, os horários da previsão (que deveriam
+# ser futuros) ficam presos no passado em relação ao "agora" real, e o
+# gráfico desenha um "dente" (um ziguezague visual) misturando pontos de
+# previsão vencidos com o histórico medido -- isso derruba a credibilidade do
+# site. Ver _fingerprint_previsao() e o bloco de detecção em
+# coletar_uma_vez() mais abaixo.
+LIMIAR_PREVISAO_DESATUALIZADA_HORAS = 3
 
 
 def agora_br():
@@ -380,6 +392,21 @@ def aplicar_jitter_previsao(previsao):
     return resultado
 
 
+def _fingerprint_previsao(previsao_bruta):
+    """Impressão digital determinística da previsão BRUTA (antes do jitter) --
+    usada só para detectar se a Copel realmente atualizou a tabela de
+    previsão entre uma coleta e outra (ver LIMIAR_PREVISAO_DESATUALIZADA_HORAS
+    acima). Precisa ser calculada sobre os valores brutos: se fosse sobre os
+    valores já com aplicar_jitter_previsao(), o hash mudaria a cada rodada
+    mesmo com a fonte real parada (o jitter é sorteado de novo sempre), e o
+    site nunca detectaria que a previsão ficou desatualizada."""
+    bruto = "|".join(
+        f"{item['data_hora']}:{item.get('regua_com_chuva_m')}:{item.get('regua_sem_chuva_m')}"
+        for item in previsao_bruta
+    )
+    return hashlib.sha256(bruto.encode("utf-8")).hexdigest()
+
+
 def coletar_texto(url):
     log(f"Iniciando coleta: {url}")
     driver = abrir_navegador()
@@ -556,7 +583,12 @@ def mesclar_historico(historico_novo, historico_anterior):
     return sorted(itens, key=lambda item: item["data_hora"])
 
 
-def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
+def coletar_uma_vez(
+    ultima_anterior=None,
+    historico_anterior=None,
+    previsao_fingerprint_anterior=None,
+    previsao_atualizada_em_anterior=None,
+):
     historico_anterior = historico_anterior or []
     historico = coletar_via_ana()
     # fonte_tecnica é só para diagnóstico interno (mensagens de log em
@@ -592,19 +624,59 @@ def coletar_uma_vez(ultima_anterior=None, historico_anterior=None):
 
     # Previsão é exclusiva da Copel -- a ANA não oferece esse dado, então essa
     # parte roda sempre, independentemente da fonte do histórico acima.
-    previsao = []
+    previsao_bruta = []
     try:
         texto_previsao = coletar_texto(URL_PREVISAO)
-        previsao = aplicar_jitter_previsao(extrair_previsao(texto_previsao))
-        log(f"Previsões extraídas: {len(previsao)}")
+        previsao_bruta = extrair_previsao(texto_previsao)
+        log(f"Previsões extraídas: {len(previsao_bruta)}")
     except Exception as exc:
         log(f"Previsão indisponível: {exc}")
+
+    # Detecção de previsão desatualizada (pedido do usuário, 23/07/2026): se a
+    # tabela bruta (antes do jitter) não muda de uma coleta pra outra, é sinal
+    # de que a Copel não atualizou a previsão -- e os horários dela, que
+    # deveriam ser futuros, começam a ficar no passado em relação ao "agora"
+    # real, criando o "dente" no gráfico. Ver LIMIAR_PREVISAO_DESATUALIZADA_HORAS
+    # e _fingerprint_previsao() acima. Se a extração falhou/veio vazia nesta
+    # rodada, não mexe no fingerprint/timestamp anteriores -- só "congela" a
+    # contagem, não reseta o relógio como se fosse uma previsão nova.
+    if previsao_bruta:
+        previsao_fingerprint = _fingerprint_previsao(previsao_bruta)
+        if previsao_fingerprint != previsao_fingerprint_anterior:
+            previsao_atualizada_em = agora_br()
+        else:
+            previsao_atualizada_em = previsao_atualizada_em_anterior or agora_br()
+    else:
+        previsao_fingerprint = previsao_fingerprint_anterior
+        previsao_atualizada_em = previsao_atualizada_em_anterior
+
+    previsao_desatualizada = bool(
+        previsao_atualizada_em
+        and (agora_br() - previsao_atualizada_em) > timedelta(hours=LIMIAR_PREVISAO_DESATUALIZADA_HORAS)
+    )
+    if previsao_desatualizada:
+        log(
+            f"Previsão sem mudança real desde {iso(previsao_atualizada_em)} "
+            f"(> {LIMIAR_PREVISAO_DESATUALIZADA_HORAS}h) -- não será publicada "
+            "nesta rodada, pra não desenhar o 'dente' no gráfico."
+        )
+        previsao_publicada = []
+    else:
+        previsao_publicada = aplicar_jitter_previsao(previsao_bruta)
 
     # O campo público "fonte" é sempre FONTE_ANA, mesmo quando fonte_tecnica
     # foi a Copel nesta rodada -- mesma decisão já aplicada a url_historico
     # acima (ver PRIORIDADE 1 no CLAUDE.md, 20/07/2026). fonte_tecnica não é
     # usada aqui de propósito: ela só serve pros logs internos já emitidos.
-    return montar_payload(historico, previsao, FONTE_ANA, url_historico)
+    payload = montar_payload(historico, previsao_publicada, FONTE_ANA, url_historico)
+    # Guardados no próprio data.json público pra servir de estado entre uma
+    # execução e outra do GitHub Actions (carregar_anterior() lê de volta no
+    # início da próxima rodada) -- não citam "Copel" nem expõem nada além de
+    # um hash e um horário, então não conflitam com a PRIORIDADE 1 do
+    # CLAUDE.md sobre não nomear a fonte da previsão publicamente.
+    payload["previsao_fingerprint"] = previsao_fingerprint
+    payload["previsao_atualizada_em"] = iso(previsao_atualizada_em) if previsao_atualizada_em else None
+    return payload
 
 
 def carregar_anterior():
@@ -681,16 +753,31 @@ def main():
     anterior = carregar_anterior()
     ultima_anterior = None
     historico_anterior = []
+    previsao_fingerprint_anterior = None
+    previsao_atualizada_em_anterior = None
     if anterior and anterior.get("dados"):
-        ultima_anterior = anterior["dados"].get("ultima", {}).get("data_hora")
-        historico_anterior = anterior["dados"].get("historico", [])
+        dados_anteriores = anterior["dados"]
+        ultima_anterior = dados_anteriores.get("ultima", {}).get("data_hora")
+        historico_anterior = dados_anteriores.get("historico", [])
+        previsao_fingerprint_anterior = dados_anteriores.get("previsao_fingerprint")
+        ts_previsao_anterior = dados_anteriores.get("previsao_atualizada_em")
+        if ts_previsao_anterior:
+            try:
+                previsao_atualizada_em_anterior = datetime.fromisoformat(ts_previsao_anterior)
+            except Exception:
+                previsao_atualizada_em_anterior = None
 
     payload = None
     erro = None
     tentativas = 2
     for tentativa in range(1, tentativas + 1):
         try:
-            payload = coletar_uma_vez(ultima_anterior, historico_anterior)
+            payload = coletar_uma_vez(
+                ultima_anterior,
+                historico_anterior,
+                previsao_fingerprint_anterior,
+                previsao_atualizada_em_anterior,
+            )
         except Exception as exc:
             erro = str(exc)
             log(f"Erro na coleta (tentativa {tentativa}): {exc}")
