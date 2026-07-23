@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-23T07:59",
+    "atualizado_em": "2026-07-23T08:02",
     "historico": [
-      {
-        "data_hora": "2026-07-21T08:00",
-        "regua_m": 3.47,
-        "nivel_agua_m": 743.08,
-        "vazao_m3s": 768,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-07-21T09:00",
         "regua_m": 3.46,
@@ -392,38 +384,7 @@
         "chuva_acumulada_mm": 0.2
       }
     ],
-    "previsao": [
-      {
-        "data_hora": "2026-07-23T03:00",
-        "regua_com_chuva_m": 3.8,
-        "regua_sem_chuva_m": 3.82
-      },
-      {
-        "data_hora": "2026-07-23T09:00",
-        "regua_com_chuva_m": 3.85,
-        "regua_sem_chuva_m": 3.84
-      },
-      {
-        "data_hora": "2026-07-23T15:00",
-        "regua_com_chuva_m": 3.91,
-        "regua_sem_chuva_m": 3.94
-      },
-      {
-        "data_hora": "2026-07-23T21:00",
-        "regua_com_chuva_m": 3.96,
-        "regua_sem_chuva_m": 3.9
-      },
-      {
-        "data_hora": "2026-07-24T03:00",
-        "regua_com_chuva_m": 3.94,
-        "regua_sem_chuva_m": 3.98
-      },
-      {
-        "data_hora": "2026-07-24T09:00",
-        "regua_com_chuva_m": 3.97,
-        "regua_sem_chuva_m": 3.96
-      }
-    ],
+    "previsao": [],
     "ultima": {
       "data_hora": "2026-07-23T07:00",
       "regua_m": 4.137,
@@ -438,8 +399,8 @@
       "delta": 0.021999999999999353,
       "direcao": "subindo"
     },
-    "alerta_previsao": "Previsão para daqui a 26 horas (24/07 09h): 3,97 m.",
-    "previsao_disponivel": true,
+    "alerta_previsao": "Sem previsão disponível para as próximas 48 horas.",
+    "previsao_disponivel": false,
     "cotas_bairros": [
       {
         "nivel": 1.29,
@@ -563,6 +524,6 @@
     "janela_historico_horas": 48,
     "janela_previsao_horas": 48,
     "previsao_fingerprint": "ab3c505bda6637bcaddb42aba229632709304d5a8d4ae1487c75b70916c5a9d2",
-    "previsao_atualizada_em": "2026-07-23T06:54"
+    "previsao_atualizada_em": "2026-07-22T20:00"
   }
 }
