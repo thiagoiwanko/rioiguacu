@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.91 — 2026-07-23
+
+- **Correção urgente: a v1.90 não estava detectando a previsão como atrasada.** O usuário apontou que a previsão continuava no ar mesmo já estando visivelmente desatualizada (o próprio gráfico mostrava o "dente"), e o motivo era que o fingerprint (`_fingerprint_previsao`) só existia a partir do primeiro deploy da v1.90 — no primeiro run ele tratou a tabela como "acabou de mudar" (não tinha nenhum estado anterior pra comparar), zerando o relógio de atraso mesmo a fonte já estando parada havia mais de 11h.
+- **O usuário encontrou a correção real na própria página de previsão: o campo "Último valor considerado" (ex.: "22/07/2026 20:00")** — é o horário da última leitura real que o modelo da fonte usou como base pra gerar as projeções futuras, publicado ali mesmo na página. Nova função `extrair_ultimo_valor_considerado()` em `scrape.py` extrai esse timestamp direto (regex simples). `coletar_uma_vez()` agora usa esse valor como referência principal de atraso (`agora - último_valor_considerado > 3h` → não publica a previsão); o método antigo (`_fingerprint_previsao`, hash da tabela bruta) vira só um fallback, usado apenas se esse campo não vier na página por algum motivo.
+- Testado localmente com o texto real capturado da página nesta sessão (23/07/2026, ~07h): "Último valor considerado: 22/07/2026 20:00" extraído corretamente, diferença calculada em ~11h, resultado: previsão corretamente marcada como desatualizada.
+- Backup pré-edição: `backups/site-v1.90-preedicao.zip`.
+
 ## v1.90 — 2026-07-23
 
 - **A previsão de 48h deixa de ser publicada quando a Copel fica mais de 3h sem atualizar a tabela.** Pedido explícito do usuário: quando a previsão atrasa, os horários dela (que deveriam ser futuros) ficam presos no passado em relação ao "agora" real, e o gráfico desenha um "dente" (ziguezague) misturando pontos de previsão vencidos com o histórico medido — o que derruba a credibilidade do site. Confirmado ao vivo antes desta mudança: `data.json` tinha `atualizado_em: 2026-07-23T06:39` mas o primeiro ponto de `previsao` era `2026-07-23T03:00`, já quase 3h40 no passado.

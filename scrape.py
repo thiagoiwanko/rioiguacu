@@ -58,15 +58,18 @@ FUSO_BR = ZoneInfo("America/Sao_Paulo")
 # (21/07/2026). Até 1% pra mais ou pra menos.
 JITTER_PREVISAO_MAX_FRACAO = 0.01
 
-# Se a tabela de previsão da Copel ficar mais tempo que isso sem nenhuma
-# mudança real (mesmos horários/valores brutos, antes do jitter), paramos de
-# publicar a previsão no site -- pedido explícito do usuário, 23/07/2026:
-# quando a Copel atrasa a atualização, os horários da previsão (que deveriam
-# ser futuros) ficam presos no passado em relação ao "agora" real, e o
-# gráfico desenha um "dente" (um ziguezague visual) misturando pontos de
-# previsão vencidos com o histórico medido -- isso derruba a credibilidade do
-# site. Ver _fingerprint_previsao() e o bloco de detecção em
-# coletar_uma_vez() mais abaixo.
+# Se a previsão estiver baseada num "Último valor considerado" (ver
+# extrair_ultimo_valor_considerado() mais abaixo -- é a própria fonte que
+# publica até quando os dados reais foram usados como base do modelo) mais
+# velho que isso em relação a agora, paramos de publicar a previsão no site
+# -- pedido explícito do usuário, 23/07/2026: quando a fonte atrasa a
+# atualização, os horários da previsão (que deveriam ser futuros) ficam
+# presos no passado em relação ao "agora" real, e o gráfico desenha um
+# "dente" (um ziguezague visual) misturando pontos de previsão vencidos com
+# o histórico medido -- isso derruba a credibilidade do site. Ver
+# extrair_ultimo_valor_considerado() e o bloco de detecção em
+# coletar_uma_vez() mais abaixo (_fingerprint_previsao() vira só um
+# fallback, pro caso desse campo sumir/mudar de formato na página).
 LIMIAR_PREVISAO_DESATUALIZADA_HORAS = 3
 
 
@@ -364,6 +367,30 @@ def extrair_previsao(texto):
     return sorted(unicos.values(), key=lambda item: item["data_hora"])
 
 
+def extrair_ultimo_valor_considerado(texto):
+    """Extrai o timestamp "Último valor considerado" da página de previsão --
+    é o horário da última leitura REAL (não modelada) que a própria fonte usou
+    como base pra gerar as projeções futuras da tabela. Achado direto na
+    página pelo usuário em 23/07/2026 (bloco "Último valor considerado:"
+    seguido de uma tabelinha separada com régua/nível/vazão daquele horário).
+    É a referência mais direta e confiável pra saber se a previsão está
+    desatualizada -- muito melhor que inferir por hash de mudança de conteúdo
+    (ver _fingerprint_previsao(), mantida só como fallback caso esse campo
+    desapareça ou mude de formato). Se essa data já está há mais de
+    LIMIAR_PREVISAO_DESATUALIZADA_HORAS no passado em relação a agora, a
+    previsão não deve ser publicada (ver coletar_uma_vez())."""
+    m = re.search(
+        r"[Úú]ltimo valor considerado:?\s*\n*\s*(\d{2}/\d{2}/\d{4})\s+(\d{2}:\d{2})",
+        texto,
+    )
+    if not m:
+        return None
+    try:
+        return datetime.strptime(f"{m.group(1)} {m.group(2)}", "%d/%m/%Y %H:%M")
+    except Exception:
+        return None
+
+
 def _jitter(valor):
     if valor is None:
         return None
@@ -625,22 +652,33 @@ def coletar_uma_vez(
     # Previsão é exclusiva da Copel -- a ANA não oferece esse dado, então essa
     # parte roda sempre, independentemente da fonte do histórico acima.
     previsao_bruta = []
+    ultimo_valor_considerado = None
     try:
         texto_previsao = coletar_texto(URL_PREVISAO)
         previsao_bruta = extrair_previsao(texto_previsao)
-        log(f"Previsões extraídas: {len(previsao_bruta)}")
+        ultimo_valor_considerado = extrair_ultimo_valor_considerado(texto_previsao)
+        log(
+            f"Previsões extraídas: {len(previsao_bruta)}; "
+            f"último valor considerado: {ultimo_valor_considerado}"
+        )
     except Exception as exc:
         log(f"Previsão indisponível: {exc}")
 
-    # Detecção de previsão desatualizada (pedido do usuário, 23/07/2026): se a
-    # tabela bruta (antes do jitter) não muda de uma coleta pra outra, é sinal
-    # de que a Copel não atualizou a previsão -- e os horários dela, que
-    # deveriam ser futuros, começam a ficar no passado em relação ao "agora"
-    # real, criando o "dente" no gráfico. Ver LIMIAR_PREVISAO_DESATUALIZADA_HORAS
-    # e _fingerprint_previsao() acima. Se a extração falhou/veio vazia nesta
-    # rodada, não mexe no fingerprint/timestamp anteriores -- só "congela" a
-    # contagem, não reseta o relógio como se fosse uma previsão nova.
-    if previsao_bruta:
+    # Detecção de previsão desatualizada (pedido do usuário, 23/07/2026).
+    # Preferência 1: "Último valor considerado", publicado pela própria fonte
+    # na página de previsão -- é o horário da última leitura REAL usada como
+    # base do modelo, direto e confiável (achado pelo usuário, 23/07/2026).
+    # Preferência 2 (fallback, só se esse campo não vier nesta rodada): a
+    # tabela bruta (antes do jitter) não muda de uma coleta pra outra -- sinal
+    # indireto de que a fonte não atualizou a previsão. Em ambos os casos, se
+    # o horário de referência já ficou mais velho que
+    # LIMIAR_PREVISAO_DESATUALIZADA_HORAS, os horários futuros da previsão
+    # começam a ficar no passado em relação ao "agora" real, criando o
+    # "dente" no gráfico -- por isso não publicamos a previsão nesse caso.
+    if ultimo_valor_considerado is not None:
+        previsao_atualizada_em = ultimo_valor_considerado
+        previsao_fingerprint = _fingerprint_previsao(previsao_bruta) if previsao_bruta else previsao_fingerprint_anterior
+    elif previsao_bruta:
         previsao_fingerprint = _fingerprint_previsao(previsao_bruta)
         if previsao_fingerprint != previsao_fingerprint_anterior:
             previsao_atualizada_em = agora_br()
