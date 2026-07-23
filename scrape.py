@@ -409,12 +409,25 @@ def aplicar_jitter_previsao(previsao):
     O jitter é sorteado de novo pra cada campo e cada horário (nunca reusa o
     mesmo fator entre regua_sem_chuva_m e regua_com_chuva_m do mesmo ponto,
     nem entre pontos diferentes), pra não virar um deslocamento constante e
-    óbvio (ex.: "sempre +0,8%"). data_hora nunca é alterada."""
+    óbvio (ex.: "sempre +0,8%"). data_hora nunca é alterada.
+
+    Regra adicional (pedido do usuário, 23/07/2026): "sem chuva" tem que
+    ficar sempre abaixo de "com chuva" -- fisicamente, chuva só soma nível,
+    nunca reduz, então o cenário sem chuva nunca deveria superar o cenário
+    com chuva. Como os dois são jitterados de forma independente, de vez em
+    quando o sorteio cruza os dois por coincidência (ex.: sem_chuva sorteado
+    +1% e com_chuva sorteado -1% no mesmo horário). Quando isso acontece,
+    empurra só o sem_chuva pra 0,01 m abaixo do com_chuva (a mesma precisão
+    de exibição, 2 casas decimais) -- não mexe no valor de com_chuva."""
     resultado = []
     for item in previsao:
         novo = dict(item)
-        novo["regua_sem_chuva_m"] = _jitter(item.get("regua_sem_chuva_m"))
-        novo["regua_com_chuva_m"] = _jitter(item.get("regua_com_chuva_m"))
+        sem_chuva = _jitter(item.get("regua_sem_chuva_m"))
+        com_chuva = _jitter(item.get("regua_com_chuva_m"))
+        if sem_chuva is not None and com_chuva is not None and sem_chuva >= com_chuva:
+            sem_chuva = round(com_chuva - 0.01, 2)
+        novo["regua_sem_chuva_m"] = sem_chuva
+        novo["regua_com_chuva_m"] = com_chuva
         resultado.append(novo)
     return resultado
 
