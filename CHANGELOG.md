@@ -8,6 +8,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.92 — 2026-07-23
+
+- **Nova regra no jitter da previsão: "sem chuva" nunca pode ficar maior ou igual a "com chuva".** Fisicamente, chuva só soma nível, nunca reduz — o cenário sem chuva não deveria superar o cenário com chuva. Como os dois valores são jitterados de forma independente (±1% cada, sorteios separados), de vez em quando o sorteio cruzava os dois por coincidência quando já estavam próximos. `aplicar_jitter_previsao()` agora checa isso depois de aplicar o jitter em ambos: se `regua_sem_chuva_m >= regua_com_chuva_m`, empurra só o `sem_chuva_m` pra 0,01 m abaixo do `com_chuva_m` (mesma precisão de exibição) — não mexe no valor de `com_chuva_m`. Testado localmente com 200.000 simulações (valores próximos, o caso mais propenso a cruzar): zero violações da regra, e os casos com campo `None` (quando um dos dois cenários não vem preenchido) continuam funcionando normalmente.
+- Backup pré-edição: `backups/site-v1.91-preedicao.zip`.
+
 ## v1.91 — 2026-07-23
 
 - **Correção urgente: a v1.90 não estava detectando a previsão como atrasada.** O usuário apontou que a previsão continuava no ar mesmo já estando visivelmente desatualizada (o próprio gráfico mostrava o "dente"), e o motivo era que o fingerprint (`_fingerprint_previsao`) só existia a partir do primeiro deploy da v1.90 — no primeiro run ele tratou a tabela como "acabou de mudar" (não tinha nenhum estado anterior pra comparar), zerando o relógio de atraso mesmo a fonte já estando parada havia mais de 11h.
