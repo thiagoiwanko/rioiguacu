@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-23T08:59",
+    "atualizado_em": "2026-07-23T09:02",
     "historico": [
-      {
-        "data_hora": "2026-07-21T09:00",
-        "regua_m": 3.46,
-        "nivel_agua_m": 743.07,
-        "vazao_m3s": 763,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-07-21T10:00",
         "regua_m": 3.45,
@@ -396,32 +388,32 @@
       {
         "data_hora": "2026-07-23T15:00",
         "regua_com_chuva_m": 4.1,
-        "regua_sem_chuva_m": 4.14
+        "regua_sem_chuva_m": 4.13
       },
       {
         "data_hora": "2026-07-23T21:00",
-        "regua_com_chuva_m": 4.12,
-        "regua_sem_chuva_m": 4.15
+        "regua_com_chuva_m": 4.11,
+        "regua_sem_chuva_m": 4.16
       },
       {
         "data_hora": "2026-07-24T03:00",
-        "regua_com_chuva_m": 4.15,
-        "regua_sem_chuva_m": 4.11
+        "regua_com_chuva_m": 4.12,
+        "regua_sem_chuva_m": 4.16
       },
       {
         "data_hora": "2026-07-24T09:00",
-        "regua_com_chuva_m": 4.18,
-        "regua_sem_chuva_m": 4.15
+        "regua_com_chuva_m": 4.19,
+        "regua_sem_chuva_m": 4.13
       },
       {
         "data_hora": "2026-07-24T15:00",
-        "regua_com_chuva_m": 4.13,
-        "regua_sem_chuva_m": 4.18
+        "regua_com_chuva_m": 4.14,
+        "regua_sem_chuva_m": 4.19
       },
       {
         "data_hora": "2026-07-24T21:00",
-        "regua_com_chuva_m": 4.16,
-        "regua_sem_chuva_m": 4.14
+        "regua_com_chuva_m": 4.17,
+        "regua_sem_chuva_m": 4.18
       }
     ],
     "ultima": {
@@ -438,7 +430,7 @@
       "delta": 0.020000000000000462,
       "direcao": "subindo"
     },
-    "alerta_previsao": "Previsão para daqui a 37 horas (24/07 21h): 4,16 m.",
+    "alerta_previsao": "Previsão para daqui a 37 horas (24/07 21h): 4,17 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
