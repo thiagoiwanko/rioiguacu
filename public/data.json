@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-24T02:59",
+    "atualizado_em": "2026-07-24T03:02",
     "historico": [
-      {
-        "data_hora": "2026-07-22T03:00",
-        "regua_m": 3.312,
-        "nivel_agua_m": 742.922,
-        "vazao_m3s": 702,
-        "chuva_mm": 20.8,
-        "chuva_acumulada_mm": 26.0
-      },
       {
         "data_hora": "2026-07-22T04:00",
         "regua_m": 3.337,
