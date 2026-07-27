@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.93 — 2026-07-26
+
+- **Aba "Para especialistas" ocultada temporariamente em `estudo.html`**, a pedido do usuário ("a aba para especialistas, deixe oculto por enquanto"). Implementado só com CSS: nova regra `#btnEspecialistas { display: none; }`, que esconde apenas o botão da aba. A seção `#viewEspecialistas` e todo o script do visualizador de PDF (`carregarPdfEspecialistas()`, `pdf.js`) permanecem intactos no código — reativar no futuro é só remover essa regra CSS, sem reconstruir nada.
+- Como só sobra a aba "Para o público" visível, nada mais no layout muda: ela já era a aba/view ativa por padrão.
+- Backup pré-edição: cópia do `estudo.html` ao vivo salva em `backups/site-v1.92-preedicao-estudo.html.bak` (o shell sandboxado desta sessão continuava indisponível para gerar o zip completo de múltiplos arquivos do jeito padrão; como só `estudo.html` foi alterado, o backup cobre esse arquivo especificamente).
+
 ## v1.92 — 2026-07-23
 
 - **Nova regra no jitter da previsão: "sem chuva" nunca pode ficar maior ou igual a "com chuva".** Fisicamente, chuva só soma nível, nunca reduz — o cenário sem chuva não deveria superar o cenário com chuva. Como os dois valores são jitterados de forma independente (±1% cada, sorteios separados), de vez em quando o sorteio cruzava os dois por coincidência quando já estavam próximos. `aplicar_jitter_previsao()` agora checa isso depois de aplicar o jitter em ambos: se `regua_sem_chuva_m >= regua_com_chuva_m`, empurra só o `sem_chuva_m` pra 0,01 m abaixo do `com_chuva_m` (mesma precisão de exibição) — não mexe no valor de `com_chuva_m`. Testado localmente com 200.000 simulações (valores próximos, o caso mais propenso a cruzar): zero violações da regra, e os casos com campo `None` (quando um dos dois cenários não vem preenchido) continuam funcionando normalmente.
