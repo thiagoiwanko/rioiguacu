@@ -3,3 +3,8 @@ monitor_web.log
 .ana_token_cache.json
 teste_api_ana.py
 app.py
+/app.js
+/index.html
+/styles.css
+/data.json
+/abrir_monitor_web.bat
