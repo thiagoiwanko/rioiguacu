@@ -332,11 +332,7 @@ h2 {
   box-shadow: 0 16px 44px rgba(0, 0, 0, .28);
 }
 
-/* Espaço acima do valor grande (rótulo -> valor) reduzido de 14px pra 6px --
-   pedido do usuário, 22/07/2026, v1.89: ficava muita distância entre "CHUVA"
-   e "0,0 mm", e entre "ACUMULADA" e "108,2 mm". Afeta igualmente #flowValue
-   e #trendValue (mesma regra genérica), o que é desejado -- deixa todos os
-   rótulos mais próximos dos valores. */
+
 .metric-card strong {
   display: block;
   margin: 6px 0 8px;
@@ -348,37 +344,18 @@ h2 {
   line-height: 1.5;
 }
 
-/* Linha "08h às 09h" abaixo do valor de chuva -- indica o intervalo de 1h
-   coberto por "Chuva X mm" (pedido do usuário, 22/07/2026, v1.83). Ficou do
-   mesmo tamanho de #rainAccum na v1.85 (14px), mas na v1.86 o #rainAccum
-   subiu pra 26px (mesmo tamanho do valor grande) e .rain-hora ficou em
-   14px -- usuário só pediu pra aumentar o acumulado dessa vez, não o
-   horário. Se pedir pra igualar de novo, reavaliar os dois tamanhos juntos. */
+
 .rain-hora {
   display: block;
   font-size: 14px;
 }
 
-/* "Acumulada" (rótulo) + #rainAccum (valor "X mm") reestruturados na v1.88
-   pra ficar exatamente como "Chuva" + #rainValue: um <span> de rótulo
-   (pega o estilo de ".metric-card span" automaticamente -- mesmo
-   uppercase/cinza/12px do resto) seguido de um <strong> pro valor grande
-   (pega ".metric-card strong" automaticamente -- mesmo 26px/22px, branco,
-   negrito de "0,0 mm"). Antes (v1.83-v1.87) "acumulada X mm" era um único
-   <small> com o texto inteiro junto, o que fazia a palavra "acumulada"
-   ficar do mesmo tamanho gigante do valor e quebrar linha de forma feia.
-   Pedido do usuário, 22/07/2026. Sem CSS próprio agora -- só a marcação
-   HTML mudou (index.html), os elementos herdam os estilos genéricos. */
 
-/* Espaço entre "16h às 17h" (.rain-hora) e "ACUMULADA" aumentado -- sem essa
-   margem os dois ficavam quase colados (span/small não têm margem própria).
-   Pedido do usuário, 22/07/2026, v1.89. */
 .rain-accum-label {
   margin-top: 12px;
 }
 
-/* "Fonte: ..." abaixo de "acumulada X mm" -- pedido do usuário, 22/07/2026,
-   v1.84. Fica discreta, no mesmo estilo de .rain-hora. */
+
 .rain-fonte {
   display: block;
   font-size: 11px;
@@ -390,13 +367,7 @@ h2 {
   padding: 0;
 }
 
-/* Alinhamento do conteúdo ao topo (era "center") -- com o bloco de Chuva mais
-   alto (5 linhas: rótulo, valor, horário, "acumulada", valor, fonte), o
-   bloco de Vazão (só 3 linhas) ficava com o conteúdo centralizado no meio de
-   um card muito mais alto que o necessário, parecendo um objeto grande
-   demais pro pouco texto. Pedido do usuário, 22/07/2026, v1.89. Só afeta
-   Vazão/Chuva (.metric-block, dentro de .metric-split) -- não afeta o card
-   "Tendência" (é .metric-card direto, sem .metric-block, mantém center). */
+
 .metric-block {
   flex: 1;
   min-width: 0;
@@ -1006,25 +977,11 @@ td {
   border-radius: 14px;
   margin-bottom: 20px;
   overflow: hidden;
-  /* Mesma largura da coluna do FAQ/gráfico/histórico em .main-grid (coluna 1,
-     minmax(720px, 1fr)) -- antes o bloco esticava até a largura total do
-     .shell, bem maior que a coluna 360px + 14px de gap reservada pro
-     side-panel. 374px = 360px (side-panel) + 14px (gap). Pedido do usuário,
-     20/07/2026: "MANTENHA O TAMANHO DO BLOCO ANTERIOR PERGUNTAS FREQUENTES". */
+  
   max-width: calc(100% - 374px);
 }
 
-/* Este bloco precisa vir DEPOIS da regra .safety-warning acima (não dentro
-   do primeiro @media (max-width: 1120px), lá em cima no arquivo) -- CSS
-   resolve empate de especificidade pela ordem de origem, então uma regra
-   de media query que aparece ANTES da regra base é irrelevante: a regra
-   base (sem @media), por vir depois no arquivo, sempre vencia e o
-   max-width: calc(100% - 374px) ficava aplicado mesmo no celular, dando
-   largura negativa e quebrando o layout. Bug introduzido na v1.72,
-   corrigido na v1.73 (usuário reportou "estragou no modo celular").
-   Abaixo de 1120px o main-grid vira coluna única (100% de largura) -- o
-   safety-warning acompanha, senão ficaria mais estreito que o FAQ logo
-   acima dele nesse breakpoint. */
+
 @media (max-width: 1120px) {
   .safety-warning {
     max-width: none;
@@ -1114,10 +1071,7 @@ td {
   margin-top: 4px;
 }
 
-/* As duas colunas viram uma grade de 2 linhas (subtítulos na linha 1, tabelas
-   na linha 2) via `order`, então cada linha se ajusta à altura do maior
-   conteúdo -- garante que as duas tabelas sempre comecem na mesma altura,
-   não importa em quantas linhas cada subtítulo quebrar. */
+
 .rank-sub-1 { order: 1; }
 .rank-sub-2 { order: 2; }
 .rank-table-1 { order: 3; }
@@ -1276,8 +1230,7 @@ td {
     gap: 4px;
   }
 
-  /* Coluna única: volta pra ordem natural de leitura (subtítulo 1, tabela 1,
-     subtítulo 2, tabela 2) em vez da ordem de 2 linhas usada no desktop. */
+  
   .rank-sub-1 { order: 1; }
   .rank-table-1 { order: 2; }
   .rank-sub-2 { order: 3; }
