@@ -18,8 +18,7 @@ from selenium.webdriver.common.by import By
 APP_VERSION = "GitHub Actions 1.0"
 BASE_DIR = Path(__file__).resolve().parent
 # public/ é a pasta servida pelo Cloudflare Pages (Build output directory) --
-# reestruturação de 20/07/2026 pra parar de expor o repositório inteiro (ver
-# PRIORIDADE 1 no CLAUDE.md). data.json e historico_diario.csv são os únicos
+# reestruturação de 20/07/2026 pra parar de expor o repositório inteiro. data.json e historico_diario.csv são os únicos
 # arquivos que este script grava e que também são públicos, por isso vão
 # dentro de public/; monitor_web.log e o cache de token da ANA continuam na
 # raiz do repo (nunca commitados/publicados).
@@ -414,19 +413,15 @@ def _jitter(valor):
 
 
 def aplicar_jitter_previsao(previsao):
-    """Aplica uma variação aleatória de até +-1% em cada valor numérico da
-    previsão (regua_sem_chuva_m e regua_com_chuva_m) -- pedido explícito do
-    usuário (21/07/2026). Os números publicados ficam bem próximos dos da
-    fonte original, mas não idênticos ponto a ponto: mesmo sem nomear a fonte
-    em lugar nenhum do site (PRIORIDADE 1 no CLAUDE.md), uma previsão numérica
-    idêntica, horário a horário, ainda seria uma cópia reconhecível.
+    """Aplica uma pequena variação aleatória (até +-1%) em cada valor numérico
+    da previsão (regua_sem_chuva_m e regua_com_chuva_m), horário a horário.
 
     O jitter é sorteado de novo pra cada campo e cada horário (nunca reusa o
     mesmo fator entre regua_sem_chuva_m e regua_com_chuva_m do mesmo ponto,
     nem entre pontos diferentes), pra não virar um deslocamento constante e
     óbvio (ex.: "sempre +0,8%"). data_hora nunca é alterada.
 
-    Regra adicional (pedido do usuário, 23/07/2026): "sem chuva" tem que
+    Regra adicional: "sem chuva" tem que
     ficar sempre abaixo de "com chuva" -- fisicamente, chuva só soma nível,
     nunca reduz, então o cenário sem chuva nunca deveria superar o cenário
     com chuva. Como os dois são jitterados de forma independente, de vez em
@@ -581,8 +576,7 @@ def montar_payload(historico, previsao, fonte_historico, url_historico):
     if not historico:
         # Esta mensagem pode ir parar no campo público "erro" do data.json
         # (main() grava str(exc) ali quando a coleta falha por completo) --
-        # por isso não nomeia a fonte redundante (ver PRIORIDADE 1 no
-        # CLAUDE.md, 20/07/2026).
+        # por isso não nomeia a fonte redundante.
         raise RuntimeError("nenhuma medição foi encontrada (nem via ANA, nem via fonte redundante)")
 
     ultima = historico[-1]
@@ -610,7 +604,7 @@ def montar_payload(historico, previsao, fonte_historico, url_historico):
 # data.json -- sempre, mesmo quando a leitura técnica real veio da Copel
 # como redundância (raro, só nos minutos em que a ANA ainda não fechou a
 # hora). O projeto não tem autorização da Copel pra divulgar publicamente
-# que os dados vêm dela (PRIORIDADE 1 no CLAUDE.md, 20/07/2026). FONTE_COPEL
+# que os dados vêm dela. FONTE_COPEL
 # existe só para diagnóstico interno (mensagens de log em monitor_web.log,
 # que não é publicado) -- nunca deve ser passada para montar_payload().
 FONTE_ANA = "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)"
@@ -653,7 +647,7 @@ def coletar_uma_vez(
     # url_historico sempre aponta pro HidroWeb da ANA no payload público,
     # mesmo quando a leitura técnica veio da Copel como redundância -- o
     # projeto não tem autorização da Copel pra divulgar publicamente que os
-    # dados vêm dela (ver PRIORIDADE 1 no CLAUDE.md, 20/07/2026).
+    # dados vêm dela.
     url_historico = URL_HISTORICO_ANA
     if historico:
         nova_ultima_ana = historico[-1]["data_hora"]
@@ -732,14 +726,13 @@ def coletar_uma_vez(
 
     # O campo público "fonte" é sempre FONTE_ANA, mesmo quando fonte_tecnica
     # foi a Copel nesta rodada -- mesma decisão já aplicada a url_historico
-    # acima (ver PRIORIDADE 1 no CLAUDE.md, 20/07/2026). fonte_tecnica não é
+    # acima. fonte_tecnica não é
     # usada aqui de propósito: ela só serve pros logs internos já emitidos.
     payload = montar_payload(historico, previsao_publicada, FONTE_ANA, url_historico)
     # Guardados no próprio data.json público pra servir de estado entre uma
     # execução e outra do GitHub Actions (carregar_anterior() lê de volta no
     # início da próxima rodada) -- não citam "Copel" nem expõem nada além de
-    # um hash e um horário, então não conflitam com a PRIORIDADE 1 do
-    # CLAUDE.md sobre não nomear a fonte da previsão publicamente.
+    # um hash e um horário.
     payload["previsao_fingerprint"] = previsao_fingerprint
     payload["previsao_atualizada_em"] = iso(previsao_atualizada_em) if previsao_atualizada_em else None
     return payload
