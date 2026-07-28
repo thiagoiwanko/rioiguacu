@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-28T08:09",
+    "atualizado_em": "2026-07-28T08:11",
     "historico": [
       {
         "data_hora": "2026-07-26T09:00",
@@ -382,25 +382,64 @@
         "vazao_m3s": 1090,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.4
+      },
+      {
+        "data_hora": "2026-07-28T08:00",
+        "regua_m": 4.216,
+        "nivel_agua_m": 743.826,
+        "vazao_m3s": 1090,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.4
       }
     ],
-    "previsao": [],
+    "previsao": [
+      {
+        "data_hora": "2026-07-28T15:00",
+        "regua_com_chuva_m": 4.24,
+        "regua_sem_chuva_m": 4.23
+      },
+      {
+        "data_hora": "2026-07-28T21:00",
+        "regua_com_chuva_m": 4.19,
+        "regua_sem_chuva_m": 4.18
+      },
+      {
+        "data_hora": "2026-07-29T03:00",
+        "regua_com_chuva_m": 4.2,
+        "regua_sem_chuva_m": 4.18
+      },
+      {
+        "data_hora": "2026-07-29T09:00",
+        "regua_com_chuva_m": 4.22,
+        "regua_sem_chuva_m": 4.17
+      },
+      {
+        "data_hora": "2026-07-29T15:00",
+        "regua_com_chuva_m": 4.24,
+        "regua_sem_chuva_m": 4.19
+      },
+      {
+        "data_hora": "2026-07-29T21:00",
+        "regua_com_chuva_m": 4.22,
+        "regua_sem_chuva_m": 4.16
+      }
+    ],
     "ultima": {
-      "data_hora": "2026-07-28T07:00",
-      "regua_m": 4.219,
-      "nivel_agua_m": 743.829,
+      "data_hora": "2026-07-28T08:00",
+      "regua_m": 4.216,
+      "nivel_agua_m": 743.826,
       "vazao_m3s": 1090,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.4
     },
     "situacao": "ATENÇÃO",
     "tendencia": {
-      "texto": "Baixando cerca de 0,2 cm por hora",
-      "delta": -0.0019999999999997797,
+      "texto": "Baixando cerca de 0,3 cm por hora",
+      "delta": -0.0030000000000001137,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Sem previsão disponível para as próximas 48 horas.",
-    "previsao_disponivel": false,
+    "alerta_previsao": "Previsão para daqui a 37 horas (29/07 21h): 4,22 m.",
+    "previsao_disponivel": true,
     "cotas_bairros": [
       {
         "nivel": 1.29,
@@ -523,7 +562,7 @@
     ],
     "janela_historico_horas": 48,
     "janela_previsao_horas": 48,
-    "previsao_fingerprint": "cecc32e5c87729f8b23a83fc334bb6a48f0179045784bdd4bb097f2d900488ae",
-    "previsao_atualizada_em": "2026-07-27T20:00"
+    "previsao_fingerprint": "7818f88550dc688196e8ac6a5ec34d4dd7fa85d306b68386ca4de7a6f46cf6ca",
+    "previsao_atualizada_em": "2026-07-28T08:00"
   }
 }
