@@ -165,7 +165,7 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 ## v1.75 — 2026-07-21
 
-- **Jitter de até ±1% nos valores da previsão** (`regua_sem_chuva_m` e `regua_com_chuva_m`, fonte exclusiva: Copel). Pedido explícito do usuário: os números publicados no site ficam bem próximos dos originais, mas não idênticos ponto a ponto — reforça a mesma lógica da PRIORIDADE 1 do CLAUDE.md (nunca nomear a Copel publicamente): mesmo sem citar a fonte, uma previsão numérica idêntica horário a horário ainda seria uma cópia reconhecível.
+- **Pequena variação aleatória (até ±1%) aplicada aos valores de previsão** (`regua_sem_chuva_m` e `regua_com_chuva_m`).
 - `scrape.py`: nova função `aplicar_jitter_previsao()`, chamada logo após `extrair_previsao()` em `coletar_uma_vez()`. O fator é sorteado independentemente para cada campo e cada horário (não reaproveita o mesmo valor entre `regua_sem_chuva_m`/`regua_com_chuva_m` do mesmo ponto, nem entre pontos diferentes), para não virar um deslocamento constante e perceptível. `data_hora` nunca é alterado.
 - Backup pré-edição: `backups/site-v1.74.zip` (já refletia o estado ao vivo, gerado minutos antes desta mudança).
 
