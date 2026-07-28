@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.100 — 2026-07-28
+
+- **Limpeza cosmética: removidas duplicatas órfãs da raiz do repositório.** `app.js`, `index.html`, `styles.css`, `data.json` e `abrir_monitor_web.bat` existiam na raiz do repo desde antes da reestruturação da v1.74, mas pararam de ser atualizados naquela época — o Cloudflare Pages só serve `public/`, e `scrape.py`/`update.yml` só escrevem em `public/data.json`. Eram peso morto, sem uso real.
+- Os 5 arquivos foram removidos do Git e adicionados ao `.gitignore` com `/` na frente (`/app.js`, `/index.html`, `/styles.css`, `/data.json`, `/abrir_monitor_web.bat`) — a barra ancora o padrão só na raiz, sem afetar os arquivos de mesmo nome dentro de `public/`, que continuam sendo os únicos servidos e atualizados.
+- Nenhum backup foi gerado pra esses arquivos (eram cópias obsoletas, sem conteúdo próprio) — o histórico do Git continua recuperável por commit, se precisar no futuro (último commit de cada um antes da remoção: abrir_monitor_web.bat, app.js, index.html, styles.css, data.json).
+- Verificado ao vivo depois da remoção: site carregando normal — gráfico, contador de visitas e dados funcionando — e a árvore do repositório com exatamente os arquivos esperados.
+
 ## v1.99 — 2026-07-28
 
 - **`app.py` removido do repositório GitHub.** Script órfão na raiz do repo — não usado pelo site publicado nem pelo pipeline automatizado (`update.yml`/`scrape.py`), mas citava as URLs da Copel duas vezes e o texto `"fonte": "Copel..."` (não temos autorização pra divulgar a fonte publicamente, ver nota sobre isso mais acima neste arquivo). Com o repositório público desde 22/07/2026, esse conteúdo ficava acessível a qualquer pessoa via `github.com/.../blob/main/app.py`, mesmo nunca tendo sido servido pelo Cloudflare Pages (que só publica `public/`, desde a v1.74). Item pendente da auditoria de segurança de 28/07/2026.
