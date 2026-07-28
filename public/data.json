@@ -1,11 +1,11 @@
 {
-  "ok": true,
-  "erro": null,
+  "ok": false,
+  "erro": "Message: timeout: Timed out receiving message from renderer: 14.777\n  (Session info: chrome=150.0.7871.128)\nStacktrace:\n#0 0x55747ee7044a <unknown>\n#1 0x55747e8488c9 <unknown>\n#2 0x55747e83035a <unknown>\n#3 0x55747e82ffd6 <unknown>\n#4 0x55747e82dbbe <unknown>\n#5 0x55747e82e53f <unknown>\n#6 0x55747e83d710 <unknown>\n#7 0x55747e857617 <unknown>\n#8 0x55747e85ee8b <unknown>\n#9 0x55747e82ec99 <unknown>\n#10 0x55747e857372 <unknown>\n#11 0x55747e8e68b0 <unknown>\n#12 0x55747e8913ff <unknown>\n#13 0x55747e892261 <unknown>\n#14 0x55747ee35cc7 <unknown>\n#15 0x55747ee344a8 <unknown>\n#16 0x55747ee1f196 <unknown>\n#17 0x55747ee3506a <unknown>\n#18 0x55747ee07020 <unknown>\n#19 0x55747ee5bb98 <unknown>\n#20 0x55747ee5bd35 <unknown>\n#21 0x55747ee6effe <unknown>\n#22 0x7fd85d29caa4 <unknown>\n#23 0x7fd85d329c6c <unknown>\n",
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-28T13:52",
+    "atualizado_em": "2026-07-28T13:49",
     "historico": [
       {
         "data_hora": "2026-07-26T14:00",
@@ -395,33 +395,33 @@
     "previsao": [
       {
         "data_hora": "2026-07-28T21:00",
+        "regua_com_chuva_m": 4.18,
+        "regua_sem_chuva_m": 4.17
+      },
+      {
+        "data_hora": "2026-07-29T03:00",
+        "regua_com_chuva_m": 4.22,
+        "regua_sem_chuva_m": 4.21
+      },
+      {
+        "data_hora": "2026-07-29T09:00",
+        "regua_com_chuva_m": 4.22,
+        "regua_sem_chuva_m": 4.21
+      },
+      {
+        "data_hora": "2026-07-29T15:00",
+        "regua_com_chuva_m": 4.15,
+        "regua_sem_chuva_m": 4.14
+      },
+      {
+        "data_hora": "2026-07-29T21:00",
         "regua_com_chuva_m": 4.19,
         "regua_sem_chuva_m": 4.18
       },
       {
-        "data_hora": "2026-07-29T03:00",
-        "regua_com_chuva_m": 4.21,
-        "regua_sem_chuva_m": 4.2
-      },
-      {
-        "data_hora": "2026-07-29T09:00",
-        "regua_com_chuva_m": 4.21,
-        "regua_sem_chuva_m": 4.2
-      },
-      {
-        "data_hora": "2026-07-29T15:00",
-        "regua_com_chuva_m": 4.21,
-        "regua_sem_chuva_m": 4.16
-      },
-      {
-        "data_hora": "2026-07-29T21:00",
-        "regua_com_chuva_m": 4.17,
-        "regua_sem_chuva_m": 4.16
-      },
-      {
         "data_hora": "2026-07-30T03:00",
-        "regua_com_chuva_m": 4.2,
-        "regua_sem_chuva_m": 4.19
+        "regua_com_chuva_m": 4.16,
+        "regua_sem_chuva_m": 4.15
       }
     ],
     "ultima": {
@@ -438,7 +438,7 @@
       "delta": -0.0030000000000001137,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 38 horas (30/07 03h): 4,20 m.",
+    "alerta_previsao": "Previsão para daqui a 38 horas (30/07 03h): 4,16 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
