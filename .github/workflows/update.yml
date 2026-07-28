@@ -27,7 +27,7 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
-            - name: Checkout
+      - name: Checkout
         # Fixado por SHA completo em 28/07/2026 (auditoria de segurança) --
         # tags como "v4" são móveis e podem ser repontadas; o SHA garante que
         # sempre roda exatamente este código, mesmo que a conta/mantenedor da
