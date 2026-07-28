@@ -2,17 +2,6 @@ name: Atualizar dados do Rio Iguaçu
 
 on:
   schedule:
-    # Baseline redundante (v1.22, 12/07/2026): o disparo PRINCIPAL agora vem
-    # do Cloudflare Worker "rioiguacu-trigger" (Cron Trigger a cada 5 min,
-    # chama workflow_dispatch via API do GitHub) -- o cron nativo do GitHub
-    # Actions é usado só como rede de segurança caso o Worker pare.
-    #
-    # Removida a rajada "todo minuto de HH:01-05" que existia até a v1.21:
-    # medindo o histórico de commits, ela causava atrasos de mais de 2h em
-    # vários dias, porque o próprio GitHub avisa que o início de cada hora é
-    # o pico de carga global do agendador `schedule` -- ou seja, a rajada
-    # rodava justamente na janela mais congestionada e menos confiável,
-    # piorando o atraso que ela tentava evitar. Não reintroduzir essa rajada.
     - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
@@ -28,20 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        # Fixado por SHA completo em 28/07/2026 (auditoria de segurança) --
-        # tags como "v4" são móveis e podem ser repontadas; o SHA garante que
-        # sempre roda exatamente este código, mesmo que a conta/mantenedor da
-        # action seja comprometida no futuro. Commit "backport fixes to
-        # releases-v4 (#2524)", branch de manutenção v4, 16/07/2026.
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
 
       - name: Configurar Chrome
-        # Fixado por SHA completo em 28/07/2026 (mesmo motivo acima).
-        uses: browser-actions/setup-chrome@c785b87e244131f27c9f19c1a33e2ead956ab7ce # v1.7.3
+        uses: browser-actions/setup-chrome@c785b87e244131f27c9f19c1a33e2ead956ab7ce
 
       - name: Configurar Python
-        # Fixado por SHA completo em 28/07/2026 (mesmo motivo acima).
-        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: "3.11"
 
@@ -58,33 +40,11 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # monitor_web.log NUNCA é adicionado ao commit (desde 20/07/2026) --
-          # ele continua sendo escrito normalmente no runner (útil pra
-          # debugar uma execução específica pelos logs do próprio GitHub
-          # Actions), mas parou de ser publicado no repositório público.
-          # Motivo: as mensagens de log citam "Copel" e a URL real dela
-          # (www.copel.com/...) em texto puro -- o projeto não tem
-          # autorização da Copel pra divulgar publicamente que os dados vêm
-          # dela (PRIORIDADE 1 no CLAUDE.md). O arquivo era commitado junto
-          # com data.json/historico_diario.csv a cada execução e, por estar
-          # na raiz do repo igual index.html, também ficava acessível direto
-          # em rioiguacu.com/monitor_web.log -- vazamento descoberto em
-          # varredura de 20/07/2026.
-          #
-          # data.json e historico_diario.csv agora vivem em public/ (mesma
-          # varredura de 20/07/2026) -- essa é a pasta configurada como
-          # "Build output directory" no Cloudflare Pages, então só o que está
-          # dentro dela é servido publicamente; scrape.py já grava os dois
-          # arquivos direto em public/ (ver PUBLIC_DIR em scrape.py).
           git add public/data.json public/historico_diario.csv
-          # Só publica (e só gera deploy no Cloudflare Pages) quando o
-          # data.json ou o historico_diario.csv realmente mudaram.
           if git diff --staged --quiet -- public/data.json public/historico_diario.csv; then
             echo "Sem mudança em data.json/historico_diario.csv; não publica nesta rodada."
             exit 0
           fi
-          # Guarda os arquivos recém-coletados fora do repo, pois em caso de
-          # conflito de push vamos resetar a árvore local para o remoto.
           mkdir -p /tmp/coleta_atual
           cp public/data.json /tmp/coleta_atual/ 2>/dev/null || true
           cp public/historico_diario.csv /tmp/coleta_atual/ 2>/dev/null || true
@@ -98,18 +58,6 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/coleta_atual/data.json public/ 2>/dev/null || true
-            # NÃO restaurar historico_diario.csv aqui (bug corrigido na v1.31).
-            # Esse arquivo é cumulativo (1 linha por dia, upsert por data) --
-            # o snapshot em /tmp foi calculado ANTES do reset, em cima do
-            # checkout antigo desta execução. Se outra execução (ou uma edição
-            # manual, ex.: backfill histórico) commitou historico_diario.csv
-            # nesse meio-tempo, restaurar o snapshot velho aqui apagava esse
-            # commit inteiro -- foi exatamente isso que aconteceu em 18/07/2026
-            # (commit 3d72381e apagou 917 linhas de backfill 34s depois de
-            # serem commitadas). Depois do reset, o arquivo já está com a
-            # versão mais recente do remoto; a linha do dia desta execução
-            # (se ainda faltar) é recalculada normalmente na próxima rodada,
-            # poucos minutos depois -- sem risco de perder histórico alheio.
             git add public/data.json
             sleep $((RANDOM % 6 + 2))
           done
