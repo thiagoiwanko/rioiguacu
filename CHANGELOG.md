@@ -8,6 +8,13 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.99 — 2026-07-28
+
+- **`app.py` removido do repositório GitHub.** Script órfão na raiz do repo — não usado pelo site publicado nem pelo pipeline automatizado (`update.yml`/`scrape.py`), mas citava as URLs da Copel duas vezes e o texto `"fonte": "Copel..."` (não temos autorização pra divulgar a fonte publicamente, ver nota sobre isso mais acima neste arquivo). Com o repositório público desde 22/07/2026, esse conteúdo ficava acessível a qualquer pessoa via `github.com/.../blob/main/app.py`, mesmo nunca tendo sido servido pelo Cloudflare Pages (que só publica `public/`, desde a v1.74). Item pendente da auditoria de segurança de 28/07/2026.
+- Arquivo local (`app.py` na pasta do projeto) mantido intacto, sem nenhuma alteração — só o rastreamento no Git foi removido. `app.py` também foi adicionado ao `.gitignore` pra evitar recommit acidental no futuro.
+- Antes de remover, o conteúdo ao vivo foi comparado com o local: o `app.py` publicado estava com a lista `COTAS_BAIRROS` bem mais completa (24 pontos de referência por bairro) do que a cópia local (8 pontos) — divergência não relacionada a dado sensível, só um histórico de edição que nunca foi sincronizado de volta pro arquivo local. Reconstrução do conteúdo ao vivo (local + `COTAS_BAIRROS` expandida) salva como backup, já que o arquivo tinha padrões que impediam extrair o texto bruto diretamente.
+- Backup pré-remoção: `backups/app.py-pre-v1.99.bak`.
+
 ## v1.98 — 2026-07-28
 
 - **Content-Security-Policy e outros headers de segurança implantados em `public/_headers`.** Item 6 da auditoria de segurança de 28/07/2026 — antes só existia `Cache-Control` pra `/app.js`, nada de CSP/HSTS/frame-protection. Rollout em duas fases pra não arriscar quebrar o site: fase 1 publicada em `Content-Security-Policy-Report-Only` (só loga violação, não bloqueia nada), testada ao vivo — console limpo em `index.html` e `estudo.html` em múltiplos carregamentos, contador de visitas e gráfico funcionando normalmente. Sem nenhuma violação encontrada, fase 2 trocou pra `Content-Security-Policy` de fato (bloqueando), com `upgrade-insecure-requests` adicionado. Testado de novo ao vivo depois da mudança: console limpo, seletor de abas do `estudo.html` funcionando, script do pdf.js (cdnjs) carregando normalmente.
