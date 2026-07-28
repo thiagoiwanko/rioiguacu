@@ -16,7 +16,6 @@ export default {
       return new Response("Not found", { status: 404, headers: corsHeaders });
     }
 
-    // Data local de Brasília, no formato YYYY-MM-DD.
     const dateStr = new Intl.DateTimeFormat("en-CA", {
       timeZone: "America/Sao_Paulo",
       year: "numeric",
@@ -26,11 +25,6 @@ export default {
 
     const weekKey = isoWeekKey(dateStr);
 
-    // Um único Durable Object global cuida de todo o incremento: como o
-    // runtime do Cloudflare processa as requisições de um mesmo Durable
-    // Object em sequência (nunca em paralelo), não existe mais a corrida
-    // que corrompia os números no Workers KV (onde "hoje" podia ficar
-    // maior que "na semana", por exemplo).
     const id = env.COUNTER.idFromName("global");
     const stub = env.COUNTER.get(id);
 
@@ -50,8 +44,8 @@ export default {
 function isoWeekKey(dateStr) {
   const [y, m, d] = dateStr.split("-").map(Number);
   const date = new Date(Date.UTC(y, m - 1, d));
-  const dayNum = (date.getUTCDay() + 6) % 7; // 0 = segunda-feira
-  date.setUTCDate(date.getUTCDate() - dayNum + 3); // quinta-feira da semana ISO
+  const dayNum = (date.getUTCDay() + 6) % 7;
+  date.setUTCDate(date.getUTCDate() - dayNum + 3);
   const firstThursday = new Date(Date.UTC(date.getUTCFullYear(), 0, 4));
   const firstDayNum = (firstThursday.getUTCDay() + 6) % 7;
   firstThursday.setUTCDate(firstThursday.getUTCDate() - firstDayNum + 3);
@@ -59,11 +53,6 @@ function isoWeekKey(dateStr) {
   return `${date.getUTCFullYear()}-W${String(week).padStart(2, "0")}`;
 }
 
-// Durable Object responsável por guardar e incrementar os contadores.
-// Cada chamada a este objeto é processada de forma isolada e em ordem
-// pelo próprio runtime do Cloudflare (garantia da plataforma), então a
-// leitura + soma + gravação abaixo é efetivamente atômica, sem depender
-// de nenhum lock manual.
 export class VisitCounterDO {
   constructor(state, env) {
     this.state = state;
@@ -75,10 +64,6 @@ export class VisitCounterDO {
     const dayParam = "day:" + url.searchParams.get("day");
     const weekParam = "week:" + url.searchParams.get("week");
 
-    // Migração única: na primeira vez que este Durable Object for usado
-    // (armazenamento ainda vazio), começa a contagem a partir dos últimos
-    // números vistos no sistema antigo (Workers KV), em vez de voltar a
-    // zero e perder o histórico de visitas já registrado.
     const seeded = await this.state.storage.get("seeded");
     if (!seeded) {
       await this.state.storage.put({
