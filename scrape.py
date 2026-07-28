@@ -129,6 +129,21 @@ COTAS_ALERTA_DEFESA_CIVIL = [
 # o alerta é elevado em um degrau, independentemente do nível absoluto da régua.
 LIMIAR_SUBIDA_24H_M = 0.85
 
+# Limites usados só por validar_payload() (item 4 da auditoria de segurança
+# de 28/07/2026: "hoje um erro do coletor pode ir direto pro ar sem
+# checagem"). Generosos de propósito -- servem pra pegar erro grosseiro de
+# parsing/unidade (decimal deslocado, campo trocado, estação errada), não
+# pra julgar se um valor é "normal": o objetivo é nunca bloquear um evento
+# real, por mais extremo que seja, só o que é fisicamente impossível.
+REGUA_MIN_PLAUSIVEL_M = 0.0
+REGUA_MAX_PLAUSIVEL_M = 13.0  # maior cheia registrada é 10,42 m (1983)
+VAZAO_MAX_PLAUSIVEL_M3S = 20000  # maiores vazões já citadas no projeto ficam bem abaixo de 2000 m3/s
+CHUVA_MAX_PLAUSIVEL_MM_HORA = 300  # recorde mundial de chuva em 1h é ~305 mm
+# Maior subida horária plausível: a subida mais rápida já documentada no
+# projeto (1,78 m em 24h, 1992) tem média de ~0,07 m/h -- mesmo picos curtos
+# dentro dessa janela ficam muito abaixo de 1,5 m numa única hora.
+LIMIAR_VARIACAO_IMPOSSIVEL_M_HORA = 1.5
+
 
 def log(mensagem):
     linha = f"[{agora_br().strftime('%d/%m/%Y %H:%M:%S')}] {mensagem}\n"
@@ -799,6 +814,84 @@ def atualizar_historico_diario(payload):
         log(f"Histórico diário: falha ao atualizar ({exc}).")
 
 
+def validar_payload(payload, dados_anteriores):
+    """Confere o payload recém-coletado antes de deixar main() publicá-lo --
+    pedido do usuário, 28/07/2026 (item 4 da auditoria de segurança: "hoje um
+    erro do coletor pode ir direto pro ar sem checagem"). Devolve None quando
+    está tudo bem, ou uma string descrevendo o problema quando não está --
+    main() trata qualquer string devolvida aqui exatamente como um erro de
+    coleta (loga e mantém o data.json anterior em cache, não sobrescreve com
+    o payload suspeito).
+
+    Checagens, nesta ordem: (1) régua/data_hora presentes e do tipo certo;
+    (2) régua dentro de uma faixa fisicamente plausível; (3) vazão e chuva
+    plausíveis quando presentes; (4) data_hora não é um ISO inválido, não
+    está no futuro além de uma folga pequena, e não regrediu em relação ao
+    que já estava publicado; (5) nenhum salto entre duas leituras
+    consecutivas do histórico passa de LIMIAR_VARIACAO_IMPOSSIVEL_M_HORA.
+
+    Só valida o nível medido ("ultima"/"historico") -- a previsão
+    (regua_sem_chuva_m/regua_com_chuva_m) já tem sua própria proteção contra
+    dado desatualizado (LIMIAR_PREVISAO_DESATUALIZADA_HORAS) e não é o que
+    aparece como nível atual do rio."""
+    ultima = payload.get("ultima") or {}
+    regua = ultima.get("regua_m")
+    data_hora_txt = ultima.get("data_hora")
+
+    if regua is None or data_hora_txt is None:
+        return "payload sem 'ultima.regua_m' ou 'ultima.data_hora'"
+    if not isinstance(regua, (int, float)) or regua != regua:  # "regua != regua" descarta NaN
+        return f"regua_m não é um número válido: {regua!r}"
+    if not (REGUA_MIN_PLAUSIVEL_M <= regua <= REGUA_MAX_PLAUSIVEL_M):
+        return f"regua_m fora da faixa fisicamente plausível: {regua} m"
+
+    vazao = ultima.get("vazao_m3s")
+    if vazao is not None and (not isinstance(vazao, (int, float)) or vazao < 0 or vazao > VAZAO_MAX_PLAUSIVEL_M3S):
+        return f"vazao_m3s implausível: {vazao!r}"
+
+    chuva = ultima.get("chuva_mm")
+    if chuva is not None and (not isinstance(chuva, (int, float)) or chuva < 0 or chuva > CHUVA_MAX_PLAUSIVEL_MM_HORA):
+        return f"chuva_mm implausível: {chuva!r}"
+
+    try:
+        data_hora = datetime.fromisoformat(data_hora_txt)
+    except Exception:
+        return f"data_hora não é um ISO válido: {data_hora_txt!r}"
+
+    if data_hora > agora_br() + timedelta(hours=2):
+        return f"data_hora no futuro: {data_hora_txt}"
+
+    dados_anteriores = dados_anteriores or {}
+    ultima_anterior_txt = (dados_anteriores.get("ultima") or {}).get("data_hora")
+    if ultima_anterior_txt:
+        try:
+            if data_hora < datetime.fromisoformat(ultima_anterior_txt):
+                return f"data_hora regrediu: {data_hora_txt} é mais antigo que o já publicado ({ultima_anterior_txt})"
+        except Exception:
+            pass
+
+    historico_ordenado = sorted(
+        (item for item in (payload.get("historico") or []) if isinstance(item.get("regua_m"), (int, float))),
+        key=lambda item: item["data_hora"],
+    )
+    for anterior_item, atual_item in zip(historico_ordenado, historico_ordenado[1:]):
+        try:
+            horas = (
+                datetime.fromisoformat(atual_item["data_hora"])
+                - datetime.fromisoformat(anterior_item["data_hora"])
+            ).total_seconds() / 3600
+            variacao_por_hora = abs(atual_item["regua_m"] - anterior_item["regua_m"]) / max(horas, 0.01)
+        except Exception:
+            continue
+        if variacao_por_hora > LIMIAR_VARIACAO_IMPOSSIVEL_M_HORA:
+            return (
+                f"variação implausível no histórico entre {anterior_item['data_hora']} e "
+                f"{atual_item['data_hora']}: {variacao_por_hora:.2f} m/h"
+            )
+
+    return None
+
+
 def main():
     log("Execução do scrape.py iniciada (GitHub Actions).")
     anterior = carregar_anterior()
@@ -843,6 +936,13 @@ def main():
             f"Aguardando {ESPERA_NOVA_TENTATIVA_SEGUNDOS}s para nova tentativa."
         )
         time.sleep(ESPERA_NOVA_TENTATIVA_SEGUNDOS)
+
+    if payload:
+        erro_validacao = validar_payload(payload, anterior["dados"] if anterior else None)
+        if erro_validacao:
+            log(f"Validação falhou, descartando payload desta rodada: {erro_validacao}")
+            erro = erro_validacao
+            payload = None
 
     if payload:
         resultado = {"ok": True, "erro": None, "dados": payload}
