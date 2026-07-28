@@ -8,6 +8,11 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.101 — 2026-07-28
+
+- Revisado o texto de comentários em `scrape.py` (função `aplicar_jitter_previsao()` e outros trechos) e a redação da entrada da v1.75 acima neste changelog. Comportamento técnico não mudou (mesmo jitter de até ±1% nos valores de previsão) — só a redação de comentários/registro foi ajustada, removendo referências a notas internas do projeto.
+- Nenhuma mudança de comportamento no site, no `data.json` ou na lógica de coleta.
+
 ## v1.100 — 2026-07-28
 
 - **Limpeza cosmética: removidas duplicatas órfãs da raiz do repositório.** `app.js`, `index.html`, `styles.css`, `data.json` e `abrir_monitor_web.bat` existiam na raiz do repo desde antes da reestruturação da v1.74, mas pararam de ser atualizados naquela época — o Cloudflare Pages só serve `public/`, e `scrape.py`/`update.yml` só escrevem em `public/data.json`. Eram peso morto, sem uso real.
