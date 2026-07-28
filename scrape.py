@@ -17,11 +17,6 @@ from selenium.webdriver.common.by import By
 
 APP_VERSION = "GitHub Actions 1.0"
 BASE_DIR = Path(__file__).resolve().parent
-# public/ é a pasta servida pelo Cloudflare Pages (Build output directory) --
-# reestruturação de 20/07/2026 pra parar de expor o repositório inteiro. data.json e historico_diario.csv são os únicos
-# arquivos que este script grava e que também são públicos, por isso vão
-# dentro de public/; monitor_web.log e o cache de token da ANA continuam na
-# raiz do repo (nunca commitados/publicados).
 PUBLIC_DIR = BASE_DIR / "public"
 PUBLIC_DIR.mkdir(exist_ok=True)
 DATA_PATH = PUBLIC_DIR / "data.json"
@@ -34,15 +29,6 @@ URL_HISTORICO_COPEL = "https://www.copel.com/mhbweb/paginas/bacia-iguacu.jsf"
 URL_HISTORICO_ANA = "https://www.snirh.gov.br/hidrotelemetria/"
 URL_PREVISAO = "https://www.copel.com/mhbweb/paginas/previsao.jsf"
 
-# API oficial da ANA (HidroWebservice). Estação 65310001 = UHE Gov. Bento Munhoz
-# União da Vitória, confirmada em 07/2026 batendo hora a hora com o que a Copel
-# publica (mesmo datum, zero 739,61 m). Não tem previsão -- só dado medido real,
-# por isso a previsão continua vindo da Copel independentemente disso funcionar.
-# Credenciais NUNCA ficam neste arquivo: vêm de variável de ambiente
-# (ANA_API_LOGIN / ANA_API_SENHA), configuradas como GitHub Actions Secret em
-# produção ou exportadas manualmente pra teste local. Se não estiverem
-# configuradas, ou se a chamada falhar por qualquer motivo, cai automaticamente
-# pro scraping da Copel (comportamento original, inalterado).
 ANA_BASE = "https://www.ana.gov.br/hidrowebservice"
 ANA_CODIGO_ESTACAO = 65310001
 ANA_ZERO_REGUA_M = 739.61
@@ -52,23 +38,8 @@ JANELA_PREVISAO_HORAS = 48
 TIMEOUT_COLETA_SEGUNDOS = 90
 FUSO_BR = ZoneInfo("America/Sao_Paulo")
 
-# Variação aleatória aplicada aos valores da previsão (fonte exclusiva: Copel,
-# ver aplicar_jitter_previsao() mais abaixo) -- pedido explícito do usuário
-# (21/07/2026). Até 1% pra mais ou pra menos.
 JITTER_PREVISAO_MAX_FRACAO = 0.01
 
-# Se a previsão estiver baseada num "Último valor considerado" (ver
-# extrair_ultimo_valor_considerado() mais abaixo -- é a própria fonte que
-# publica até quando os dados reais foram usados como base do modelo) mais
-# velho que isso em relação a agora, paramos de publicar a previsão no site
-# -- pedido explícito do usuário, 23/07/2026: quando a fonte atrasa a
-# atualização, os horários da previsão (que deveriam ser futuros) ficam
-# presos no passado em relação ao "agora" real, e o gráfico desenha um
-# "dente" (um ziguezague visual) misturando pontos de previsão vencidos com
-# o histórico medido -- isso derruba a credibilidade do site. Ver
-# extrair_ultimo_valor_considerado() e o bloco de detecção em
-# coletar_uma_vez() mais abaixo (_fingerprint_previsao() vira só um
-# fallback, pro caso desse campo sumir/mudar de formato na página).
 LIMIAR_PREVISAO_DESATUALIZADA_HORAS = 3
 
 
@@ -105,15 +76,6 @@ COTAS_BAIRROS = [
     (10.42, "Enchente de 1983"),
 ]
 
-# Níveis de alerta definidos por análise estatística da série histórica ANA
-# (65310000, 1930-2023): média 2,67 m, desvio padrão 1,08 m, modelo de
-# distribuição normal validado por contagem direta de frequência real na
-# série. Ver proposta completa em FAQ_NIVEIS_ALERTA_PROPOSTA.md (18/07/2026).
-#   Observação  3,70 m = média + 1 desvio padrão (P85)
-#   Atenção     4,20 m = percentil 90
-#   Alerta      5,00 m = média + 2 desvios padrão (P95)
-#   Emergência      5,50 m = P97,5
-#   Grande enchente 6,50 m = ~1 em cada 10 endereços da cidade abaixo da régua
 COTAS_ALERTA_DEFESA_CIVIL = [
     (3.70, "OBSERVAÇÃO"),
     (4.20, "ATENÇÃO"),
@@ -122,25 +84,12 @@ COTAS_ALERTA_DEFESA_CIVIL = [
     (6.50, "GRANDE ENCHENTE"),
 ]
 
-# Escalada por velocidade: a série histórica mostra subidas abruptas (1,78 m
-# em 24h em 1992; 3,34 m em 48h em 2014). Quando o rio sobe LIMIAR_SUBIDA_24H_M
-# ou mais em 24 horas -- taxa superada em ~1% de todas as subidas desde 1930 --
-# o alerta é elevado em um degrau, independentemente do nível absoluto da régua.
 LIMIAR_SUBIDA_24H_M = 0.85
 
-# Limites usados só por validar_payload() (item 4 da auditoria de segurança
-# de 28/07/2026: "hoje um erro do coletor pode ir direto pro ar sem
-# checagem"). Generosos de propósito -- servem pra pegar erro grosseiro de
-# parsing/unidade (decimal deslocado, campo trocado, estação errada), não
-# pra julgar se um valor é "normal": o objetivo é nunca bloquear um evento
-# real, por mais extremo que seja, só o que é fisicamente impossível.
 REGUA_MIN_PLAUSIVEL_M = 0.0
-REGUA_MAX_PLAUSIVEL_M = 13.0  # maior cheia registrada é 10,42 m (1983)
-VAZAO_MAX_PLAUSIVEL_M3S = 20000  # maiores vazões já citadas no projeto ficam bem abaixo de 2000 m3/s
-CHUVA_MAX_PLAUSIVEL_MM_HORA = 300  # recorde mundial de chuva em 1h é ~305 mm
-# Maior subida horária plausível: a subida mais rápida já documentada no
-# projeto (1,78 m em 24h, 1992) tem média de ~0,07 m/h -- mesmo picos curtos
-# dentro dessa janela ficam muito abaixo de 1,5 m numa única hora.
+REGUA_MAX_PLAUSIVEL_M = 13.0
+VAZAO_MAX_PLAUSIVEL_M3S = 20000
+CHUVA_MAX_PLAUSIVEL_MM_HORA = 300
 LIMIAR_VARIACAO_IMPOSSIVEL_M_HORA = 1.5
 
 
@@ -164,10 +113,6 @@ def parse_numero(valor):
 
 
 def _ana_query_string(params):
-    # A API da ANA exige espaço codificado como %20 nos NOMES dos parâmetros
-    # ("Código da Estação", "Range Intervalo de busca" etc). requests.get(params=dict)
-    # usa '+' por padrão (estilo application/x-www-form-urlencoded), que a API
-    # rejeita com 400 Bad Request -- por isso a URL é montada manualmente aqui.
     return "&".join(f"{quote(k, safe='')}={quote(str(v), safe='')}" for k, v in params.items())
 
 
@@ -195,9 +140,6 @@ def _ana_autenticar(identificador, senha):
     resp.raise_for_status()
     token = resp.json()["items"]["tokenautenticacao"]
 
-    # Cacheia por 55 min (validade real é 60 min) pra nunca reautenticar a
-    # cada execução do GitHub Actions -- autenticação em alta frequência é
-    # monitorada pela ANA e pode resultar em bloqueio de IP (417).
     try:
         ANA_TOKEN_CACHE_PATH.write_text(
             json.dumps({
@@ -218,10 +160,6 @@ def _parse_data_hora_ana(valor):
 
 
 def coletar_via_ana():
-    """Busca o histórico via API oficial da ANA (estação 65310001). Retorna None
-    (sem lançar exceção) se as credenciais não estiverem configuradas ou se
-    qualquer etapa falhar -- nesses casos coletar_uma_vez() cai pro scraping
-    da Copel automaticamente, sem afetar a previsão (que é Copel-only)."""
     identificador = os.environ.get("ANA_API_LOGIN")
     senha = os.environ.get("ANA_API_SENHA")
     if not identificador or not senha:
@@ -358,17 +296,6 @@ def extrair_previsao(texto):
             continue
 
         try:
-            # A tabela da Copel lista as colunas nesta ordem: "Previsão com
-            # chuva" (régua, nível de água, vazão) primeiro, depois "Previsão
-            # sem chuva" (régua, nível de água, vazão). padrao_numero só casa
-            # números com 1-2 dígitos antes da vírgula, então só a régua de
-            # cada bloco entra em `numeros` -- nível de água tem 3 dígitos
-            # (ex.: 742,95) e vazão não tem vírgula. Ou seja, numeros[0] é
-            # sempre a régua "com chuva" (aparece primeiro na linha) e
-            # numeros[1] é a régua "sem chuva" (aparece depois). Bug
-            # encontrado em 22/07/2026 (v1.82): essa atribuição estava
-            # invertida desde sempre -- o campo "regua_com_chuva_m" publicado
-            # no site vinha, na verdade, do cenário sem chuva, e vice-versa.
             dados.append({
                 "data_hora": iso(_parse_data_hora(m.group(1), m.group(2))),
                 "regua_com_chuva_m": numeros[0],
@@ -382,17 +309,6 @@ def extrair_previsao(texto):
 
 
 def extrair_ultimo_valor_considerado(texto):
-    """Extrai o timestamp "Último valor considerado" da página de previsão --
-    é o horário da última leitura REAL (não modelada) que a própria fonte usou
-    como base pra gerar as projeções futuras da tabela. Achado direto na
-    página pelo usuário em 23/07/2026 (bloco "Último valor considerado:"
-    seguido de uma tabelinha separada com régua/nível/vazão daquele horário).
-    É a referência mais direta e confiável pra saber se a previsão está
-    desatualizada -- muito melhor que inferir por hash de mudança de conteúdo
-    (ver _fingerprint_previsao(), mantida só como fallback caso esse campo
-    desapareça ou mude de formato). Se essa data já está há mais de
-    LIMIAR_PREVISAO_DESATUALIZADA_HORAS no passado em relação a agora, a
-    previsão não deve ser publicada (ver coletar_uma_vez())."""
     m = re.search(
         r"[Úú]ltimo valor considerado:?\s*\n*\s*(\d{2}/\d{2}/\d{4})\s+(\d{2}:\d{2})",
         texto,
@@ -413,22 +329,6 @@ def _jitter(valor):
 
 
 def aplicar_jitter_previsao(previsao):
-    """Aplica uma pequena variação aleatória (até +-1%) em cada valor numérico
-    da previsão (regua_sem_chuva_m e regua_com_chuva_m), horário a horário.
-
-    O jitter é sorteado de novo pra cada campo e cada horário (nunca reusa o
-    mesmo fator entre regua_sem_chuva_m e regua_com_chuva_m do mesmo ponto,
-    nem entre pontos diferentes), pra não virar um deslocamento constante e
-    óbvio (ex.: "sempre +0,8%"). data_hora nunca é alterada.
-
-    Regra adicional: "sem chuva" tem que
-    ficar sempre abaixo de "com chuva" -- fisicamente, chuva só soma nível,
-    nunca reduz, então o cenário sem chuva nunca deveria superar o cenário
-    com chuva. Como os dois são jitterados de forma independente, de vez em
-    quando o sorteio cruza os dois por coincidência (ex.: sem_chuva sorteado
-    +1% e com_chuva sorteado -1% no mesmo horário). Quando isso acontece,
-    empurra só o sem_chuva pra 0,01 m abaixo do com_chuva (a mesma precisão
-    de exibição, 2 casas decimais) -- não mexe no valor de com_chuva."""
     resultado = []
     for item in previsao:
         novo = dict(item)
@@ -443,13 +343,6 @@ def aplicar_jitter_previsao(previsao):
 
 
 def _fingerprint_previsao(previsao_bruta):
-    """Impressão digital determinística da previsão BRUTA (antes do jitter) --
-    usada só para detectar se a Copel realmente atualizou a tabela de
-    previsão entre uma coleta e outra (ver LIMIAR_PREVISAO_DESATUALIZADA_HORAS
-    acima). Precisa ser calculada sobre os valores brutos: se fosse sobre os
-    valores já com aplicar_jitter_previsao(), o hash mudaria a cada rodada
-    mesmo com a fonte real parada (o jitter é sorteado de novo sempre), e o
-    site nunca detectaria que a previsão ficou desatualizada."""
     bruto = "|".join(
         f"{item['data_hora']}:{item.get('regua_com_chuva_m')}:{item.get('regua_sem_chuva_m')}"
         for item in previsao_bruta
@@ -474,11 +367,6 @@ def coletar_texto(url):
             pass
 
 
-# Degraus de situação, do mais baixo ao mais alto. O primeiro (0.0) é a
-# linha de base "normal" -- não faz parte de COTAS_ALERTA_DEFESA_CIVIL porque
-# não é um nível de alerta, é a ausência de alerta. Texto encurtado pra só
-# "NÍVEL NORMAL" (sem "- monitoramento diário") a pedido do usuário,
-# 22/07/2026, v1.87.
 NIVEIS_SITUACAO = [(0.0, "NÍVEL NORMAL")] + COTAS_ALERTA_DEFESA_CIVIL
 
 
@@ -493,8 +381,6 @@ def _tier_por_nivel(regua):
 def definir_situacao(regua, historico=None):
     tier = _tier_por_nivel(regua)
 
-    # Escalada por velocidade: se a subida nas últimas 24h já atingiu o
-    # limiar, eleva um degrau mesmo que o nível absoluto ainda não justifique.
     if historico:
         try:
             agora_dt = datetime.fromisoformat(historico[-1]["data_hora"])
@@ -523,9 +409,6 @@ def calcular_tendencia(historico):
     direcao = "subindo" if delta > 0 else "baixando"
     verbo = "Subindo" if delta > 0 else "Baixando"
     abs_delta_m = abs(delta)
-    # Abaixo de 1 m/h (a grande maioria do tempo), mostra em cm -- mais fácil
-    # de ler que um decimal de metro ("0,6 cm" em vez de "0.006 m"). Taxas
-    # raras/extremas acima disso continuam em metros.
     if abs_delta_m < 1:
         valor = f"{abs_delta_m * 100:.1f}".replace(".", ",")
         texto = f"{verbo} cerca de {valor} cm por hora"
@@ -544,11 +427,6 @@ def verificar_alerta_previsao(historico, previsao):
     if not futuros:
         return "Sem previsão disponível para as próximas 48 horas."
 
-    # Valor "verdadeiro" pro horário-alvo (48h à frente) -- não o pico da
-    # janela inteira. Pega o ponto de previsão mais próximo do alvo e usa o
-    # cenário "com chuva" quando disponível, coerente com a linha "Previsão"
-    # plotada no gráfico (app.js só desenha pontos com regua_com_chuva_m
-    # preenchido).
     mais_proximo = min(
         futuros,
         key=lambda item: abs(datetime.fromisoformat(item["data_hora"]) - alvo),
@@ -560,23 +438,12 @@ def verificar_alerta_previsao(historico, previsao):
     data_hora_ponto = datetime.fromisoformat(mais_proximo["data_hora"])
     quando_fmt = data_hora_ponto.strftime("%d/%m %Hh")
 
-    # A fonte da previsão nem sempre cobre as 48h completas (às vezes a
-    # janela disponível é mais curta, ex.: ~35h) -- por isso calculamos e
-    # mostramos o número real de horas até o ponto usado, em vez de afirmar
-    # "48 horas" mesmo quando o ponto mais próximo está bem aquém disso. O
-    # texto não nomeia a fonte da previsão (decisão do usuário, 20/07/2026).
-    # Frase final "Não é um alerta oficial da Defesa Civil." removida a
-    # pedido do usuário (22/07/2026, v1.81) -- texto fica só com o valor e
-    # o horário.
     horas_reais = round((data_hora_ponto - agora_base).total_seconds() / 3600)
     return f"Previsão para daqui a {horas_reais} horas ({quando_fmt}): {valor_fmt} m."
 
 
 def montar_payload(historico, previsao, fonte_historico, url_historico):
     if not historico:
-        # Esta mensagem pode ir parar no campo público "erro" do data.json
-        # (main() grava str(exc) ali quando a coleta falha por completo) --
-        # por isso não nomeia a fonte redundante.
         raise RuntimeError("nenhuma medição foi encontrada (nem via ANA, nem via fonte redundante)")
 
     ultima = historico[-1]
@@ -600,31 +467,11 @@ def montar_payload(historico, previsao, fonte_historico, url_historico):
     }
 
 
-# FONTE_ANA é o único texto que pode ir para o campo público "fonte" do
-# data.json -- sempre, mesmo quando a leitura técnica real veio da Copel
-# como redundância (raro, só nos minutos em que a ANA ainda não fechou a
-# hora). O projeto não tem autorização da Copel pra divulgar publicamente
-# que os dados vêm dela. FONTE_COPEL
-# existe só para diagnóstico interno (mensagens de log em monitor_web.log,
-# que não é publicado) -- nunca deve ser passada para montar_payload().
 FONTE_ANA = "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)"
 FONTE_COPEL = "Copel – Monitoramento Hidrológico (fonte redundante, usada quando a ANA ainda não publicou a leitura da hora)"
 
 
 def mesclar_historico(historico_novo, historico_anterior):
-    """Une o histórico recém-coletado (via ANA ou Copel) com o histórico já
-    salvo no data.json da execução anterior, preenchendo por data_hora.
-
-    Sem isso, uma coleta cuja fonte responde com sucesso mas devolve uma
-    janela incompleta (ex.: ANA retornando só as horas de hoje, sem ontem)
-    substituía o histórico inteiro e "esquecia" horas que já tinham sido
-    coletadas com sucesso antes -- mesmo a Copel nunca era chamada pra
-    completar, porque tecnicamente a ANA "funcionou" (só que incompleta).
-
-    Com a mesclagem, o histórico do site é cumulativo: uma hora só some da
-    janela de JANELA_HISTORICO_HORAS quando fica velha demais, nunca porque
-    a coleta desta rodada não trouxe ela de novo. Em caso de conflito no
-    mesmo horário, o dado desta execução tem prioridade (mais recente)."""
     por_hora = {item["data_hora"]: item for item in historico_anterior}
     por_hora.update({item["data_hora"]: item for item in historico_novo})
     limite = agora_br() - timedelta(hours=JANELA_HISTORICO_HORAS)
@@ -640,14 +487,7 @@ def coletar_uma_vez(
 ):
     historico_anterior = historico_anterior or []
     historico = coletar_via_ana()
-    # fonte_tecnica é só para diagnóstico interno (mensagens de log em
-    # monitor_web.log, nunca publicado) -- o campo público "fonte" do
-    # data.json é sempre FONTE_ANA, ver montar_payload() mais abaixo.
     fonte_tecnica = None
-    # url_historico sempre aponta pro HidroWeb da ANA no payload público,
-    # mesmo quando a leitura técnica veio da Copel como redundância -- o
-    # projeto não tem autorização da Copel pra divulgar publicamente que os
-    # dados vêm dela.
     url_historico = URL_HISTORICO_ANA
     if historico:
         nova_ultima_ana = historico[-1]["data_hora"]
@@ -655,9 +495,6 @@ def coletar_uma_vez(
             fonte_tecnica = FONTE_ANA
             url_historico = URL_HISTORICO_ANA
         else:
-            # A ANA respondeu, mas ainda é o mesmo dado de antes (a hora ainda
-            # não fechou lá) -- usa Copel como redundância nesta rodada em vez
-            # de reescrever o mesmo horário e fingir que atualizou.
             log(f"ANA: ainda sem dado novo (última segue {nova_ultima_ana}); usando Copel como redundância nesta rodada.")
             historico = None
 
@@ -665,14 +502,10 @@ def coletar_uma_vez(
         texto_historico = coletar_texto(URL_HISTORICO_COPEL)
         historico = extrair_medicoes(texto_historico)
         fonte_tecnica = FONTE_COPEL
-        # url_historico permanece URL_HISTORICO_ANA (definido acima) mesmo
-        # aqui -- nunca expor a URL da Copel no data.json público.
         log(f"Medições obtidas via {fonte_tecnica.split(' ')[0]}: {len(historico)}")
 
     historico = mesclar_historico(historico, historico_anterior)
 
-    # Previsão é exclusiva da Copel -- a ANA não oferece esse dado, então essa
-    # parte roda sempre, independentemente da fonte do histórico acima.
     previsao_bruta = []
     ultimo_valor_considerado = None
     try:
@@ -686,17 +519,6 @@ def coletar_uma_vez(
     except Exception as exc:
         log(f"Previsão indisponível: {exc}")
 
-    # Detecção de previsão desatualizada (pedido do usuário, 23/07/2026).
-    # Preferência 1: "Último valor considerado", publicado pela própria fonte
-    # na página de previsão -- é o horário da última leitura REAL usada como
-    # base do modelo, direto e confiável (achado pelo usuário, 23/07/2026).
-    # Preferência 2 (fallback, só se esse campo não vier nesta rodada): a
-    # tabela bruta (antes do jitter) não muda de uma coleta pra outra -- sinal
-    # indireto de que a fonte não atualizou a previsão. Em ambos os casos, se
-    # o horário de referência já ficou mais velho que
-    # LIMIAR_PREVISAO_DESATUALIZADA_HORAS, os horários futuros da previsão
-    # começam a ficar no passado em relação ao "agora" real, criando o
-    # "dente" no gráfico -- por isso não publicamos a previsão nesse caso.
     if ultimo_valor_considerado is not None:
         previsao_atualizada_em = ultimo_valor_considerado
         previsao_fingerprint = _fingerprint_previsao(previsao_bruta) if previsao_bruta else previsao_fingerprint_anterior
@@ -724,15 +546,7 @@ def coletar_uma_vez(
     else:
         previsao_publicada = aplicar_jitter_previsao(previsao_bruta)
 
-    # O campo público "fonte" é sempre FONTE_ANA, mesmo quando fonte_tecnica
-    # foi a Copel nesta rodada -- mesma decisão já aplicada a url_historico
-    # acima. fonte_tecnica não é
-    # usada aqui de propósito: ela só serve pros logs internos já emitidos.
     payload = montar_payload(historico, previsao_publicada, FONTE_ANA, url_historico)
-    # Guardados no próprio data.json público pra servir de estado entre uma
-    # execução e outra do GitHub Actions (carregar_anterior() lê de volta no
-    # início da próxima rodada) -- não citam "Copel" nem expõem nada além de
-    # um hash e um horário.
     payload["previsao_fingerprint"] = previsao_fingerprint
     payload["previsao_atualizada_em"] = iso(previsao_atualizada_em) if previsao_atualizada_em else None
     return payload
@@ -748,8 +562,6 @@ def carregar_anterior():
 
 
 def _ler_historico_diario():
-    """Lê o CSV atual do histórico diário (se existir) como um dicionário
-    {data: [campos]}, pra permitir upsert por data sem duplicar linhas."""
     linhas = {}
     if HISTORICO_DIARIO_PATH.exists():
         try:
@@ -766,16 +578,6 @@ def _ler_historico_diario():
 
 
 def atualizar_historico_diario(payload):
-    """Mantém um registro de 1 linha por dia (nível máximo/mínimo/último e
-    vazão do último horário do dia) num CSV crescente no repositório, pra
-    dar continuidade ao histórico oficial da ANA (estação 65310000, que só
-    vai até 31/12/2023) com os dados telemétricos coletados a partir daqui.
-
-    Roda a cada execução com coleta bem-sucedida. Como o histórico coletado
-    cobre as últimas JANELA_HISTORICO_HORAS horas (48h), isso também corrige
-    o fechamento do dia anterior caso a última execução daquele dia tenha
-    ficado incompleta -- todo dia presente na janela atual é reescrito com
-    os dados mais completos disponíveis até agora."""
     try:
         linhas = _ler_historico_diario()
         por_dia = {}
@@ -808,32 +610,13 @@ def atualizar_historico_diario(payload):
 
 
 def validar_payload(payload, dados_anteriores):
-    """Confere o payload recém-coletado antes de deixar main() publicá-lo --
-    pedido do usuário, 28/07/2026 (item 4 da auditoria de segurança: "hoje um
-    erro do coletor pode ir direto pro ar sem checagem"). Devolve None quando
-    está tudo bem, ou uma string descrevendo o problema quando não está --
-    main() trata qualquer string devolvida aqui exatamente como um erro de
-    coleta (loga e mantém o data.json anterior em cache, não sobrescreve com
-    o payload suspeito).
-
-    Checagens, nesta ordem: (1) régua/data_hora presentes e do tipo certo;
-    (2) régua dentro de uma faixa fisicamente plausível; (3) vazão e chuva
-    plausíveis quando presentes; (4) data_hora não é um ISO inválido, não
-    está no futuro além de uma folga pequena, e não regrediu em relação ao
-    que já estava publicado; (5) nenhum salto entre duas leituras
-    consecutivas do histórico passa de LIMIAR_VARIACAO_IMPOSSIVEL_M_HORA.
-
-    Só valida o nível medido ("ultima"/"historico") -- a previsão
-    (regua_sem_chuva_m/regua_com_chuva_m) já tem sua própria proteção contra
-    dado desatualizado (LIMIAR_PREVISAO_DESATUALIZADA_HORAS) e não é o que
-    aparece como nível atual do rio."""
     ultima = payload.get("ultima") or {}
     regua = ultima.get("regua_m")
     data_hora_txt = ultima.get("data_hora")
 
     if regua is None or data_hora_txt is None:
         return "payload sem 'ultima.regua_m' ou 'ultima.data_hora'"
-    if not isinstance(regua, (int, float)) or regua != regua:  # "regua != regua" descarta NaN
+    if not isinstance(regua, (int, float)) or regua != regua:
         return f"regua_m não é um número válido: {regua!r}"
     if not (REGUA_MIN_PLAUSIVEL_M <= regua <= REGUA_MAX_PLAUSIVEL_M):
         return f"regua_m fora da faixa fisicamente plausível: {regua} m"
