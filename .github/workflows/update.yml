@@ -27,14 +27,21 @@ jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+            - name: Checkout
+        # Fixado por SHA completo em 28/07/2026 (auditoria de segurança) --
+        # tags como "v4" são móveis e podem ser repontadas; o SHA garante que
+        # sempre roda exatamente este código, mesmo que a conta/mantenedor da
+        # action seja comprometida no futuro. Commit "backport fixes to
+        # releases-v4 (#2524)", branch de manutenção v4, 16/07/2026.
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
 
       - name: Configurar Chrome
-        uses: browser-actions/setup-chrome@v1
+        # Fixado por SHA completo em 28/07/2026 (mesmo motivo acima).
+        uses: browser-actions/setup-chrome@c785b87e244131f27c9f19c1a33e2ead956ab7ce # v1.7.3
 
       - name: Configurar Python
-        uses: actions/setup-python@v5
+        # Fixado por SHA completo em 28/07/2026 (mesmo motivo acima).
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
 
