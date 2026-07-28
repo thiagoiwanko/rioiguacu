@@ -8,6 +8,10 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.96 — 2026-07-28
+
+- **Versões travadas em `requirements.txt`** (`selenium==4.46.0`, `requests==2.34.2`, as mais recentes no PyPI) **e corrigido hotfix da v1.94**: a linha `- name: Checkout` do `update.yml` tinha 12 espaços de indentação em vez de 6, invalidando o YAML e derrubando a coleta automática por ~1h até o usuário avisar. Corrigido via commit 12ae6bc, run manual confirmado. Backup: `backups/requirements.txt-pre-v1.96.bak`.
+
 ## v1.94 — 2026-07-28
 
 - **GitHub Actions do `update.yml` fixadas por SHA completo, sem mudança de versão.** As três actions usadas (`actions/checkout`, `browser-actions/setup-chrome`, `actions/setup-python`) passaram a referenciar o commit exato correspondente à mesma versão já em uso (`v4` → `@11d5960a326750d5838078e36cf38b85af677262`, `v1` → `@c785b87e244131f27c9f19c1a33e2ead956ab7ce` = `v1.7.3`, `v5` → `@a26af69be951a213d495a4c3e4e4022e16d87065` = `v5.6.0`), em vez de tags móveis. Motivo: uma tag pode ser repontada para código malicioso se a conta do mantenedor da action for comprometida no futuro — o SHA garante que o workflow sempre executa exatamente o código já revisado. Item 2 da lista de segurança da auditoria de 28/07/2026 (2FA + branch ruleset em `main` feitos antes desta entrada; itens restantes ficam só em `PENDENCIAS.md` local, que não é publicado no GitHub).
