@@ -8,6 +8,12 @@ Cada versão tem um backup completo do código-fonte em `backups/site-vX.Y.zip`,
 
 **Nota sobre este próprio arquivo (19/07/2026):** o `CHANGELOG.md` local desta sessão estava parando na v1.5 (mesmo problema já documentado acima para outra ocasião) — foi reconstruído a partir do conteúdo AO VIVO em `raw.githubusercontent.com` antes de receber a entrada da v1.51, para não repetir o incidente original.
 
+## v1.97 — 2026-07-28
+
+- **Validação de dados adicionada ao `scrape.py` antes de publicar.** Nova função `validar_payload()`, chamada em `main()` logo depois da coleta: rejeita o payload da rodada se `regua_m` estiver fora de uma faixa fisicamente plausível (0–13 m), se `vazao_m3s`/`chuva_mm` forem implausíveis, se `data_hora` for inválida, estiver no futuro, ou tiver regredido em relação ao que já estava publicado, ou se algum salto entre duas leituras consecutivas do histórico passar de 1,5 m numa hora. Antes, um erro do coletor (parsing errado, campo trocado, unidade confusa) podia ir direto pro `data.json` público sem checagem nenhuma. Quando a validação falha, `main()` trata como falha de coleta: loga o motivo e mantém o `data.json` anterior em cache, exatamente como já acontecia em caso de exceção. Item 4 da lista de segurança da auditoria de 28/07/2026.
+- Limites deliberadamente generosos (não julgam se um valor é "normal", só pegam erro grosseiro) — o objetivo é nunca bloquear um evento real, por mais extremo que seja, só o que é fisicamente impossível.
+- Backup pré-edição: `backups/scrape.py-pre-v1.97.bak` (shell sandboxado desta sessão continuava indisponível — mesmo padrão das v1.92/v1.96, backup de arquivo único).
+
 ## v1.96 — 2026-07-28
 
 - **Versões travadas em `requirements.txt`** (`selenium==4.46.0`, `requests==2.34.2`, as mais recentes no PyPI) **e corrigido hotfix da v1.94**: a linha `- name: Checkout` do `update.yml` tinha 12 espaços de indentação em vez de 6, invalidando o YAML e derrubando a coleta automática por ~1h até o usuário avisar. Corrigido via commit 12ae6bc, run manual confirmado. Backup: `backups/requirements.txt-pre-v1.96.bak`.
