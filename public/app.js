@@ -36,10 +36,6 @@ minute: "2-digit",
 });
 }
 
-// A chuva mostrada no card ("Chuva X mm") é a chuva medida na hora cheia do
-// dado mais recente (last.data_hora) -- ou seja, cobre a 1 hora terminada
-// nesse horário. Ex.: data_hora "09:00" -> chuva caiu entre 08h e 09h.
-// Pedido do usuário (22/07/2026, v1.83), pra deixar isso explícito no site.
 function formatRainHourRange(value) {
 const d = parseDate(value);
 const pad = (n) => String(n).padStart(2, "0");
@@ -48,11 +44,6 @@ const inicioHora = (fimHora + 23) % 24;
 return `${pad(inicioHora)}h às ${pad(fimHora)}h`;
 }
 
-// Escala do gráfico/gauge alinhada aos 5 níveis estatísticos de alerta
-// (Observação 3,70 / Atenção 4,20 / Alerta 5,00 / Emergência 5,50 / Grande enchente 6,50 m).
-// O piso da escala é o mínimo histórico já registrado (1,30 m, em 2020), não zero --
-// o rio nunca opera perto de zero, então usar 1,30 m como base aproveita melhor
-// a faixa visual do gauge para variação real do nível.
 const NIVEL_MIN_ESCALA = 1.3;
 const NIVEL_MAX_ESCALA = 6.5;
 
@@ -78,18 +69,10 @@ return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 return "rgb(255,48,48)";
 }
 
-// Enchentes históricas e o recorde de estiagem são "extremos históricos":
-// eventos raros e pontuais. Cotas de bairro são estimativas de metodologia
-// diferente (endereço + relevo). Usado tanto para separar os dois quadros
-// da lateral quanto para decidir o que aparece como linha no gráfico.
 function isHistoricalExtreme(item) {
 return item.descricao.startsWith("Enchente de") || item.descricao.startsWith("Menor nível histórico");
 }
 
-// Linhas do gráfico: só alertas + extremos históricos (enchentes e o menor
-// nível já registrado). As ~20 cotas de bairro ficam de fora -- são
-// referências úteis na lista lateral, mas amontoadas no gráfico deixavam
-// ele ilegível (linhas quase coincidentes, muitas só com número).
 function allReferences(data) {
 const map = new Map();
 data.cotas_bairros.filter(isHistoricalExtreme).forEach((item) => map.set(Number(item.nivel), item.descricao));
@@ -124,14 +107,9 @@ const values = [...hist, ...forecast, currentLevel];
 const minValue = Math.min(...values);
 const maxValue = Math.max(...values);
 
-// Distância mínima necessária para a linha inteira caber no gráfico.
 const distAcimaDados = Math.max(maxValue - currentLevel, 0);
 const distAbaixoDados = Math.max(currentLevel - minValue, 0);
 
-// Reserva espaço para pelo menos as duas próximas cotas de ALERTA (não
-// cotas históricas distantes, como recordes de estiagem ou enchentes
-// antigas) acima e abaixo do nível atual, para dar contexto sem esticar
-// demais a escala vertical e achatar a variação real do gráfico.
 const refs = data.cotas_alerta.map((item) => Number(item.nivel));
 const refsAcima = refs.filter((v) => v > currentLevel).sort((a, b) => a - b);
 const refsAbaixo = refs.filter((v) => v < currentLevel).sort((a, b) => b - a);
@@ -148,8 +126,6 @@ let minY = currentLevel - halfSpan;
 let maxY = currentLevel + halfSpan;
 
 if (minY < 0) {
-// Régua não é negativa: em vez de cortar embaixo, empurra a folga para cima
-// (o nível atual deixa de ficar exatamente no centro só quando está bem perto de zero).
 maxY += -minY;
 minY = 0;
 }
@@ -167,10 +143,6 @@ if (texto.startsWith("OBSERVAÇÃO")) return "badge-observacao";
 return "badge-normal";
 }
 
-// Cor do indicador de tendência: verde/azul quando o rio está descendo
-// (mais rápido = cor mais forte), amarelo/vermelho quando está subindo,
-// ciano quando está estável. Limiar de "rápido" em m/h escolhido para
-// destacar variações fora do ritmo normal de oscilação horária do rio.
 function trendColor(tendencia) {
 const delta = Math.abs((tendencia && tendencia.delta) || 0);
 const direcao = (tendencia && tendencia.direcao) || "estavel";
@@ -180,18 +152,6 @@ if (direcao === "subindo") return rapido ? "var(--red)" : "var(--yellow)";
 return rapido ? "var(--blue)" : "var(--green)";
 }
 
-// Aviso de atraso no envio do dado pela estação telemétrica da ANA: a leitura
-// chega 1 vez por hora, então a próxima é esperada 1h depois da última
-// (last.data_hora + 1h). Se já passou mais de DELAY_WARNING_MIN além desse
-// horário esperado e o site ainda não recebeu uma leitura mais nova, mostra um
-// aviso perto do relógio em "Nível atual do rio" -- deixa claro que o atraso é
-// da estação/ANA, não da página, e que a atualização é automática assim que o
-// dado for disponibilizado. Comparação sempre com a hora real do dispositivo
-// de quem está vendo a página (Date.now()), não com o campo "atualizado_em" do
-// data.json (que é só o horário em que o scrape.py rodou, não da estação).
-// Limiar de 30 min (pedido do usuário, 21/07/2026) -- versão anterior (v1.76)
-// usava 5 min e foi considerada visualmente ruim/aparecia com frequência
-// demais; 30 min reduz a frequência do aviso.
 const DELAY_WARNING_MIN = 30;
 
 function checkStationDelay(ultimaDataHora) {
@@ -225,14 +185,7 @@ $("trendValue").innerHTML = `<i class="trend-dot" style="background:${corTendenc
 $("trendValue").style.color = corTendencia;
 $("forecastAlert").textContent = data.alerta_previsao;
 $("forecastAlert").className = data.previsao_disponivel ? "" : "warning";
-// Link "Abrir fonte" removido (v1.71) -- data.url_historico às vezes aponta
-// pra URL real da Copel, o que não pode ser exposto publicamente.
-// $("sourceLabel") fica sempre vazio -- "Dados Visíveis (ANA)" virou só
-// "Dados Visíveis" a pedido do usuário (22/07/2026, v1.81).
 $("sourceLabel").textContent = "";
-// A linha "Fonte desta atualização: ANA" foi removida (v1.71) por ficar
-// redundante com o subtítulo do cabeçalho, que já diz "com dados da ANA"
-// -- pedido do usuário, 20/07/2026. #sourceNote fica sempre vazio agora.
 const sourceNoteEl = $("sourceNote");
 if (sourceNoteEl) {
 sourceNoteEl.textContent = "";
@@ -274,11 +227,6 @@ return `
 }).join("");
 }
 
-// Centraliza a marca "O rio está aqui agora!" na área visível da lista,
-// como se pediu -- exceto quando isso empurraria o scroll além do início/fim
-// da lista, caso em que o navegador já trava sozinho no 0 ou no máximo
-// (então um nível muito baixo ou muito alto naturalmente fica na ponta,
-// não forçado para o centro).
 function centerCurrentMarker(containerId) {
 const container = $(containerId);
 if (!container) return;
@@ -298,9 +246,6 @@ const bairros = data.cotas_bairros.filter((item) => !isHistoricalExtreme(item));
 $("enchentesList").innerHTML = referenceRowsHtml(historicos, currentLevel);
 $("bairrosList").innerHTML = referenceRowsHtml(bairros, currentLevel);
 
-// Só centraliza no primeiro carregamento -- nas atualizações periódicas
-// (a cada 5 min) não deve puxar o scroll de quem estiver lendo outra
-// parte da lista.
 if (!referenceListsCentered) {
 centerCurrentMarker("enchentesList");
 centerCurrentMarker("bairrosList");
@@ -344,7 +289,6 @@ const containerWidth = el.clientWidth || 900;
 const isNarrow = containerWidth < 640;
 const width = isNarrow ? Math.max(280, containerWidth) : Math.max(760, containerWidth);
 const height = isNarrow ? Math.round(Math.min(360, Math.max(300, width * 0.92))) : 485;
-// Painel pequeno de precipitação, anexado abaixo do gráfico principal (mesmo eixo X).
 const rain = isNarrow
 ? { gap: 10, titleH: 14, barsH: 50, marginBottom: 6 }
 : { gap: 14, titleH: 16, barsH: 70, marginBottom: 8 };
@@ -376,8 +320,6 @@ const y = (v) => pad.top + (1 - ((v - minY) / (maxY - minY))) * plotH;
 const refs = allReferences(data).filter((item) => item.nivel >= minY && item.nivel <= maxY);
 const labels = nearestReferenceLabels(data, data.ultima.regua_m);
 
-// Evita sobreposição de caixas de legenda quando duas cotas de referência
-// estão muito próximas em altura (ex.: 4.30 m e 4.50 m).
 const labelBoxHeight = 20;
 const labelPositions = new Map();
 const sortedLabels = [...labels.values()].sort((a, b) => y(a.nivel) - y(b.nivel));
@@ -404,11 +346,6 @@ const dryPoints = [
 ...data.previsao.filter((item) => item.regua_sem_chuva_m !== null).map((item) => ({ data_hora: item.data_hora, value: item.regua_sem_chuva_m })),
 ];
 
-// Quando os dois cenários (com/sem chuva) estão muito próximos -- divergência
-// relativa abaixo de 1% em todos os pontos --, mostrar duas linhas quase
-// coincidentes só confunde. Nesse caso o gráfico mostra uma única linha
-// "Previsão" (usa os valores "com chuva", já que são praticamente iguais aos
-// "sem chuva"); a legenda no cabeçalho do gráfico acompanha essa decisão.
 const paresPrevisao = data.previsao.filter(
 (item) => typeof item.regua_com_chuva_m === "number" && typeof item.regua_sem_chuva_m === "number"
 );
@@ -432,7 +369,6 @@ legendForecastDry.hidden = previsaoConvergente;
 const yTicks = Array.from({ length: 6 }, (_, i) => minY + ((maxY - minY) / 5) * i);
 const xTicks = Array.from({ length: 5 }, (_, i) => new Date(start.getTime() + ((end.getTime() - start.getTime()) / 4) * i));
 
-// Barras de precipitação horária (mm), mesma janela de tempo do histórico.
 const rainPoints = histPoints.filter((item) => typeof item.chuva_mm === "number");
 const rainMaxRaw = rainPoints.length ? Math.max(...rainPoints.map((p) => p.chuva_mm)) : 0;
 const rainMax = Math.max(5, rainMaxRaw * 1.15);
@@ -614,9 +550,6 @@ else hideTooltip();
 }, { passive: true });
 }
 
-// Contador de visitas via Worker + KV do próprio Cloudflare (sem depender de terceiros).
-// Falha silenciosamente se o serviço estiver fora do ar: é só um número informativo
-// no rodapé, não deve afetar o resto do site. Conta acessos (hits), não visitantes únicos.
 async function trackVisit() {
 const counterEl = $("visitCounter");
 if (!counterEl) return;
@@ -626,7 +559,6 @@ const r = await fetch("https://rioiguacu-counter.thiago-dff.workers.dev/track");
 const { total, week, day } = await r.json();
 counterEl.textContent = `· ${nf.format(total)} visitas · ${nf.format(week)} na semana · ${nf.format(day)} hoje`;
 } catch (error) {
-// silencioso
 }
 }
 
@@ -635,7 +567,4 @@ setupChartTooltip();
 refresh(false);
 trackVisit();
 setInterval(() => refresh(false), 5 * 60 * 1000);
-// Reavalia o aviso de atraso a cada minuto (não só a cada 5 min do refresh
-// de dados) -- assim o aviso aparece perto do minuto real em que o atraso
-// passa de DELAY_WARNING_MIN, mesmo sem esperar o próximo fetch de data.json.
 setInterval(() => state.data && state.data.ultima && checkStationDelay(state.data.ultima.data_hora), 60 * 1000);
