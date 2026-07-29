@@ -1,11 +1,11 @@
 {
-  "ok": true,
-  "erro": null,
+  "ok": false,
+  "erro": "Message: timeout: Timed out receiving message from renderer: 67.785\n  (Session info: chrome=150.0.7871.128)\nStacktrace:\n#0 0x5605b384044a <unknown>\n#1 0x5605b32188c9 <unknown>\n#2 0x5605b320035a <unknown>\n#3 0x5605b31fffd6 <unknown>\n#4 0x5605b31fdbbe <unknown>\n#5 0x5605b31fe53f <unknown>\n#6 0x5605b320d710 <unknown>\n#7 0x5605b3227617 <unknown>\n#8 0x5605b322ee8b <unknown>\n#9 0x5605b31fec99 <unknown>\n#10 0x5605b3227372 <unknown>\n#11 0x5605b32b68b0 <unknown>\n#12 0x5605b32613ff <unknown>\n#13 0x5605b3262261 <unknown>\n#14 0x5605b3805cc7 <unknown>\n#15 0x5605b38044a8 <unknown>\n#16 0x5605b37ef196 <unknown>\n#17 0x5605b380506a <unknown>\n#18 0x5605b37d7020 <unknown>\n#19 0x5605b382bb98 <unknown>\n#20 0x5605b382bd35 <unknown>\n#21 0x5605b383effe <unknown>\n#22 0x7f471ca9caa4 <unknown>\n#23 0x7f471cb29c6c <unknown>\n",
   "dados": {
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-29T11:50",
+    "atualizado_em": "2026-07-29T11:47",
     "historico": [
       {
         "data_hora": "2026-07-27T12:00",
