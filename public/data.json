@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-31T15:09",
+    "atualizado_em": "2026-07-31T15:11",
     "historico": [
       {
         "data_hora": "2026-07-29T16:00",
@@ -382,28 +382,36 @@
         "vazao_m3s": 1040,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.2
+      },
+      {
+        "data_hora": "2026-07-31T15:00",
+        "regua_m": 4.132,
+        "nivel_agua_m": 743.742,
+        "vazao_m3s": 1040,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.2
       }
     ],
     "previsao": [
       {
         "data_hora": "2026-07-31T21:00",
-        "regua_com_chuva_m": 4.17,
-        "regua_sem_chuva_m": 4.14
+        "regua_com_chuva_m": 4.18,
+        "regua_sem_chuva_m": 4.11
       },
       {
         "data_hora": "2026-08-01T03:00",
-        "regua_com_chuva_m": 4.11,
-        "regua_sem_chuva_m": 4.1
+        "regua_com_chuva_m": 4.17,
+        "regua_sem_chuva_m": 4.12
       },
       {
         "data_hora": "2026-08-01T09:00",
-        "regua_com_chuva_m": 4.17,
-        "regua_sem_chuva_m": 4.16
+        "regua_com_chuva_m": 4.16,
+        "regua_sem_chuva_m": 4.11
       },
       {
         "data_hora": "2026-08-01T15:00",
-        "regua_com_chuva_m": 4.09,
-        "regua_sem_chuva_m": 4.08
+        "regua_com_chuva_m": 4.12,
+        "regua_sem_chuva_m": 4.11
       },
       {
         "data_hora": "2026-08-01T21:00",
@@ -412,12 +420,12 @@
       },
       {
         "data_hora": "2026-08-02T03:00",
-        "regua_com_chuva_m": 4.11,
-        "regua_sem_chuva_m": 4.1
+        "regua_com_chuva_m": 4.09,
+        "regua_sem_chuva_m": 4.08
       }
     ],
     "ultima": {
-      "data_hora": "2026-07-31T14:00",
+      "data_hora": "2026-07-31T15:00",
       "regua_m": 4.132,
       "nivel_agua_m": 743.742,
       "vazao_m3s": 1040,
@@ -426,11 +434,11 @@
     },
     "situacao": "OBSERVAÇÃO",
     "tendencia": {
-      "texto": "Baixando cerca de 1,5 cm por hora",
-      "delta": -0.015000000000000568,
-      "direcao": "baixando"
+      "texto": "Estável",
+      "delta": 0,
+      "direcao": "estavel"
     },
-    "alerta_previsao": "Previsão para daqui a 37 horas (02/08 03h): 4,11 m.",
+    "alerta_previsao": "Previsão para daqui a 36 horas (02/08 03h): 4,09 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
