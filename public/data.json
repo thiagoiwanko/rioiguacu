@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-31T13:39",
+    "atualizado_em": "2026-07-31T13:42",
     "historico": [
       {
         "data_hora": "2026-07-29T14:00",
@@ -392,7 +392,38 @@
         "chuva_acumulada_mm": 0.2
       }
     ],
-    "previsao": [],
+    "previsao": [
+      {
+        "data_hora": "2026-07-31T21:00",
+        "regua_com_chuva_m": 4.17,
+        "regua_sem_chuva_m": 4.14
+      },
+      {
+        "data_hora": "2026-08-01T03:00",
+        "regua_com_chuva_m": 4.14,
+        "regua_sem_chuva_m": 4.13
+      },
+      {
+        "data_hora": "2026-08-01T09:00",
+        "regua_com_chuva_m": 4.18,
+        "regua_sem_chuva_m": 4.16
+      },
+      {
+        "data_hora": "2026-08-01T15:00",
+        "regua_com_chuva_m": 4.17,
+        "regua_sem_chuva_m": 4.15
+      },
+      {
+        "data_hora": "2026-08-01T21:00",
+        "regua_com_chuva_m": 4.09,
+        "regua_sem_chuva_m": 4.08
+      },
+      {
+        "data_hora": "2026-08-02T03:00",
+        "regua_com_chuva_m": 4.09,
+        "regua_sem_chuva_m": 4.08
+      }
+    ],
     "ultima": {
       "data_hora": "2026-07-31T13:00",
       "regua_m": 4.147,
@@ -407,8 +438,8 @@
       "delta": -0.0039999999999995595,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Sem previsão disponível para as próximas 48 horas.",
-    "previsao_disponivel": false,
+    "alerta_previsao": "Previsão para daqui a 38 horas (02/08 03h): 4,09 m.",
+    "previsao_disponivel": true,
     "cotas_bairros": [
       {
         "nivel": 1.29,
@@ -531,7 +562,7 @@
     ],
     "janela_historico_horas": 48,
     "janela_previsao_horas": 48,
-    "previsao_fingerprint": "27763758041ad1cce4f308a565e1036827b9a95f6ba8b0db6c31758e05ceadcf",
-    "previsao_atualizada_em": "2026-07-31T08:00"
+    "previsao_fingerprint": "08aa0cc808378256d3e0606fa9bc2312a6de77fb2ea2fbd8c2dcd476f6eb9d7c",
+    "previsao_atualizada_em": "2026-07-31T14:00"
   }
 }
