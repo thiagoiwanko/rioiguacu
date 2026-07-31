@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-31T06:21",
+    "atualizado_em": "2026-07-31T06:26",
     "historico": [
       {
         "data_hora": "2026-07-29T07:00",
@@ -339,15 +339,15 @@
         "data_hora": "2026-07-31T00:00",
         "regua_m": 4.216,
         "nivel_agua_m": 743.826,
-        "vazao_m3s": 1090,
+        "vazao_m3s": 1087,
         "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.4
+        "chuva_acumulada_mm": 0.0
       },
       {
         "data_hora": "2026-07-31T01:00",
         "regua_m": 4.212,
         "nivel_agua_m": 743.822,
-        "vazao_m3s": 1080,
+        "vazao_m3s": 1082,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -355,7 +355,7 @@
         "data_hora": "2026-07-31T02:00",
         "regua_m": 4.207,
         "nivel_agua_m": 743.817,
-        "vazao_m3s": 1080,
+        "vazao_m3s": 1082,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -363,7 +363,7 @@
         "data_hora": "2026-07-31T03:00",
         "regua_m": 4.203,
         "nivel_agua_m": 743.813,
-        "vazao_m3s": 1080,
+        "vazao_m3s": 1077,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -371,7 +371,7 @@
         "data_hora": "2026-07-31T04:00",
         "regua_m": 4.199,
         "nivel_agua_m": 743.809,
-        "vazao_m3s": 1080,
+        "vazao_m3s": 1077,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -379,7 +379,7 @@
         "data_hora": "2026-07-31T05:00",
         "regua_m": 4.193,
         "nivel_agua_m": 743.803,
-        "vazao_m3s": 1070,
+        "vazao_m3s": 1073,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
