@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-07-31T21:24",
+    "atualizado_em": "2026-07-31T21:27",
     "historico": [
       {
         "data_hora": "2026-07-29T22:00",
@@ -395,33 +395,33 @@
     "previsao": [
       {
         "data_hora": "2026-08-01T03:00",
-        "regua_com_chuva_m": 4.1,
-        "regua_sem_chuva_m": 4.09
+        "regua_com_chuva_m": 4.13,
+        "regua_sem_chuva_m": 4.11
       },
       {
         "data_hora": "2026-08-01T09:00",
-        "regua_com_chuva_m": 4.11,
-        "regua_sem_chuva_m": 4.1
+        "regua_com_chuva_m": 4.13,
+        "regua_sem_chuva_m": 4.11
       },
       {
         "data_hora": "2026-08-01T15:00",
-        "regua_com_chuva_m": 4.08,
-        "regua_sem_chuva_m": 4.07
+        "regua_com_chuva_m": 4.07,
+        "regua_sem_chuva_m": 4.06
       },
       {
         "data_hora": "2026-08-01T21:00",
         "regua_com_chuva_m": 4.08,
-        "regua_sem_chuva_m": 4.06
-      },
-      {
-        "data_hora": "2026-08-02T03:00",
-        "regua_com_chuva_m": 4.05,
         "regua_sem_chuva_m": 4.04
       },
       {
+        "data_hora": "2026-08-02T03:00",
+        "regua_com_chuva_m": 4.04,
+        "regua_sem_chuva_m": 4.03
+      },
+      {
         "data_hora": "2026-08-02T09:00",
-        "regua_com_chuva_m": 4.0,
-        "regua_sem_chuva_m": 3.99
+        "regua_com_chuva_m": 4.03,
+        "regua_sem_chuva_m": 4.0
       }
     ],
     "ultima": {
@@ -438,7 +438,7 @@
       "delta": -0.006000000000000227,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 36 horas (02/08 09h): 4,00 m.",
+    "alerta_previsao": "Previsão para daqui a 36 horas (02/08 09h): 4,03 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
