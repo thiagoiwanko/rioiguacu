@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-08-02T08:59",
+    "atualizado_em": "2026-08-02T09:02",
     "historico": [
-      {
-        "data_hora": "2026-07-31T09:00",
-        "regua_m": 4.169,
-        "nivel_agua_m": 743.779,
-        "vazao_m3s": 1060,
-        "chuva_mm": 0.2,
-        "chuva_acumulada_mm": 0.2
-      },
       {
         "data_hora": "2026-07-31T10:00",
         "regua_m": 4.166,
@@ -388,32 +380,32 @@
       {
         "data_hora": "2026-08-02T15:00",
         "regua_com_chuva_m": 3.93,
-        "regua_sem_chuva_m": 3.91
+        "regua_sem_chuva_m": 3.88
       },
       {
         "data_hora": "2026-08-02T21:00",
-        "regua_com_chuva_m": 3.91,
-        "regua_sem_chuva_m": 3.9
+        "regua_com_chuva_m": 3.85,
+        "regua_sem_chuva_m": 3.84
       },
       {
         "data_hora": "2026-08-03T03:00",
-        "regua_com_chuva_m": 3.84,
-        "regua_sem_chuva_m": 3.83
+        "regua_com_chuva_m": 3.87,
+        "regua_sem_chuva_m": 3.86
       },
       {
         "data_hora": "2026-08-03T09:00",
-        "regua_com_chuva_m": 3.86,
-        "regua_sem_chuva_m": 3.85
+        "regua_com_chuva_m": 3.81,
+        "regua_sem_chuva_m": 3.8
       },
       {
         "data_hora": "2026-08-03T15:00",
-        "regua_com_chuva_m": 3.77,
-        "regua_sem_chuva_m": 3.76
+        "regua_com_chuva_m": 3.78,
+        "regua_sem_chuva_m": 3.77
       },
       {
         "data_hora": "2026-08-03T21:00",
-        "regua_com_chuva_m": 3.8,
-        "regua_sem_chuva_m": 3.75
+        "regua_com_chuva_m": 3.73,
+        "regua_sem_chuva_m": 3.72
       }
     ],
     "ultima": {
@@ -430,7 +422,7 @@
       "delta": -0.0040000000000000036,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 37 horas (03/08 21h): 3,80 m.",
+    "alerta_previsao": "Previsão para daqui a 37 horas (03/08 21h): 3,73 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
