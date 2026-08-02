@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-08-02T20:26",
+    "atualizado_em": "2026-08-02T20:28",
     "historico": [
       {
         "data_hora": "2026-07-31T21:00",
@@ -219,7 +219,7 @@
         "data_hora": "2026-08-02T00:00",
         "regua_m": 3.959,
         "nivel_agua_m": 743.569,
-        "vazao_m3s": 970,
+        "vazao_m3s": 971,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -251,7 +251,7 @@
         "data_hora": "2026-08-02T04:00",
         "regua_m": 3.94,
         "nivel_agua_m": 743.55,
-        "vazao_m3s": 961,
+        "vazao_m3s": 962,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -259,7 +259,7 @@
         "data_hora": "2026-08-02T05:00",
         "regua_m": 3.936,
         "nivel_agua_m": 743.546,
-        "vazao_m3s": 961,
+        "vazao_m3s": 962,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -283,7 +283,7 @@
         "data_hora": "2026-08-02T08:00",
         "regua_m": 3.923,
         "nivel_agua_m": 743.533,
-        "vazao_m3s": 952,
+        "vazao_m3s": 953,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -291,7 +291,7 @@
         "data_hora": "2026-08-02T09:00",
         "regua_m": 3.917,
         "nivel_agua_m": 743.527,
-        "vazao_m3s": 952,
+        "vazao_m3s": 953,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -323,7 +323,7 @@
         "data_hora": "2026-08-02T13:00",
         "regua_m": 3.896,
         "nivel_agua_m": 743.506,
-        "vazao_m3s": 944,
+        "vazao_m3s": 945,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -331,7 +331,7 @@
         "data_hora": "2026-08-02T14:00",
         "regua_m": 3.89,
         "nivel_agua_m": 743.5,
-        "vazao_m3s": 940,
+        "vazao_m3s": 941,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -339,7 +339,7 @@
         "data_hora": "2026-08-02T15:00",
         "regua_m": 3.886,
         "nivel_agua_m": 743.496,
-        "vazao_m3s": 940,
+        "vazao_m3s": 941,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -347,7 +347,7 @@
         "data_hora": "2026-08-02T16:00",
         "regua_m": 3.881,
         "nivel_agua_m": 743.491,
-        "vazao_m3s": 936,
+        "vazao_m3s": 937,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -355,7 +355,7 @@
         "data_hora": "2026-08-02T17:00",
         "regua_m": 3.876,
         "nivel_agua_m": 743.486,
-        "vazao_m3s": 936,
+        "vazao_m3s": 937,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
       },
@@ -392,28 +392,28 @@
       },
       {
         "data_hora": "2026-08-03T09:00",
+        "regua_com_chuva_m": 3.8,
+        "regua_sem_chuva_m": 3.79
+      },
+      {
+        "data_hora": "2026-08-03T15:00",
         "regua_com_chuva_m": 3.78,
         "regua_sem_chuva_m": 3.77
       },
       {
-        "data_hora": "2026-08-03T15:00",
-        "regua_com_chuva_m": 3.79,
-        "regua_sem_chuva_m": 3.76
-      },
-      {
         "data_hora": "2026-08-03T21:00",
         "regua_com_chuva_m": 3.76,
-        "regua_sem_chuva_m": 3.74
+        "regua_sem_chuva_m": 3.75
       },
       {
         "data_hora": "2026-08-04T03:00",
-        "regua_com_chuva_m": 3.71,
+        "regua_com_chuva_m": 3.7,
         "regua_sem_chuva_m": 3.69
       },
       {
         "data_hora": "2026-08-04T09:00",
-        "regua_com_chuva_m": 3.72,
-        "regua_sem_chuva_m": 3.66
+        "regua_com_chuva_m": 3.7,
+        "regua_sem_chuva_m": 3.69
       }
     ],
     "ultima": {
@@ -430,7 +430,7 @@
       "delta": -0.0040000000000000036,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 37 horas (04/08 09h): 3,72 m.",
+    "alerta_previsao": "Previsão para daqui a 37 horas (04/08 09h): 3,70 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
