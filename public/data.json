@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-08-03T19:39",
+    "atualizado_em": "2026-08-03T19:42",
     "historico": [
       {
         "data_hora": "2026-08-01T20:00",
@@ -392,7 +392,38 @@
         "chuva_acumulada_mm": 0.0
       }
     ],
-    "previsao": [],
+    "previsao": [
+      {
+        "data_hora": "2026-08-04T03:00",
+        "regua_com_chuva_m": 3.7,
+        "regua_sem_chuva_m": 3.69
+      },
+      {
+        "data_hora": "2026-08-04T09:00",
+        "regua_com_chuva_m": 3.71,
+        "regua_sem_chuva_m": 3.7
+      },
+      {
+        "data_hora": "2026-08-04T15:00",
+        "regua_com_chuva_m": 3.66,
+        "regua_sem_chuva_m": 3.64
+      },
+      {
+        "data_hora": "2026-08-04T21:00",
+        "regua_com_chuva_m": 3.61,
+        "regua_sem_chuva_m": 3.6
+      },
+      {
+        "data_hora": "2026-08-05T03:00",
+        "regua_com_chuva_m": 3.59,
+        "regua_sem_chuva_m": 3.58
+      },
+      {
+        "data_hora": "2026-08-05T09:00",
+        "regua_com_chuva_m": 3.55,
+        "regua_sem_chuva_m": 3.54
+      }
+    ],
     "ultima": {
       "data_hora": "2026-08-03T19:00",
       "regua_m": 3.753,
@@ -407,8 +438,8 @@
       "delta": -0.004999999999999893,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Sem previsão disponível para as próximas 48 horas.",
-    "previsao_disponivel": false,
+    "alerta_previsao": "Previsão para daqui a 38 horas (05/08 09h): 3,55 m.",
+    "previsao_disponivel": true,
     "cotas_bairros": [
       {
         "nivel": 1.29,
@@ -531,7 +562,7 @@
     ],
     "janela_historico_horas": 48,
     "janela_previsao_horas": 48,
-    "previsao_fingerprint": "7339b86941c5176fd1aaf4cc5ff84d02972f62ad5be47a03728d87720fa9c5ef",
-    "previsao_atualizada_em": "2026-08-03T14:00"
+    "previsao_fingerprint": "ca031ba60ddbdd49e90ef73be3a3ed54a76af4d2dd519dc1fd85d192e3c2b1b8",
+    "previsao_atualizada_em": "2026-08-03T20:00"
   }
 }
