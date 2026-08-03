@@ -48,18 +48,19 @@ jobs:
           mkdir -p /tmp/coleta_atual
           cp public/data.json /tmp/coleta_atual/ 2>/dev/null || true
           cp public/historico_diario.csv /tmp/coleta_atual/ 2>/dev/null || true
-          for i in 1 2 3 4 5; do
+          for i in $(seq 1 12); do
             git commit -m "Atualiza dados do Rio Iguaçu" -q || true
             if git push; then
               echo "Push concluído na tentativa $i."
               exit 0
             fi
-            echo "Push rejeitado (tentativa $i/5): outra execução chegou primeiro. Sincronizando..."
+            echo "Push rejeitado (tentativa $i/12): outra execução chegou primeiro. Sincronizando..."
             git fetch origin main
             git reset --hard origin/main
             cp /tmp/coleta_atual/data.json public/ 2>/dev/null || true
-            git add public/data.json
-            sleep $((RANDOM % 6 + 2))
+            cp /tmp/coleta_atual/historico_diario.csv public/ 2>/dev/null || true
+            git add public/data.json public/historico_diario.csv
+            sleep $((RANDOM % 10 + 3))
           done
-          echo "Falha ao empurrar as mudanças após 5 tentativas."
+          echo "Falha ao empurrar as mudanças após 12 tentativas."
           exit 1
