@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-08-03T15:10",
+    "atualizado_em": "2026-08-03T15:11",
     "historico": [
       {
         "data_hora": "2026-08-01T16:00",
@@ -382,55 +382,63 @@
         "vazao_m3s": 896,
         "chuva_mm": 0.0,
         "chuva_acumulada_mm": 0.0
+      },
+      {
+        "data_hora": "2026-08-03T15:00",
+        "regua_m": 3.773,
+        "nivel_agua_m": 743.383,
+        "vazao_m3s": 891,
+        "chuva_mm": 0.0,
+        "chuva_acumulada_mm": 0.0
       }
     ],
     "previsao": [
       {
         "data_hora": "2026-08-03T21:00",
-        "regua_com_chuva_m": 3.76,
-        "regua_sem_chuva_m": 3.75
+        "regua_com_chuva_m": 3.75,
+        "regua_sem_chuva_m": 3.74
       },
       {
         "data_hora": "2026-08-04T03:00",
-        "regua_com_chuva_m": 3.76,
-        "regua_sem_chuva_m": 3.69
+        "regua_com_chuva_m": 3.75,
+        "regua_sem_chuva_m": 3.7
       },
       {
         "data_hora": "2026-08-04T09:00",
+        "regua_com_chuva_m": 3.7,
+        "regua_sem_chuva_m": 3.69
+      },
+      {
+        "data_hora": "2026-08-04T15:00",
         "regua_com_chuva_m": 3.66,
         "regua_sem_chuva_m": 3.65
       },
       {
-        "data_hora": "2026-08-04T15:00",
+        "data_hora": "2026-08-04T21:00",
         "regua_com_chuva_m": 3.62,
         "regua_sem_chuva_m": 3.61
       },
       {
-        "data_hora": "2026-08-04T21:00",
-        "regua_com_chuva_m": 3.66,
-        "regua_sem_chuva_m": 3.59
-      },
-      {
         "data_hora": "2026-08-05T03:00",
-        "regua_com_chuva_m": 3.57,
-        "regua_sem_chuva_m": 3.56
+        "regua_com_chuva_m": 3.6,
+        "regua_sem_chuva_m": 3.59
       }
     ],
     "ultima": {
-      "data_hora": "2026-08-03T14:00",
-      "regua_m": 3.775,
-      "nivel_agua_m": 743.385,
-      "vazao_m3s": 896,
+      "data_hora": "2026-08-03T15:00",
+      "regua_m": 3.773,
+      "nivel_agua_m": 743.383,
+      "vazao_m3s": 891,
       "chuva_mm": 0.0,
       "chuva_acumulada_mm": 0.0
     },
     "situacao": "OBSERVAÇÃO",
     "tendencia": {
       "texto": "Baixando cerca de 0,2 cm por hora",
-      "delta": -0.002000000000000224,
+      "delta": -0.0019999999999997797,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 37 horas (05/08 03h): 3,57 m.",
+    "alerta_previsao": "Previsão para daqui a 36 horas (05/08 03h): 3,60 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
