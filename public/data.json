@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-08-03T13:59",
+    "atualizado_em": "2026-08-03T14:02",
     "historico": [
-      {
-        "data_hora": "2026-08-01T14:00",
-        "regua_m": 4.003,
-        "nivel_agua_m": 743.613,
-        "vazao_m3s": 988,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-08-01T15:00",
         "regua_m": 3.995,
@@ -395,8 +387,8 @@
     "previsao": [
       {
         "data_hora": "2026-08-03T21:00",
-        "regua_com_chuva_m": 3.73,
-        "regua_sem_chuva_m": 3.72
+        "regua_com_chuva_m": 3.78,
+        "regua_sem_chuva_m": 3.73
       },
       {
         "data_hora": "2026-08-04T03:00",
@@ -405,23 +397,23 @@
       },
       {
         "data_hora": "2026-08-04T09:00",
-        "regua_com_chuva_m": 3.67,
-        "regua_sem_chuva_m": 3.66
+        "regua_com_chuva_m": 3.72,
+        "regua_sem_chuva_m": 3.68
       },
       {
         "data_hora": "2026-08-04T15:00",
         "regua_com_chuva_m": 3.64,
-        "regua_sem_chuva_m": 3.61
+        "regua_sem_chuva_m": 3.63
       },
       {
         "data_hora": "2026-08-04T21:00",
-        "regua_com_chuva_m": 3.65,
-        "regua_sem_chuva_m": 3.61
+        "regua_com_chuva_m": 3.6,
+        "regua_sem_chuva_m": 3.59
       },
       {
         "data_hora": "2026-08-05T03:00",
-        "regua_com_chuva_m": 3.57,
-        "regua_sem_chuva_m": 3.56
+        "regua_com_chuva_m": 3.63,
+        "regua_sem_chuva_m": 3.59
       }
     ],
     "ultima": {
@@ -438,7 +430,7 @@
       "delta": -0.010999999999999677,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 38 horas (05/08 03h): 3,57 m.",
+    "alerta_previsao": "Previsão para daqui a 38 horas (05/08 03h): 3,63 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
