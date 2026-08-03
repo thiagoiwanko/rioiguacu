@@ -5,16 +5,8 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-08-03T10:57",
+    "atualizado_em": "2026-08-03T11:02",
     "historico": [
-      {
-        "data_hora": "2026-08-01T11:00",
-        "regua_m": 4.012,
-        "nivel_agua_m": 743.622,
-        "vazao_m3s": 991,
-        "chuva_mm": 0.0,
-        "chuva_acumulada_mm": 0.0
-      },
       {
         "data_hora": "2026-08-01T12:00",
         "regua_m": 4.007,
@@ -392,38 +384,7 @@
         "chuva_acumulada_mm": 0.0
       }
     ],
-    "previsao": [
-      {
-        "data_hora": "2026-08-03T15:00",
-        "regua_com_chuva_m": 3.81,
-        "regua_sem_chuva_m": 3.8
-      },
-      {
-        "data_hora": "2026-08-03T21:00",
-        "regua_com_chuva_m": 3.76,
-        "regua_sem_chuva_m": 3.75
-      },
-      {
-        "data_hora": "2026-08-04T03:00",
-        "regua_com_chuva_m": 3.69,
-        "regua_sem_chuva_m": 3.68
-      },
-      {
-        "data_hora": "2026-08-04T09:00",
-        "regua_com_chuva_m": 3.68,
-        "regua_sem_chuva_m": 3.67
-      },
-      {
-        "data_hora": "2026-08-04T15:00",
-        "regua_com_chuva_m": 3.62,
-        "regua_sem_chuva_m": 3.61
-      },
-      {
-        "data_hora": "2026-08-04T21:00",
-        "regua_com_chuva_m": 3.64,
-        "regua_sem_chuva_m": 3.6
-      }
-    ],
+    "previsao": [],
     "ultima": {
       "data_hora": "2026-08-03T10:00",
       "regua_m": 3.798,
@@ -438,8 +399,8 @@
       "delta": -0.004999999999999893,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 35 horas (04/08 21h): 3,64 m.",
-    "previsao_disponivel": true,
+    "alerta_previsao": "Sem previsão disponível para as próximas 48 horas.",
+    "previsao_disponivel": false,
     "cotas_bairros": [
       {
         "nivel": 1.29,
