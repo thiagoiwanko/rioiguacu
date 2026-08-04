@@ -225,6 +225,18 @@ h2 {
   background: rgba(255, 159, 46, .14);
 }
 
+.level-badge.badge-estiagem-atencao {
+  border-color: rgba(198, 140, 58, .55);
+  color: rgb(210, 160, 90);
+  background: rgba(198, 140, 58, .14);
+}
+
+.level-badge.badge-estiagem-alerta {
+  border-color: rgba(168, 90, 34, .6);
+  color: rgb(196, 120, 60);
+  background: rgba(168, 90, 34, .16);
+}
+
 .level-badge.badge-muito-alta {
   border-color: rgba(255, 61, 66, .6);
   color: var(--red);
