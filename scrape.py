@@ -78,10 +78,16 @@ COTAS_BAIRROS = [
 
 COTAS_ALERTA_DEFESA_CIVIL = [
     (3.70, "OBSERVAÇÃO"),
-    (4.20, "ATENÇÃO"),
-    (5.00, "ALERTA"),
+    (4.20, "ATENÇÃO (INUNDAÇÃO)"),
+    (5.00, "ALERTA (INUNDAÇÃO)"),
     (5.50, "EMERGÊNCIA"),
     (6.50, "GRANDE ENCHENTE"),
+]
+
+
+COTAS_ESTIAGEM = [
+    (1.57, "ALERTA (ESTIAGEM)"),
+    (1.67, "ATENÇÃO (ESTIAGEM)"),
 ]
 
 LIMIAR_SUBIDA_24H_M = 0.85
@@ -379,6 +385,10 @@ def _tier_por_nivel(regua):
 
 
 def definir_situacao(regua, historico=None):
+    for limite, desc in COTAS_ESTIAGEM:
+        if regua <= limite:
+            return desc
+
     tier = _tier_por_nivel(regua)
 
     if historico:
@@ -461,7 +471,7 @@ def montar_payload(historico, previsao, fonte_historico, url_historico):
         "alerta_previsao": verificar_alerta_previsao(historico, previsao),
         "previsao_disponivel": bool(previsao),
         "cotas_bairros": [{"nivel": nivel, "descricao": desc} for nivel, desc in COTAS_BAIRROS],
-        "cotas_alerta": [{"nivel": nivel, "descricao": desc} for nivel, desc in COTAS_ALERTA_DEFESA_CIVIL],
+        "cotas_alerta": [{"nivel": nivel, "descricao": desc} for nivel, desc in COTAS_ALERTA_DEFESA_CIVIL + COTAS_ESTIAGEM],
         "janela_historico_horas": JANELA_HISTORICO_HORAS,
         "janela_previsao_horas": JANELA_PREVISAO_HORAS,
     }
