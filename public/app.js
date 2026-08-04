@@ -133,10 +133,19 @@ minY = 0;
 return { minY, maxY };
 }
 
+function referenceColor(item) {
+if (item.descricao && item.descricao.includes("(ESTIAGEM)")) {
+return item.descricao.startsWith("ALERTA") ? "rgb(168, 90, 34)" : "rgb(198, 140, 58)";
+}
+return colorForLevel(item.nivel);
+}
+
 function severityClass(situacao) {
 const texto = situacao || "";
 if (texto.startsWith("GRANDE ENCHENTE")) return "badge-critico";
 if (texto.startsWith("EMERGÊNCIA")) return "badge-muito-alta";
+if (texto.startsWith("ALERTA (ESTIAGEM)")) return "badge-estiagem-alerta";
+if (texto.startsWith("ATENÇÃO (ESTIAGEM)")) return "badge-estiagem-atencao";
 if (texto.startsWith("ALERTA")) return "badge-alta";
 if (texto.startsWith("ATENÇÃO")) return "badge-moderada";
 if (texto.startsWith("OBSERVAÇÃO")) return "badge-observacao";
@@ -257,7 +266,7 @@ $("alertList").innerHTML = data.cotas_alerta
 .sort((a, b) => b.nivel - a.nivel)
 .map((item) => `
 <div class="alert-row">
-<i class="alert-icon" style="background:${colorForLevel(item.nivel)}">!</i>
+<i class="alert-icon" style="background:${referenceColor(item)}">!</i>
 <strong>${item.nivel.toFixed(2)} m</strong>
 <span>${item.descricao}</span>
 </div>
@@ -408,14 +417,14 @@ const isAlert = data.cotas_alerta.some((alert) => Number(alert.nivel) === item.n
 const label = labels.get(item.nivel);
 const labelY = labelPositions.get(item.nivel);
 return `
-<line x1="${pad.left}" x2="${width - pad.right}" y1="${y(item.nivel)}" y2="${y(item.nivel)}" stroke="${colorForLevel(item.nivel)}" stroke-width="${isAlert ? 2 : 1.2}" stroke-dasharray="${isAlert ? "3 5" : "8 5"}" opacity=".95"/>
+<line x1="${pad.left}" x2="${width - pad.right}" y1="${y(item.nivel)}" y2="${y(item.nivel)}" stroke="${referenceColor(item)}" stroke-width="${isAlert ? 2 : 1.2}" stroke-dasharray="${isAlert ? "3 5" : "8 5"}" opacity=".95"/>
 ${label ? `
 <g>
 <rect x="${pad.left + 8}" y="${labelY - 19}" width="${labelBoxWidth}" height="18" rx="5" fill="rgba(8,16,22,.78)" stroke="rgba(255,255,255,.10)"/>
-<text x="${pad.left + 16}" y="${labelY - 6}" fill="${isAlert ? "#eef7fb" : colorForLevel(item.nivel)}" font-size="${fs.refLabel}" font-weight="800">${item.nivel.toFixed(2)} m - ${label.descricao}</text>
+<text x="${pad.left + 16}" y="${labelY - 6}" fill="${isAlert ? "#eef7fb" : referenceColor(item)}" font-size="${fs.refLabel}" font-weight="800">${item.nivel.toFixed(2)} m - ${label.descricao}</text>
 </g>
 ` : `
-<text x="${width - pad.right - 5}" y="${y(item.nivel) - 3}" text-anchor="end" fill="${colorForLevel(item.nivel)}" font-size="${fs.refNum}" opacity=".8">${item.nivel.toFixed(2)}</text>
+<text x="${width - pad.right - 5}" y="${y(item.nivel) - 3}" text-anchor="end" fill="${referenceColor(item)}" font-size="${fs.refNum}" opacity=".8">${item.nivel.toFixed(2)}</text>
 `}
 `;
 }).join("")}
