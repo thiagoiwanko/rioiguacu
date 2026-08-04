@@ -5,7 +5,7 @@
     "versao": "GitHub Actions 1.0",
     "fonte": "ANA – Agência Nacional de Águas e Saneamento Básico (estação telemétrica UHE Gov. Bento Munhoz, União da Vitória)",
     "url_historico": "https://www.snirh.gov.br/hidrotelemetria/",
-    "atualizado_em": "2026-08-04T16:34",
+    "atualizado_em": "2026-08-04T16:37",
     "historico": [
       {
         "data_hora": "2026-08-02T17:00",
@@ -395,13 +395,13 @@
     "previsao": [
       {
         "data_hora": "2026-08-04T21:00",
-        "regua_com_chuva_m": 3.66,
+        "regua_com_chuva_m": 3.67,
         "regua_sem_chuva_m": 3.64
       },
       {
         "data_hora": "2026-08-05T03:00",
-        "regua_com_chuva_m": 3.58,
-        "regua_sem_chuva_m": 3.57
+        "regua_com_chuva_m": 3.57,
+        "regua_sem_chuva_m": 3.56
       },
       {
         "data_hora": "2026-08-05T09:00",
@@ -410,18 +410,18 @@
       },
       {
         "data_hora": "2026-08-05T15:00",
-        "regua_com_chuva_m": 3.52,
-        "regua_sem_chuva_m": 3.51
+        "regua_com_chuva_m": 3.55,
+        "regua_sem_chuva_m": 3.52
       },
       {
         "data_hora": "2026-08-05T21:00",
-        "regua_com_chuva_m": 3.51,
-        "regua_sem_chuva_m": 3.5
+        "regua_com_chuva_m": 3.48,
+        "regua_sem_chuva_m": 3.47
       },
       {
         "data_hora": "2026-08-06T03:00",
-        "regua_com_chuva_m": 3.48,
-        "regua_sem_chuva_m": 3.47
+        "regua_com_chuva_m": 3.46,
+        "regua_sem_chuva_m": 3.45
       }
     ],
     "ultima": {
@@ -438,7 +438,7 @@
       "delta": -0.0050000000000003375,
       "direcao": "baixando"
     },
-    "alerta_previsao": "Previsão para daqui a 35 horas (06/08 03h): 3,48 m.",
+    "alerta_previsao": "Previsão para daqui a 35 horas (06/08 03h): 3,46 m.",
     "previsao_disponivel": true,
     "cotas_bairros": [
       {
@@ -545,11 +545,11 @@
       },
       {
         "nivel": 4.2,
-        "descricao": "ATENÇÃO"
+        "descricao": "ATENÇÃO (INUNDAÇÃO)"
       },
       {
         "nivel": 5.0,
-        "descricao": "ALERTA"
+        "descricao": "ALERTA (INUNDAÇÃO)"
       },
       {
         "nivel": 5.5,
@@ -558,6 +558,14 @@
       {
         "nivel": 6.5,
         "descricao": "GRANDE ENCHENTE"
+      },
+      {
+        "nivel": 1.57,
+        "descricao": "ALERTA (ESTIAGEM)"
+      },
+      {
+        "nivel": 1.67,
+        "descricao": "ATENÇÃO (ESTIAGEM)"
       }
     ],
     "janela_historico_horas": 48,
