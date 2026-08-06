@@ -110,7 +110,7 @@ const maxValue = Math.max(...values);
 const distAcimaDados = Math.max(maxValue - currentLevel, 0);
 const distAbaixoDados = Math.max(currentLevel - minValue, 0);
 
-const refs = data.cotas_alerta.map((item) => Number(item.nivel));
+const refs = allReferences(data).map((item) => Number(item.nivel));
 const refsAcima = refs.filter((v) => v > currentLevel).sort((a, b) => a - b);
 const refsAbaixo = refs.filter((v) => v < currentLevel).sort((a, b) => b - a);
 const folgaRefAcima = refsAcima.length
@@ -120,13 +120,13 @@ const folgaRefAbaixo = refsAbaixo.length
 ? currentLevel - refsAbaixo[Math.min(1, refsAbaixo.length - 1)]
 : 1;
 
-let halfSpan = Math.max(distAcimaDados, distAbaixoDados, folgaRefAcima, folgaRefAbaixo, 0.6) + 0.3;
+let spanAcima = Math.max(distAcimaDados, folgaRefAcima, 0.6) + 0.3;
+let spanAbaixo = Math.max(distAbaixoDados, folgaRefAbaixo, 0.6) + 0.3;
 
-let minY = currentLevel - halfSpan;
-let maxY = currentLevel + halfSpan;
+let minY = currentLevel - spanAbaixo;
+let maxY = currentLevel + spanAcima;
 
 if (minY < 0) {
-maxY += -minY;
 minY = 0;
 }
 
@@ -326,7 +326,13 @@ const { minY, maxY } = chartBounds(data);
 
 const x = (d) => pad.left + ((d.getTime() - start.getTime()) / (end.getTime() - start.getTime())) * plotW;
 const y = (v) => pad.top + (1 - ((v - minY) / (maxY - minY))) * plotH;
-const refs = allReferences(data).filter((item) => item.nivel >= minY && item.nivel <= maxY);
+const refs = (() => {
+const nivel = data.ultima.regua_m;
+const merged = allReferences(data);
+const acima = merged.filter((item) => item.nivel > nivel).sort((a, b) => a.nivel - b.nivel).slice(0, 2);
+const abaixo = merged.filter((item) => item.nivel <= nivel).sort((a, b) => b.nivel - a.nivel).slice(0, 2);
+return [...abaixo, ...acima].sort((a, b) => a.nivel - b.nivel);
+})();
 const labels = nearestReferenceLabels(data, data.ultima.regua_m);
 
 const labelBoxHeight = 20;
