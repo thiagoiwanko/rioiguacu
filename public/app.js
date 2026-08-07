@@ -110,23 +110,23 @@ const maxValue = Math.max(...values);
 const distAcimaDados = Math.max(maxValue - currentLevel, 0);
 const distAbaixoDados = Math.max(currentLevel - minValue, 0);
 
-const refs = allReferences(data).map((item) => Number(item.nivel));
-const refsAcima = refs.filter((v) => v > currentLevel).sort((a, b) => a - b);
-const refsAbaixo = refs.filter((v) => v < currentLevel).sort((a, b) => b - a);
+const merged = allReferences(data);
+const refsAcima = merged.filter((item) => item.nivel > currentLevel).sort((a, b) => a.nivel - b.nivel).slice(0, 2);
+const refsAbaixo = merged.filter((item) => item.nivel <= currentLevel).sort((a, b) => b.nivel - a.nivel).slice(0, 2);
 const folgaRefAcima = refsAcima.length
-? refsAcima[Math.min(1, refsAcima.length - 1)] - currentLevel
+? refsAcima[refsAcima.length - 1].nivel - currentLevel
 : 1;
 const folgaRefAbaixo = refsAbaixo.length
-? currentLevel - refsAbaixo[Math.min(1, refsAbaixo.length - 1)]
+? currentLevel - refsAbaixo[refsAbaixo.length - 1].nivel
 : 1;
 
-let spanAcima = Math.max(distAcimaDados, folgaRefAcima, 0.6) + 0.3;
-let spanAbaixo = Math.max(distAbaixoDados, folgaRefAbaixo, 0.6) + 0.3;
+let halfSpan = Math.max(distAcimaDados, distAbaixoDados, folgaRefAcima, folgaRefAbaixo, 0.6) + 0.3;
 
-let minY = currentLevel - spanAbaixo;
-let maxY = currentLevel + spanAcima;
+let minY = currentLevel - halfSpan;
+let maxY = currentLevel + halfSpan;
 
 if (minY < 0) {
+maxY += -minY;
 minY = 0;
 }
 
